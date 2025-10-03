@@ -12,6 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         //
+        Schema::create('users', function (Blueprint $table) {
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->enum('status',(['pending', 'active', 'banned', 'deleted']))->default('pending')->after('column: email');
+            $table->string('phone_number')->nullable();
+            $table->string('avatar')->nullable();
+            $table->text('address')->nullable();
+            $table->foreignId('role_id')->constrained(table: 'roles')->onDelete(action: 'cascade');
+            $table->string('activation_token')->nullable();
+            $table->string('google_id')->nullable();
+            $table->timestamps();
+        });
+
     }
 
     /**
@@ -20,5 +34,6 @@ return new class extends Migration
     public function down(): void
     {
         //
+        Schema::dropIfExists('users');
     }
 };
