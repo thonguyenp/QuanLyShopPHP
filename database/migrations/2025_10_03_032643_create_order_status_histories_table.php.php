@@ -12,6 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         //
+        Schema::create('order_status_histories', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
+            $table->enum('status', ['pending', 'processing', 'shipped', 'completed', 'canceled']);
+            $table->timestamp('changed_at')->useCurrent();
+            $table->text('note')->nullable();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -20,5 +28,6 @@ return new class extends Migration
     public function down(): void
     {
         //
+        Schema::dropIfExists('order_status_histories');
     }
 };

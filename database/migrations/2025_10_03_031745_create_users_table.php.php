@@ -13,10 +13,11 @@ return new class extends Migration
     {
         //
         Schema::create('users', function (Blueprint $table) {
+            $table->id();
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->enum('status',(['pending', 'active', 'banned', 'deleted']))->default('pending')->after('column: email');
+            $table->enum('status',(['pending', 'active', 'banned', 'deleted']))->default('pending');
             $table->string('phone_number')->nullable();
             $table->string('avatar')->nullable();
             $table->text('address')->nullable();
