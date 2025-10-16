@@ -34,16 +34,34 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
-    // /**
-    //  * Get the attributes that should be cast.
-    //  *
-    //  * @return array<string, string>
-    //  */
-    // protected function casts(): array
-    // {
-    //     return [
-    //         'email_verified_at' => 'datetime',
-    //         'password' => 'hashed',
-    //     ];
-    // }
+    
+    public function review()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    public function shippingAddress()
+    {
+        return $this->hasMany(ShippingAddress::class);
+    }
+
+    public function isActive()
+    {
+        return $this->status === 'active';
+    }
+
+    public function isPending()
+    {
+        return $this->status === 'pending';
+    }
+
+    public function isBanned()
+    {
+        return $this->status === 'banned';
+    }
+
+    public function isDeleted()
+    {
+        return $this->status === 'deleted';
+    }
 }

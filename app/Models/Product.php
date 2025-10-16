@@ -26,4 +26,9 @@ class Product extends Model
     {
         return $this->hasMany(ProductImage::class);
     }
+
+    public function cartItem()
+    {
+        return $this->hasMany(CartItem::class);
+    }
 }
