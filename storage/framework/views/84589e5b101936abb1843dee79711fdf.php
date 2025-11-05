@@ -35,11 +35,13 @@
 
     <!-- Header Start -->
     <?php echo $__env->make('clients.partials.header_home', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+    <!-- Header Start -->
     <main>
         <?php echo $__env->yieldContent('content'); ?>
     </main>
+    <!-- Footer Start -->
     <?php echo $__env->make('clients.partials.footer_home', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
-    <!-- Header Start -->
+    <!-- Footer Start -->
 
 
 
@@ -58,5 +60,11 @@
     <!-- Template Javascript -->
     <script src="<?php echo e(asset('assets/clients/js/main.js')); ?>"></script>
 </body>
-
+<script>
+        document.addEventListener("DOMContentLoaded", function() {
+        if (typeof WOW !== "undefined") {
+            new WOW().init();
+        }
+    });
+</script>
 </html><?php /**PATH E:\laragon\www\QuanLyShop\resources\views/layouts/client_home.blade.php ENDPATH**/ ?>

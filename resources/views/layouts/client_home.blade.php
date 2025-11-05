@@ -35,11 +35,13 @@
 
     <!-- Header Start -->
     @include('clients.partials.header_home')
+    <!-- Header Start -->
     <main>
         @yield('content')
     </main>
+    <!-- Footer Start -->
     @include('clients.partials.footer_home')
-    <!-- Header Start -->
+    <!-- Footer Start -->
 
 
 
@@ -58,5 +60,11 @@
     <!-- Template Javascript -->
     <script src="{{asset('assets/clients/js/main.js')}}"></script>
 </body>
-
+<script>
+        document.addEventListener("DOMContentLoaded", function() {
+        if (typeof WOW !== "undefined") {
+            new WOW().init();
+        }
+    });
+</script>
 </html>
