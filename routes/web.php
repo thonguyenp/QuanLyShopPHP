@@ -12,8 +12,8 @@ Route::get('/404', function () {
 
 Route::get('/about', function () {
     return view('clients.pages.about');
-});
+})->name('about');
 
 Route::get('/contact', function () {
     return view('clients.pages.contact');
-});
+})->name('contact');
