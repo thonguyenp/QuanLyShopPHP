@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>@yield('title')</title>
+    <title><?php echo $__env->yieldContent('title'); ?></title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -20,27 +20,27 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="{{asset('assets/clients/lib/animate/animate.min.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/clients/lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
+    <link href="<?php echo e(asset('assets/clients/lib/animate/animate.min.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('assets/clients/lib/owlcarousel/assets/owl.carousel.min.css')); ?>" rel="stylesheet">
 
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="{{asset('assets/clients/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="<?php echo e(asset('assets/clients/css/bootstrap.min.css')); ?>" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="{{asset('assets/clients/css/style.css')}}" rel="stylesheet">
+    <link href="<?php echo e(asset('assets/clients/css/style.css')); ?>" rel="stylesheet">
 </head>
 
 <body>
 
     <!-- Header Start -->
-    @include('clients.partials.header_home')
+    <?php echo $__env->make('clients.partials.header_home', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
     <!-- Header Start -->
     <main>
-        @yield('content')
+        <?php echo $__env->yieldContent('content'); ?>
     </main>
     <!-- Footer Start -->
-    @include('clients.partials.footer_home')
+    <?php echo $__env->make('clients.partials.footer_home', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
     <!-- Footer Start -->
 
 
@@ -54,11 +54,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
-    <script src="{{asset('assets/clients/lib/wow/wow.min.js')}}"></script>
-    <script src="{{asset('assets/clients/lib/owlcarousel/owl.carousel.min.js')}}"></script>
-    <script src="{{asset('assets/clients/js/custom.js')}}"></script>
+    <script src="<?php echo e(asset('assets/clients/lib/wow/wow.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/clients/lib/owlcarousel/owl.carousel.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/clients/js/custom.js')); ?>"></script>
     <!-- Template Javascript -->
-    <script src="{{asset('assets/clients/js/main.js')}}"></script>
+    <script src="<?php echo e(asset('assets/clients/js/main.js')); ?>"></script>
 </body>
 <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -67,4 +67,4 @@
         }
     });
 </script>
-</html>
+</html><?php /**PATH E:\laragon\www\QuanLyShop\resources\views/layouts/client.blade.php ENDPATH**/ ?>

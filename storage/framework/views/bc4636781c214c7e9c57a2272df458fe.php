@@ -1,10 +1,10 @@
-@extends('layouts.client')
 
-@section('title', 'Đăng ký')
-@section('breadcrumb', 'Register')
 
-@section('content')
-    @include('clients.partials.breadcrumb')
+<?php $__env->startSection('title', 'Đăng ký'); ?>
+<?php $__env->startSection('breadcrumb', 'Register'); ?>
+
+<?php $__env->startSection('content'); ?>
+    <?php echo $__env->make('clients.partials.breadcrumb', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
     <!-- Register Area Start -->
 <div class="ltn__login-area pb-110">
     <div class="container">
@@ -19,8 +19,8 @@
         <div class="row">
             <div class="col-lg-6 offset-lg-3">
                 <div class="account-login-inner">
-                    <form action="{{route('post-register')}}" method="POST" id="register-form" class="ltn__form-box contact-form-box">
-                        @csrf
+                    <form action="<?php echo e(route('post-register')); ?>" method="POST" id="register-form" class="ltn__form-box contact-form-box">
+                        <?php echo csrf_field(); ?>
                         <div class="mb-3">
                             <input type="text" name="name" class="form-control" placeholder="Họ và tên" required>
                         </div>
@@ -55,4 +55,5 @@
 </div>
 <!-- Register Area End -->
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.client', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH E:\laragon\www\QuanLyShop\resources\views/clients/pages/register.blade.php ENDPATH**/ ?>
