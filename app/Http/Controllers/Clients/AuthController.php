@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Clients;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ActivationMail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 
@@ -56,7 +58,27 @@ class AuthController extends Controller
             'activation_token' => $token,
         ]);
 
+        Mail::to($user->email)->send(new ActivationMail($token, $user));
+
         toastr()->success('Đăng ký tài khoản thành công. Vui lòng kiểm tra email để kích hoạt tài khoản');
         return redirect()->back();
+    }
+
+    public function activate ($token)
+    {
+        $user = User::where('activation_token',$token)->first();
+
+        if ($user)
+        {
+            $user->status = 'active';
+            $user->activation_token = null;
+            $user->save();
+
+            toastr()->success('Kích hoạt tài khoản thành công');
+            return redirect()->back();
+        }
+
+            toastr()->error('Token không hợp lệ hoặc hết hạn');
+            return redirect()->back();
     }
 }
