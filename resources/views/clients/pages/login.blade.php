@@ -33,6 +33,9 @@
                                 <div class="alert alert-danger">{{$message}}</div>
                             @enderror
                         </div>
+                        <div class="mt-4 text-end" >
+                            <p><a href="{{url('/register')}}">Forgot password?</a></p>
+                        </div>
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary rounded-pill py-2">Đăng nhập</button>
                         </div>

@@ -1,19 +1,14 @@
 <!-- Topbar Start -->
 <div class="container-fluid px-5 d-none border-bottom d-lg-block">
     <div class="row gx-0 align-items-center">
-        <div class="col-lg-4 text-center text-lg-start mb-lg-0">
+        <div class="col-lg-6 text-center text-lg-start mb-lg-0">
             <div class="d-inline-flex align-items-center" style="height: 45px;">
                 <a href="#" class="text-muted me-2"> <a href="<?php echo e(route('about')); ?>">About Us</a></a><small>  / </small>
                 <a href="#" class="text-muted ms-2"><a href="<?php echo e(route('contact')); ?>">Contact</a> </a>
 
             </div>
         </div>
-        <div class="col-lg-4 text-center d-flex align-items-center justify-content-center">
-            <small class="text-dark">Call Us:</small>
-            <a href="#" class="text-muted">(+012) 1234 567890</a>
-        </div>
-
-        <div class="col-lg-4 text-center text-lg-end">
+        <div class="col-lg-6 text-center text-lg-end">
             <div class="d-inline-flex align-items-center" style="height: 45px;">
                 <div class="dropdown">
                     <a href="#" class="dropdown-toggle text-muted ms-2" data-bs-toggle="dropdown"><small><i
@@ -61,8 +56,6 @@
         </div>
         <div class="col-md-4 col-lg-3 text-center text-lg-end">
             <div class="d-inline-flex align-items-center">
-                <a href="#" class="text-muted d-flex align-items-center justify-content-center me-3"><span
-                        class="rounded-circle btn-md-square border"><i class="fas fa-random"></i></i></a>
                 <a href="#" class="text-muted d-flex align-items-center justify-content-center me-3"><span
                         class="rounded-circle btn-md-square border"><i class="fas fa-heart"></i></a>
                 <a href="#" class="text-muted d-flex align-items-center justify-content-center"><span
@@ -133,9 +126,8 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
+                        <a href="<?php echo e(route('home')); ?>" class="nav-item nav-link active">Home</a>
                         <a href="shop.html" class="nav-item nav-link">Shop</a>
-                        <a href="single.html" class="nav-item nav-link">Single Page</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu m-0">
@@ -184,8 +176,6 @@
                             </div>
                         </div>
                     </div>
-                    <a href="" class="btn btn-secondary rounded-pill py-2 px-4 px-lg-3 mb-3 mb-md-3 mb-lg-0"><i
-                            class="fa fa-mobile-alt me-2"></i> +0123 456 7890</a>
                 </div>
             </nav>
         </div>
