@@ -76,7 +76,7 @@
                         </tbody>
                     </table>
                     <div class="text-end">
-                        <button class="btn btn-primary" style="width: 200px;">Thêm địa chỉ mới</button>
+                        <button type="submit" class="btn btn-primary" style="width: 200px;">Thêm địa chỉ mới</button>
                     </div>
                 </div>
             </div>
@@ -92,8 +92,11 @@
                         <div class="card mb-4 mb-xl-0">
                             <div class="card-header">Ảnh đại diện</div>
                             <div class="card-body text-center">
-                                <img class="profile-pic rounded-circle mb-2" style="width: 100px; height: 100px;"
-                                    id="preview-image" src="{{$user->avatar}}" alt="avatar">
+                            <img id="preview-image"
+                                src="{{ $user->avatar ? asset('storage/' . $user->avatar) : asset('images/default-avatar.png') }}"
+                                class="profile-pic rounded-circle mb-2"
+                                style="width: 100px; height: 100px;"
+                                alt="avatar">
                                 <div class="small font-italic text-muted mb-4">JPG hoặc PNG, tối đa 5MB</div>
                                 <input type="file" name="avatar" id="avatar" accept="image/" class="d-none">
                             </div>

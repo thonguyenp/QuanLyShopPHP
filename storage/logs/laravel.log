@@ -1845,3 +1845,5 @@
 #45 E:\\laragon\\www\\QuanLyShop\\public\\index.php(20): Illuminate\\Foundation\\Application->handleRequest(Object(Illuminate\\Http\\Request))
 #46 {main}
 "} 
+[2025-11-06 15:14:12] local.DEBUG: {"id":12,"name":"Nguy\u1ec5n Ph\u01b0\u1edbc Th\u1ecd","email":"tho.np.64cntt@ntu.edu.vn","password":"$2y$12$N\/g6z8X2dnp0eWyGTG\/NPe\/vsi6q6HMkGgq9CiYf3\/IkKZONfRXgG","status":"active","phone_number":"124213","avatar":"upload\/users\/1762441967_690cbaef9b214_jpg","address":"vcbcvb","role_id":3,"activation_token":null,"google_id":null,"created_at":"2025-11-06T03:17:57.000000Z","updated_at":"2025-11-06T15:12:47.000000Z"}  
+[2025-11-06 15:16:12] local.DEBUG: {"id":12,"name":"Nguy\u1ec5n Ph\u01b0\u1edbc Th\u1ecd","email":"tho.np.64cntt@ntu.edu.vn","password":"$2y$12$N\/g6z8X2dnp0eWyGTG\/NPe\/vsi6q6HMkGgq9CiYf3\/IkKZONfRXgG","status":"active","phone_number":"0367137145","avatar":"upload\/users\/1762442052_690cbb441cf05_jpg","address":"984 23\/10 street","role_id":3,"activation_token":null,"google_id":null,"created_at":"2025-11-06T03:17:57.000000Z","updated_at":"2025-11-06T15:14:12.000000Z"}  

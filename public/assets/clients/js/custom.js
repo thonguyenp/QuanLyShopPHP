@@ -114,8 +114,64 @@ $(document).ready(function() {
 
     $('#update-account').on('submit', (function(e){
         e.preventDefault();
+        
         let formData = new FormData(this);
+        formData.append('_method', 'PUT'); // 👈 thêm dòng này
         let urlUpdate = $(this).attr('action');
-        console.log(formData);
+
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            url: urlUpdate,
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            beforeSend: function() {
+                $('.text-end button[type=submit]').text('Đang cập nhật...').attr('disabled', true);
+            },
+            success: function(response) {
+                if (response.success)
+                {
+                    toastr.success(response.message);
+                    // Update new img
+                    if (response.avatar)
+                    {
+                        $('#preview-image').attr('src', response.avatar);
+                    }
+                    else
+                    {
+                        toastr.error(response.message);
+                    }
+                }
+            },
+            error: function (xhr) {
+                console.error(xhr); // 👈 Giúp bạn xem log thật sự trong console
+
+                if (xhr.responseJSON && xhr.responseJSON.errors) {
+                    // Có lỗi validation
+                    let errors = xhr.responseJSON.errors;
+                    $.each(errors, function (key, value) {
+                        toastr.error(value[0]);
+                    });
+                } else if (xhr.responseJSON && xhr.responseJSON.message) {
+                    // Có message lỗi tổng quát
+                    toastr.error(xhr.responseJSON.message);
+                } else {
+                    // Không phải JSON => in ra lỗi HTTP hoặc server
+                    toastr.error("Đã xảy ra lỗi máy chủ (" + xhr.status + ")");
+                }
+            },
+
+            complete: function () {
+                $('.text-end button')
+                    .text('Cập nhật')
+                    .attr('disabled', false);
+            }
+        });
     }));
 });
