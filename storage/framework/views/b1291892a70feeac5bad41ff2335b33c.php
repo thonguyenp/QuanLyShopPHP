@@ -48,7 +48,7 @@ endif;
 unset($__errorArgs, $__bag); ?>
                         </div>
                         <div class="mt-4 text-end" >
-                            <p><a href="<?php echo e(url('/register')); ?>">Forgot password?</a></p>
+                            <p><a href="<?php echo e(route('password.request')); ?>">Forgot password?</a></p>
                         </div>
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary rounded-pill py-2">Đăng nhập</button>
