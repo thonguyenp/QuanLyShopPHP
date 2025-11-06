@@ -1,6 +1,5 @@
 $(document).ready(function() {
     // validate register formm
-    console.log(111);
     $('#register-form').submit(function(e) {
         let name = $('input[name="name"]').val();
         let email = $('input[name="email"]').val();
@@ -32,6 +31,28 @@ $(document).ready(function() {
         if (!checkbox)
         {
             errorMessage +=  "Bạn phải đồng ý với điều khoản <br>";
+        }
+        if (errorMessage != "")
+        {
+            toastr.error(errorMessage, "Lỗi");
+            e.preventDefault();
+        }
+    });
+    // validate login formm
+    $('#login-form').submit(function(e) {
+        console.log(111)
+        let email = $('input[name="email"]').val();
+        let password = $('input[name="password"]').val();
+        
+        let errorMessage = "";
+        if (!emailRegex.test(email))
+        {
+            errorMessage += "Email không hợp lệ <br>";
+        }
+
+        if (password.length < 6)
+        {
+            errorMessage +=  "Mật khẩu có ít nhất 6 ký tự <br>";
         }
         if (errorMessage != "")
         {

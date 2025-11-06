@@ -23,3 +23,7 @@ Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('regi
 Route::post('/register', [AuthController::class, 'register'])->name('post-register');
 
 Route::get('/activate/{token}', [AuthController::class, 'activate'])->name('activate');
+
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('post-login');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Mail\ActivationMail;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
@@ -52,7 +53,7 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->name),
+            'password' => Hash::make($request->password),
             'status' => 'pending',
             'role_id' => 3,
             'activation_token' => $token,
@@ -81,4 +82,45 @@ class AuthController extends Controller
             toastr()->error('Token không hợp lệ hoặc hết hạn');
             return redirect()->back();
     }
+
+    public function showLoginForm ()
+    {
+        return view('clients.pages.login');
+    }
+
+    public function login(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|string|email|',
+            'password' => 'required|min:6',
+        ], [
+            'email.required' => 'Email là bắt buộc',
+            'email.unique' => 'Email đã được dùng',
+            'password.required' => 'Mật khẩu là bắt buộc',
+            'password.min' => 'Mật khẩu có ít nhất 6 ký tự',
+        ]);
+        // check login infor
+        if (Auth::attempt([
+            'email' => $request->email,
+            'password' => $request->password,
+            'status' => 'active',
+        ]))
+        {
+            if (in_array(Auth::user()->role->name, ['customer']))
+            {
+                $request->session()->regenerate();
+                toastr()->success('Đăng nhập thành công');
+                return redirect()->route('home');
+            }
+            else 
+            {
+                Auth::logout();
+                toastr()->error('Bạn không có quyền truy cập vào tài khoản này');
+                return redirect()->back();
+            }
+        } 
+        toastr()->error('Thông tin đăng nhập không chính xác hoặc tài khoản chưa kích hoạt');
+        return redirect()->back();
+    }
+    
 }

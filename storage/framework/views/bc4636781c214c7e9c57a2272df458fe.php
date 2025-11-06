@@ -95,7 +95,7 @@ unset($__errorArgs, $__bag); ?>
                         </div>
 
                         <div class="text-center mt-4">
-                            <p>Already have an account? <a href="/">Login now</a></p>
+                            <p>Already have an account? <a href="<?php echo e(url('/login')); ?>">Login now</a></p>
                         </div>
                     </form>
                 </div>
