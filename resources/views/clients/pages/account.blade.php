@@ -92,8 +92,8 @@
                         <div class="card mb-4 mb-xl-0">
                             <div class="card-header">Ảnh đại diện</div>
                             <div class="card-body text-center">
-                                <img class="profile-pic rounded-circle mb-2"
-                                    src="{{$user->avatar}}" alt="avatar">
+                                <img class="profile-pic rounded-circle mb-2" style="width: 100px; height: 100px;"
+                                    id="preview-image" src="{{$user->avatar}}" alt="avatar">
                                 <div class="small font-italic text-muted mb-4">JPG hoặc PNG, tối đa 5MB</div>
                                 <input type="file" name="avatar" id="avatar" accept="image/" class="d-none">
                             </div>
@@ -105,41 +105,39 @@
                         <div class="card mb-4">
                             <div class="card-header">Chi tiết tài khoản</div>
                             <div class="card-body">
-                                <form>
-                                    <div class="row gx-3 mb-3">
-                                        <div class="col-md-6">
-                                            <label class="small mb-1" for="ltn_name">Họ và tên</label>
-                                            <input class="form-control" id="inputName" name="ltn_name" type="text"
-                                                placeholder="Nhập tên của bạn" value="{{$user->name}}">
-                                        </div>
+                                <div class="row gx-3 mb-3">
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="ltn_name">Họ và tên</label>
+                                        <input class="form-control" id="ltn_name" name="ltn_name" type="text"
+                                            placeholder="Nhập tên của bạn" value="{{$user->name}}">
                                     </div>
+                                </div>
 
-                                    <div class="row gx-3 mb-3">
-                                        <div class="col-md-6">
-                                            <label class="small mb-1" for="ltn_email">Email (không được thay đổi)</label>
-                                            <input class="form-control" id="inputEmailAddress" name="ltn_email" type="email" readonly
-                                            placeholder="Nhập email" value="{{$user->email}}">
-                                        </div>
+                                <div class="row gx-3 mb-3">
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="ltn_email">Email (không được thay đổi)</label>
+                                        <input class="form-control" id="ltn_email" name="ltn_email" type="email"
+                                            readonly placeholder="Nhập email" value="{{$user->email}}">
                                     </div>
+                                </div>
 
-                                    <div class="row gx-3 mb-3">
-                                        <div class="col-md-6">
-                                            <label class="small mb-1" for="ltn_phone_number">Số điện thoại</label>
-                                            <input class="form-control" id="inputPhone" type="tel" name="ltn_phone_number"
-                                                placeholder="Nhập số điện thoại" value="{{$user->phone_number}}">
-                                        </div>
+                                <div class="row gx-3 mb-3">
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="ltn_phone_number">Số điện thoại</label>
+                                        <input class="form-control" id="ltn_phone_number" type="tel"
+                                            name="ltn_phone_number" placeholder="Nhập số điện thoại"
+                                            value="{{$user->phone_number}}">
                                     </div>
+                                </div>
 
-                                    <div class="row gx-3 mb-3">
-                                        <div class="col-md-6">
-                                            <label class="small mb-1" for="ltn_address">Địa chỉ</label>
-                                            <input class="form-control" id="inputPhone" type="tel" name="ltn_address"
-                                                placeholder="Nhập số điện thoại" value="{{$user->address}}">
-                                        </div>
+                                <div class="row gx-3 mb-3">
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="ltn_address">Địa chỉ</label>
+                                        <input class="form-control" id="ltn_address" type="text" name="ltn_address"
+                                            placeholder="Nhập số địa chỉ" value="{{$user->address}}">
                                     </div>
-
-                                    <button class="btn btn-primary" type="button">Lưu thay đổi</button>
-                                </form>
+                                </div>
+                                <button class="btn btn-primary" type="submit">Lưu thay đổi</button>
                             </div>
                         </div>
                     </div>
@@ -163,9 +161,10 @@
                         </div>
                         <div class="mb-3">
                             <label class="small mb-1" for="confirm_new_password">Nhập lại mật khẩu mới</label>
-                            <input class="form-control" name="confirm_new_password" id="confirm_new_password" type="password">
+                            <input class="form-control" name="confirm_new_password" id="confirm_new_password"
+                                type="password">
                         </div>
-                        <button class="btn btn-primary" type="button">Cập nhật mật khẩu</button>
+                        <button class="btn btn-primary" type="submit">Cập nhật mật khẩu</button>
                     </form>
                 </div>
             </div>

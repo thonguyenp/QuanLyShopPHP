@@ -99,11 +99,23 @@ $(document).ready(function() {
     $('.profile-pic').click(function() {
         $("#avatar").click();
     });
-    
+    // When selecting an image => display preview image
+    $("#avatar").change(function() {
+        let input = this;
+        if (input.files && input.files[0])
+        {
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                $('#preview-image').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    });
+
     $('#update-account').on('submit', (function(e){
         e.preventDefault();
         let formData = new FormData(this);
         let urlUpdate = $(this).attr('action');
-
+        console.log(formData);
     }));
 });
