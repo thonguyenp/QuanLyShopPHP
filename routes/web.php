@@ -21,17 +21,24 @@ Route::get('/contact', function () {
     return view('clients.pages.contact');
 })->name('contact');
 
-Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
-Route::post('/register', [AuthController::class, 'register'])->name('post-register');
+Route::middleware('guest')->group(function(){
+    Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+    Route::post('/register', [AuthController::class, 'register'])->name('post-register');
+    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [AuthController::class, 'login'])->name('post-login');
+    Route::get('/forget-password', [ForgotPasswordController::class, 'showForgotPasswordForm'])->name('password.request');
+    Route::post('/forget-password', [ForgotPasswordController::class, 'sendResetLink'])->name('password.email');
+
+    Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+    Route::post('/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.update');
+
+});
 
 Route::get('/activate/{token}', [AuthController::class, 'activate'])->name('activate');
 
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [AuthController::class, 'login'])->name('post-login');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-Route::get('/forget-password', [ForgotPasswordController::class, 'showForgotPasswordForm'])->name('password.request');
-Route::post('/forget-password', [ForgotPasswordController::class, 'sendResetLink'])->name('password.email');
-
-Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
-Route::post('/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.update');
+Route::middleware(['auth.custom'])->group(function(){
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::prefix('account')->group(function(){
+        
+    });
+});
