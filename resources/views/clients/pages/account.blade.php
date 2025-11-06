@@ -27,7 +27,7 @@
                 <div class="card-header">Bảng điều khiển</div>
                 <div class="card-body">
                     Hello <strong>{{ $user->email }}</strong> (not <strong>{{ $user->email }}</strong>)
-                    <small><a href="javascript:void(0)">Đăng xuất</a></small>
+                    <small><a href="{{route('logout')}}">Đăng xuất</a></small>
 
                     Từ bảng điều khiển tài khoản của bạn, bạn có thể xem <span>đơn hàng gần đây</span>, quản lý
                     <span>địa chỉ giao hàng và thanh toán của bạn</span>, và <span>chỉnh sửa mật khẩu và thông tin chi
@@ -84,18 +84,18 @@
 
         <!-- Chi tiết tài khoản -->
         <div class="tab-pane fade" id="liton_tab_account">
-            <div class="row">
-                <form action="" method="post" id="update-account" enctype="multipart/form-data">
+            <form action="" method="post" id="update-account" enctype="multipart/form-data">
+                <div class="row">
                     @method('PUT')
                     <div class="col-xl-4">
                         <!-- Profile picture card-->
                         <div class="card mb-4 mb-xl-0">
                             <div class="card-header">Ảnh đại diện</div>
                             <div class="card-body text-center">
-                                <img class="img-account-profile rounded-circle mb-2"
-                                    src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                                <img class="rounded-circle mb-2"
+                                    src="{{$user->avatar}}" alt="avatarr">
                                 <div class="small font-italic text-muted mb-4">JPG hoặc PNG, tối đa 5MB</div>
-                                <button class="btn btn-primary" type="button">Tải ảnh mới</button>
+                                <input type="file" name="avatar" id="avatar" accept="image/" class="d-none">
                             </div>
                         </div>
                     </div>
@@ -108,23 +108,33 @@
                                 <form>
                                     <div class="row gx-3 mb-3">
                                         <div class="col-md-6">
-                                            <label class="small mb-1" for="inputName">Họ và tên</label>
-                                            <input class="form-control" id="inputName" name="inputName" type="text"
-                                                placeholder="Nhập tên của bạn" value="Nguyễn Văn A">
+                                            <label class="small mb-1" for="ltn_name">Họ và tên</label>
+                                            <input class="form-control" id="inputName" name="ltn_name" type="text"
+                                                placeholder="Nhập tên của bạn" value="{{$user->name}}">
                                         </div>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label class="small mb-1" for="inputEmailAddress">Địa chỉ email</label>
-                                        <input class="form-control" id="inputEmailAddress" type="email"
-                                            placeholder="Nhập email" value="name@example.com">
                                     </div>
 
                                     <div class="row gx-3 mb-3">
                                         <div class="col-md-6">
-                                            <label class="small mb-1" for="inputPhone">Số điện thoại</label>
-                                            <input class="form-control" id="inputPhone" type="tel"
-                                                placeholder="Nhập số điện thoại" value="0123-456-789">
+                                            <label class="small mb-1" for="ltn_email">Email (không được thay đổi)</label>
+                                            <input class="form-control" id="inputEmailAddress" name="ltn_email" type="email" readonly
+                                            placeholder="Nhập email" value="{{$user->email}}">
+                                        </div>
+                                    </div>
+
+                                    <div class="row gx-3 mb-3">
+                                        <div class="col-md-6">
+                                            <label class="small mb-1" for="ltn_phone_number">Số điện thoại</label>
+                                            <input class="form-control" id="inputPhone" type="tel" name="ltn_phone_number"
+                                                placeholder="Nhập số điện thoại" value="{{$user->phone_number}}">
+                                        </div>
+                                    </div>
+
+                                    <div class="row gx-3 mb-3">
+                                        <div class="col-md-6">
+                                            <label class="small mb-1" for="ltn_address">Địa chỉ</label>
+                                            <input class="form-control" id="inputPhone" type="tel" name="ltn_address"
+                                                placeholder="Nhập số điện thoại" value="{{$user->address}}">
                                         </div>
                                     </div>
 
@@ -133,8 +143,8 @@
                             </div>
                         </div>
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
 
         <!-- Đổi mật khẩu -->
@@ -144,16 +154,16 @@
                 <div class="card-body">
                     <form>
                         <div class="mb-3">
-                            <label class="small mb-1" for="currentPassword">Mật khẩu hiện tại</label>
-                            <input class="form-control" id="currentPassword" type="password">
+                            <label class="small mb-1" for="current_password">Mật khẩu hiện tại</label>
+                            <input class="form-control" name="current_password" id="current_password" type="password">
                         </div>
                         <div class="mb-3">
-                            <label class="small mb-1" for="newPassword">Mật khẩu mới</label>
-                            <input class="form-control" id="newPassword" type="password">
+                            <label class="small mb-1" for="new_password">Mật khẩu mới</label>
+                            <input class="form-control" name="new_password" id="new_password" type="password">
                         </div>
                         <div class="mb-3">
-                            <label class="small mb-1" for="confirmPassword">Nhập lại mật khẩu mới</label>
-                            <input class="form-control" id="confirmPassword" type="password">
+                            <label class="small mb-1" for="confirm_new_password">Nhập lại mật khẩu mới</label>
+                            <input class="form-control" name="confirm_new_password" id="confirm_new_password" type="password">
                         </div>
                         <button class="btn btn-primary" type="button">Cập nhật mật khẩu</button>
                     </form>
