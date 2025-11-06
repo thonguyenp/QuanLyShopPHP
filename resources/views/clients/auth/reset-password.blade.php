@@ -19,7 +19,7 @@
         <div class="row">
             <div class="col-lg-6 offset-lg-3">
                 <div class="account-login-inner">
-                    <form action="{{route('password.update')}}" method="POST" id="login-form"
+                    <form action="{{route('password.update')}}" method="POST" id="reset-password-form"
                         class="ltn__form-box contact-form-box">
                         @csrf
                         <input type="hidden" name="token" id="" value="{{$token}}">

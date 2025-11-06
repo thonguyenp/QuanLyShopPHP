@@ -34,4 +34,4 @@ Route::get('/forget-password', [ForgotPasswordController::class, 'showForgotPass
 Route::post('/forget-password', [ForgotPasswordController::class, 'sendResetLink'])->name('password.email');
 
 Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
-Route::post('/reset-password', [ResetPasswordController::class, 'sendResetLink'])->name('password.update');
+Route::post('/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.update');
