@@ -39,7 +39,9 @@ Route::get('/activate/{token}', [AuthController::class, 'activate'])->name('acti
 
 Route::middleware(['auth.custom'])->group(function(){
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    
     Route::prefix('account')->group(function(){
-    Route::get('/', [AccountController::class, 'index'])->name('account');
+        Route::get('/', [AccountController::class, 'index'])->name('account');
+        Route::put('/', [AccountController::class, 'update'])->name('account.update');
     });
 });

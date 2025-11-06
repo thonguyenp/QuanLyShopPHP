@@ -84,7 +84,7 @@
 
         <!-- Chi tiết tài khoản -->
         <div class="tab-pane fade" id="liton_tab_account">
-            <form action="" method="post" id="update-account" enctype="multipart/form-data">
+            <form action="{{route('account.update')}}" method="post" id="update-account" enctype="multipart/form-data">
                 <div class="row">
                     @method('PUT')
                     <div class="col-xl-4">
@@ -92,8 +92,8 @@
                         <div class="card mb-4 mb-xl-0">
                             <div class="card-header">Ảnh đại diện</div>
                             <div class="card-body text-center">
-                                <img class="rounded-circle mb-2"
-                                    src="{{$user->avatar}}" alt="avatarr">
+                                <img class="profile-pic rounded-circle mb-2"
+                                    src="{{$user->avatar}}" alt="avatar">
                                 <div class="small font-italic text-muted mb-4">JPG hoặc PNG, tối đa 5MB</div>
                                 <input type="file" name="avatar" id="avatar" accept="image/" class="d-none">
                             </div>

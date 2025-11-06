@@ -27,7 +27,7 @@
                 <div class="card-header">Bảng điều khiển</div>
                 <div class="card-body">
                     Hello <strong><?php echo e($user->email); ?></strong> (not <strong><?php echo e($user->email); ?></strong>)
-                    <small><a href="javascript:void(0)">Đăng xuất</a></small>
+                    <small><a href="<?php echo e(route('logout')); ?>">Đăng xuất</a></small>
 
                     Từ bảng điều khiển tài khoản của bạn, bạn có thể xem <span>đơn hàng gần đây</span>, quản lý
                     <span>địa chỉ giao hàng và thanh toán của bạn</span>, và <span>chỉnh sửa mật khẩu và thông tin chi
@@ -84,7 +84,7 @@
 
         <!-- Chi tiết tài khoản -->
         <div class="tab-pane fade" id="liton_tab_account">
-            <form action="" method="post" id="update-account" enctype="multipart/form-data">
+            <form action="<?php echo e(route('account.update')); ?>" method="post" id="update-account" enctype="multipart/form-data">
                 <div class="row">
                     <?php echo method_field('PUT'); ?>
                     <div class="col-xl-4">
@@ -92,7 +92,7 @@
                         <div class="card mb-4 mb-xl-0">
                             <div class="card-header">Ảnh đại diện</div>
                             <div class="card-body text-center">
-                                <img class="rounded-circle mb-2"
+                                <img class="profile-pic rounded-circle mb-2"
                                     src="<?php echo e($user->avatar); ?>" alt="avatar">
                                 <div class="small font-italic text-muted mb-4">JPG hoặc PNG, tối đa 5MB</div>
                                 <input type="file" name="avatar" id="avatar" accept="image/" class="d-none">
@@ -152,22 +152,20 @@
             <div class="card mb-4">
                 <div class="card-header">Đổi mật khẩu</div>
                 <div class="card-body">
-                    <form action="?" method="POST" id="change-password-form">
-                        <div class="row">
-                        <div class="col-md-12">
-                            <label>Mật khẩu hiện tại: </label>
-                            <input type="password" name="current_password" required> 
-                            
-                            <label>Mật khẩu mới: </label>
-                            <input type="password" name="new_password" required>
-                            
-                            <label>Nhập lại mật khẩu mới:</label>
-                            <input type="password" name="confirm_new_password" autocomplete="new-password">
+                    <form>
+                        <div class="mb-3">
+                            <label class="small mb-1" for="current_password">Mật khẩu hiện tại</label>
+                            <input class="form-control" name="current_password" id="current_password" type="password">
                         </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" for="new_password">Mật khẩu mới</label>
+                            <input class="form-control" name="new_password" id="new_password" type="password">
                         </div>
-                    <div class="btn-wrapper">
-                        <button type="submit" class="btn theme-btn-1 btn-effect-1 text-uppercase">Đổi mật khẩu</button>
-                    </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" for="confirm_new_password">Nhập lại mật khẩu mới</label>
+                            <input class="form-control" name="confirm_new_password" id="confirm_new_password" type="password">
+                        </div>
+                        <button class="btn btn-primary" type="button">Cập nhật mật khẩu</button>
                     </form>
                 </div>
             </div>

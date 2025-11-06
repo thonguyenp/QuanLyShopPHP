@@ -15,4 +15,9 @@ class AccountController extends Controller
         // dd($user);
         return view('clients.pages.account', compact('user'));
     }
+
+    public function update(Request $request)
+    {
+        
+    }
 }

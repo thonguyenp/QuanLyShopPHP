@@ -1,4 +1,7 @@
 $(document).ready(function() {
+    // *******************
+    // Page login, register
+    // *******************
     // validate register form
     $('#register-form').submit(function(e) {
         let name = $('input[name="name"]').val();
@@ -61,7 +64,6 @@ $(document).ready(function() {
         }
     });
     // validate reset password form
-
     $('#reset-password-form').submit(function(e) {
         let email = $('input[name="email"]').val();
         let password = $('input[name="password"]').val();
@@ -90,4 +92,18 @@ $(document).ready(function() {
             e.preventDefault();
         }
     });
+    // *******************
+    // Page account
+    // *******************
+    // When clicking on the image => open input file
+    $('.profile-pic').click(function() {
+        $("#avatar").click();
+    });
+    
+    $('#update-account').on('submit', (function(e){
+        e.preventDefault();
+        let formData = new FormData(this);
+        let urlUpdate = $(this).attr('action');
+
+    }));
 });
