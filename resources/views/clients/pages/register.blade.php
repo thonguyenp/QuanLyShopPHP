@@ -22,16 +22,28 @@
                     <form action="{{route('post-register')}}" method="POST" id="register-form" class="ltn__form-box contact-form-box">
                         @csrf
                         <div class="mb-3">
-                            <input type="text" name="name" class="form-control" placeholder="Họ và tên" required>
+                            <input type="text" name="name" class="form-control" value="{{old('name')}}" placeholder="Họ và tên" required>
+                            @error('name')
+                                <div class="alert alert-danger">{{$message}}</div>
+                            @enderror
                         </div>
                         <div class="mb-3">
-                            <input type="email" name="email" class="form-control" placeholder="Email" required>
+                            <input type="email" name="email" class="form-control" value="{{old('email')}}" placeholder="Email" required>
+                            @error('email')
+                                <div class="alert alert-danger">{{$message}}</div>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <input type="password" name="password" class="form-control" placeholder="Mật khẩu" required>
+                            @error('password')
+                                <div class="alert alert-danger">{{$message}}</div>
+                            @enderror
                         </div>
                         <div class="mb-3">
-                            <input type="password" name="confirmpassword" class="form-control" placeholder="Xác nhận mật khẩu" required>
+                            <input type="password" name="password_confirmation" class="form-control" placeholder="Xác nhận mật khẩu" required>
+                            @error('password_confirmation')
+                                <div class="alert alert-danger">{{$message}}</div>
+                            @enderror
                         </div>
 
                         <div class="form-check mb-3">
@@ -39,6 +51,9 @@
                             <label class="form-check-label" for="agreeCheck">
                                 Tôi đồng ý cho xử lý dữ liệu cá nhân của mình để nhận tài liệu tiếp thị được cá nhân hóa theo mẫu đồng ý và chính sách bảo mật.
                             </label>
+                            @error('checkbox')
+                                <div class="alert alert-danger">{{$message}}</div>
+                            @enderror
                         </div>
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary rounded-pill py-3">Tạo tài khoản</button>

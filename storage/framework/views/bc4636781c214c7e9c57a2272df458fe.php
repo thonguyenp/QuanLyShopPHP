@@ -22,16 +22,56 @@
                     <form action="<?php echo e(route('post-register')); ?>" method="POST" id="register-form" class="ltn__form-box contact-form-box">
                         <?php echo csrf_field(); ?>
                         <div class="mb-3">
-                            <input type="text" name="name" class="form-control" placeholder="Họ và tên" required>
+                            <input type="text" name="name" class="form-control" value="<?php echo e(old('name')); ?>" placeholder="Họ và tên" required>
+                            <?php $__errorArgs = ['name'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                <div class="alert alert-danger"><?php echo e($message); ?></div>
+                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                         </div>
                         <div class="mb-3">
-                            <input type="email" name="email" class="form-control" placeholder="Email" required>
+                            <input type="email" name="email" class="form-control" value="<?php echo e(old('email')); ?>" placeholder="Email" required>
+                            <?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                <div class="alert alert-danger"><?php echo e($message); ?></div>
+                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                         </div>
                         <div class="mb-3">
                             <input type="password" name="password" class="form-control" placeholder="Mật khẩu" required>
+                            <?php $__errorArgs = ['password'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                <div class="alert alert-danger"><?php echo e($message); ?></div>
+                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                         </div>
                         <div class="mb-3">
-                            <input type="password" name="confirmpassword" class="form-control" placeholder="Xác nhận mật khẩu" required>
+                            <input type="password" name="password_confirmation" class="form-control" placeholder="Xác nhận mật khẩu" required>
+                            <?php $__errorArgs = ['password_confirmation'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                <div class="alert alert-danger"><?php echo e($message); ?></div>
+                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                         </div>
 
                         <div class="form-check mb-3">
@@ -39,6 +79,16 @@
                             <label class="form-check-label" for="agreeCheck">
                                 Tôi đồng ý cho xử lý dữ liệu cá nhân của mình để nhận tài liệu tiếp thị được cá nhân hóa theo mẫu đồng ý và chính sách bảo mật.
                             </label>
+                            <?php $__errorArgs = ['checkbox'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                <div class="alert alert-danger"><?php echo e($message); ?></div>
+                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                         </div>
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary rounded-pill py-3">Tạo tài khoản</button>

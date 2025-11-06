@@ -5,7 +5,7 @@ $(document).ready(function() {
         let name = $('input[name="name"]').val();
         let email = $('input[name="email"]').val();
         let password = $('input[name="password"]').val();
-        let confirmPassword = $('input[name="confirmPassword"]').val();
+        let password_confirmation = $('input[name="password_confirmation"]').val();
         let checkbox = $('input[name="checkbox"]').is(':checked');
         
         let errorMessage = "";
@@ -25,7 +25,7 @@ $(document).ready(function() {
         {
             errorMessage +=  "Mật khẩu có ít nhất 6 ký tự <br>";
         }
-        if (password != confirmPassword)
+        if (password != password_confirmation)
         {
             errorMessage +=  "Mật khẩu nhập lại không khớp <br>";
         }

@@ -31,7 +31,9 @@
     27 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     28 => 'Termwind\\Laravel\\TermwindServiceProvider',
     29 => 'Phiki\\Adapters\\Laravel\\PhikiServiceProvider',
-    30 => 'App\\Providers\\AppServiceProvider',
+    30 => 'Flasher\\Laravel\\FlasherServiceProvider',
+    31 => 'Flasher\\Toastr\\Laravel\\FlasherToastrServiceProvider',
+    32 => 'App\\Providers\\AppServiceProvider',
   ),
   'eager' => 
   array (
@@ -50,7 +52,9 @@
     12 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     13 => 'Termwind\\Laravel\\TermwindServiceProvider',
     14 => 'Phiki\\Adapters\\Laravel\\PhikiServiceProvider',
-    15 => 'App\\Providers\\AppServiceProvider',
+    15 => 'Flasher\\Laravel\\FlasherServiceProvider',
+    16 => 'Flasher\\Toastr\\Laravel\\FlasherToastrServiceProvider',
+    17 => 'App\\Providers\\AppServiceProvider',
   ),
   'deferred' => 
   array (
