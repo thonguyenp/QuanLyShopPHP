@@ -111,7 +111,7 @@ $(document).ready(function() {
             reader.readAsDataURL(input.files[0]);
         }
     });
-
+    // When clicking on submit button
     $('#update-account').on('submit', (function(e){
         e.preventDefault();
         
@@ -174,4 +174,34 @@ $(document).ready(function() {
             }
         });
     }));
+
+    // validate change password form
+    $('#reset-password-form').submit(function(e) {
+        let email = $('input[name="email"]').val();
+        let password = $('input[name="password"]').val();
+        let password_confirmation = $('input[name="password_confirmation"]').val();
+        
+        let errorMessage = "";
+
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+        if (!emailRegex.test(email))
+        {
+            errorMessage += "Email không hợp lệ <br>";
+        }
+
+        if (password.length < 6)
+        {
+            errorMessage +=  "Mật khẩu có ít nhất 6 ký tự <br>";
+        }
+        if (password != password_confirmation)
+        {
+            errorMessage +=  "Mật khẩu nhập lại không khớp <br>";
+        }
+        if (errorMessage != "")
+        {
+            toastr.error(errorMessage, "Lỗi");
+            e.preventDefault();
+        }
+    });
 });

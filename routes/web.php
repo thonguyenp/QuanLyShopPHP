@@ -43,5 +43,6 @@ Route::middleware(['auth.custom'])->group(function(){
     Route::prefix('account')->group(function(){
         Route::get('/', [AccountController::class, 'index'])->name('account');
         Route::put('/', [AccountController::class, 'update'])->name('account.update');
+        Route::post('/change-pasword', [AccountController::class, 'changePassword'])->name('account.change-pasword');
     });
 });

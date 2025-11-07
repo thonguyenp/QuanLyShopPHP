@@ -26,6 +26,7 @@ class AccountController extends Controller
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
+        /** @var \App\Models\User $user */ //hàng này giúp editor hiểu rằng biến user là 1 đối tượng của User model
         $user = Auth::user();
         // handle avatar
         if ($request->hasFile('avatar')) {

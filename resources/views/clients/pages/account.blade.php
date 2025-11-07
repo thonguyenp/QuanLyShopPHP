@@ -153,7 +153,7 @@
             <div class="card mb-4">
                 <div class="card-header">Đổi mật khẩu</div>
                 <div class="card-body">
-                    <form>
+                    <form action="{{route('account.change-pasword')}}" method="POST" id="change-password-form">
                         <div class="mb-3">
                             <label class="small mb-1" for="current_password">Mật khẩu hiện tại</label>
                             <input class="form-control" name="current_password" id="current_password" type="password">
