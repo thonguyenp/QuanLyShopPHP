@@ -219,13 +219,15 @@
                         <div class="col-md-6 col-lg-4 col-xl-3">
                             <div class="product-item rounded wow fadeInUp" data-wow-delay="0.1s">
                                 <div class="product-item-inner border rounded">
+                                    {{-- img --}}
                                     <div class="product-item-inner-item">
-                                        <img src="img/product-3.png" class="img-fluid w-100 rounded-top" alt="">
+                                        <img src="{{ $product->image_url }}" class="img-fluid w-100 rounded-top" alt="{{ $product->name }}">
                                         <div class="product-new">New</div>
                                         <div class="product-details">
                                             <a href="#"><i class="fa fa-eye fa-1x"></i></a>
                                         </div>
                                     </div>
+                                    {{-- content --}}
                                     <div class="text-center rounded-bottom p-4">
                                         <a href="#" class="d-block mb-2">{{ $product->category->name }} </a>
                                         <a href="#" class="d-block h4">{{$product->name}}</a>
@@ -233,6 +235,7 @@
                                         <span class="text-primary fs-5">{{number_format($product->price, 2)}}</span>
                                     </div>
                                 </div>
+                                {{-- button --}}
                                 <div class="product-item-add border border-top-0 rounded-bottom text-center p-4 pt-0">
                                     <a href="#" class="btn btn-primary border-secondary rounded-pill py-2 px-4 mb-4"><i
                                             class="fas fa-shopping-cart me-2"></i> Add To Cart</a>

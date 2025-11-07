@@ -35,10 +35,17 @@ class HomeController extends Controller
         $productRightBanner = Product::with('category')
             ->where('name', 'iPhone 15 Pro Max')
             ->first();
+        
         // hiển thị thông tin cho All Product Section
         $allProductSection = Product::with('category')
             ->take(8)                   // chỉ lấy 8 sản phẩm
             ->get();
+        // Gán đường dẫn ảnh cho phần allProductSection
+        foreach ($allProductSection as $product) {
+            $product->image_url = $product->firstImage?->image
+                ? asset('storage/upload/products/' . $product->firstImage->image)
+                : asset('storage/upload/products/default-product.png');
+        }
 
         return view('clients.pages.home', compact(
             'categories',

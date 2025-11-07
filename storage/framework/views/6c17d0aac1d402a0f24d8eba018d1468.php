@@ -14,13 +14,20 @@
                     <a href="#" class="dropdown-toggle text-muted ms-2" data-bs-toggle="dropdown"><small><i
                                 class="fa fa-home me-2"></i> My Dashboard</small></a>
                     <div class="dropdown-menu rounded">
-                        <a href="#" class="dropdown-item"> Login</a>
-                        <a href="#" class="dropdown-item"> Wishlist</a>
-                        <a href="#" class="dropdown-item"> My Card</a>
-                        <a href="#" class="dropdown-item"> Notifications</a>
-                        <a href="#" class="dropdown-item"> Account Settings</a>
-                        <a href="#" class="dropdown-item"> My Account</a>
-                        <a href="#" class="dropdown-item"> Log Out</a>
+                        <?php if(auth()->guard()->guest()): ?>
+                            <a href="<?php echo e(route('login')); ?>" class="dropdown-item">Login</a>
+                            <a href="<?php echo e(route('register')); ?>" class="dropdown-item">Register</a>
+                        <?php endif; ?>
+                        <?php if(auth()->guard()->check()): ?>
+                            <a href="<?php echo e(route('account')); ?>" class="dropdown-item">My Account</a>
+                            <a href="" class="dropdown-item">Wishlist</a>
+                            <a href="" class="dropdown-item">Notifications</a>
+                            <form action="<?php echo e(route('logout')); ?>" method="POST">
+                                <?php echo csrf_field(); ?>
+                                <button type="submit" class="dropdown-item">Logout</button>
+                            </form>
+                        <?php endif; ?>
+
                     </div>
                 </div>
             </div>

@@ -38,7 +38,7 @@ Route::middleware('guest')->group(function(){
 Route::get('/activate/{token}', [AuthController::class, 'activate'])->name('activate');
 
 Route::middleware(['auth.custom'])->group(function(){
-    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     
     Route::prefix('account')->group(function(){
         Route::get('/', [AccountController::class, 'index'])->name('account');
