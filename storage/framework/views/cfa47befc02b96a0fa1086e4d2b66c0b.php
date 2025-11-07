@@ -1,19 +1,19 @@
-@extends('layouts.client_home')
 
-@section('title', 'Cửa hàng')
 
-@section('breadcrumb', 'Shop')
+<?php $__env->startSection('title', 'Cửa hàng'); ?>
 
-@section('content')
-    @include('clients.partials.breadcrumb')
+<?php $__env->startSection('breadcrumb', 'Shop'); ?>
+
+<?php $__env->startSection('content'); ?>
+    <?php echo $__env->make('clients.partials.breadcrumb', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
     <!-- Shop Page Start -->
     <div class="container-fluid shop py-5">
         <div class="container py-5">
             <div class="row g-4">
-                @include('clients.components.products_grid')
+                <?php echo $__env->make('clients.components.products_grid', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
                 <div class="col-lg-9 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="rounded mb-4 position-relative">
-                        <img src="{{asset('assets/clients/img/product-banner-3.jpg')}}" class="img-fluid rounded w-100" style="height: 250px;"
+                        <img src="<?php echo e(asset('assets/clients/img/product-banner-3.jpg')); ?>" class="img-fluid rounded w-100" style="height: 250px;"
                             alt="Image">
                         <div class="position-absolute rounded d-flex flex-column align-items-center justify-content-center text-center"
                             style="width: 100%; height: 250px; top: 0; left: 0; background: rgba(242, 139, 0, 0.3);">
@@ -68,7 +68,7 @@
                                     <div class="product-item rounded wow fadeInUp" data-wow-delay="0.1s">
                                         <div class="product-item-inner border rounded">
                                             <div class="product-item-inner-item">
-                                                <img src="{{asset('assets/clients/img/product-3.png')}}" class="img-fluid w-100 rounded-top" alt="">
+                                                <img src="<?php echo e(asset('assets/clients/img/product-3.png')); ?>" class="img-fluid w-100 rounded-top" alt="">
                                                 <div class="product-new">New</div>
                                                 <div class="product-details">
                                                     <a href="#"><i class="fa fa-eye fa-1x"></i></a>
@@ -171,4 +171,5 @@
         </div>
     </div>
     <!-- Shop Page End -->
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.client_home', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH E:\laragon\www\QuanLyShop\resources\views/clients/pages/products.blade.php ENDPATH**/ ?>

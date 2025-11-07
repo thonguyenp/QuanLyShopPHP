@@ -4,6 +4,7 @@ use App\Http\Controllers\Clients\AccountController;
 use App\Http\Controllers\Clients\AuthController;
 use App\Http\Controllers\Clients\ForgotPasswordController;
 use App\Http\Controllers\Clients\HomeController;
+use App\Http\Controllers\Clients\ProductController;
 use App\Http\Controllers\Clients\ResetPasswordController;
 use Illuminate\Support\Facades\Route;
 
@@ -50,3 +51,5 @@ Route::middleware(['auth.custom'])->group(function(){
         Route::delete('/addresses/{id}', [AccountController::class, 'deleteAddress'])->name('account.address.delete');
     });
 });
+
+Route::get('/product', [ProductController::class, 'index'])->name('product.index');

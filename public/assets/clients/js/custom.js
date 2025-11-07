@@ -1,93 +1,80 @@
-$(document).ready(function() {
+$(document).ready(function () {
     // *******************
     // Page login, register
     // *******************
     // validate register form
-    $('#register-form').submit(function(e) {
+    $('#register-form').submit(function (e) {
         let name = $('input[name="name"]').val();
         let email = $('input[name="email"]').val();
         let password = $('input[name="password"]').val();
         let password_confirmation = $('input[name="password_confirmation"]').val();
         let checkbox = $('input[name="checkbox"]').is(':checked');
-        
+
         let errorMessage = "";
 
-        if (name.length < 3)
-        {
-            errorMessage +=  "Họ và tên phải có ít nhất 3 ký tự <br>";
+        if (name.length < 3) {
+            errorMessage += "Họ và tên phải có ít nhất 3 ký tự <br>";
         }
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-        if (!emailRegex.test(email))
-        {
+        if (!emailRegex.test(email)) {
             errorMessage += "Email không hợp lệ <br>";
         }
 
-        if (password.length < 6)
-        {
-            errorMessage +=  "Mật khẩu có ít nhất 6 ký tự <br>";
+        if (password.length < 6) {
+            errorMessage += "Mật khẩu có ít nhất 6 ký tự <br>";
         }
-        if (password != password_confirmation)
-        {
-            errorMessage +=  "Mật khẩu nhập lại không khớp <br>";
+        if (password != password_confirmation) {
+            errorMessage += "Mật khẩu nhập lại không khớp <br>";
         }
-        if (!checkbox)
-        {
-            errorMessage +=  "Bạn phải đồng ý với điều khoản <br>";
+        if (!checkbox) {
+            errorMessage += "Bạn phải đồng ý với điều khoản <br>";
         }
-        if (errorMessage != "")
-        {
+        if (errorMessage != "") {
             toastr.error(errorMessage, "Lỗi");
             e.preventDefault();
         }
     });
     // validate login form
-    $('#login-form').submit(function(e) {
+    $('#login-form').submit(function (e) {
         console.log(111)
         let email = $('input[name="email"]').val();
         let password = $('input[name="password"]').val();
-        
+
         let errorMessage = "";
-        if (!emailRegex.test(email))
-        {
+        if (!emailRegex.test(email)) {
             errorMessage += "Email không hợp lệ <br>";
         }
 
-        if (password.length < 6)
-        {
-            errorMessage +=  "Mật khẩu có ít nhất 6 ký tự <br>";
+        if (password.length < 6) {
+            errorMessage += "Mật khẩu có ít nhất 6 ký tự <br>";
         }
-        if (errorMessage != "")
-        {
+        if (errorMessage != "") {
             toastr.error(errorMessage, "Lỗi");
             e.preventDefault();
         }
     });
     // validate reset password form
-    $('#reset-password-form').submit(function(e) {
+    $('#reset-password-form').submit(function (e) {
         let email = $('input[name="email"]').val();
         let password = $('input[name="password"]').val();
         let password_confirmation = $('input[name="password_confirmation"]').val();
-        
+
         let errorMessage = "";
 
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-        if (!emailRegex.test(email))
-        {
+        if (!emailRegex.test(email)) {
             errorMessage += "Email không hợp lệ <br>";
         }
 
-        if (password.length < 6)
-        {
-            errorMessage +=  "Mật khẩu có ít nhất 6 ký tự <br>";
+        if (password.length < 6) {
+            errorMessage += "Mật khẩu có ít nhất 6 ký tự <br>";
         }
-        if (password != password_confirmation)
-        {
-            errorMessage +=  "Mật khẩu nhập lại không khớp <br>";
+        if (password != password_confirmation) {
+            errorMessage += "Mật khẩu nhập lại không khớp <br>";
         }
-        if (errorMessage != "")
-        {
+        if (errorMessage != "") {
             toastr.error(errorMessage, "Lỗi");
             e.preventDefault();
         }
@@ -96,25 +83,24 @@ $(document).ready(function() {
     // Page account
     // *******************
     // When clicking on the image => open input file
-    $('.profile-pic').click(function() {
+    $('.profile-pic').click(function () {
         $("#avatar").click();
     });
     // When selecting an image => display preview image
-    $("#avatar").change(function() {
+    $("#avatar").change(function () {
         let input = this;
-        if (input.files && input.files[0])
-        {
+        if (input.files && input.files[0]) {
             let reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 $('#preview-image').attr('src', e.target.result);
             }
             reader.readAsDataURL(input.files[0]);
         }
     });
     // When clicking on submit button
-    $('#update-account').on('submit', (function(e){
+    $('#update-account').on('submit', (function (e) {
         e.preventDefault();
-        
+
         let formData = new FormData(this);
         formData.append('_method', 'PUT'); // 👈 thêm dòng này
         let urlUpdate = $(this).attr('action');
@@ -131,20 +117,17 @@ $(document).ready(function() {
             data: formData,
             processData: false,
             contentType: false,
-            beforeSend: function() {
+            beforeSend: function () {
                 $('.text-end button[type=submit]').text('Đang cập nhật...').attr('disabled', true);
             },
-            success: function(response) {
-                if (response.success)
-                {
+            success: function (response) {
+                if (response.success) {
                     toastr.success(response.message);
                     // Update new img
-                    if (response.avatar)
-                    {
+                    if (response.avatar) {
                         $('#preview-image').attr('src', response.avatar);
                     }
-                    else
-                    {
+                    else {
                         toastr.error(response.message);
                     }
                 }
@@ -176,29 +159,25 @@ $(document).ready(function() {
     }));
 
     // validate change password form
-    $('#change-password-form').submit(function(e) {
+    $('#change-password-form').submit(function (e) {
         e.preventDefault();
         let current_password = $('input[name="current_password"]').val();
         let new_password = $('input[name="new_password"]').val();
         let confirm_new_password = $('input[name="confirm_new_password"]').val();
-        
+
         let errorMessage = "";
 
-        if (current_password.length < 6)
-        {
-            errorMessage +=  "Mật khẩu mới có ít nhất 6 ký tự <br>";
+        if (current_password.length < 6) {
+            errorMessage += "Mật khẩu mới có ít nhất 6 ký tự <br>";
         }
 
-        if (new_password.length < 6)
-        {
-            errorMessage +=  "Mật khẩu mới có ít nhất 6 ký tự <br>";
+        if (new_password.length < 6) {
+            errorMessage += "Mật khẩu mới có ít nhất 6 ký tự <br>";
         }
-        if (new_password != confirm_new_password)
-        {
-            errorMessage +=  "Mật khẩu nhập lại không khớp <br>";
+        if (new_password != confirm_new_password) {
+            errorMessage += "Mật khẩu nhập lại không khớp <br>";
         }
-        if (errorMessage != "")
-        {
+        if (errorMessage != "") {
             toastr.error(errorMessage, "Lỗi");
             return;
         }
@@ -216,17 +195,15 @@ $(document).ready(function() {
             url: urlUpdate,
             type: 'POST',
             data: formData,
-            beforeSend: function() {
+            beforeSend: function () {
                 $('.text-end button[type=submit]').text('Đang cập nhật...').attr('disabled', true);
             },
-            success: function(response) {
-                if (response.success)
-                {
+            success: function (response) {
+                if (response.success) {
                     toastr.success(response.message);
                     $('#change-password-form')[0].reset();
                 }
-                else
-                {
+                else {
                     toastr.error(response.message);
                 }
             },
@@ -257,7 +234,7 @@ $(document).ready(function() {
     });
 
     //validate add address form
-    $('#addAddressForm').submit(function(e) {
+    $('#addAddressForm').submit(function (e) {
         e.preventDefault();
 
         let isValid = true;
@@ -268,24 +245,49 @@ $(document).ready(function() {
         let fullName = $('#full_name').val().trim();
         let phone = $('#phone').val().trim();
 
-        if (fullName.length < 3)
-        {
+        if (fullName.length < 3) {
             isValid = false;
             $('#full_name').after(
                 '<p class="error-message text-danger">Họ và tên không được ít hơn 3 ký tự</p>'
             )
         }
         let phoneRegex = /^[0-9]{10,11}$/;
-        if (!phoneRegex.test(phone))
-        {
+        if (!phoneRegex.test(phone)) {
             isValid = false;
             $('#phone').after(
                 '<p class="error-message text-danger">Số điện thoại không hợp lệ</p>'
             )
         }
-        if (isValid)
-        {
+        if (isValid) {
             this.submit();
         }
     });
+
 });
+
+// Phương thức cho price range hoạt động
+function updateDualRange() {
+  const min = document.getElementById('minRange');
+  const max = document.getElementById('maxRange');
+  const minValue = document.getElementById('minValue');
+  const maxValue = document.getElementById('maxValue');
+  const sliderRange = document.getElementById('sliderRange');
+  
+  let minVal = parseInt(min.value);
+  let maxVal = parseInt(max.value);
+
+  if (minVal > maxVal) {
+    [minVal, maxVal] = [maxVal, minVal];
+  }
+
+  minValue.textContent = minVal;
+  maxValue.textContent = maxVal;
+
+  const minPercent = (minVal / min.max) * 100;
+  const maxPercent = (maxVal / max.max) * 100;
+  
+  sliderRange.style.left = minPercent + "%";
+  sliderRange.style.width = (maxPercent - minPercent) + "%";
+
+  console.log(minValue, ' ',maxValue);
+}

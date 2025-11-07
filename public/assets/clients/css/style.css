@@ -695,6 +695,52 @@
 
 /*** Shop Page End ***/
 
+/* Price slider start */
+.range-slider {
+  position: relative;
+  width: 100%;
+  height: 40px;
+}
+
+.range-slider input[type="range"] {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  pointer-events: none; /* không chặn trượt */
+  appearance: none;
+  height: 8px;
+  background: transparent;
+}
+
+.range-slider input[type="range"]::-webkit-slider-thumb {
+  pointer-events: all;
+  appearance: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: #f28b00;
+  cursor: pointer;
+}
+
+.slider-track {
+  position: absolute;
+  height: 6px;
+  width: 100%;
+  background: #ddd;
+  border-radius: 3px;
+  top: 16px;
+}
+
+.slider-range {
+  position: absolute;
+  height: 6px;
+  background: #f28b00;
+  border-radius: 3px;
+  top: 16px;
+}
+
+/* Price slider end */
 
 /*** Single Products Start ***/
 .single-product .owl-nav .owl-prev,
@@ -741,19 +787,6 @@
     border-radius: 40px;
     border: 4px solid var(--bs-secondary);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .related-product .related-carousel .related-item {
     width: 100%;

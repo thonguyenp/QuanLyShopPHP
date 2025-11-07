@@ -14,11 +14,10 @@
                     <a href="#" class="dropdown-toggle text-muted ms-2" data-bs-toggle="dropdown"><small><i
                                 class="fa fa-home me-2"></i> My Dashboard</small></a>
                     <div class="dropdown-menu rounded">
-                        <?php if(auth()->guard()->guest()): ?>
+                        <?php if(!Auth::check()): ?>
                             <a href="<?php echo e(route('login')); ?>" class="dropdown-item">Login</a>
                             <a href="<?php echo e(route('register')); ?>" class="dropdown-item">Register</a>
-                        <?php endif; ?>
-                        <?php if(auth()->guard()->check()): ?>
+                        <?php else: ?>
                             <a href="<?php echo e(route('account')); ?>" class="dropdown-item">My Account</a>
                             <a href="" class="dropdown-item">Wishlist</a>
                             <a href="" class="dropdown-item">Notifications</a>
@@ -27,6 +26,7 @@
                                 <button type="submit" class="dropdown-item">Logout</button>
                             </form>
                         <?php endif; ?>
+                        
 
                     </div>
                 </div>
@@ -67,7 +67,6 @@
                         class="rounded-circle btn-md-square border"><i class="fas fa-heart"></i></a>
                 <a href="#" class="text-muted d-flex align-items-center justify-content-center"><span
                         class="rounded-circle btn-md-square border"><i class="fas fa-shopping-cart"></i></span>
-                    <span class="text-dark ms-2">$0.00</span></a>
             </div>
         </div>
     </div>
@@ -134,7 +133,7 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0">
                         <a href="<?php echo e(route('home')); ?>" class="nav-item nav-link active">Home</a>
-                        <a href="shop.html" class="nav-item nav-link">Shop</a>
+                        <a href="<?php echo e(route('product.index')); ?>" class="nav-item nav-link">Shop</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu m-0">
