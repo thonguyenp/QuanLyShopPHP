@@ -25,13 +25,18 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function image ()
+    public function images ()
     {
         return $this->hasMany(ProductImage::class);
     }
 
-    public function cartItem()
+    public function cartItems()
     {
         return $this->hasMany(CartItem::class);
+    }
+
+    public function firstImage()
+    {
+        return $this->hasOne(ProductImage::class)->orderBy('id','ASC');
     }
 }

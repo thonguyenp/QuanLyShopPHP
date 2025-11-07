@@ -324,18 +324,18 @@ namespace App\Models {
      *
      * @property \Illuminate\Support\Carbon|null $updated_at
      * @property \Illuminate\Support\Carbon|null $created_at
-     * @property string|null $images
+     * @property string|null $image
      * @property string|null $description
      * @property string $slug
      * @property string $name
      * @property int $id
-     * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Product> $product
-     * @property-read int|null $product_count
+     * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Product> $products
+     * @property-read int|null $products_count
      * @method static \Illuminate\Database\Eloquent\Builder<Category>|Category whereId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Category>|Category whereName($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Category>|Category whereSlug($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Category>|Category whereDescription($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<Category>|Category whereImages($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Category>|Category whereImage($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Category>|Category whereCreatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Category>|Category whereUpdatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Category>|Category newModelQuery()
@@ -2886,10 +2886,11 @@ namespace App\Models {
      * @property string $name
      * @property int $id
      * @property-read \App\Models\Category $category
-     * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ProductImage> $image
-     * @property-read int|null $image_count
-     * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CartItem> $cartItem
-     * @property-read int|null $cartItem_count
+     * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ProductImage> $images
+     * @property-read int|null $images_count
+     * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CartItem> $cartItems
+     * @property-read int|null $cartItems_count
+     * @property-read \App\Models\ProductImage $firstImage
      * @method static \Illuminate\Database\Eloquent\Builder<Product>|Product whereId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Product>|Product whereName($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Product>|Product whereSlug($value)
