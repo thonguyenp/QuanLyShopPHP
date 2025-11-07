@@ -44,5 +44,9 @@ Route::middleware(['auth.custom'])->group(function(){
         Route::get('/', [AccountController::class, 'index'])->name('account');
         Route::put('/', [AccountController::class, 'update'])->name('account.update');
         Route::post('/change-pasword', [AccountController::class, 'changePassword'])->name('account.change-pasword');
+        // 2 nút hành động phần address
+        Route::post('/addresses', [AccountController::class, 'addAddress'])->name('account.address.add');
+        Route::put('/addresses/{id}', [AccountController::class, 'updatePrimaryAddress'])->name('account.address.update');
+        Route::delete('/addresses/{id}', [AccountController::class, 'deleteAddress'])->name('account.address.delete');
     });
 });

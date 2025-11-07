@@ -59,44 +59,86 @@
                                 <th>Địa chỉ</th>
                                 <th>Thành phố</th>
                                 <th>Số điện thoại</th>
+                                <th>Mặc định</th>
                                 <th>Hành động</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($addresses as $item)
                             <tr>
-                                <td>1</td>
-                                <td>Jun 22, 2019</td>
-                                <td>Pending</td>
-                                <td>$3000</td>
+                                <td>{{$item->full_name}}</td>
+                                <td>{{$item->address}}</td>
+                                <td>{{$item->city}}</td>
+                                <td>{{$item->phone}}</td>
                                 <td>
-                                    <button type="submit" class="btn btn-sm btn-danger"
-                                        onclick="return confirm('Bạn có muốn xóa địa chỉ này?')">Xóa</button>
+                                    @if ($item->default)
+                                        <span class="badge bg-success">Mặc định</span>
+                                    @else
+                                        <form action="{{route('account.address.update', $item->id)}}" method="post" class="d-line">
+                                            @csrf
+                                            @method('PUT')
+                                            <button class="btn btn-primary">Chọn</button>
+                                        </form>
+                                    @endif
+                                </td>
+                                <td>
+                                    <form action="{{route('account.address.delete', $item->id)}}" method="POST" class="d-line">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger"
+                                        onclick="return confirm('Bạn có muốn xóa địa chỉ này không?')">Xóa</button>
+                                    </form>
                                 </td>
                             </tr>
+
+                            @endforeach
                         </tbody>
                     </table>
                     <div class="text-end">
-                        <button type="submit" class="btn btn-primary" style="width: 200px;"
-                        data-bs-toggle="modal" data-bs-target="#addAddress">Thêm địa chỉ mới</button>
+                        <button type="submit" class="btn btn-primary" style="width: 200px;" data-bs-toggle="modal"
+                            data-bs-target="#addAddress">Thêm địa chỉ mới</button>
                     </div>
                 </div>
                 <!-- Modal -->
-                <div class="modal fade" id="addAddress" tabindex="-1" aria-labelledby="addAddressLabel" aria-hidden="true">
+                <div class="modal fade" id="addAddress" tabindex="-1" aria-labelledby="addAddressLabel"
+                    aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="addAddressLabel">Thêm địa chỉ mới</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="" method="post" id="addAddressForm">
-                                @csrf
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="addAddressLabel">Thêm địa chỉ mới</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{{route('account.address.add')}}" method="post" id="addAddressForm">
+                                    @csrf
+                                    <div class="mb-3">
+                                        <label for="full_name" class="form-label">Tên người dùng</label>
+                                        <input type="text" class="form-control" id="full_name" name="full_name"
+                                            required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="address" class="form-label">Địa chỉ</label>
+                                        <input type="text" class="form-control" id="address" name="address" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="city" class="form-label">Thành phố</label>
+                                        <input type="text" class="form-control" id="city" name="city" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="phone" class="form-label">Số điện thoại</label>
+                                        <input type="text" class="form-control" id="phone" name="phone" required>
+                                    </div>
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" id="default" name="default"
+                                            >
+                                        <label for="default" class="form-label">Đặt làm địa chỉ mặc định</label>
+                                    </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
                             </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
                         </div>
                     </div>
                 </div>
@@ -104,96 +146,96 @@
         </div>
 
         <!-- Chi tiết tài khoản -->
-        <div class="tab-pane fade" id="liton_tab_account">
-            <form action="{{route('account.update')}}" method="post" id="update-account" enctype="multipart/form-data">
-                <div class="row">
-                    @method('PUT')
-                    <div class="col-xl-4">
-                        <!-- Profile picture card-->
-                        <div class="card mb-4 mb-xl-0">
-                            <div class="card-header">Ảnh đại diện</div>
-                            <div class="card-body text-center">
-                            <img id="preview-image"
-                                src="{{ $user->avatar ? asset('storage/' . $user->avatar) : asset('images/default-avatar.png') }}"
-                                class="profile-pic rounded-circle mb-2"
-                                style="width: 100px; height: 100px;"
-                                alt="avatar">
-                                <div class="small font-italic text-muted mb-4">JPG hoặc PNG, tối đa 5MB</div>
-                                <input type="file" name="avatar" id="avatar" accept="image/" class="d-none">
+            <div class="tab-pane fade" id="liton_tab_account">
+                <form action="{{route('account.update')}}" method="post" id="update-account"
+                    enctype="multipart/form-data">
+                    <div class="row">
+                        @method('PUT')
+                        <div class="col-xl-4">
+                            <!-- Profile picture card-->
+                            <div class="card mb-4 mb-xl-0">
+                                <div class="card-header">Ảnh đại diện</div>
+                                <div class="card-body text-center">
+                                    <img id="preview-image"
+                                        src="{{ $user->avatar ? asset('storage/' . $user->avatar) : asset('images/default-avatar.png') }}"
+                                        class="profile-pic rounded-circle mb-2" style="width: 100px; height: 100px;"
+                                        alt="avatar">
+                                    <div class="small font-italic text-muted mb-4">JPG hoặc PNG, tối đa 5MB</div>
+                                    <input type="file" name="avatar" id="avatar" accept="image/" class="d-none">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-8">
+                            <!-- Account details card-->
+                            <div class="card mb-4">
+                                <div class="card-header">Chi tiết tài khoản</div>
+                                <div class="card-body">
+                                    <div class="row gx-3 mb-3">
+                                        <div class="col-md-6">
+                                            <label class="small mb-1" for="ltn_name">Họ và tên</label>
+                                            <input class="form-control" id="ltn_name" name="ltn_name" type="text"
+                                                placeholder="Nhập tên của bạn" value="{{$user->name}}">
+                                        </div>
+                                    </div>
+
+                                    <div class="row gx-3 mb-3">
+                                        <div class="col-md-6">
+                                            <label class="small mb-1" for="ltn_email">Email (không được thay
+                                                đổi)</label>
+                                            <input class="form-control" id="ltn_email" name="ltn_email" type="email"
+                                                readonly placeholder="Nhập email" value="{{$user->email}}">
+                                        </div>
+                                    </div>
+
+                                    <div class="row gx-3 mb-3">
+                                        <div class="col-md-6">
+                                            <label class="small mb-1" for="ltn_phone_number">Số điện thoại</label>
+                                            <input class="form-control" id="ltn_phone_number" type="tel"
+                                                name="ltn_phone_number" placeholder="Nhập số điện thoại"
+                                                value="{{$user->phone_number}}">
+                                        </div>
+                                    </div>
+
+                                    <div class="row gx-3 mb-3">
+                                        <div class="col-md-6">
+                                            <label class="small mb-1" for="ltn_address">Địa chỉ</label>
+                                            <input class="form-control" id="ltn_address" type="text" name="ltn_address"
+                                                placeholder="Nhập số địa chỉ" value="{{$user->address}}">
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary" type="submit">Lưu thay đổi</button>
+                                </div>
                             </div>
                         </div>
                     </div>
+                </form>
+            </div>
 
-                    <div class="col-xl-8">
-                        <!-- Account details card-->
-                        <div class="card mb-4">
-                            <div class="card-header">Chi tiết tài khoản</div>
-                            <div class="card-body">
-                                <div class="row gx-3 mb-3">
-                                    <div class="col-md-6">
-                                        <label class="small mb-1" for="ltn_name">Họ và tên</label>
-                                        <input class="form-control" id="ltn_name" name="ltn_name" type="text"
-                                            placeholder="Nhập tên của bạn" value="{{$user->name}}">
-                                    </div>
-                                </div>
-
-                                <div class="row gx-3 mb-3">
-                                    <div class="col-md-6">
-                                        <label class="small mb-1" for="ltn_email">Email (không được thay đổi)</label>
-                                        <input class="form-control" id="ltn_email" name="ltn_email" type="email"
-                                            readonly placeholder="Nhập email" value="{{$user->email}}">
-                                    </div>
-                                </div>
-
-                                <div class="row gx-3 mb-3">
-                                    <div class="col-md-6">
-                                        <label class="small mb-1" for="ltn_phone_number">Số điện thoại</label>
-                                        <input class="form-control" id="ltn_phone_number" type="tel"
-                                            name="ltn_phone_number" placeholder="Nhập số điện thoại"
-                                            value="{{$user->phone_number}}">
-                                    </div>
-                                </div>
-
-                                <div class="row gx-3 mb-3">
-                                    <div class="col-md-6">
-                                        <label class="small mb-1" for="ltn_address">Địa chỉ</label>
-                                        <input class="form-control" id="ltn_address" type="text" name="ltn_address"
-                                            placeholder="Nhập số địa chỉ" value="{{$user->address}}">
-                                    </div>
-                                </div>
-                                <button class="btn btn-primary" type="submit">Lưu thay đổi</button>
+            <!-- Đổi mật khẩu -->
+            <div class="tab-pane fade" id="liton_tab_password">
+                <div class="card mb-4">
+                    <div class="card-header">Đổi mật khẩu</div>
+                    <div class="card-body">
+                        <form action="{{route('account.change-pasword')}}" method="POST" id="change-password-form">
+                            <div class="mb-3">
+                                <label class="small mb-1" for="current_password">Mật khẩu hiện tại</label>
+                                <input class="form-control" name="current_password" id="current_password"
+                                    type="password">
                             </div>
-                        </div>
+                            <div class="mb-3">
+                                <label class="small mb-1" for="new_password">Mật khẩu mới</label>
+                                <input class="form-control" name="new_password" id="new_password" type="password">
+                            </div>
+                            <div class="mb-3">
+                                <label class="small mb-1" for="confirm_new_password">Nhập lại mật khẩu mới</label>
+                                <input class="form-control" name="confirm_new_password" id="confirm_new_password"
+                                    type="password">
+                            </div>
+                            <button class="btn btn-primary" type="submit">Cập nhật mật khẩu</button>
+                        </form>
                     </div>
-                </div>
-            </form>
-        </div>
-
-        <!-- Đổi mật khẩu -->
-        <div class="tab-pane fade" id="liton_tab_password">
-            <div class="card mb-4">
-                <div class="card-header">Đổi mật khẩu</div>
-                <div class="card-body">
-                    <form action="{{route('account.change-pasword')}}" method="POST" id="change-password-form">
-                        <div class="mb-3">
-                            <label class="small mb-1" for="current_password">Mật khẩu hiện tại</label>
-                            <input class="form-control" name="current_password" id="current_password" type="password">
-                        </div>
-                        <div class="mb-3">
-                            <label class="small mb-1" for="new_password">Mật khẩu mới</label>
-                            <input class="form-control" name="new_password" id="new_password" type="password">
-                        </div>
-                        <div class="mb-3">
-                            <label class="small mb-1" for="confirm_new_password">Nhập lại mật khẩu mới</label>
-                            <input class="form-control" name="confirm_new_password" id="confirm_new_password"
-                                type="password">
-                        </div>
-                        <button class="btn btn-primary" type="submit">Cập nhật mật khẩu</button>
-                    </form>
                 </div>
             </div>
-        </div>
-
     </div>
-</div>
-@endsection
+    @endsection

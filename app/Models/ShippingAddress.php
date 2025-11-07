@@ -4,12 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @mixin IdeHelperShippingAddress
+ */
 class ShippingAddress extends Model
 {
     //
     protected $fillable = [
         'user_id',
-        'fullname',
+        'full_name',
         'phone',
         'address',
         'city',
