@@ -15,6 +15,7 @@
 <!-- Carousel Start -->
 <div class="container-fluid carousel bg-light px-0">
     <div class="row g-0 justify-content-end">
+        {{-- Left banner --}}
         <div class="col-12 col-lg-7 col-xl-9">
             <div class="header-carousel owl-carousel bg-light py-5">
                 <div class="row g-0 header-carousel-item align-items-center">
@@ -47,20 +48,21 @@
                 </div>
             </div>
         </div>
+        {{-- Right banner --}}
         <div class="col-12 col-lg-5 col-xl-3 wow fadeInRight" data-wow-delay="0.1s">
             <div class="carousel-header-banner h-100">
+                {{-- Tạm thời giữ lại ảnh này --}}
                 <img src="{{asset('assets/clients/img/header-img2.jpg')}}" class="img-fluid w-100 h-100"
                     style="object-fit: cover;" alt="Image">
                 <div class="carousel-banner-offer">
-                    <p class="bg-primary text-white rounded fs-5 py-2 px-4 mb-0 me-3">Save $48.00</p>
-                    <p class="text-primary fs-5 fw-bold mb-0">Special Offer</p>
+                    <p class="bg-primary text-white rounded fs-5 py-2 px-4 mb-0 me-3">Special Offer</p>
                 </div>
                 <div class="carousel-banner">
                     <div class="carousel-banner-content text-center p-4">
-                        <a href="#" class="d-block mb-2">SmartPhone</a>
-                        <a href="#" class="d-block text-white fs-3">Apple iPad Mini <br> G2356</a>
-                        <del class="me-2 text-white fs-5">$1,250.00</del>
-                        <span class="text-primary fs-5">$1,050.00</span>
+                        <a href="#" class="d-block mb-2">{{$productRightBanner->category->name}}</a>
+                        <a href="#" class="d-block text-white fs-3">{{$productRightBanner->name}}</a>
+                        <del class="me-2 text-white fs-5">{{ number_format($productRightBanner->price + 200, 2) }}</del>
+                        <span class="text-primary fs-5">{{number_format($productRightBanner->price, 2)}}</span>
                     </div>
                     <a href="#" class="btn btn-primary rounded-pill py-2 px-4"><i class="fas fa-shopping-cart me-2"></i>
                         Add To Cart</a>
@@ -171,8 +173,7 @@
         @foreach ($categories as $category)
         <div class="col">
             <div class="category-card">
-                <img src="{{ asset('storage/'. $category->image) }}"
-                    alt={{$category->name}}>
+                <img src="{{ asset('storage/'. $category->image) }}" alt={{$category->name}}>
                 <p>{{$category->name}}</p>
                 <p>{{$category->products->count()}} sản phẩm</p>
             </div>
@@ -194,7 +195,7 @@
                     <ul class="nav nav-pills d-inline-flex text-center mb-5">
                         <li class="nav-item mb-4">
                             <a class="d-flex mx-2 py-2 bg-light rounded-pill active" data-bs-toggle="pill"
-                                href="#tab-1">
+                                href="#AllProductSection">
                                 <span class="text-dark" style="width: 130px;">All Products</span>
                             </a>
                         </li>
@@ -205,11 +206,6 @@
                         </li>
                         <li class="nav-item mb-4">
                             <a class="d-flex mx-2 py-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-3">
-                                <span class="text-dark" style="width: 130px;">Featured</span>
-                            </a>
-                        </li>
-                        <li class="nav-item mb-4">
-                            <a class="d-flex mx-2 py-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-4">
                                 <span class="text-dark" style="width: 130px;">Top Selling</span>
                             </a>
                         </li>
@@ -217,8 +213,9 @@
                 </div>
             </div>
             <div class="tab-content">
-                <div id="tab-1" class="tab-pane fade show p-0 active">
+                <div id="AllProductSection" class="tab-pane fade show p-0 active">
                     <div class="row g-4">
+                        @foreach ($allProductSection as $product)
                         <div class="col-md-6 col-lg-4 col-xl-3">
                             <div class="product-item rounded wow fadeInUp" data-wow-delay="0.1s">
                                 <div class="product-item-inner border rounded">
@@ -230,10 +227,10 @@
                                         </div>
                                     </div>
                                     <div class="text-center rounded-bottom p-4">
-                                        <a href="#" class="d-block mb-2">SmartPhone </a>
-                                        <a href="#" class="d-block h4">all product Apple iPad Mini <br> G2356</a>
-                                        <del class="me-2 fs-5">$1,250.00</del>
-                                        <span class="text-primary fs-5">$1,050.00</span>
+                                        <a href="#" class="d-block mb-2">{{ $product->category->name }} </a>
+                                        <a href="#" class="d-block h4">{{$product->name}}</a>
+                                        <del class="me-2 fs-5">{{number_format($product->price + 200, 2)}}</del>
+                                        <span class="text-primary fs-5">{{number_format($product->price, 2)}}</span>
                                     </div>
                                 </div>
                                 <div class="product-item-add border border-top-0 rounded-bottom text-center p-4 pt-0">
@@ -261,6 +258,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endforeach
                     </div>
                 </div>
                 <div id="tab-2" class="tab-pane fade show p-0">
@@ -354,51 +352,6 @@
                         </div>
                     </div>
                 </div>
-                <div id="tab-4" class="tab-pane fade show p-0">
-                    <div class="row g-4">
-                        <div class="col-md-6 col-lg-4 col-xl-3">
-                            <div class="product-item rounded wow fadeInUp" data-wow-delay="0.1s">
-                                <div class="product-item-inner border rounded">
-                                    <div class="product-item-inner-item">
-                                        <img src="img/product-14.png" class="img-fluid w-100 rounded-top" alt="Image">
-                                        <div class="product-details">
-                                            <a href="#"><i class="fa fa-eye fa-1x"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="text-center rounded-bottom p-4">
-                                        <a href="#" class="d-block mb-2">SmartPhone</a>
-                                        <a href="#" class="d-block h4">top selling Apple iPad Mini <br> G2356</a>
-                                        <del class="me-2 fs-5">$1,250.00</del>
-                                        <span class="text-primary fs-5">$1,050.00</span>
-                                    </div>
-                                </div>
-                                <div class="product-item-add border border-top-0 rounded-bottom  text-center p-4 pt-0">
-                                    <a href="#" class="btn btn-primary border-secondary rounded-pill py-2 px-4 mb-4"><i
-                                            class="fas fa-shopping-cart me-2"></i> Add To Cart</a>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="d-flex">
-                                            <i class="fas fa-star text-primary"></i>
-                                            <i class="fas fa-star text-primary"></i>
-                                            <i class="fas fa-star text-primary"></i>
-                                            <i class="fas fa-star text-primary"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                        <div class="d-flex">
-                                            <a href="#"
-                                                class="text-primary d-flex align-items-center justify-content-center me-3"><span
-                                                    class="rounded-circle btn-sm-square border"><i
-                                                        class="fas fa-random"></i></i></a>
-                                            <a href="#"
-                                                class="text-primary d-flex align-items-center justify-content-center me-0"><span
-                                                    class="rounded-circle btn-sm-square border"><i
-                                                        class="fas fa-heart"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -452,15 +405,16 @@
         </div>
         {{-- items (tối thiểu phải có 2), 1 item lớn có 4 item nhỏ --}}
         <div class="productList-carousel owl-carousel pt-4 wow fadeInUp" data-wow-delay="0.3s">
-            @foreach ($categoriesWithTwoProducts as $category)
+            @foreach ($categories as $category)
             <div class="productImg-carousel owl-carousel productList-item">
-                @foreach ($category->two_products as $product)
+                @foreach ($category->products as $product)
                 <div class="productImg-item products-mini-item border">
                     <div class="row g-0">
                         {{-- img --}}
                         <div class="col-5">
                             <div class="products-mini-img border-end h-100">
-                                <img src="{{ $product->image_url }}" class="img-fluid w-100 h-100" alt="{{ $product->name }}">
+                                <img src="{{ $product->image_url }}" class="img-fluid w-100 h-100"
+                                    alt="{{ $product->name }}">
                                 <div class="products-mini-icon rounded-circle bg-primary">
                                     <a href="#"><i class="fa fa-eye fa-1x text-white"></i></a>
                                 </div>
@@ -508,25 +462,31 @@
         </div>
         <div class="row g-4">
             <div class="col-md-6 col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.1s">
+                {{-- Chưa làm phần hóa đơn nên chưa có --}}
+                @foreach ($bestSellingProducts as $product)
                 <div class="products-mini-item border">
                     <div class="row g-0">
+                        {{-- img --}}
                         <div class="col-5">
                             <div class="products-mini-img border-end h-100">
-                                <img src="img/product-3.png" class="img-fluid w-100 h-100" alt="Image">
+                                <img src="{{ $product->image_url }}" class="img-fluid w-100 h-100"
+                                    alt="{{ $product->name }}">
                                 <div class="products-mini-icon rounded-circle bg-primary">
                                     <a href="#"><i class="fa fa-eye fa-1x text-white"></i></a>
                                 </div>
                             </div>
                         </div>
+                        {{-- content --}}
                         <div class="col-7">
                             <div class="products-mini-content p-3">
-                                <a href="#" class="d-block mb-2">SmartPhone</a>
-                                <a href="#" class="d-block h4">Apple iPad Mini item 1 G2356</a>
-                                <del class="me-2 fs-5">$1,250.00</del>
-                                <span class="text-primary fs-5">$1,050.00</span>
+                                <a href="#" class="d-block mb-2">{{$category->name}}</a>
+                                <a href="#" class="d-block h4">{{$product->name}}</a>
+                                <del class="me-2 fs-5">{{number_format($product->price + 200, 2) }}</del>
+                                <span class="text-primary fs-5">{{number_format($product->price, 2)}}</span>
                             </div>
                         </div>
                     </div>
+                    {{-- button --}}
                     <div class="products-mini-add border p-3">
                         <a href="#" class="btn btn-primary border-secondary rounded-pill py-2 px-4"><i
                                 class="fas fa-shopping-cart me-2"></i> Add To Cart</a>
@@ -538,6 +498,8 @@
                         </div>
                     </div>
                 </div>
+
+                @endforeach
             </div>
         </div>
     </div>

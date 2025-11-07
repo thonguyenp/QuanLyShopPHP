@@ -10,8 +10,8 @@
         }, 1);
     };
     spinner(0);
-    
-    
+
+
     // Initiate the wowjs
     new WOW().init();
 
@@ -35,59 +35,88 @@
         dots: false,
         loop: true,
         margin: 0,
-        nav : true,
-        navText : [
+        nav: true,
+        navText: [
             '<i class="bi bi-arrow-left"></i>',
             '<i class="bi bi-arrow-right"></i>'
         ]
     });
 
-
     // ProductList carousel
     $(".productList-carousel").owlCarousel({
-        autoplay: true,
+        autoplay: false,
         smartSpeed: 2000,
         dots: false,
         loop: true,
         margin: 25,
-        nav : true,
-        navText : [
+        nav: true,
+        navText: [
             '<i class="fas fa-chevron-left"></i>',
             '<i class="fas fa-chevron-right"></i>'
         ],
         responsiveClass: true,
         responsive: {
-            0:{
-                items:1
+            0: {
+                items: 1
             },
-            576:{
-                items:1
+            576: {
+                items: 1
             },
-            768:{
-                items:2
+            768: {
+                items: 2
             },
-            992:{
-                items:2
+            992: {
+                items: 2
             },
-            1200:{
-                items:3
+            1200: {
+                items: 3
             }
+        },
+        onInitialized: function() {
+            // Chỉ khởi tạo carousel con khi cha đã load xong
+            initProductImgCarousel();
         }
+
     });
+    // Hàm khởi tạo carousel con
+    function initProductImgCarousel() {
+        $(".productImg-carousel").each(function() {
+            $(this).owlCarousel({
+                autoplay: false, // rất quan trọng — con không được autoplay
+                smartSpeed: 800,
+                dots: false,
+                loop: true,
+                items: 1,
+                margin: 15,
+                nav: true,
+                navText: [
+                    '<i class="bi bi-arrow-left"></i>',
+                    '<i class="bi bi-arrow-right"></i>'
+                ]
+            });
+        });
+    }
+
 
     // ProductList categories carousel
-    $(".productImg-carousel").owlCarousel({
-        autoplay: true,
-        smartSpeed: 1500,
-        dots: false,
-        loop: true,
-        items: 1,
-        margin: 25,
-        nav : true,
-        navText : [
-            '<i class="bi bi-arrow-left"></i>',
-            '<i class="bi bi-arrow-right"></i>'
-        ]
+    $('.productImg-carousel').each(function () {
+        const $this = $(this);
+        $this.owlCarousel({
+            autoplay: false,
+            smartSpeed: 1000,
+            dots: false,
+            loop: true,
+            items: 1,
+            margin: 25,
+            nav: true,
+            navText: [
+                '<i class="bi bi-arrow-left"></i>',
+                '<i class="bi bi-arrow-right"></i>'
+            ],
+            onInitialized: function () {
+                $this.removeClass('owl-loading');
+            }
+        });
     });
 
 
@@ -99,8 +128,8 @@
         dotsData: true,
         loop: true,
         items: 1,
-        nav : true,
-        navText : [
+        nav: true,
+        navText: [
             '<i class="bi bi-arrow-left"></i>',
             '<i class="bi bi-arrow-right"></i>'
         ]
@@ -114,27 +143,27 @@
         dots: false,
         loop: true,
         margin: 25,
-        nav : true,
-        navText : [
+        nav: true,
+        navText: [
             '<i class="fas fa-chevron-left"></i>',
             '<i class="fas fa-chevron-right"></i>'
         ],
         responsiveClass: true,
         responsive: {
-            0:{
-                items:1
+            0: {
+                items: 1
             },
-            576:{
-                items:1
+            576: {
+                items: 1
             },
-            768:{
-                items:2
+            768: {
+                items: 2
             },
-            992:{
-                items:3
+            992: {
+                items: 3
             },
-            1200:{
-                items:4
+            1200: {
+                items: 3
             }
         }
     });
@@ -158,22 +187,22 @@
     });
 
 
-    
-   // Back to top button
-   $(window).scroll(function () {
-    if ($(this).scrollTop() > 300) {
-        $('.back-to-top').fadeIn('slow');
-    } else {
-        $('.back-to-top').fadeOut('slow');
-    }
+
+    // Back to top button
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 300) {
+            $('.back-to-top').fadeIn('slow');
+        } else {
+            $('.back-to-top').fadeOut('slow');
+        }
     });
     $('.back-to-top').click(function () {
-        $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
+        $('html, body').animate({ scrollTop: 0 }, 1500, 'easeInOutExpo');
         return false;
     });
 
 
-   
+
 
 })(jQuery);
 
