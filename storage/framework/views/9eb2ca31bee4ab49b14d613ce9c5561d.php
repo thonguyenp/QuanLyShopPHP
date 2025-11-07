@@ -76,7 +76,26 @@
                         </tbody>
                     </table>
                     <div class="text-end">
-                        <button type="submit" class="btn btn-primary" style="width: 200px;">Thêm địa chỉ mới</button>
+                        <button type="submit" class="btn btn-primary" style="width: 200px;"
+                        data-bs-toggle="modal" data-bs-target="#addAddress">Thêm địa chỉ mới</button>
+                    </div>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="addAddress" tabindex="-1" aria-labelledby="addAddressLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="addAddressLabel">Modal title</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -153,7 +172,7 @@
             <div class="card mb-4">
                 <div class="card-header">Đổi mật khẩu</div>
                 <div class="card-body">
-                    <form>
+                    <form action="<?php echo e(route('account.change-pasword')); ?>" method="POST" id="change-password-form">
                         <div class="mb-3">
                             <label class="small mb-1" for="current_password">Mật khẩu hiện tại</label>
                             <input class="form-control" name="current_password" id="current_password" type="password">

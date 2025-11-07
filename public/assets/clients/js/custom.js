@@ -176,32 +176,83 @@ $(document).ready(function() {
     }));
 
     // validate change password form
-    $('#reset-password-form').submit(function(e) {
-        let email = $('input[name="email"]').val();
-        let password = $('input[name="password"]').val();
-        let password_confirmation = $('input[name="password_confirmation"]').val();
+    $('#change-password-form').submit(function(e) {
+        e.preventDefault();
+        let current_password = $('input[name="current_password"]').val();
+        let new_password = $('input[name="new_password"]').val();
+        let confirm_new_password = $('input[name="confirm_new_password"]').val();
         
         let errorMessage = "";
 
-        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-        if (!emailRegex.test(email))
+        if (current_password.length < 6)
         {
-            errorMessage += "Email không hợp lệ <br>";
+            errorMessage +=  "Mật khẩu mới có ít nhất 6 ký tự <br>";
         }
 
-        if (password.length < 6)
+        if (new_password.length < 6)
         {
-            errorMessage +=  "Mật khẩu có ít nhất 6 ký tự <br>";
+            errorMessage +=  "Mật khẩu mới có ít nhất 6 ký tự <br>";
         }
-        if (password != password_confirmation)
+        if (new_password != confirm_new_password)
         {
             errorMessage +=  "Mật khẩu nhập lại không khớp <br>";
         }
         if (errorMessage != "")
         {
             toastr.error(errorMessage, "Lỗi");
-            e.preventDefault();
+            return;
         }
+
+        let formData = $(this).serialize();
+        let urlUpdate = $(this).attr('action');
+
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            url: urlUpdate,
+            type: 'POST',
+            data: formData,
+            beforeSend: function() {
+                $('.text-end button[type=submit]').text('Đang cập nhật...').attr('disabled', true);
+            },
+            success: function(response) {
+                if (response.success)
+                {
+                    toastr.success(response.message);
+                    $('#change-password-form')[0].reset();
+                }
+                else
+                {
+                    toastr.error(response.message);
+                }
+            },
+            error: function (xhr) {
+                console.error(xhr); // 👈 Giúp bạn xem log thật sự trong console
+
+                if (xhr.responseJSON && xhr.responseJSON.errors) {
+                    // Có lỗi validation
+                    let errors = xhr.responseJSON.errors;
+                    $.each(errors, function (key, value) {
+                        toastr.error(value[0]);
+                    });
+                } else if (xhr.responseJSON && xhr.responseJSON.message) {
+                    // Có message lỗi tổng quát
+                    toastr.error(xhr.responseJSON.message);
+                } else {
+                    // Không phải JSON => in ra lỗi HTTP hoặc server
+                    toastr.error("Đã xảy ra lỗi máy chủ (" + xhr.status + ")");
+                }
+            },
+
+            complete: function () {
+                $('.text-end button')
+                    .text('Cập nhật')
+                    .attr('disabled', false);
+            }
+        });
     });
 });

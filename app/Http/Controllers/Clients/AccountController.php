@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Clients;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class AccountController extends Controller
@@ -17,6 +18,7 @@ class AccountController extends Controller
         return view('clients.pages.account', compact('user'));
     }
 
+    // Update information
     public function update(Request $request)
     {
         $request->validate([
@@ -54,5 +56,37 @@ class AccountController extends Controller
             'avatar' => asset('storage/' . $user->avatar)
         ]);
 
+    }
+
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|min:6',
+            'confirm_new_password' => 'required|same:new_password',
+        ],[
+            'current_password.required' => 'Vui lòng nhập mật khẩu hiện tại.',
+            'new_password.required' => 'Mật khẩu mới không được để trống.',
+            'new_password.min' => 'Mật khẩu mới phải có ít nhất 6 ký tự.',
+            'confirm_new_password.required' => 'Vui lòng nhập lại mật khẩu mới.',
+            'confirm_new_password.same' => 'Mật khẩu nhập lại không khớp.',
+        ]);
+
+        $user = Auth::user();
+
+        // Check if current password is correct
+        if (!Hash::check($request->current_password, $user->password))
+        {
+            return response()->json([
+                'error' => ['current_password' => ['Mật khẩu hiện tại không đúng']]
+            ], 422);    //422 = unprocessable content
+        }
+
+        $user->update(['password' => Hash::make($request->new_password)]);
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'Đổi mật khẩu thành công',
+        ]);
     }
 }
