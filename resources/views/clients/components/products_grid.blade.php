@@ -1,42 +1,16 @@
 <div class="col-lg-3 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="product-categories mb-4">
-                        <h4>Products Categories</h4>
+                        <h4>Danh mục sản phẩm</h4>
                         <ul class="list-unstyled">
+                            @foreach ($categories as $category)
                             <li>
                                 <div class="categories-item">
                                     <a href="#" class="text-dark"><i class="fas fa-apple-alt text-secondary me-2"></i>
-                                        Accessories</a>
-                                    <span>(3)</span>
+                                        {{$category->name}}</a>
+                                    <span>({{ $category->products->count() }})</span>
                                 </div>
                             </li>
-                            <li>
-                                <div class="categories-item">
-                                    <a href="#" class="text-dark"><i class="fas fa-apple-alt text-secondary me-2"></i>
-                                        Electronics & Computer</a>
-                                    <span>(5)</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="categories-item">
-                                    <a href="#" class="text-dark"><i
-                                            class="fas fa-apple-alt text-secondary me-2"></i>Laptops & Desktops</a>
-                                    <span>(2)</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="categories-item">
-                                    <a href="#" class="text-dark"><i
-                                            class="fas fa-apple-alt text-secondary me-2"></i>Mobiles & Tablets</a>
-                                    <span>(8)</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="categories-item">
-                                    <a href="#" class="text-dark"><i
-                                            class="fas fa-apple-alt text-secondary me-2"></i>SmartPhone & Smart TV</a>
-                                    <span>(5)</span>
-                                </div>
-                            </li>
+                            @endforeach
                         </ul>
                     </div>
                     {{-- Price range --}}
@@ -57,14 +31,20 @@
                             <span>To: $<span id="maxValue">400</span></span>
                         </div>
                     </div>
-
-
-
-                    <div class="additional-product mb-4">
+                    <div class="manufacturer mb-4">
                         <h4>Nhà sản xuất</h4>
-                        <div class="additional-product-item">
-                            <input type="radio" class="me-2" id="Categories-1" name="Categories-1" value="Beverages">
-                            <label for="Categories-1" class="text-dark"> Accessories</label>
+                        <div class="container">
+                            <div class="row">
+                                @foreach ($manufacturers as $manufacturer)
+                                <div class="col-lg-6">
+                                    <a href="">
+                                        <img src="{{ asset('storage/'. $manufacturer->image) }}" class="img-fluid"
+                                            alt="{{ $manufacturer->name }}"
+                                            style="width: 250px; height: 100px">
+                                    </a>
+                                </div>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                     <div class="featured-product mb-4">
@@ -92,4 +72,4 @@
                             <a href="#" class="btn btn-primary px-4 py-3 rounded-pill w-100">Vew More</a>
                         </div>
                     </div>
-                </div>
+</div>
