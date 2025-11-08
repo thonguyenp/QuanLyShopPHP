@@ -72,7 +72,25 @@ class ProductController extends Controller
         }
         return response()->json([
             'products' => view('clients.components.products_grid', compact('products'))->render(),
-            'pagination' => ($products->links('clients.components.pagination.pagination_custom'))->render()
+            'pagination' => ($products->links('clients.components.pagination.pagination_custom'))->toHtml()
         ]);
+    }
+
+    public function detail ($slug)
+    {
+        $product = Product::with(['category', 'images', 'manufacturer'])->where('slug', $slug)->firstOrFail();
+        //Lấy 3 sản phẩm liên quan đến cùng category
+        $relatedProducts = Product::where('category_id', $product->category_id)
+            ->where('id', '!=', $product->id)
+            ->with('category')
+            ->limit(3)
+            ->get();
+        foreach ($relatedProducts as $product) {
+            $product->image_url = $product->firstImage?->image
+            ? asset('storage/upload/products/'.$product->firstImage->image)
+            : asset('storage/upload/products/default-product.png');
+        }
+
+        return view('clients.pages.product-detail', compact('product', 'relatedProducts'));
     }
 }

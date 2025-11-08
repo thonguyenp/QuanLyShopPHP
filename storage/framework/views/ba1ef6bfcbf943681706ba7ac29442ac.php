@@ -1,27 +1,27 @@
-@extends('layouts.client_home')
 
-@section('title', 'Chi tiết sản phẩm')
 
-@section('breadcrumb', 'Product Detail')
+<?php $__env->startSection('title', 'Chi tiết sản phẩm'); ?>
 
-@section('content')
-@include('clients.partials.breadcrumb')
+<?php $__env->startSection('breadcrumb', 'Product Detail'); ?>
+
+<?php $__env->startSection('content'); ?>
+<?php echo $__env->make('clients.partials.breadcrumb', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 <!-- Single Products Start -->
 <div class="container-fluid shop py-5">
     <div class="container py-5">
         <div class="row g-4">
-            {{-- Cột trái --}}
+            
             <div class="col-lg-5 col-xl-3 wow fadeInUp" data-wow-delay="0.1s">
-                {{-- Sản phẩm liên quan --}}
+                
                 <div class="container related-product">
                     <h4 class="mb-3">Sản phẩm liên quan</h4>
-                    @foreach ($relatedProducts as $product)
+                    <?php $__currentLoopData = $relatedProducts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="row">
                             <div class="col-6 rounded me-4" style="width: 100px; height: 100px;">
-                                <img src="{{ $product->image_url }}" class="img-fluid rounded" alt="{{ $product->name }}">
+                                <img src="<?php echo e($product->image_url); ?>" class="img-fluid rounded" alt="<?php echo e($product->name); ?>">
                             </div>
                             <div class="col-6">
-                                <h6 class="mb-2"><a href="#">{{ $product->name }}</a></h6>
+                                <h6 class="mb-2"><a href="#"><?php echo e($product->name); ?></a></h6>
                                 <div class="d-flex mb-2">
                                     <i class="fa fa-star text-secondary"></i>
                                     <i class="fa fa-star text-secondary"></i>
@@ -30,40 +30,40 @@
                                     <i class="fa fa-star"></i>
                                 </div>
                                 <div class="mb-1">
-                                    <h5 class="text-danger text-decoration-line-through">{{number_format($product->price + 200,0,',','.')}}</h5>
-                                    <h5 class="fw-bold me-2">{{number_format($product->price,0,',','.')}}</h5>
+                                    <h5 class="text-danger text-decoration-line-through"><?php echo e(number_format($product->price + 200,0,',','.')); ?></h5>
+                                    <h5 class="fw-bold me-2"><?php echo e(number_format($product->price,0,',','.')); ?></h5>
                                 </div>
                             </div>
                         </div>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
                 <div class="d-flex justify-content-center my-4">
                     <a href="#" class="btn btn-primary px-4 py-3 rounded-pill w100">View More</a>
                 </div>
             </div>
-            {{-- Cột phải --}}
+            
             <div class="col-lg-7 col-xl-9 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="row g-4 single-product">
-                    {{-- Product imgs --}}
+                    
                     <div class="col-xl-6">
                         <div class="single-carousel owl-carousel">
-                            @foreach ($product->images as $image)
+                            <?php $__currentLoopData = $product->images; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <div class="single-item"
-                                data-dot="<img class='img-fluid' src='{{ asset('storage/' . $image->image) }}' alt='{{ $product->name }}'>">
+                                data-dot="<img class='img-fluid' src='<?php echo e(asset('storage/' . $image->image)); ?>' alt='<?php echo e($product->name); ?>'>">
                                 <div class="single-inner bg-light rounded">
-                                    <img src="{{ asset('storage/') . $image->image }}" class="img-fluid rounded"
-                                        alt="{{ $product->name }}">
+                                    <img src="<?php echo e(asset('storage/') . $image->image); ?>" class="img-fluid rounded"
+                                        alt="<?php echo e($product->name); ?>">
                                 </div>
                             </div>
-                            @endforeach
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </div>
                     </div>
-                    {{-- Product detail --}}
+                    
                     <div class="col-xl-6">
-                        <h4 class="fw-bold mb-3">{{$product->name}}</h4>
-                        <p class="mb-3">{{ $product->manufacturer->name }} - {{$product->category->name}}</p>
-                        <h5 class="fw-bold mb-3">{{number_format($product->price,0,',','.')}}</h5>
-                        {{-- Star rating --}}
+                        <h4 class="fw-bold mb-3"><?php echo e($product->name); ?></h4>
+                        <p class="mb-3"><?php echo e($product->manufacturer->name); ?> - <?php echo e($product->category->name); ?></p>
+                        <h5 class="fw-bold mb-3"><?php echo e(number_format($product->price,0,',','.')); ?></h5>
+                        
                         <div class="d-flex mb-4">
                             <i class="fa fa-star text-secondary"></i>
                             <i class="fa fa-star text-secondary"></i>
@@ -71,13 +71,13 @@
                             <i class="fa fa-star text-secondary"></i>
                             <i class="fa fa-star"></i>
                         </div>
-                        {{-- Short Description --}}
+                        
                         <div class="d-flex flex-column mb-3">
-                            <small>{{$product->status}}</small>
-                            <small>Available: <strong class="text-primary">{{$product->stock}}</strong></small>
+                            <small><?php echo e($product->status); ?></small>
+                            <small>Available: <strong class="text-primary"><?php echo e($product->stock); ?></strong></small>
                         </div>
-                        <p class="mb-4">{{$product->description}}</p>
-                        {{-- Button --}}
+                        <p class="mb-4"><?php echo e($product->description); ?></p>
+                        
                         <div class="input-group quantity mb-5" style="width: 100px;">
                             <div class="input-group-btn">
                                 <button class="btn btn-sm btn-minus rounded-circle bg-light border">
@@ -95,7 +95,7 @@
                             class="btn btn-primary border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i
                                 class="fa fa-shopping-bag me-2 text-white"></i> Add to cart</a>
                     </div>
-                    {{-- Description / Review --}}
+                    
                     <div class="col-lg-12">
                         <nav>
                             <div class="nav nav-tabs mb-3">
@@ -108,43 +108,50 @@
                             </div>
                         </nav>
                         <div class="tab-content mb-5">
-                            {{-- Detailed Description --}}
+                            
                             <div class="tab-pane active" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
                                 <p>
                                     Mô tả sản phẩm: 
-                                    {{ $product->description }}
+                                    <?php echo e($product->description); ?>
+
                                 </p>
                                 <b class="fw-bold">CPU: </b>
                                 <p class="small">
-                                    {{ $product->cpu }}
+                                    <?php echo e($product->cpu); ?>
+
                                 </p>
                                 <b class="fw-bold">GPU: </b>
                                 <p class="small">
-                                    {{ $product->gpu }}
+                                    <?php echo e($product->gpu); ?>
+
                                 </p>
                                 <b class="fw-bold">RAM: </b>
                                 <p class="small">
-                                    {{ $product->ram }}
+                                    <?php echo e($product->ram); ?>
+
                                 </p>
                                 <b class="fw-bold">Dung lượng lưu trữ: </b>
                                 <p class="small">
-                                    {{ $product->rom }}
+                                    <?php echo e($product->rom); ?>
+
                                 </p>
                                 <b class="fw-bold">Camera: </b>
                                 <p class="small">
-                                    {{ $product->camera }}
+                                    <?php echo e($product->camera); ?>
+
                                 </p>
                                 <b class="fw-bold">Thời lượng pin: </b>
                                 <p class="small">
-                                    {{ $product->battery }}
+                                    <?php echo e($product->battery); ?>
+
                                 </p>
                                 <b class="fw-bold">Kích thước màn hình: </b>
                                 <p class="small">
-                                    {{ $product->monitor_size }} </p>
+                                    <?php echo e($product->monitor_size); ?> </p>
                                 <b class="fw-bold mb-0">Độ phân giải:</b>
-                                <p class="small">{{$product->monitor_resolution}}</p>
+                                <p class="small"><?php echo e($product->monitor_resolution); ?></p>
                             </div>
-                            {{-- Review --}}
+                            
                             <div class="tab-pane" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
                                 <div class="d-flex">
                                     <img src="img/avatar.jpg" class="img-fluid rounded-circle p-3"
@@ -189,7 +196,7 @@
                             </div>
                         </div>
                     </div>
-                    {{-- Form upload comment --}}
+                    
                     <form action="#">
                         <h4 class="mb-5 fw-bold">Leave a Reply</h4>
                         <div class="row g-4">
@@ -236,4 +243,5 @@
 </div>
 </div>
 <!-- Single Products End -->
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.client_home', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH E:\laragon\www\QuanLyShop\resources\views/clients/pages/product-detail.blade.php ENDPATH**/ ?>

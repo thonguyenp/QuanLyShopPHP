@@ -25,6 +25,12 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function manufacturer ()
+    {
+        return $this->belongsTo(Manufacturer::class);
+    }
+
+
     public function images ()
     {
         return $this->hasMany(ProductImage::class);
