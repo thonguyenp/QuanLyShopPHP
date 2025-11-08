@@ -231,8 +231,8 @@
                                     <div class="text-center rounded-bottom p-4">
                                         <a href="#" class="d-block mb-2">{{ $product->category->name }} </a>
                                         <a href="#" class="d-block h4">{{$product->name}}</a>
-                                        <del class="me-2 fs-5">{{number_format($product->price + 200, 2)}}</del>
-                                        <span class="text-primary fs-5">{{number_format($product->price, 2)}}</span>
+                                        <del class="me-2 fs-5">{{number_format($product->price + 200, 0,',','.')}}</del>
+                                        <span class="text-primary fs-5">{{number_format($product->price, 0,',','.')}}</span>
                                     </div>
                                 </div>
                                 {{-- button --}}

@@ -1,11 +1,13 @@
 <div class="col-lg-3 wow fadeInUp" data-wow-delay="0.1s">
+                    
                     <div class="product-categories mb-4">
                         <h4>Danh mục sản phẩm</h4>
                         <ul class="list-unstyled">
                             <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <li>
                                 <div class="categories-item">
-                                    <a href="#" class="text-dark"><i class="fas fa-apple-alt text-secondary me-2"></i>
+                                    <a href="#" class="category-filter text-dark" data-id="<?php echo e($category->id); ?>">
+                                        <i class="fas fa-apple-alt text-secondary me-2"></i>
                                         <?php echo e($category->name); ?></a>
                                     <span>(<?php echo e($category->products->count()); ?>)</span>
                                 </div>
@@ -21,16 +23,17 @@
                             <div class="slider-track"></div>
                             <div class="slider-range" id="sliderRange"></div>
 
-                            <input type="range" id="minRange" min="0" max="500" value="100" step="1" oninput="updateDualRange()">
-                            <input type="range" id="maxRange" min="0" max="500" value="400" step="1" oninput="updateDualRange()">
+                            <input type="range" id="minRange" min="0" max="100000000" value="1000000" step="1" oninput="updateDualRange()">
+                            <input type="range" id="maxRange" min="0" max="100000000" value="4000000" step="1" oninput="updateDualRange()">
                         </div>
 
                         <div class="mt-2">
-                            <span>From: $<span id="minValue">100</span></span>
-                            <span class="mx-2">—</span>
-                            <span>To: $<span id="maxValue">400</span></span>
+                            <span>From: <span id="minValue">1.000.000</span> VNĐ</span>
+                            <br>
+                            <span>To: <span id="maxValue">4.000.000</span> VNĐ</span>
                         </div>
                     </div>
+                    
                     <div class="manufacturer mb-4">
                         <h4>Nhà sản xuất</h4>
                         <div class="container">

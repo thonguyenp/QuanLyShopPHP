@@ -33,16 +33,13 @@
                         </div>
                         <div class="col-xl-3 text-end">
                             <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between">
-                                <label for="electronics">Sort By:</label>
-                                <select id="electronics" name="electronicslist"
+                                <label for="electronics">Sắp xếp theo:</label>
+                                <select id="sort-by" name="electronicslist"
                                     class="border-0 form-select-sm bg-light me-3" form="electronicsform">
-                                    <option value="volvo">Default Sorting</option>
-                                    <option value="volv">Nothing</option>
-                                    <option value="sab">Popularity</option>
-                                    <option value="saab">Newness</option>
-                                    <option value="opel">Average Rating</option>
-                                    <option value="audio">Low to high</option>
-                                    <option value="audi">High to low</option>
+                                    <option value="default">Mặc định</option>
+                                    <option value="latest">Hàng mới nhất</option>
+                                    <option value="price_asc">Giá thấp đến cao</option>
+                                    <option value="price_desc">Giá cao đến thấp</option>
                                 </select>
                             </div>
                         </div>
@@ -64,21 +61,22 @@
                     <div class="tab-content">
                         <div id="tab-5" class="tab-pane fade show p-0 active">
                             <div class="row g-4 product">
+                                <?php $__currentLoopData = $productsForGrid; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <div class="col-lg-4">
                                     <div class="product-item rounded wow fadeInUp" data-wow-delay="0.1s">
                                         <div class="product-item-inner border rounded">
                                             <div class="product-item-inner-item">
-                                                <img src="<?php echo e(asset('assets/clients/img/product-3.png')); ?>" class="img-fluid w-100 rounded-top" alt="">
+                                                <img src="<?php echo e($product->image_url); ?>" class="img-fluid w-100 rounded-top" alt="<?php echo e($product->name); ?>">
                                                 <div class="product-new">New</div>
                                                 <div class="product-details">
                                                     <a href="#"><i class="fa fa-eye fa-1x"></i></a>
                                                 </div>
                                             </div>
                                             <div class="text-center rounded-bottom p-4">
-                                                <a href="#" class="d-block mb-2">SmartPhone</a>
-                                                <a href="#" class="d-block h4">Apple iPad Mini <br> G2356</a>
-                                                <del class="me-2 fs-5">$1,250.00</del>
-                                                <span class="text-primary fs-5">$1,050.00</span>
+                                                <a href="#" class="d-block mb-2"><?php echo e($product->category->name); ?></a>
+                                                <a href="#" class="d-block h4"><?php echo e($product->name); ?></a>
+                                                <del class="me-2 fs-5"><?php echo e(number_format($product->price + 200, 0,',','.')); ?></del>
+                                                <span class="text-primary fs-5"><?php echo e(number_format($product->price, 0,',','.')); ?></span>
                                             </div>
                                         </div>
                                         <div
@@ -108,48 +106,52 @@
                                         </div>
                                     </div>
                                 </div>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </div>
                         </div>
                         <div id="tab-6" class="products tab-pane fade show p-0">
                             <div class="row g-4 products-mini">
-                                <div class="col-lg-6">
-                                    <div class="products-mini-item border">
-                                        <div class="row g-0">
-                                            <div class="col-5">
-                                                <div class="products-mini-img border-end h-100">
-                                                    <img src="img/product-3.png" class="img-fluid w-100 h-100"
-                                                        alt="Image">
-                                                    <div class="products-mini-icon rounded-circle bg-primary">
-                                                        <a href="#"><i class="fa fa-eye fa-1x text-white"></i></a>
+                                <?php $__currentLoopData = $productsForGrid; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <div class="col-lg-6 col-6">
+                                        <div class="products-mini-item border">
+                                            <div class="row g-0">
+                                                <div class="col-5">
+                                                    <div class="products-mini-img border-end h-100">
+                                                        <img src="<?php echo e($product->image_url); ?>" class="img-fluid w-100 h-100"
+                                                            alt="<?php echo e($product->name); ?>">
+                                                        <div class="products-mini-icon rounded-circle bg-primary">
+                                                            <a href="#"><i class="fa fa-eye fa-1x text-white"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-7">
+                                                    <div class="products-mini-content p-3">
+                                                        <a href="#" class="d-block mb-2"><?php echo e($product->category->name); ?></a>
+                                                        <a href="#" class="d-block h4"><?php echo e($product->name); ?></a>
+                                                        <del class="me-2 fs-5"><?php echo e(number_format($product->price + 200, 0,',','.')); ?></del>
+                                                        <span class="text-primary fs-5"><?php echo e(number_format($product->price, 0,',','.')); ?></span>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-7">
-                                                <div class="products-mini-content p-3">
-                                                    <a href="#" class="d-block mb-2">SmartPhone</a>
-                                                    <a href="#" class="d-block h4">Apple iPad Mini <br> G2356</a>
-                                                    <del class="me-2 fs-5">$1,250.00</del>
-                                                    <span class="text-primary fs-5">$1,050.00</span>
+                                            <div class="products-mini-add border p-3">
+                                                <a href="#"
+                                                    class="btn btn-primary border-secondary rounded-pill py-2 px-4"><i
+                                                        class="fas fa-shopping-cart me-2"></i> Add To Cart</a>
+                                                <div class="d-flex">
+                                                    <a href="#"
+                                                        class="text-primary d-flex align-items-center justify-content-center me-3"><span
+                                                            class="rounded-circle btn-sm-square border"><i
+                                                                class="fas fa-random"></i></i></a>
+                                                    <a href="#"
+                                                        class="text-primary d-flex align-items-center justify-content-center me-0"><span
+                                                            class="rounded-circle btn-sm-square border"><i
+                                                                class="fas fa-heart"></i></a>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="products-mini-add border p-3">
-                                            <a href="#"
-                                                class="btn btn-primary border-secondary rounded-pill py-2 px-4"><i
-                                                    class="fas fa-shopping-cart me-2"></i> Add To Cart</a>
-                                            <div class="d-flex">
-                                                <a href="#"
-                                                    class="text-primary d-flex align-items-center justify-content-center me-3"><span
-                                                        class="rounded-circle btn-sm-square border"><i
-                                                            class="fas fa-random"></i></i></a>
-                                                <a href="#"
-                                                    class="text-primary d-flex align-items-center justify-content-center me-0"><span
-                                                        class="rounded-circle btn-sm-square border"><i
-                                                            class="fas fa-heart"></i></a>
-                                            </div>
-                                        </div>
                                     </div>
-                                </div>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                
                                 <div class="col-12 wow fadeInUp" data-wow-delay="0.1s">
                                     <div class="pagination d-flex justify-content-center mt-5">
                                         <a href="#" class="rounded">&laquo;</a>

@@ -262,32 +262,105 @@ $(document).ready(function () {
             this.submit();
         }
     });
-
+    // *************
+    // Page Product
+    // *************
+    $('.category-filter').click(function () {
+        $('.category-filter').removeClass('active');
+        $(this).addClass('active');
+        fetchProducts();
+    });
+    $('#sort-by').click(function () {
+        fetchProducts();
+    });
 });
+// ******
+// Price Range
+// ******
+// Đưa sản phẩm lên trang shop
+function fetchProducts() {
+    let category_id = $('.category-filter.active').data('id') || '';
+    let minPrice = parseInt($('#minValue').text().replace(/\./g, '')) || 0;
+    let maxPrice = parseInt($('#maxValue').text().replace(/\./g, '')) || 0;
+    let sort_by = $('#sort-by').val();
+
+    console.log(category_id);
+    console.log(minPrice);
+    console.log(maxPrice);
+    console.log(sort_by);
+
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $.ajax({
+        url: urlUpdate,
+        type: 'POST',
+        data: formData,
+        beforeSend: function () {
+            $('.text-end button[type=submit]').text('Đang cập nhật...').attr('disabled', true);
+        },
+        success: function (response) {
+            if (response.success) {
+                toastr.success(response.message);
+                $('#change-password-form')[0].reset();
+            }
+            else {
+                toastr.error(response.message);
+            }
+        },
+        error: function (xhr) {
+            console.error(xhr); // 👈 Giúp bạn xem log thật sự trong console
+
+            if (xhr.responseJSON && xhr.responseJSON.errors) {
+                // Có lỗi validation
+                let errors = xhr.responseJSON.errors;
+                $.each(errors, function (key, value) {
+                    toastr.error(value[0]);
+                });
+            } else if (xhr.responseJSON && xhr.responseJSON.message) {
+                // Có message lỗi tổng quát
+                toastr.error(xhr.responseJSON.message);
+            } else {
+                // Không phải JSON => in ra lỗi HTTP hoặc server
+                toastr.error("Đã xảy ra lỗi máy chủ (" + xhr.status + ")");
+            }
+        },
+
+        complete: function () {
+            $('.text-end button')
+                .text('Cập nhật')
+                .attr('disabled', false);
+        }
+    });
+
+}
+
+// Format lại số trong price range
+function numberWithDots(x) {
+    // Format số kiểu 1.000.000
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
 
 // Phương thức cho price range hoạt động
 function updateDualRange() {
-  const min = document.getElementById('minRange');
-  const max = document.getElementById('maxRange');
-  const minValue = document.getElementById('minValue');
-  const maxValue = document.getElementById('maxValue');
-  const sliderRange = document.getElementById('sliderRange');
-  
-  let minVal = parseInt(min.value);
-  let maxVal = parseInt(max.value);
+    let min = parseInt(document.getElementById('minRange').value);
+    let max = parseInt(document.getElementById('maxRange').value);
 
-  if (minVal > maxVal) {
-    [minVal, maxVal] = [maxVal, minVal];
-  }
+    // Cập nhật giá trị hiển thị
+    document.getElementById('minValue').innerText = numberWithDots(min);
+    document.getElementById('maxValue').innerText = numberWithDots(max);
 
-  minValue.textContent = minVal;
-  maxValue.textContent = maxVal;
+    // Cập nhật thanh màu cam
+    let slider = document.querySelector('.range-slider');
+    let range = slider.querySelector('#sliderRange');
+    let minPercent = (min - parseInt(slider.querySelector('#minRange').min)) / (parseInt(slider.querySelector('#minRange').max) - parseInt(slider.querySelector('#minRange').min)) * 100;
+    let maxPercent = (max - parseInt(slider.querySelector('#maxRange').min)) / (parseInt(slider.querySelector('#maxRange').max) - parseInt(slider.querySelector('#maxRange').min)) * 100;
 
-  const minPercent = (minVal / min.max) * 100;
-  const maxPercent = (maxVal / max.max) * 100;
-  
-  sliderRange.style.left = minPercent + "%";
-  sliderRange.style.width = (maxPercent - minPercent) + "%";
+    range.style.left = minPercent + "%";
+    range.style.width = (maxPercent - minPercent) + "%";
 
-  console.log(minValue, ' ',maxValue);
+    fetchProducts();
 }
