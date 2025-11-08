@@ -61,30 +61,14 @@
 
 
                     <div class="additional-product mb-4">
-                        <h4>Additional Products</h4>
+                        <h4>Nhà sản xuất</h4>
                         <div class="additional-product-item">
                             <input type="radio" class="me-2" id="Categories-1" name="Categories-1" value="Beverages">
                             <label for="Categories-1" class="text-dark"> Accessories</label>
                         </div>
-                        <div class="additional-product-item">
-                            <input type="radio" class="me-2" id="Categories-2" name="Categories-1" value="Beverages">
-                            <label for="Categories-2" class="text-dark"> Electronics & Computer</label>
-                        </div>
-                        <div class="additional-product-item">
-                            <input type="radio" class="me-2" id="Categories-3" name="Categories-1" value="Beverages">
-                            <label for="Categories-3" class="text-dark"> Laptops & Desktops</label>
-                        </div>
-                        <div class="additional-product-item">
-                            <input type="radio" class="me-2" id="Categories-4" name="Categories-1" value="Beverages">
-                            <label for="Categories-4" class="text-dark"> Mobiles & Tablets</label>
-                        </div>
-                        <div class="additional-product-item">
-                            <input type="radio" class="me-2" id="Categories-5" name="Categories-1" value="Beverages">
-                            <label for="Categories-5" class="text-dark"> SmartPhone & Smart TV</label>
-                        </div>
                     </div>
                     <div class="featured-product mb-4">
-                        <h4 class="mb-3">Featured products</h4>
+                        <h4 class="mb-3">Sản phẩm mới</h4>
                         <div class="featured-product-item">
                             <div class="rounded me-4" style="width: 100px; height: 100px;">
                                 <img src="img/product-5.png" class="img-fluid rounded" alt="Image">
