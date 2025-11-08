@@ -84,16 +84,16 @@
                                     <i class="fa fa-minus"></i>
                                 </button>
                             </div>
-                            <input type="text" class="form-control form-control-sm text-center border-0" value="1">
+                            <input type="text" readonly data-max="<?php echo e($product->stock); ?>" class="form-control plus-minus-box form-control-sm text-center border-0" value="1">
                             <div class="input-group-btn">
-                                <button class="btn btn-sm btn-plus rounded-circle bg-light border">
+                                <button class="btn btn-sm inc btn-plus rounded-circle bg-light border">
                                     <i class="fa fa-plus"></i>
                                 </button>
                             </div>
                         </div>
-                        <a href="#"
-                            class="btn btn-primary border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i
-                                class="fa fa-shopping-bag me-2 text-white"></i> Add to cart</a>
+                        <a href="<?php echo e(route('cart.add')); ?>" data-id="<?php echo e($product->id); ?>" class="add-to-cart-btn btn btn-primary border border-secondary rounded-pill px-4 py-2 mb-4 text-primary">
+                            <i class="fa fa-shopping-bag me-2 text-white"></i> Thêm vào giỏ hàng
+                        </a>
                     </div>
                     
                     <div class="col-lg-12">
