@@ -43,14 +43,14 @@
                             <div class="slider-track"></div>
                             <div class="slider-range" id="sliderRange"></div>
 
-                            <input type="range" id="minRange" min="0" max="100000000" value="1000000" step="1" oninput="updateDualRange()">
-                            <input type="range" id="maxRange" min="0" max="100000000" value="4000000" step="1" oninput="updateDualRange()">
+                            <input type="range" id="minRange" min="0" max="100000000" value="0" step="1" oninput="">
+                            <input type="range" id="maxRange" min="0" max="100000000" value="100000000" step="1" oninput="">
                         </div>
 
                         <div class="mt-2">
-                            <span>From: <span id="minValue">1.000.000</span> VNĐ</span>
+                            <span>From: <span id="minValue">0</span> VNĐ</span>
                             <br>
-                            <span>To: <span id="maxValue">4.000.000</span> VNĐ</span>
+                            <span>To: <span id="maxValue">100.000.000</span> VNĐ</span>
                         </div>
                     </div>
                     {{-- Nhà sản xuất --}}

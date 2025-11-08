@@ -18,13 +18,13 @@ class ProductController extends Controller
         // Lấy danh sách manufacturers
         $manufacturers = Manufacturer::with('products')->get();
         // Lấy danh sách sản phẩm
-        $products = Product::with('firstImage', 'category')->where('status','in_stock')->paginate(9);
+        $products = Product::with('firstImage', 'category')->where('status','in_stock')->paginate(3);
         foreach ($products as $product) {
             $product->image_url = $product->firstImage?->image
             ? asset('storage/upload/products/'.$product->firstImage->image)
             : asset('storage/upload/products/default-product.png');
         }
-        
+
 
         return view('clients.pages.products', compact('categories', 'manufacturers','products'));
     }
@@ -62,10 +62,17 @@ class ProductController extends Controller
                     break;
             }
         }
-        $products = $query->paginate(9);
-
+        // 
+        $products = $query->paginate(3);
+        
+        foreach ($products as $product) {
+            $product->image_url = $product->firstImage?->image
+            ? asset('storage/upload/products/'.$product->firstImage->image)
+            : asset('storage/upload/products/default-product.png');
+        }
         return response()->json([
-            'products' => view('clients.components.products_grid', compact('products'))->render()
+            'products' => view('clients.components.products_grid', compact('products'))->render(),
+            'pagination' => ($products->links('clients.components.pagination.pagination_custom'))->render()
         ]);
     }
 }

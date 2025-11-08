@@ -962,7 +962,7 @@ namespace App\Models {
      *
      * @property \Illuminate\Support\Carbon|null $updated_at
      * @property \Illuminate\Support\Carbon|null $created_at
-     * @property string|null $images
+     * @property string|null $image
      * @property string|null $description
      * @property string $slug
      * @property string $name
@@ -973,7 +973,7 @@ namespace App\Models {
      * @method static \Illuminate\Database\Eloquent\Builder<Manufacturer>|Manufacturer whereName($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Manufacturer>|Manufacturer whereSlug($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Manufacturer>|Manufacturer whereDescription($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<Manufacturer>|Manufacturer whereImages($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Manufacturer>|Manufacturer whereImage($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Manufacturer>|Manufacturer whereCreatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Manufacturer>|Manufacturer whereUpdatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Manufacturer>|Manufacturer newModelQuery()

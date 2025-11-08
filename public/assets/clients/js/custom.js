@@ -265,10 +265,68 @@ $(document).ready(function () {
     // *************
     // Page Product
     // *************
+    // Đưa sản phẩm lên trang shop
+
+    let currentPage = 1;
+    
+
+    function fetchProducts() {
+        let category_id = $('.category-filter.active').data('id') || '';
+        let minPrice = parseInt($('#minValue').text().replace(/\./g, '')) || 0;
+        let maxPrice = parseInt($('#maxValue').text().replace(/\./g, '')) || 0;
+        let sort_by = $('#sort-by').val();
+
+        console.log(category_id);
+        console.log(minPrice);
+        console.log(maxPrice);
+        console.log(sort_by);
+
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            url: "products/filter?page=" + currentPage,
+            type: 'GET',
+            data: {
+                category_id : category_id,
+                min_price : minPrice,
+                max_price : maxPrice,
+                sort_by : sort_by,
+            },
+            beforeSend: function () {
+                $('#spinner').show();
+                $('#product-content').hide();
+            },
+            success: function (response) {
+                $('#product-content').html(response.products);
+                $('.pagination-wrapper').html(response.pagination);
+            },
+            complete: function () {
+                $('#spinner').hide();
+                $('#product-content').show();
+            },
+            error: function (xhr) {
+                alert('có lỗi xảy ra với Ajax fetchProduct');
+            },
+        });   
+    }
+
+    $(document).on('click', '.pagination-link', function(e) {
+        e.preventDefault();
+        let pageUrl = $(this).attr('href');
+        let page = pageUrl.split('page=')[1];
+        currentPage = page;
+        fetchProducts();
+    });
+
     $('.category-filter').on('click', function (e) {
         // e.preventDefault();
         $('.category-filter').removeClass('active');
         $(this).addClass('active');
+        currentPage = 1;
         fetchProducts();
     });
 
@@ -276,79 +334,39 @@ $(document).ready(function () {
     $('#sort-by').on('change', function () {
         fetchProducts();
     });
+    // ******
+    // Price Range
+    // ******
+
+
+    // Format lại số trong price range
+    function numberWithDots(x) {
+        // Format số kiểu 1.000.000
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+    // Phương thức cho price range hoạt động
+    function updateDualRange() {
+        let min = parseInt(document.getElementById('minRange').value);
+        let max = parseInt(document.getElementById('maxRange').value);
+
+        // Cập nhật giá trị hiển thị
+        document.getElementById('minValue').innerText = numberWithDots(min);
+        document.getElementById('maxValue').innerText = numberWithDots(max);
+
+        // Cập nhật thanh màu cam
+        let slider = document.querySelector('.range-slider');
+        let range = slider.querySelector('#sliderRange');
+        let minPercent = (min - parseInt(slider.querySelector('#minRange').min)) / (parseInt(slider.querySelector('#minRange').max) - parseInt(slider.querySelector('#minRange').min)) * 100;
+        let maxPercent = (max - parseInt(slider.querySelector('#maxRange').min)) / (parseInt(slider.querySelector('#maxRange').max) - parseInt(slider.querySelector('#maxRange').min)) * 100;
+
+        range.style.left = minPercent + "%";
+        range.style.width = (maxPercent - minPercent) + "%";
+        currentPage = 1;
+        
+        fetchProducts();
+    }
+    // Bind sự kiện onchange cho range
+    $('#minRange, #maxRange').on('input', updateDualRange);
+
 });
-// ******
-// Price Range
-// ******
-// Đưa sản phẩm lên trang shop
-function fetchProducts() {
-    let category_id = $('.category-filter.active').data('id') || '';
-    let minPrice = parseInt($('#minValue').text().replace(/\./g, '')) || 0;
-    let maxPrice = parseInt($('#maxValue').text().replace(/\./g, '')) || 0;
-    let sort_by = $('#sort-by').val();
-
-    console.log(category_id);
-    console.log(minPrice);
-    console.log(maxPrice);
-    console.log(sort_by);
-
-    $.ajaxSetup({
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-
-    $.ajax({
-        url: "products/filter",
-        type: 'GET',
-        data: {
-            category_id : category_id,
-            min_price : minPrice,
-            max_price : maxPrice,
-            sort_by : sort_by,
-        },
-        beforeSend: function () {
-            $('#spinner').show();
-            $('#product-content').hide();
-        },
-        success: function (response) {
-            $('#product-content').html(response.products);
-        },
-        complete: function () {
-            $('#spinner').hide();
-            $('#product-content').show();
-        },
-        error: function (xhr) {
-            alert('có lỗi xảy ra với Ajax fetchProduct');
-        },
-    });
-    
-}
-
-// Format lại số trong price range
-function numberWithDots(x) {
-    // Format số kiểu 1.000.000
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-}
-
-// Phương thức cho price range hoạt động
-function updateDualRange() {
-    let min = parseInt(document.getElementById('minRange').value);
-    let max = parseInt(document.getElementById('maxRange').value);
-
-    // Cập nhật giá trị hiển thị
-    document.getElementById('minValue').innerText = numberWithDots(min);
-    document.getElementById('maxValue').innerText = numberWithDots(max);
-
-    // Cập nhật thanh màu cam
-    let slider = document.querySelector('.range-slider');
-    let range = slider.querySelector('#sliderRange');
-    let minPercent = (min - parseInt(slider.querySelector('#minRange').min)) / (parseInt(slider.querySelector('#minRange').max) - parseInt(slider.querySelector('#minRange').min)) * 100;
-    let maxPercent = (max - parseInt(slider.querySelector('#maxRange').min)) / (parseInt(slider.querySelector('#maxRange').max) - parseInt(slider.querySelector('#maxRange').min)) * 100;
-
-    range.style.left = minPercent + "%";
-    range.style.width = (maxPercent - minPercent) + "%";
-
-    fetchProducts();
-}
-
