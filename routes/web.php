@@ -52,4 +52,5 @@ Route::middleware(['auth.custom'])->group(function(){
     });
 });
 
-Route::get('/product', [ProductController::class, 'index'])->name('product.index');
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products/filter', [ProductController::class, 'filter'])->name('products.filter');

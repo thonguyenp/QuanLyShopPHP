@@ -265,12 +265,15 @@ $(document).ready(function () {
     // *************
     // Page Product
     // *************
-    $('.category-filter').click(function () {
+    $('.category-filter').on('click', function (e) {
+        // e.preventDefault();
         $('.category-filter').removeClass('active');
         $(this).addClass('active');
         fetchProducts();
     });
-    $('#sort-by').click(function () {
+
+
+    $('#sort-by').on('change', function () {
         fetchProducts();
     });
 });
@@ -296,46 +299,30 @@ function fetchProducts() {
     });
 
     $.ajax({
-        url: urlUpdate,
-        type: 'POST',
-        data: formData,
+        url: "products/filter",
+        type: 'GET',
+        data: {
+            category_id : category_id,
+            min_price : minPrice,
+            max_price : maxPrice,
+            sort_by : sort_by,
+        },
         beforeSend: function () {
-            $('.text-end button[type=submit]').text('Đang cập nhật...').attr('disabled', true);
+            $('#spinner').show();
+            $('#product-content').hide();
         },
         success: function (response) {
-            if (response.success) {
-                toastr.success(response.message);
-                $('#change-password-form')[0].reset();
-            }
-            else {
-                toastr.error(response.message);
-            }
+            $('#product-content').html(response.products);
+        },
+        complete: function () {
+            $('#spinner').hide();
+            $('#product-content').show();
         },
         error: function (xhr) {
-            console.error(xhr); // 👈 Giúp bạn xem log thật sự trong console
-
-            if (xhr.responseJSON && xhr.responseJSON.errors) {
-                // Có lỗi validation
-                let errors = xhr.responseJSON.errors;
-                $.each(errors, function (key, value) {
-                    toastr.error(value[0]);
-                });
-            } else if (xhr.responseJSON && xhr.responseJSON.message) {
-                // Có message lỗi tổng quát
-                toastr.error(xhr.responseJSON.message);
-            } else {
-                // Không phải JSON => in ra lỗi HTTP hoặc server
-                toastr.error("Đã xảy ra lỗi máy chủ (" + xhr.status + ")");
-            }
+            alert('có lỗi xảy ra với Ajax fetchProduct');
         },
-
-        complete: function () {
-            $('.text-end button')
-                .text('Cập nhật')
-                .attr('disabled', false);
-        }
     });
-
+    
 }
 
 // Format lại số trong price range
@@ -364,3 +351,4 @@ function updateDualRange() {
 
     fetchProducts();
 }
+

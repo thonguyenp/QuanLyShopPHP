@@ -33,7 +33,7 @@ class HomeController extends Controller
             ->get();
         // hiển thị thông tin cho right banner
         $productRightBanner = Product::with('category')
-            ->where('name', 'iPhone 15 Pro Max')
+            ->where('name', 'iPhone 15 Pro')
             ->first();
         
         // hiển thị thông tin cho All Product Section

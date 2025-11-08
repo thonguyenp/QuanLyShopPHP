@@ -134,7 +134,7 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0">
                         <a href="{{route('home')}}" class="nav-item nav-link active">Home</a>
-                        <a href="{{ route('product.index') }}" class="nav-item nav-link">Shop</a>
+                        <a href="{{ route('products.index') }}" class="nav-item nav-link">Shop</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu m-0">
