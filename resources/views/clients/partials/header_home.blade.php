@@ -91,7 +91,9 @@
 
                 <!-- Cart Sidebar (Offcanvas) -->
                 <div class="offcanvas offcanvas-end" tabindex="-1" id="cartSidebar" aria-labelledby="cartSidebarLabel">
-                    @include('clients.components.includes.mini_cart')
+                    <div class="mini-cart-container">
+                        @include('clients.components.includes.mini_cart')
+                    </div>
                 </div>
 
 

@@ -92,7 +92,9 @@
 
                 <!-- Cart Sidebar (Offcanvas) -->
                 <div class="offcanvas offcanvas-end" tabindex="-1" id="cartSidebar" aria-labelledby="cartSidebarLabel">
-                    <?php echo $__env->make('clients.components.includes.mini_cart', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+                    <div class="mini-cart-container">
+                        <?php echo $__env->make('clients.components.includes.mini_cart', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+                    </div>
                 </div>
 
 

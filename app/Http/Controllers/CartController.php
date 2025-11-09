@@ -79,14 +79,14 @@ class CartController extends Controller
         $cartItems = CartItem::with('product')
             ->where('user_id', auth()->id())
             ->get();
-    } else {
-        // Người dùng chưa đăng nhập → lấy giỏ hàng từ session
-        $cartItems = session('cart', []);
-    }
+        } else {
+            // Người dùng chưa đăng nhập → lấy giỏ hàng từ session
+            $cartItems = session('cart', []);
+        }
 
-    return response()->json([
-        'status' => true,
-        'html' => view('clients.components.includes.mini_cart', compact('cartItems'))->render()
-    ]);
+        return response()->json([
+            'status' => true,
+            'html' => view('clients.components.includes.mini_cart', compact('cartItems'))->render()
+        ]);
     }
 }

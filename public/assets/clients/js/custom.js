@@ -433,7 +433,14 @@ $(document).ready(function () {
             url: "/mini-cart",
             type: 'GET',
             success: function (response) {
-                console.log(response);
+                if (response.status)
+                {
+                    $('#cartSidebar .mini-cart-container').html(response.html);
+                }
+                else 
+                {
+                    toastr.error('Không thể tải giỏ hàng');
+                }
             },
             error: function (xhr) {
                 alert('có lỗi xảy ra với Ajax add cart của detail product');
