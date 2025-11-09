@@ -142,7 +142,7 @@
                     </div>
                 </div>
                 <div id="product-content">
-                    <?php echo $__env->make('clients.components.products_grid', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+                    <?php echo $__env->make('clients.components.products_grid',['products' => $products], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
                 </div>
             </div>
         </div>

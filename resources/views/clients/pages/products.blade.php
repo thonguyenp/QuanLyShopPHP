@@ -142,7 +142,7 @@
                     </div>
                 </div>
                 <div id="product-content">
-                    @include('clients.components.products_grid')
+                    @include('clients.components.products_grid',['products' => $products])
                 </div>
             </div>
         </div>

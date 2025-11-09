@@ -18,7 +18,11 @@ class ProductController extends Controller
         // Lấy danh sách manufacturers
         $manufacturers = Manufacturer::with('products')->get();
         // Lấy danh sách sản phẩm
-        $products = Product::with('firstImage', 'category')->where('status','in_stock')->paginate(3);
+        $products = Product::with(['firstImage', 'category'])
+            ->where('status', 'in_stock')
+            ->where('stock', '>', 0) // chỉ lấy sản phẩm còn hàng
+            ->paginate(9);        
+        // dd($products);
         foreach ($products as $product) {
             $product->image_url = $product->firstImage?->image
             ? asset('storage/upload/products/'.$product->firstImage->image)
@@ -63,7 +67,7 @@ class ProductController extends Controller
             }
         }
         // 
-        $products = $query->paginate(3);
+        $products = $query->where('status', 'in_stock')->paginate(9);
         
         foreach ($products as $product) {
             $product->image_url = $product->firstImage?->image
