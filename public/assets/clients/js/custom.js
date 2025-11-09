@@ -448,7 +448,6 @@ $(document).ready(function () {
                 alert('có lỗi xảy ra với Ajax add cart của detail product');
             },
         });
-
     })
 
     // Khi bấm nút xóa item thì xóa khỏi cart sidebar

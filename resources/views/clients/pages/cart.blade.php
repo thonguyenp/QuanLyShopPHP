@@ -24,7 +24,7 @@
                     @php
                     $cartTotal = 0;
                     @endphp
-                    @forelse ($cartItems as $item)
+                    @forelse ($cartProducts as $item)
                     @php
                     $subTotal = $item['price'] * $item['quantity'];
                     $cartTotal += $subTotal;
@@ -73,7 +73,7 @@
                 </tbody>
             </table>
         </div>
-        @if (!empty($cartItems))
+        @if (!empty($cartProducts))
             <div class="row g-4 justify-content-end">
             <div class="col-8"></div>
             <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">

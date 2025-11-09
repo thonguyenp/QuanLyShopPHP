@@ -14,15 +14,15 @@
             @if (!empty($cartItems) && count($cartItems) > 0)
             @foreach ($cartItems as $item)
             @php
-                $product = auth()->check() ? $item->product : \App\Models\Product::find($item['product_id']);
-                $quantity = auth()->check() ? $item->quantity : $item['quantity'];
-                $subtotal += $quantity * $product->price;
+            $product = auth()->check() ? $item->product : \App\Models\Product::find($item['product_id']); 
+            $quantity = auth()->check() ? $item->quantity : $item['quantity']; 
+            $subtotal += $quantity * $product->price;            
             @endphp
             <div class="list-group-item d-flex align-items-start border-0">
                 {{-- Img --}}
                 <div class="mini-cart-img position-relative" style="width:80px; height:80px; flex-shrink:0;">
                     <a href="javascript:void(0)">
-                        <img src="{{ asset($product->images->first()->image_path ?? 'storage/uploads/products/default-product.png') }}"
+                        <img src="{{ asset($product->images->first()->image_path ?? 'storage/upload/products/default-product.png') }}"
                             alt="{{ $product->name }}" class="img-thumbnail" style="width:100%; height:100%; object-fit:cover;">
                     </a>
                     <button data-id="{{ $product->id }}" class="mini-cart-item-delete btn btn-sm btn-danger" title="Xóa sản phẩm"

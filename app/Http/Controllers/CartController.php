@@ -10,23 +10,6 @@ use Illuminate\Support\Facades\Auth;
 class CartController extends Controller
 {
     //
-    public function viewCart ()
-    {
-        if (Auth::check()) 
-        {
-            // Lấy cart từ db
-
-        }
-        else 
-        {
-            // Lấy cart từ section
-            $cartItems = session()->get('cart', []);
-
-        }
-
-        return view('clients.pages.cart', compact('cartItems'));
-    }
-
     public function addToCart(Request $request)
     {
         $request->merge(['quantity' => (int) $request->quantity]);
@@ -77,7 +60,7 @@ class CartController extends Controller
                     'price' => $product->price,
                     'quantity' => $request->quantity,
                     'stock' => $product->stock,
-                    'image' => $product->images->first()->image_path ?? 'uploads/products/default-product.png',
+                    'image' => $product->images->first()->image_path ?? 'upload/products/default-product.png',
                 ];
             }
 
@@ -131,7 +114,7 @@ class CartController extends Controller
             unset($cart[$request->product_id]);
 
             // Nếu giỏ hàng còn sản phẩm thì cập nhật lại
-            if (!empty($cart)) {
+            if (! empty($cart)) {
                 session()->put('cart', $cart);
             } else {
                 // Nếu không còn gì thì xóa luôn key 'cart'
@@ -145,5 +128,27 @@ class CartController extends Controller
             'status' => true,
             'cart_count' => $cartCount,
         ]);
+    }
+
+    public function viewCart()
+    {
+        if (Auth::check()) {
+            // Lấy cart từ db
+            $cartProducts = CartItem::where('user_id', Auth::id())->with('product')->get()->map(function ($item) {
+                return [
+                    'product_id' => $item->product->id,
+                    'name' => $item->product->name,
+                    'price' => $item->product->price,
+                    'quantity' => $item->quantity,
+                    'stock' => $item->product->stock,
+                ];
+            })->toArray();
+        } else {
+            // Lấy cart từ section
+            $cartProducts = session()->get('cart', []);
+        }
+
+        // dd($cartItems);
+        return view('clients.pages.cart', compact('cartProducts'));
     }
 }

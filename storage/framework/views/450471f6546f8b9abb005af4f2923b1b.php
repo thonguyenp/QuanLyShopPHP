@@ -24,7 +24,7 @@
                     <?php
                     $cartTotal = 0;
                     ?>
-                    <?php $__empty_1 = true; $__currentLoopData = $cartItems; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                    <?php $__empty_1 = true; $__currentLoopData = $cartProducts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                     <?php
                     $subTotal = $item['price'] * $item['quantity'];
                     $cartTotal += $subTotal;
@@ -73,7 +73,7 @@
                 </tbody>
             </table>
         </div>
-        <?php if(!empty($cartItems)): ?>
+        <?php if(!empty($cartProducts)): ?>
             <div class="row g-4 justify-content-end">
             <div class="col-8"></div>
             <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
