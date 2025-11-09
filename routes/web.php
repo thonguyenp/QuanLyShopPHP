@@ -61,4 +61,5 @@ Route::get('/products/{slug}', [ProductController::class, 'detail'])->name('prod
 
 // Handle Cart
 Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+Route::post('/cart/remove', [CartController::class, 'removeFromMiniCart'])->name('cart.remove');
 Route::get('/mini-cart', [CartController::class, 'loadMiniCart'])->name('cart.mini');

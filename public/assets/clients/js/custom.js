@@ -428,6 +428,7 @@ $(document).ready(function () {
     //**************
     // Cart
     //**************
+    // Khi bấm nút cart thì hiện cart sidebar
     $('#mini-cart-icon').on('click', function(e) {
         $.ajax({
             url: "/mini-cart",
@@ -447,6 +448,35 @@ $(document).ready(function () {
             },
         });
 
+    })
+
+    // Khi bấm nút xóa item thì xóa khỏi cart sidebar
+    $(document).on('click', '.mini-cart-item-delete', function(e) {
+        console.log(111111);
+        let productId = $(this).data('id');
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        
+        $.ajax({
+            url: "/cart/remove",
+            type: 'POST',
+            data: {
+                product_id: productId
+            },
+            success: function (response) {
+                if (response.status)
+                {
+                    $('#cart_count').text(response.cart_count);
+                    $('#mini-cart-icon').click();
+                }
+            },
+            error: function (xhr) {
+                alert('có lỗi xảy ra với Ajax add cart của detail product');
+            },
+        });
     })
 
 });

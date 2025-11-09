@@ -14,9 +14,9 @@
             <?php if(!empty($cartItems) && count($cartItems) > 0): ?>
             <?php $__currentLoopData = $cartItems; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <?php
-            $product = auth()->check() ? $item->product : \App\Models\Product::find($item['product_id']);
-            $quantity = auth()->check() ? $item->quantity : $item['quantity'];
-            $subtotal += $quantity * $product->price;
+                $product = auth()->check() ? $item->product : \App\Models\Product::find($item['product_id']);
+                $quantity = auth()->check() ? $item->quantity : $item['quantity'];
+                $subtotal += $quantity * $product->price;
             ?>
             <div class="list-group-item d-flex align-items-start border-0">
                 
@@ -25,7 +25,7 @@
                         <img src="<?php echo e(asset($product->images->first()->image_path ?? 'storage/uploads/products/default-product.png')); ?>"
                             alt="<?php echo e($product->name); ?>" class="img-thumbnail" style="width:100%; height:100%; object-fit:cover;">
                     </a>
-                    <button data-id="<?php echo e($product->id); ?>" class="btn btn-sm btn-danger" title="Xóa sản phẩm"
+                    <button data-id="<?php echo e($product->id); ?>" class="mini-cart-item-delete btn btn-sm btn-danger" title="Xóa sản phẩm"
                         style="position:absolute; top:-5px; right:-5px; padding:0.25rem;">
                         <i class="fa fa-trash"></i>
                     </button>
