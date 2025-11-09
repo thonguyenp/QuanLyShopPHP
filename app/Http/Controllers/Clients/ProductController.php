@@ -20,7 +20,6 @@ class ProductController extends Controller
         // Lấy danh sách sản phẩm
         $products = Product::with(['firstImage', 'category'])
             ->where('status', 'in_stock')
-            ->where('stock', '>', 0) // chỉ lấy sản phẩm còn hàng
             ->paginate(9);        
         // dd($products);
         foreach ($products as $product) {
