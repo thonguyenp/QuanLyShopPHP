@@ -1,0 +1,3 @@
+<?php echo $__env->make('clients.components.modals.add_to_cart_modal',['product' => $product], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+<?php echo $__env->make('clients.components.modals.liton_wishlist_modal',['product' => $product], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+<?php /**PATH E:\laragon\www\QuanLyShop\resources\views/clients/components/includes/include-modals.blade.php ENDPATH**/ ?>

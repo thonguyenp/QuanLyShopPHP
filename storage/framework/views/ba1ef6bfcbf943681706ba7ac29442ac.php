@@ -15,13 +15,13 @@
                 
                 <div class="container related-product">
                     <h4 class="mb-3">Sản phẩm liên quan</h4>
-                    <?php $__currentLoopData = $relatedProducts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php $__currentLoopData = $relatedProducts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $related): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="row">
                             <div class="col-6 rounded me-4" style="width: 100px; height: 100px;">
-                                <img src="<?php echo e($product->image_url); ?>" class="img-fluid rounded" alt="<?php echo e($product->name); ?>">
+                                <img src="<?php echo e($related->image_url); ?>" class="img-fluid rounded" alt="<?php echo e($related->name); ?>">
                             </div>
                             <div class="col-6">
-                                <h6 class="mb-2"><a href="#"><?php echo e($product->name); ?></a></h6>
+                                <h6 class="mb-2"><a href="#"><?php echo e($related->name); ?></a></h6>
                                 <div class="d-flex mb-2">
                                     <i class="fa fa-star text-secondary"></i>
                                     <i class="fa fa-star text-secondary"></i>
@@ -30,8 +30,8 @@
                                     <i class="fa fa-star"></i>
                                 </div>
                                 <div class="mb-1">
-                                    <h5 class="text-danger text-decoration-line-through"><?php echo e(number_format($product->price + 200,0,',','.')); ?></h5>
-                                    <h5 class="fw-bold me-2"><?php echo e(number_format($product->price,0,',','.')); ?></h5>
+                                    <h5 class="text-danger text-decoration-line-through"><?php echo e(number_format($related->price + 200,0,',','.')); ?></h5>
+                                    <h5 class="fw-bold me-2"><?php echo e(number_format($related->price,0,',','.')); ?></h5>
                                 </div>
                             </div>
                         </div>

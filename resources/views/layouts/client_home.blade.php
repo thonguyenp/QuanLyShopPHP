@@ -27,6 +27,8 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{asset('assets/clients/css/bootstrap.min.css')}}" rel="stylesheet">
+    <!-- Bootstrap 5 JS (bundle có sẵn Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Template Stylesheet -->
     <link href="{{asset('assets/clients/css/style.css')}}" rel="stylesheet">

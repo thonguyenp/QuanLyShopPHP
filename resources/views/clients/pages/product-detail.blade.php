@@ -15,13 +15,13 @@
                 {{-- Sản phẩm liên quan --}}
                 <div class="container related-product">
                     <h4 class="mb-3">Sản phẩm liên quan</h4>
-                    @foreach ($relatedProducts as $product)
+                    @foreach ($relatedProducts as $related)
                         <div class="row">
                             <div class="col-6 rounded me-4" style="width: 100px; height: 100px;">
-                                <img src="{{ $product->image_url }}" class="img-fluid rounded" alt="{{ $product->name }}">
+                                <img src="{{ $related->image_url }}" class="img-fluid rounded" alt="{{ $related->name }}">
                             </div>
                             <div class="col-6">
-                                <h6 class="mb-2"><a href="#">{{ $product->name }}</a></h6>
+                                <h6 class="mb-2"><a href="#">{{ $related->name }}</a></h6>
                                 <div class="d-flex mb-2">
                                     <i class="fa fa-star text-secondary"></i>
                                     <i class="fa fa-star text-secondary"></i>
@@ -30,8 +30,8 @@
                                     <i class="fa fa-star"></i>
                                 </div>
                                 <div class="mb-1">
-                                    <h5 class="text-danger text-decoration-line-through">{{number_format($product->price + 200,0,',','.')}}</h5>
-                                    <h5 class="fw-bold me-2">{{number_format($product->price,0,',','.')}}</h5>
+                                    <h5 class="text-danger text-decoration-line-through">{{number_format($related->price + 200,0,',','.')}}</h5>
+                                    <h5 class="fw-bold me-2">{{number_format($related->price,0,',','.')}}</h5>
                                 </div>
                             </div>
                         </div>

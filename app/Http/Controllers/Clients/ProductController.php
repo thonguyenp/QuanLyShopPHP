@@ -79,15 +79,16 @@ class ProductController extends Controller
     public function detail ($slug)
     {
         $product = Product::with(['category', 'images', 'manufacturer'])->where('slug', $slug)->firstOrFail();
+        // dd($product);
         //Lấy 3 sản phẩm liên quan đến cùng category
         $relatedProducts = Product::where('category_id', $product->category_id)
             ->where('id', '!=', $product->id)
             ->with('category')
             ->limit(3)
             ->get();
-        foreach ($relatedProducts as $product) {
-            $product->image_url = $product->firstImage?->image
-            ? asset('storage/upload/products/'.$product->firstImage->image)
+        foreach ($relatedProducts as $related) {
+            $related->image_url = $related->firstImage?->image
+            ? asset('storage/upload/products/'.$related->firstImage->image)
             : asset('storage/upload/products/default-product.png');
         }
 
