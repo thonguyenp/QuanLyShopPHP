@@ -3,7 +3,7 @@
     <div class="row gx-0 align-items-center">
         <div class="col-lg-6 text-center text-lg-start mb-lg-0">
             <div class="d-inline-flex align-items-center" style="height: 45px;">
-                <a href="#" class="text-muted me-2"> <a href="{{route('about')}}">About Us</a></a><small>  / </small>
+                <a href="#" class="text-muted me-2"> <a href="{{route('about')}}">About Us</a></a><small> / </small>
                 <a href="#" class="text-muted ms-2"><a href="{{route('contact')}}">Contact</a> </a>
 
             </div>
@@ -15,16 +15,16 @@
                                 class="fa fa-home me-2"></i> My Dashboard</small></a>
                     <div class="dropdown-menu rounded">
                         @if (!Auth::check())
-                            <a href="{{ route('login') }}" class="dropdown-item">Login</a>
-                            <a href="{{ route('register') }}" class="dropdown-item">Register</a>
+                        <a href="{{ route('login') }}" class="dropdown-item">Login</a>
+                        <a href="{{ route('register') }}" class="dropdown-item">Register</a>
                         @else
-                            <a href="{{ route('account') }}" class="dropdown-item">My Account</a>
-                            <a href="" class="dropdown-item">Wishlist</a>
-                            <a href="" class="dropdown-item">Notifications</a>
-                            <form action="{{ route('logout') }}" method="POST">
-                                @csrf
-                                <button type="submit" class="dropdown-item">Logout</button>
-                            </form>
+                        <a href="{{ route('account') }}" class="dropdown-item">My Account</a>
+                        <a href="" class="dropdown-item">Wishlist</a>
+                        <a href="" class="dropdown-item">Notifications</a>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="dropdown-item">Logout</button>
+                        </form>
                         @endif
                         {{-- @auth
                         @endauth --}}
@@ -67,20 +67,34 @@
                 <a href="#" class="text-muted d-flex align-items-center justify-content-center me-3">
                     <span class="rounded-circle btn-md-square border"><i class="fas fa-heart"></i></span>
                 </a>
-                <a href="#" class="text-muted d-flex align-items-center justify-content-center position-relative">
-                    <span class="rounded-circle btn-md-square border">
+
+                <!-- Cart Button ở góc phải header -->
+                <a href="#" 
+                    id="mini-cart-icon"
+                    class="text-muted d-flex align-items-center justify-content-center position-relative"
+                    data-bs-toggle="offcanvas" aria-controls="cartSidebar"
+                    data-bs-target="#cartSidebar">
+
+                    <span class="rounded-circle btn-md-square border p-2">
                         <i class="fas fa-shopping-cart"></i>
                     </span>
-                    <span 
-                        id="cart_count"
+
+                    <span id="cart_count"
                         class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                         @auth
-                            {{ \App\Models\CartItem::where('user_id', auth()->id())->sum('quantity') }}
+                        {{ \App\Models\CartItem::where('user_id', auth()->id())->sum('quantity') }}
                         @else
-                            {{ session('cart') ? array_sum(array_column(session('cart'), 'quantity')) : 0 }}
+                        {{ session('cart') ? array_sum(array_column(session('cart'), 'quantity')) : 0 }}
                         @endauth
                     </span>
                 </a>
+
+                <!-- Cart Sidebar (Offcanvas) -->
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="cartSidebar" aria-labelledby="cartSidebarLabel">
+                    @include('clients.components.includes.mini_cart')
+                </div>
+
+
 
             </div>
         </div>

@@ -66,4 +66,4 @@ unset($__errorArgs, $__bag); ?>
 <!-- Register Area End -->
 
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.client', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH E:\laragon\www\QuanLyShop\resources\views/clients/pages/login.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.client_home', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH E:\laragon\www\QuanLyShop\resources\views/clients/pages/login.blade.php ENDPATH**/ ?>

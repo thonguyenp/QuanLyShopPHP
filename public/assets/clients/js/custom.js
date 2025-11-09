@@ -424,7 +424,22 @@ $(document).ready(function () {
             },
         });
     });
+    
+    //**************
+    // Cart
+    //**************
+    $('#mini-cart-icon').on('click', function(e) {
+        $.ajax({
+            url: "/mini-cart",
+            type: 'GET',
+            success: function (response) {
+                console.log(response);
+            },
+            error: function (xhr) {
+                alert('có lỗi xảy ra với Ajax add cart của detail product');
+            },
+        });
 
-
+    })
 
 });

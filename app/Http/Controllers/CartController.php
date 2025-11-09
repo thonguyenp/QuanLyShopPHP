@@ -70,4 +70,23 @@ class CartController extends Controller
             'cart_count' => $cartCount
         ]);
     }
+
+    public function loadMiniCart()
+    {
+        $cartItems = [];
+        if (auth()->check()) {
+        // Người dùng đã đăng nhập → lấy giỏ hàng từ database
+        $cartItems = CartItem::with('product')
+            ->where('user_id', auth()->id())
+            ->get();
+    } else {
+        // Người dùng chưa đăng nhập → lấy giỏ hàng từ session
+        $cartItems = session('cart', []);
+    }
+
+    return response()->json([
+        'status' => true,
+        'html' => view('clients.components.includes.mini_cart', compact('cartItems'))->render()
+    ]);
+    }
 }

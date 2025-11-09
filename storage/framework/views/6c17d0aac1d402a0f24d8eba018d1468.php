@@ -3,7 +3,7 @@
     <div class="row gx-0 align-items-center">
         <div class="col-lg-6 text-center text-lg-start mb-lg-0">
             <div class="d-inline-flex align-items-center" style="height: 45px;">
-                <a href="#" class="text-muted me-2"> <a href="<?php echo e(route('about')); ?>">About Us</a></a><small>  / </small>
+                <a href="#" class="text-muted me-2"> <a href="<?php echo e(route('about')); ?>">About Us</a></a><small> / </small>
                 <a href="#" class="text-muted ms-2"><a href="<?php echo e(route('contact')); ?>">Contact</a> </a>
 
             </div>
@@ -15,16 +15,16 @@
                                 class="fa fa-home me-2"></i> My Dashboard</small></a>
                     <div class="dropdown-menu rounded">
                         <?php if(!Auth::check()): ?>
-                            <a href="<?php echo e(route('login')); ?>" class="dropdown-item">Login</a>
-                            <a href="<?php echo e(route('register')); ?>" class="dropdown-item">Register</a>
+                        <a href="<?php echo e(route('login')); ?>" class="dropdown-item">Login</a>
+                        <a href="<?php echo e(route('register')); ?>" class="dropdown-item">Register</a>
                         <?php else: ?>
-                            <a href="<?php echo e(route('account')); ?>" class="dropdown-item">My Account</a>
-                            <a href="" class="dropdown-item">Wishlist</a>
-                            <a href="" class="dropdown-item">Notifications</a>
-                            <form action="<?php echo e(route('logout')); ?>" method="POST">
-                                <?php echo csrf_field(); ?>
-                                <button type="submit" class="dropdown-item">Logout</button>
-                            </form>
+                        <a href="<?php echo e(route('account')); ?>" class="dropdown-item">My Account</a>
+                        <a href="" class="dropdown-item">Wishlist</a>
+                        <a href="" class="dropdown-item">Notifications</a>
+                        <form action="<?php echo e(route('logout')); ?>" method="POST">
+                            <?php echo csrf_field(); ?>
+                            <button type="submit" class="dropdown-item">Logout</button>
+                        </form>
                         <?php endif; ?>
                         
 
@@ -66,22 +66,36 @@
                 <a href="#" class="text-muted d-flex align-items-center justify-content-center me-3">
                     <span class="rounded-circle btn-md-square border"><i class="fas fa-heart"></i></span>
                 </a>
-                <a href="#" class="text-muted d-flex align-items-center justify-content-center position-relative">
-                    <span class="rounded-circle btn-md-square border">
+
+                <!-- Cart Button ở góc phải header -->
+                <a href="#" 
+                    id="mini-cart-icon"
+                    class="text-muted d-flex align-items-center justify-content-center position-relative"
+                    data-bs-toggle="offcanvas" aria-controls="cartSidebar"
+                    data-bs-target="#cartSidebar">
+
+                    <span class="rounded-circle btn-md-square border p-2">
                         <i class="fas fa-shopping-cart"></i>
                     </span>
-                    <span 
-                        id="cart_count"
+
+                    <span id="cart_count"
                         class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                         <?php if(auth()->guard()->check()): ?>
-                            <?php echo e(\App\Models\CartItem::where('user_id', auth()->id())->sum('quantity')); ?>
+                        <?php echo e(\App\Models\CartItem::where('user_id', auth()->id())->sum('quantity')); ?>
 
                         <?php else: ?>
-                            <?php echo e(session('cart') ? array_sum(array_column(session('cart'), 'quantity')) : 0); ?>
+                        <?php echo e(session('cart') ? array_sum(array_column(session('cart'), 'quantity')) : 0); ?>
 
                         <?php endif; ?>
                     </span>
                 </a>
+
+                <!-- Cart Sidebar (Offcanvas) -->
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="cartSidebar" aria-labelledby="cartSidebarLabel">
+                    <?php echo $__env->make('clients.components.includes.mini_cart', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+                </div>
+
+
 
             </div>
         </div>
