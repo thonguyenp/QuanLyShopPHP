@@ -399,7 +399,8 @@ $(document).ready(function () {
 
         let button = $(this);                      // nút vừa click
         let productId = button.data('id');         // lấy id sản phẩm
-        let quantity = button.prev('.quantity').find('input').val(); 
+        // Nếu lấy ở trong product detail thì lấy theo quantity, còn ở những nơi khác thì quantity luôn là 1
+        let quantity = button.prev('.quantity').find('input').val() > 1 ? button.prev('.quantity').find('input').val() : 1 ; 
 
         $.ajaxSetup({
             headers: {
@@ -415,7 +416,8 @@ $(document).ready(function () {
                 quantity: quantity,
             },
             success: function (response) {
-                console.log(response);
+                $('#add_to_cart_modal-' + productId).modal('show');
+                $('#cart_count').text(response.cart_count);
             },
             error: function (xhr) {
                 alert('có lỗi xảy ra với Ajax add cart của detail product');

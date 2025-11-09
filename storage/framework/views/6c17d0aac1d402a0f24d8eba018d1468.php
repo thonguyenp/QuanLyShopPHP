@@ -63,10 +63,26 @@
         </div>
         <div class="col-md-4 col-lg-3 text-center text-lg-end">
             <div class="d-inline-flex align-items-center">
-                <a href="#" class="text-muted d-flex align-items-center justify-content-center me-3"><span
-                        class="rounded-circle btn-md-square border"><i class="fas fa-heart"></i></a>
-                <a href="#" class="text-muted d-flex align-items-center justify-content-center"><span
-                        class="rounded-circle btn-md-square border"><i class="fas fa-shopping-cart"></i></span>
+                <a href="#" class="text-muted d-flex align-items-center justify-content-center me-3">
+                    <span class="rounded-circle btn-md-square border"><i class="fas fa-heart"></i></span>
+                </a>
+                <a href="#" class="text-muted d-flex align-items-center justify-content-center position-relative">
+                    <span class="rounded-circle btn-md-square border">
+                        <i class="fas fa-shopping-cart"></i>
+                    </span>
+                    <span 
+                        id="cart_count"
+                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        <?php if(auth()->guard()->check()): ?>
+                            <?php echo e(\App\Models\CartItem::where('user_id', auth()->id())->sum('quantity')); ?>
+
+                        <?php else: ?>
+                            <?php echo e(session('cart') ? array_sum(array_column(session('cart'), 'quantity')) : 0); ?>
+
+                        <?php endif; ?>
+                    </span>
+                </a>
+
             </div>
         </div>
     </div>

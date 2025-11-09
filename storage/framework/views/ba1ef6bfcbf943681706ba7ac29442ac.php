@@ -91,7 +91,11 @@
                                 </button>
                             </div>
                         </div>
-                        <a href="<?php echo e(route('cart.add')); ?>" data-id="<?php echo e($product->id); ?>" class="add-to-cart-btn btn btn-primary border border-secondary rounded-pill px-4 py-2 mb-4 text-primary">
+                        <a href="<?php echo e(route('cart.add')); ?>" 
+                        data-id="<?php echo e($product->id); ?>" 
+                        data-bs-toggle="modal"
+                        data-bs-target="#add_to_cart_modal-<?php echo e($product->id); ?>"
+                        class="add-to-cart-btn btn btn-primary border border-secondary rounded-pill px-4 py-2 mb-4 text-primary">
                             <i class="fa fa-shopping-bag me-2 text-white"></i> Thêm vào giỏ hàng
                         </a>
                     </div>
@@ -243,5 +247,8 @@
 </div>
 </div>
 <!-- Single Products End -->
+<?php echo $__env->make('clients.components.includes.include-modals', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 <?php $__env->stopSection(); ?>
+
+
 <?php echo $__env->make('layouts.client_home', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH E:\laragon\www\QuanLyShop\resources\views/clients/pages/product-detail.blade.php ENDPATH**/ ?>

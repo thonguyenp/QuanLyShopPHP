@@ -1,4 +1,4 @@
-@extends('layouts.client')
+@extends('layouts.client_home')
 
 @section('title', 'Đăng ký')
 @section('breadcrumb', 'Register')

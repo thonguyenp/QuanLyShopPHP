@@ -1,4 +1,4 @@
-@extends('layouts.client')
+@extends('layouts.client_home')
 
 @section('title', 'Về chúng tôi')
 @section('breadcrumb', 'About Us')
