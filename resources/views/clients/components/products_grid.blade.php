@@ -30,8 +30,8 @@
                     <div class="product-item-add border border-top-0 rounded-bottom text-center p-4 pt-0">
                         <a href="{{ route('cart.add') }}" 
                         data-id="{{ $product->id }}" 
-                        data-bs-toggle="modal"
-                        data-bs-target="#add_to_cart_modal-{{ $product->id }}"
+                        {{-- data-bs-toggle="modal"
+                        data-bs-target="#add_to_cart_modal-{{ $product->id }}" --}}
                         class="add-to-cart-btn btn btn-primary border border-secondary rounded-pill px-4 py-2 mb-4 text-primary">
                             <i class="fa fa-shopping-bag me-2 text-white"></i> Thêm vào giỏ hàng
                         </a>

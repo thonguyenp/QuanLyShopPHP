@@ -416,6 +416,7 @@ $(document).ready(function () {
                 quantity: quantity,
             },
             success: function (response) {
+                // Khi bấm vào thì hiện lên modal và thay đổi text của id cart_count
                 $('#add_to_cart_modal-' + productId).modal('show');
                 $('#cart_count').text(response.cart_count);
             },

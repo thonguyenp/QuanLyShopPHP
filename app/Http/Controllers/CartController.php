@@ -10,6 +10,23 @@ use Illuminate\Support\Facades\Auth;
 class CartController extends Controller
 {
     //
+    public function viewCart ()
+    {
+        if (Auth::check()) 
+        {
+            // Lấy cart từ db
+
+        }
+        else 
+        {
+            // Lấy cart từ section
+            $cartItems = session()->get('cart', []);
+
+        }
+
+        return view('clients.pages.cart', compact('cartItems'));
+    }
+
     public function addToCart(Request $request)
     {
         $request->merge(['quantity' => (int) $request->quantity]);
