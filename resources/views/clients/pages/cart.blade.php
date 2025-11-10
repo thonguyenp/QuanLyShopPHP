@@ -57,7 +57,8 @@
                             <p class="mb-0 py-4">{{number_format($subtotal,0,',','.')}} VND</p>
                         </td>
                         <td class="cart-product-remove py-4">
-                            <button data-id="{{ $item['product_id'] }}"
+                            <button 
+                                data-id="{{ $item['product_id'] }}"
                                 class="remove-from-cart btn btn-md rounded-circle bg-light border">
                                 <i class="fa fa-times text-danger"></i>
                             </button>

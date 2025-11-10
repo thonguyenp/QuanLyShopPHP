@@ -535,21 +535,35 @@ $(document).ready(function () {
         });
 
     }
+    // Hàm xử lí btn remove trong cart page
+    $('.remove-from-cart').on('click', function (e) {
+        let productId = $(this).data('id');
+        let row = $(this).closest('tr');
+        
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
-    $('#mini-cart-icon').on('click', function (e) {
+
         $.ajax({
-            url: "/mini-cart",
-            type: 'GET',
+            url: "/cart/remove-cart",
+            type: 'POST',
+            data: {
+                product_id: productId,
+            },
             success: function (response) {
-                if (response.status) {
-                    $('#cartSidebar .mini-cart-container').html(response.html);
-                }
-                else {
-                    toastr.error('Không thể tải giỏ hàng');
+                row.remove();
+                $('.cart-total').text(response.total);
+                $('.cart-grand-total').text(response.grandtotal);
+                if ($('.cart-product-remove').length == 0)
+                {
+                    location.reload();
                 }
             },
             error: function (xhr) {
-                alert('có lỗi xảy ra với Ajax add cart của detail product');
+                alert(xhr.responseJSON.error);
             },
         });
     })

@@ -67,3 +67,4 @@ Route::get('/mini-cart', [CartController::class, 'loadMiniCart'])->name('cart.mi
 // Handle Page Cart
 Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.index');
 Route::post('/cart/update', [CartController::class, 'updateCart'])->name('cart.update');
+Route::post('/cart/remove-cart', [CartController::class, 'removeCartItem'])->name('cart.remove');
