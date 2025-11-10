@@ -13,7 +13,9 @@
 
           <!-- Buttons -->
           <div class="d-flex gap-2">
-            <button class="btn btn-primary btn-sm fw-semibold px-3">View Cart</button>
+            <a href="<?php echo e(route('cart.index')); ?>">
+              <button class="btn btn-primary btn-sm fw-semibold px-3">View Cart</button>
+            </a>
             <button class="btn btn-dark btn-sm fw-semibold px-3">Checkout</button>
           </div>
         </div>
