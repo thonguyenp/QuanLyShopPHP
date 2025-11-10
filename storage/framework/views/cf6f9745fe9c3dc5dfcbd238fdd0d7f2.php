@@ -37,23 +37,23 @@
                     <div class="col-md-12 col-lg-6">
                         <div class="form-item w-100">
                             <label class="form-label my-3">Họ và tên<sup>*</sup></label>
-                            <input type="text" placeholder="Họ và tên" class="form-control" value="<?php echo e($defaultAddress->full_name); ?>" readonly>
+                            <input type="text" name="ltn_name" placeholder="Họ và tên" class="form-control" value="<?php echo e($defaultAddress->full_name); ?>" readonly>
                         </div>
                     </div>
                     <div class="col-md-12 col-lg-6">
                         <div class="form-item w-100">
                             <label class="form-label my-3">Số điện thoại<sup>*</sup></label>
-                            <input type="text" placeholder="Số điện thoại" class="form-control" value="<?php echo e($defaultAddress->phone); ?>" readonly>
+                            <input type="text" name="ltn_phone" placeholder="Số điện thoại" class="form-control" value="<?php echo e($defaultAddress->phone); ?>" readonly>
                         </div>
                     </div>
                 </div>
                 <div class="form-item">
                     <label class="form-label my-3">Số nhà và tên đường<sup>*</sup></label>
-                    <input type="text" placeholder="Số nhà và tên đường" class="form-control" value="<?php echo e($defaultAddress->address); ?>" readonly>
+                    <input type="text" name="ltn_address" placeholder="Số nhà và tên đường" class="form-control" value="<?php echo e($defaultAddress->address); ?>" readonly>
                 </div>
                 <div class="form-item">
                     <label class="form-label my-3">Thành phố <sup>*</sup></label>
-                    <input type="text" class="form-control" placeholder="Thành phố" value="<?php echo e($defaultAddress->city); ?>" readonly>
+                    <input type="text" name="ltn_city" class="form-control" placeholder="Thành phố" value="<?php echo e($defaultAddress->city); ?>" readonly>
                 </div>
                 <div class="form-item">
                     <label class="form-label my-3">Địa chỉ email<sup>*</sup></label>
@@ -81,14 +81,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="text-center">
+                            <?php $__currentLoopData = $cartProducts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <tr class="text-center">
                                 <th scope="row" class="text-start py-4">
-                                    Apple iPad Mini
+                                    <?php echo e($item->product->name); ?>
+
                                 </th>
-                                <td class="py-4">$269.00</td>
-                                <td class="py-4">2</td>
-                                <td class="py-4">$538.00</td>
+                                <td class="py-4"><?php echo e(number_format($item->product->price, 0, ',', '.')); ?></td>
+                                <td class="py-4"><?php echo e(($item->quantity)); ?></td>
+                                <td class="py-4"><?php echo e(number_format($item->quantity * $item->product->price, 0, ',', '.')); ?></td>
                             </tr>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            
                             <tr>
                                 <th scope="row">
                                 </th>
@@ -98,7 +102,7 @@
                                 </td>
                                 <td class="py-4">
                                     <div class="py-2 text-center border-bottom border-top">
-                                        <p class="mb-0 text-dark">$1134.00</p>
+                                        <p class="mb-0 text-dark"></p>
                                     </div>
                                 </td>
                             </tr>
@@ -109,7 +113,7 @@
                                 <td class="py-4">
                                 </td>
                                 <td colspan="3" class="py-4">
-                                    <p class="mb-0 text-dark py-4">zzzz</p>
+                                    <p class="mb-0 text-dark py-4"><?php echo e(number_format(25000, 0, ',', '.')); ?></p>
                                 </td>
                             </tr>
                             <tr>
@@ -120,7 +124,7 @@
                                 <td class="py-4"></td>
                                 <td class="py-4">
                                     <div class="py-2 text-center border-bottom border-top">
-                                        <p class="mb-0 text-dark">$135.00</p>
+                                        <p class="mb-0 text-dark totalPrice_checkout"><?php echo e(number_format($totalPrice + 25000, 0, ',', '.')); ?></p>
                                     </div>
                                 </td>
                             </tr>

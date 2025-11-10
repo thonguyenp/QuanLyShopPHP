@@ -567,5 +567,33 @@ $(document).ready(function () {
             },
         });
     })
+    //**************
+    // Checkout Page
+    //**************
+    // 
+    $('#list_address').change(function() {
+        var addressId = $(this).val();
+        
+        $.ajax({
+            url: "/checkout/get-address",
+            type: 'GET',
+            data: {
+                address_id: addressId,
+            },
+            success: function (response) {
+                if ($(response.success))
+                {
+                    $('input[name="ltn_name"]').val(response.data.full_name);
+                    $('input[name="ltn_phone"]').val(response.data.phone);
+                    $('input[name="ltn_address"]').val(response.data.address);
+                    $('input[name="ltn_city"]').val(response.data.city);
 
+                }
+            },
+            error: function (xhr) {
+                alert(xhr.responseJSON.error);
+            },
+        });
+
+    });
 });
