@@ -22,12 +22,12 @@
                 </thead>
                 <tbody>
                     <?php
-                    $cartTotal = 0;
+                    $carttotal = 0;
                     ?>
                     <?php $__empty_1 = true; $__currentLoopData = $cartProducts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                     <?php
-                    $subTotal = $item['price'] * $item['quantity'];
-                    $cartTotal += $subTotal;
+                    $subtotal = $item['price'] * $item['quantity'];
+                    $carttotal += $subtotal;
                     ?>
                     <tr>
                         <th scope="row">
@@ -53,8 +53,8 @@
                                 </div>
                             </div>
                         </td>
-                        <td>
-                            <p class="mb-0 py-4"><?php echo e(number_format($subTotal,0,',','.')); ?> VND</p>
+                        <td class="cart-product-sub">
+                            <p class="mb-0 py-4"><?php echo e(number_format($subtotal,0,',','.')); ?> VND</p>
                         </td>
                         <td class="cart-product-remove py-4">
                             <button data-id="<?php echo e($item['product_id']); ?>"
@@ -82,7 +82,7 @@
                         <h1 class="display-6 mb-4">Tổng giỏ hàng</h1>
                         <div class="d-flex justify-content-between mb-4">
                             <h5 class="mb-0 me-4">Tổng tiền hàng:</h5>
-                            <p class="mb-0"><?php echo e(number_format($cartTotal,0,',','.')); ?> VND</p>
+                            <p class="cart-total mb-0"><?php echo e(number_format($carttotal,0,',','.')); ?> VND</p>
                         </div>
                         <div class="d-flex justify-content-between">
                             <h5 class="mb-0 me-4">Phí vận chuyển:</h5>
@@ -93,7 +93,7 @@
                     </div>
                     <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
                         <h5 class="mb-0 ps-4 me-4">Tổng thanh toán:</h5>
-                        <p class="mb-0 pe-4"><?php echo e(number_format($cartTotal + 25000,0,',','.')); ?> VND</p>
+                        <p class="cart-grand-total mb-0 pe-4"><?php echo e(number_format($carttotal + 25000,0,',','.')); ?> VND</p>
                     </div>
                     <button class="btn btn-primary rounded-pill px-4 py-3 text-uppercase mb-4 ms-4" type="button">Thanh
                         toán</button>

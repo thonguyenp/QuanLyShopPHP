@@ -151,4 +151,64 @@ class CartController extends Controller
         // dd($cartItems);
         return view('clients.pages.cart', compact('cartProducts'));
     }
+    //Cập nhật lại cart page
+    public function updateCart(Request $request)
+    {
+        $productId = $request->product_id;
+        $quantity = $request->quantity;
+
+        if (Auth::check()) {
+            // Update cart từ db
+            $cartProducts = CartItem::where('user_id', Auth::id())->where('product_id', $productId)->first();
+            // Kiểm tra product có trong sản phẩm không
+            if (! $cartProducts) {
+                return response()->json(['error' => 'Sản phẩm không tồn tại trong giỏ hàng'], 404);
+            }
+            $product = Product::find($productId);
+            // Kiểm tra quantity có vượt quá stock không
+            if ($quantity > $product->stock) {
+                return response()->json(['error' => 'Số lượng vượt quá tồn kho'], 400);
+            }
+            $cartProducts->quantity = $quantity;
+            $cartProducts->save();
+        } else {
+            // Update cart từ section
+            $cart = session()->get('cart', []);
+            // Kiểm tra product có trong sản phẩm không
+            if (!isset($cart[$productId])) {
+                return response()->json(['error' => 'Sản phẩm không tồn tại trong giỏ hàng'], 404);
+            }
+            $product = Product::find($productId);
+            // Kiểm tra quantity có vượt quá stock không
+            if ($quantity > $product->stock) {
+                return response()->json(['error' => 'Số lượng vượt quá tồn kho'], 400);
+            }
+            $cart[$productId]['quantity'] = $quantity;
+            session()->put('cart', $cart);
+        }
+        // Tính lại cartTotal
+        $subtotal = $quantity * $product->price;
+        $total = $this->calculateCartTotal();
+        $grandtotal = $total + 25000;
+
+        return response()->json([
+            'quantity' => $quantity,
+            'subtotal' => number_format($subtotal,0,',','.'),
+            'total' => number_format($total,0,',','.'),
+            'grandtotal' => number_format($grandtotal,0,',','.'),
+
+        ]);
+    }
+    //tính tổng total sau khi cập nhật lại cart page
+    function calculateCartTotal()
+    {
+        if (Auth::check()) {
+            return CartItem::where('user_id', Auth::id())->with('product')->get()
+                ->sum(fn($item) => $item->quantity * $item->product->price);
+        } else {
+            // Lấy cart từ section
+            $cart = session()->get('cart', []);
+            return collect($cart)->sum(fn($item) => $item['quantity'] * $item['price']);
+        }
+    }
 }
