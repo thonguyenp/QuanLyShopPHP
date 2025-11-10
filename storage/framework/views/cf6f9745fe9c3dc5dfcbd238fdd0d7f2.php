@@ -1,11 +1,11 @@
-@extends('layouts.client_home')
 
-@section('title', 'Thanh toán')
 
-@section('breadcrumb', 'Checkout')
+<?php $__env->startSection('title', 'Thanh toán'); ?>
 
-@section('content')
-@include('clients.partials.breadcrumb')
+<?php $__env->startSection('breadcrumb', 'Checkout'); ?>
+
+<?php $__env->startSection('content'); ?>
+<?php echo $__env->make('clients.partials.breadcrumb', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 <!-- Checkout Page Start -->
 <div class="container-fluid bg-light overflow-hidden py-5">
     <div class="container py-5">
@@ -17,15 +17,16 @@
             </div>
                 <div class="col-3 align-content-center">
                     <select name="address_id" id="list_address" class="input-item">
-                        @foreach ($addresses as $address)
-                        <option value="{{ $address->id }}" {{ $address->defaultAddress ? 'selected' : '' }}>
-                            {{ $address->full_name }} - {{ $address->address }}
+                        <?php $__currentLoopData = $addresses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $address): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <option value="<?php echo e($address->id); ?>" <?php echo e($address->defaultAddress ? 'selected' : ''); ?>>
+                            <?php echo e($address->full_name); ?> - <?php echo e($address->address); ?>
+
                         </option>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </select>
                 </div>
                 <div class="col-2">
-                    <a href="{{ route('account') }}" class="btn btn-primary text-primary">Thêm địa chỉ mới</a>
+                    <a href="<?php echo e(route('account')); ?>" class="btn btn-primary text-primary">Thêm địa chỉ mới</a>
                 </div>
 
             </div>
@@ -36,27 +37,27 @@
                     <div class="col-md-12 col-lg-6">
                         <div class="form-item w-100">
                             <label class="form-label my-3">Họ và tên<sup>*</sup></label>
-                            <input type="text" placeholder="Họ và tên" class="form-control" value="{{ $defaultAddress->full_name }}" readonly>
+                            <input type="text" placeholder="Họ và tên" class="form-control" value="<?php echo e($defaultAddress->full_name); ?>" readonly>
                         </div>
                     </div>
                     <div class="col-md-12 col-lg-6">
                         <div class="form-item w-100">
                             <label class="form-label my-3">Số điện thoại<sup>*</sup></label>
-                            <input type="text" placeholder="Số điện thoại" class="form-control" value="{{ $defaultAddress->phone }}" readonly>
+                            <input type="text" placeholder="Số điện thoại" class="form-control" value="<?php echo e($defaultAddress->phone); ?>" readonly>
                         </div>
                     </div>
                 </div>
                 <div class="form-item">
                     <label class="form-label my-3">Số nhà và tên đường<sup>*</sup></label>
-                    <input type="text" placeholder="Số nhà và tên đường" class="form-control" value="{{ $defaultAddress->address }}" readonly>
+                    <input type="text" placeholder="Số nhà và tên đường" class="form-control" value="<?php echo e($defaultAddress->address); ?>" readonly>
                 </div>
                 <div class="form-item">
                     <label class="form-label my-3">Thành phố <sup>*</sup></label>
-                    <input type="text" class="form-control" placeholder="Thành phố" value="{{ $defaultAddress->city }}" readonly>
+                    <input type="text" class="form-control" placeholder="Thành phố" value="<?php echo e($defaultAddress->city); ?>" readonly>
                 </div>
                 <div class="form-item">
                     <label class="form-label my-3">Địa chỉ email<sup>*</sup></label>
-                    <input type="email" placeholder="Địa chỉ email" class="form-control" value="{{ $user->email }}">
+                    <input type="email" placeholder="Địa chỉ email" class="form-control" value="<?php echo e($user->email); ?>">
                 </div>
                 <div class="form-check my-3">
                     <input class="form-check-input" type="checkbox" id="Address-1" name="Address" value="Address"
@@ -127,7 +128,7 @@
                     </table>
                 </div>
                 <form action="" method="post">
-                    @csrf
+                    <?php echo csrf_field(); ?>
                     <div id="checkout_payment">
                         <div class="row g-0 text-center align-items-center justify-content-center border-bottom py-2">
                             <div class="col-12">
@@ -153,7 +154,7 @@
 
                     </div>
                 </form>
-                {{-- Button order --}}
+                
                 <div class="row g-4 text-center align-items-center justify-content-center pt-4">
                     <button type="button"
                         class="btn btn-primary border-secondary py-3 px-4 text-uppercase w-100 text-primary">Place
@@ -165,4 +166,5 @@
 </div>
 <!-- Checkout Page End -->
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.client_home', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH E:\laragon\www\QuanLyShop\resources\views/clients/pages/checkout.blade.php ENDPATH**/ ?>

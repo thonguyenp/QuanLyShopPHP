@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Clients\AccountController;
 use App\Http\Controllers\Clients\AuthController;
 use App\Http\Controllers\Clients\ForgotPasswordController;
@@ -51,6 +52,8 @@ Route::middleware(['auth.custom'])->group(function(){
         Route::put('/addresses/{id}', [AccountController::class, 'updatePrimaryAddress'])->name('account.address.update');
         Route::delete('/addresses/{id}', [AccountController::class, 'deleteAddress'])->name('account.address.delete');
     });
+
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 });
 
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
@@ -68,3 +71,4 @@ Route::get('/mini-cart', [CartController::class, 'loadMiniCart'])->name('cart.mi
 Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.index');
 Route::post('/cart/update', [CartController::class, 'updateCart'])->name('cart.update');
 Route::post('/cart/remove-cart', [CartController::class, 'removeCartItem'])->name('cart.remove');
+
