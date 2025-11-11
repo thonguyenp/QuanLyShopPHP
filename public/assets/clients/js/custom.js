@@ -539,7 +539,7 @@ $(document).ready(function () {
     $('.remove-from-cart').on('click', function (e) {
         let productId = $(this).data('id');
         let row = $(this).closest('tr');
-        
+
         $.ajaxSetup({
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
@@ -557,8 +557,7 @@ $(document).ready(function () {
                 row.remove();
                 $('.cart-total').text(response.total);
                 $('.cart-grand-total').text(response.grandtotal);
-                if ($('.cart-product-remove').length == 0)
-                {
+                if ($('.cart-product-remove').length == 0) {
                     location.reload();
                 }
             },
@@ -571,9 +570,9 @@ $(document).ready(function () {
     // Checkout Page
     //**************
     // Lấy ra danh sách địa chỉ
-    $('#list_address').change(function() {
+    $('#list_address').change(function () {
         var addressId = $(this).val();
-        
+
         $.ajax({
             url: "/checkout/get-address",
             type: 'GET',
@@ -581,8 +580,7 @@ $(document).ready(function () {
                 address_id: addressId,
             },
             success: function (response) {
-                if ($(response.success))
-                {
+                if ($(response.success)) {
                     $('input[name="ltn_name"]').val(response.data.full_name);
                     $('input[name="ltn_phone"]').val(response.data.phone);
                     $('input[name="ltn_address"]').val(response.data.address);
@@ -603,15 +601,15 @@ $(document).ready(function () {
     //**************
     let selectRating = 0;
     // Xử lí khi rê chuột vào ngôi sao
-    $('.rating-star').hover(function(e) {
+    $('.rating-star').hover(function (e) {
         let value = $(this).data('value');
         highlightStar(value);
-    }, function(){
+    }, function () {
         highlightStar(selectRating);
     });
 
     // Xử lí khi rê chuột vào ngôi sao
-    $('.rating-star').click(function(e) {
+    $('.rating-star').click(function (e) {
         e.preventDefault();
         selectRating = $(this).data('value');
         $('#rating-value').val(selectRating); // cập nhật input ẩn
@@ -630,50 +628,65 @@ $(document).ready(function () {
     }
     // Xử lý submit comment
     $('#review-form').submit(function (e) {
-    e.preventDefault();
+        e.preventDefault();
 
-    let productId = $(this).data('product-id');
-    let rating = $('#rating-value').val();
-    let content = $('#review-content').val();
+        let productId = $(this).data('product-id');
+        let rating = $('#rating-value').val();
+        let content = $('#review-content').val();
 
-    // Kiểm tra rating
-    if (rating == 0) {
-        $('#review-error').html('<div class="alert alert-danger">Vui lòng chọn số sao</div>');
-        return;
-    }
-
-    // Kiểm tra nội dung
-    if (content.trim() === '') {
-        $('#review-error').html('<div class="alert alert-danger">Vui lòng nhập nội dung đánh giá</div>');
-        return;
-    }
-
-    $('#review-error').empty(); // xóa lỗi cũ
-
-    $.ajaxSetup({
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+        // Kiểm tra rating
+        if (rating == 0) {
+            $('#review-error').html('<div class="alert alert-danger">Vui lòng chọn số sao</div>');
+            return;
         }
-    });
 
-    $.ajax({
-        url: "/review",
-        type: 'POST',
-        data: {
-            product_id: productId,
-            rating: rating,
-            comment: content
-        },
-        success: function (response) {
-            $('#review-content').val('');  // ✅ reset textarea
-            highlightStar(0);
-            selectRating = 0;
-            toastr.success(response.message);
-        },
-        error: function (xhr) {
-            alert(xhr.responseJSON.error || 'Có lỗi xảy ra');
-        },
-    });
-    });
+        // Kiểm tra nội dung
+        if (content.trim() === '') {
+            $('#review-error').html('<div class="alert alert-danger">Vui lòng nhập nội dung đánh giá</div>');
+            return;
+        }
 
+        $('#review-error').empty(); // xóa lỗi cũ
+
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            url: "/review",
+            type: 'POST',
+            data: {
+                product_id: productId,
+                rating: rating,
+                comment: content
+            },
+            success: function (response) {
+                $('#review-content').val('');
+                highlightStar(0);
+                selectRating = 0;
+                toastr.success(response.message);
+
+                loadReview(productId);
+            },
+            error: function (xhr) {
+                alert(xhr.responseJSON.error || 'Có lỗi xảy ra');
+            },
+        });
+    });
+    function loadReview (productId)
+    {
+        $.ajax({
+            url: "/review/" + productId,
+            type: 'GET',
+            success: function (response) {
+                $('.ltn_comment-inner').html(response);
+            },
+            error: function (xhr) {
+                alert(xhr.responseJSON.error || 'Có lỗi xảy ra');
+            },
+        });
+
+    }
 });

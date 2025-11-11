@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Clients;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,6 +11,11 @@ use Illuminate\Support\Facades\Auth;
 class ReviewController extends Controller
 {
     //
+    public function index(Product $product)
+    {
+        return view('clients.components.includes.review-list', compact('product'))->render();
+    }
+    
     public function createReview (Request $request)
     {
         $request->validate([
@@ -30,4 +36,6 @@ class ReviewController extends Controller
             'message' => 'Đánh giá đã được gửi'
         ], 200);
     }
+
+    
 }

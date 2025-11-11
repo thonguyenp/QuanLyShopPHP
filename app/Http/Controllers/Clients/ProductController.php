@@ -82,7 +82,7 @@ class ProductController extends Controller
 
     public function detail ($slug)
     {
-        $product = Product::with(['category', 'images', 'manufacturer'])->where('slug', $slug)->firstOrFail();
+        $product = Product::with(['category', 'images', 'manufacturer', 'reviews.user'])->where('slug', $slug)->firstOrFail();
         // dd($product);
         //Lấy 3 sản phẩm liên quan đến cùng category
         $relatedProducts = Product::where('category_id', $product->category_id)
