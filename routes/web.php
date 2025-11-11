@@ -6,6 +6,7 @@ use App\Http\Controllers\Clients\AccountController;
 use App\Http\Controllers\Clients\AuthController;
 use App\Http\Controllers\Clients\ForgotPasswordController;
 use App\Http\Controllers\Clients\HomeController;
+use App\Http\Controllers\Clients\OrderController;
 use App\Http\Controllers\Clients\ProductController;
 use App\Http\Controllers\Clients\ResetPasswordController;
 use Illuminate\Support\Facades\Route;
@@ -56,6 +57,8 @@ Route::middleware(['auth.custom'])->group(function(){
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
     Route::get('/checkout/get-address', [CheckoutController::class, 'getAddress'])->name('checkout.get-addres');
     Route::post('/checkout', [CheckoutController::class, 'placeOrder'])->name('checkout.placeOrder');
+
+    Route::get('/order/{id}', [OrderController::class, 'showOrder'])->name('order.showOrder');
 });
 
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');

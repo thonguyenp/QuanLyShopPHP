@@ -84,6 +84,7 @@ class CheckoutController extends Controller
                 'status' => 'pending',
                 'paid_at' => null,
             ]);
+            
             // Sau khi tạo xong order thì xóa hết item trong cart đi
             CartItem::where('user_id', $user->id)->delete();
             DB::commit();
