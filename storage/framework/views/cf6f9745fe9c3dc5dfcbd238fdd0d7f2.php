@@ -12,9 +12,9 @@
         <h1 class="mb-4 wow fadeInUp" data-wow-delay="0.1s">Chi tiết thanh toán</h1>
         <div class="select-adress">
             <div class="row">
-            <div class="col-1">
-                <h6>Chọn Địa chỉ:</h6>
-            </div>
+                <div class="col-1">
+                    <h6>Chọn Địa chỉ:</h6>
+                </div>
                 <div class="col-3 align-content-center">
                     <select name="address_id" id="list_address" class="input-item">
                         <?php $__currentLoopData = $addresses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $address): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -37,23 +37,27 @@
                     <div class="col-md-12 col-lg-6">
                         <div class="form-item w-100">
                             <label class="form-label my-3">Họ và tên<sup>*</sup></label>
-                            <input type="text" name="ltn_name" placeholder="Họ và tên" class="form-control" value="<?php echo e($defaultAddress->full_name); ?>" readonly>
+                            <input type="text" name="ltn_name" placeholder="Họ và tên" class="form-control"
+                                value="<?php echo e($defaultAddress->full_name); ?>" readonly>
                         </div>
                     </div>
                     <div class="col-md-12 col-lg-6">
                         <div class="form-item w-100">
                             <label class="form-label my-3">Số điện thoại<sup>*</sup></label>
-                            <input type="text" name="ltn_phone" placeholder="Số điện thoại" class="form-control" value="<?php echo e($defaultAddress->phone); ?>" readonly>
+                            <input type="text" name="ltn_phone" placeholder="Số điện thoại" class="form-control"
+                                value="<?php echo e($defaultAddress->phone); ?>" readonly>
                         </div>
                     </div>
                 </div>
                 <div class="form-item">
                     <label class="form-label my-3">Số nhà và tên đường<sup>*</sup></label>
-                    <input type="text" name="ltn_address" placeholder="Số nhà và tên đường" class="form-control" value="<?php echo e($defaultAddress->address); ?>" readonly>
+                    <input type="text" name="ltn_address" placeholder="Số nhà và tên đường" class="form-control"
+                        value="<?php echo e($defaultAddress->address); ?>" readonly>
                 </div>
                 <div class="form-item">
                     <label class="form-label my-3">Thành phố <sup>*</sup></label>
-                    <input type="text" name="ltn_city" class="form-control" placeholder="Thành phố" value="<?php echo e($defaultAddress->city); ?>" readonly>
+                    <input type="text" name="ltn_city" class="form-control" placeholder="Thành phố"
+                        value="<?php echo e($defaultAddress->city); ?>" readonly>
                 </div>
                 <div class="form-item">
                     <label class="form-label my-3">Địa chỉ email<sup>*</sup></label>
@@ -82,17 +86,19 @@
                         </thead>
                         <tbody>
                             <?php $__currentLoopData = $cartProducts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <tr class="text-center">
+                            <tr class="text-center">
                                 <th scope="row" class="text-start py-4">
                                     <?php echo e($item->product->name); ?>
 
                                 </th>
                                 <td class="py-4"><?php echo e(number_format($item->product->price, 0, ',', '.')); ?></td>
                                 <td class="py-4"><?php echo e(($item->quantity)); ?></td>
-                                <td class="py-4"><?php echo e(number_format($item->quantity * $item->product->price, 0, ',', '.')); ?></td>
+                                <td class="py-4"><?php echo e(number_format($item->quantity * $item->product->price, 0, ',', '.')); ?>
+
+                                </td>
                             </tr>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            
+
                             <tr>
                                 <th scope="row">
                                 </th>
@@ -124,21 +130,24 @@
                                 <td class="py-4"></td>
                                 <td class="py-4">
                                     <div class="py-2 text-center border-bottom border-top">
-                                        <p class="mb-0 text-dark totalPrice_checkout"><?php echo e(number_format($totalPrice + 25000, 0, ',', '.')); ?></p>
+                                        <p class="mb-0 text-dark totalPrice_checkout"><?php echo e(number_format($totalPrice +
+                                            25000, 0, ',', '.')); ?></p>
                                     </div>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <form action="" method="post">
+                <form action="<?php echo e(route('checkout.placeOrder')); ?>" method="post">
                     <?php echo csrf_field(); ?>
+                    <input type="hidden" name="address_id" value="<?php echo e($defaultAddress->id); ?>">
                     <div id="checkout_payment">
                         <div class="row g-0 text-center align-items-center justify-content-center border-bottom py-2">
                             <div class="col-12">
                                 <div class="form-check text-start my-2">
-                                    <input type="radio" class="form-check-input bg-primary border-0" id="payment_paypal"
-                                        name="payment_method" value="paypal">
+                                    <input type="radio" class="form-check-input bg-primary border-0" 
+                                        id="payment_paypal"
+                                        name="payment_method" value="atm">
                                     <label class="form-check-label" for="Transfer-paypal">Paypal</label>
                                 </div>
                                 <p class="text-start text-dark">Thanh toán qua Paypal</p>
@@ -148,22 +157,22 @@
                         <div class="row g-0 text-center align-items-center justify-content-center border-bottom py-2">
                             <div class="col-12">
                                 <div class="form-check text-start my-2">
-                                    <input type="radio" class="form-check-input bg-primary border-0" id="payment_cod"
-                                        name="payment_method" value="COD">
+                                    <input type="radio" class="form-check-input bg-primary border-0" 
+                                        id="payment_cash"
+                                        name="payment_method" value="cash" checked>
                                     <label class="form-check-label" for="Transfer-cod">COD</label>
                                 </div>
                                 <p class="text-start text-dark">Trả tiền khi nhận hàng</p>
                             </div>
                         </div>
-
+                    </div>
+                    
+                    <div class="row g-4 text-center align-items-center justify-content-center pt-4">
+                        <button type="submit" id="order_button_cash"
+                            class="btn btn-primary border-secondary py-3 px-4 text-uppercase w-100 text-primary">Đặt
+                            hàng</button>
                     </div>
                 </form>
-                
-                <div class="row g-4 text-center align-items-center justify-content-center pt-4">
-                    <button type="button"
-                        class="btn btn-primary border-secondary py-3 px-4 text-uppercase w-100 text-primary">Place
-                        Order</button>
-                </div>
             </div>
         </div>
     </div>

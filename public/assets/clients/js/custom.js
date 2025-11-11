@@ -587,6 +587,7 @@ $(document).ready(function () {
                     $('input[name="ltn_phone"]').val(response.data.phone);
                     $('input[name="ltn_address"]').val(response.data.address);
                     $('input[name="ltn_city"]').val(response.data.city);
+                    $('input[name="address_id"]').val(response.data.id);
 
                 }
             },

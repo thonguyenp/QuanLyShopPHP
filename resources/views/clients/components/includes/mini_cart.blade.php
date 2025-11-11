@@ -49,7 +49,7 @@
         </div>
         <div class="d-grid gap-2 mb-2">
             <a href="{{ route('cart.index') }}" class="btn btn-outline-primary btn-block">Xem giỏ hàng</a>
-            <a href="checkout.html" class="btn btn-primary btn-block">Thanh toán</a>
+            <a href="{{ route('checkout.placeOrder') }}" class="btn btn-primary btn-block">Thanh toán</a>
         </div>
     </div>
 
