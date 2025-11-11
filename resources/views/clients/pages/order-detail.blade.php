@@ -19,7 +19,7 @@
                     <span class="badge bg-primary">Đang xử lý</span>
                     @elseif ($order->status == 'completed')
                     <span class="badge bg-success">Đã hoàn thành</span>
-                    @elseif ($order->status == 'failed')
+                    @elseif ($order->status == 'canceled')
                     <span class="badge bg-danger">Đã hủy</span>
                     @endif
                 </p>
@@ -63,7 +63,7 @@
                     <td>
                         <img src="{{ asset('storage/' . $item->product->image) }}" alt="">
                     </td>
-                    <td>#{{$item->name}}</td>
+                    <td>{{$item->product->name}}</td>
                     <td>{{number_format($item->price,0,',','.')}} VNĐ</td>
                     <td>{{number_format($item->quantity,0,',','.')}}</td>
                     <td>{{number_format($item->price * $item->quantity,0,',','.')}} VNĐ</td>
@@ -72,7 +72,7 @@
             </tbody>
         </table>
         @if ($order->status == 'pending')
-        <form action="" method="post" onsubmit="return confirm('Bạn có chắc muốn hủy đơn hàng này?');">
+        <form action="{{ route('order.cancel', $order->id) }}" method="post" onsubmit="return confirm('Bạn có chắc muốn hủy đơn hàng này?');">
             @csrf
             <button type="submit" class="btn btn-danger btn-sm my-3">
                 Hủy đơn hàng

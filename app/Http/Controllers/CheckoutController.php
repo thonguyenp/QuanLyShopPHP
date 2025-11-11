@@ -77,6 +77,15 @@ class CheckoutController extends Controller
                     'price' => $item->product->price,
                 ]);
             }
+
+            $product = $item->product;
+            if ($product->stock < $item->quantity)
+            {
+                throw new \Exception("Sản phẩm {$product->name} không đủ hàng trong kho");
+            }
+            $product->stock -= $item->quantity;
+            $product->save();
+
             Payment::create([
                 'order_id' => $order->id,
                 'payment_method' => $request->payment_method,

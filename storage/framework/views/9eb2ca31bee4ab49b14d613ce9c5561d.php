@@ -65,7 +65,7 @@
                                             <span class="badge bg-primary">Đang xử lý</span>
                                         <?php elseif($order->status == 'completed'): ?>
                                             <span class="badge bg-success">Đã hoàn thành</span>
-                                        <?php elseif($order->status == 'failed'): ?>
+                                        <?php elseif($order->status == 'canceled'): ?>
                                             <span class="badge bg-danger">Đã hủy</span>
                                         <?php endif; ?>
                                     </td>

@@ -96,8 +96,7 @@
                         <h5 class="mb-0 ps-4 me-4">Tổng thanh toán:</h5>
                         <p class="cart-grand-total mb-0 pe-4">{{number_format($carttotal + 25000,0,',','.')}} VND</p>
                     </div>
-                    <button class="btn btn-primary rounded-pill px-4 py-3 text-uppercase mb-4 ms-4" type="button">Thanh
-                        toán</button>
+                        <a class="btn btn-primary rounded-pill px-4 py-3 mb-4 ms-4" href="{{ route('checkout') }}">Thanh toán</a>
                 </div>
             </div>
         </div>

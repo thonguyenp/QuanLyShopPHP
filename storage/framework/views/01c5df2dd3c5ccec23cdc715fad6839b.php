@@ -19,7 +19,7 @@
                     <span class="badge bg-primary">Đang xử lý</span>
                     <?php elseif($order->status == 'completed'): ?>
                     <span class="badge bg-success">Đã hoàn thành</span>
-                    <?php elseif($order->status == 'failed'): ?>
+                    <?php elseif($order->status == 'canceled'): ?>
                     <span class="badge bg-danger">Đã hủy</span>
                     <?php endif; ?>
                 </p>
@@ -63,7 +63,7 @@
                     <td>
                         <img src="<?php echo e(asset('storage/' . $item->product->image)); ?>" alt="">
                     </td>
-                    <td>#<?php echo e($item->name); ?></td>
+                    <td><?php echo e($item->product->name); ?></td>
                     <td><?php echo e(number_format($item->price,0,',','.')); ?> VNĐ</td>
                     <td><?php echo e(number_format($item->quantity,0,',','.')); ?></td>
                     <td><?php echo e(number_format($item->price * $item->quantity,0,',','.')); ?> VNĐ</td>
@@ -72,7 +72,7 @@
             </tbody>
         </table>
         <?php if($order->status == 'pending'): ?>
-        <form action="" method="post" onsubmit="return confirm('Bạn có chắc muốn hủy đơn hàng này?');">
+        <form action="<?php echo e(route('order.cancel', $order->id)); ?>" method="post" onsubmit="return confirm('Bạn có chắc muốn hủy đơn hàng này?');">
             <?php echo csrf_field(); ?>
             <button type="submit" class="btn btn-danger btn-sm my-3">
                 Hủy đơn hàng
