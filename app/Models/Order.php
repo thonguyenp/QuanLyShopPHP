@@ -17,7 +17,7 @@ class Order extends Model
         'shipping_address_id'
     ];
 
-    public function orderItem ()
+    public function orderItems ()
     {
         return $this->hasMany(OrderItem::class);
     }

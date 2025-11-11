@@ -67,11 +67,10 @@
                                             <span class="badge bg-success">Đã hoàn thành</span>
                                         <?php elseif($order->status == 'failed'): ?>
                                             <span class="badge bg-danger">Đã hủy</span>
-
                                         <?php endif; ?>
                                     </td>
                                     <td><?php echo e(number_format($order->total_price,0,',','.')); ?> VNĐ</td>
-                                    <td><a class="btn btn-sm btn-info" href="<?php echo e(route('order.showOrder')); ?>">Xem chi tiết đơn hàng</a></td>
+                                    <td><a class="btn btn-sm btn-info" href="<?php echo e(route('order.showOrder', $order->id)); ?>">Xem chi tiết đơn hàng</a></td>
                                 </tr>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </tbody>

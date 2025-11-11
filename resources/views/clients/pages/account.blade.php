@@ -67,11 +67,10 @@
                                             <span class="badge bg-success">Đã hoàn thành</span>
                                         @elseif ($order->status == 'failed')
                                             <span class="badge bg-danger">Đã hủy</span>
-
                                         @endif
                                     </td>
                                     <td>{{number_format($order->total_price,0,',','.')}} VNĐ</td>
-                                    <td><a class="btn btn-sm btn-info" href="{{ route('order.showOrder') }}">Xem chi tiết đơn hàng</a></td>
+                                    <td><a class="btn btn-sm btn-info" href="{{ route('order.showOrder', $order->id) }}">Xem chi tiết đơn hàng</a></td>
                                 </tr>
                                 @endforeach
                             </tbody>

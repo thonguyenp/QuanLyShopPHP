@@ -1605,8 +1605,8 @@ namespace App\Models {
      * @property float|null $total_price
      * @property int $user_id
      * @property int $id
-     * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\OrderItem> $orderItem
-     * @property-read int|null $orderItem_count
+     * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\OrderItem> $orderItems
+     * @property-read int|null $orderItems_count
      * @property-read \App\Models\User $user
      * @property-read \App\Models\ShippingAddress $shippingAddress
      * @property-read \App\Models\Payment $payment
