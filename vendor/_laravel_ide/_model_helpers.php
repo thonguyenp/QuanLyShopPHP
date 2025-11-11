@@ -3215,6 +3215,8 @@ namespace App\Models {
      * @property string $slug
      * @property string $name
      * @property int $id
+     * @property-read mixed $average_rating
+     * @property-read mixed $image_url
      * @property-read \App\Models\Category $category
      * @property-read \App\Models\Manufacturer $manufacturer
      * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ProductImage> $images

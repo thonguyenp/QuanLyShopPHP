@@ -12,14 +12,6 @@ class HomeController extends Controller
     public function index()
     {
         $categories = Category::with('products')->get();
-        // Hiển thị ảnh cho product
-        foreach ($categories as $index => $category) {
-            foreach ($category->products as $product) {
-                $product->image_url = $product->firstImage?->image
-                ? asset('storage/upload/products/'.$product->firstImage->image)
-                : asset('storage/upload/products/default-product.png');
-            }
-        }
         // hiển thị thông tin cho best seller
         $bestSellingProducts = Product::with('category')
             ->join('order_items', 'products.id', '=', 'order_items.product_id')
@@ -29,13 +21,8 @@ class HomeController extends Controller
                 'products.description', 'products.price', 'products.stock', 'products.status',
                 'products.created_at', 'products.updated_at')
             ->orderByDesc('total_sold')
-            ->limit(10)
+            ->limit(8)
             ->get();
-        foreach ($bestSellingProducts as $product) {
-            $product->image_url = $product->firstImage?->image
-                ? asset('storage/upload/products/'.$product->firstImage->image)
-                : asset('storage/upload/products/default-product.png');
-        }
 
         // hiển thị thông tin cho right banner
         $productRightBanner = Product::with('category')
@@ -46,17 +33,16 @@ class HomeController extends Controller
         $allProductSection = Product::with('category')
             ->take(8)                   // chỉ lấy 8 sản phẩm
             ->get();
-        // Gán đường dẫn ảnh cho phần allProductSection
-        foreach ($allProductSection as $product) {
-            $product->image_url = $product->firstImage?->image
-                ? asset('storage/upload/products/'.$product->firstImage->image)
-                : asset('storage/upload/products/default-product.png');
-        }
+        $latestProducts = Product::orderBy('updated_at', 'desc') // sắp xếp mới nhất trước
+            ->take(8)                                        // chỉ lấy 3 sản phẩm
+            ->get();
+
 
         return view('clients.pages.home', compact(
             'categories',
             'bestSellingProducts',
             'productRightBanner',
-            'allProductSection'));
+            'allProductSection',
+            'latestProducts'));
     }
 }

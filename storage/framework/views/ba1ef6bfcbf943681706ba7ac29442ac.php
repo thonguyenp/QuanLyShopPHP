@@ -16,25 +16,20 @@
                 <div class="container related-product">
                     <h4 class="mb-3">Sản phẩm liên quan</h4>
                     <?php $__currentLoopData = $relatedProducts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $related): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <div class="row">
-                            <div class="col-6 rounded me-4" style="width: 100px; height: 100px;">
-                                <img src="<?php echo e($related->image_url); ?>" class="img-fluid rounded" alt="<?php echo e($related->name); ?>">
-                            </div>
-                            <div class="col-6">
-                                <h6 class="mb-2"><a href="#"><?php echo e($related->name); ?></a></h6>
-                                <div class="d-flex mb-2">
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                                <div class="mb-1">
-                                    <h5 class="text-danger text-decoration-line-through"><?php echo e(number_format($related->price + 200,0,',','.')); ?></h5>
-                                    <h5 class="fw-bold me-2"><?php echo e(number_format($related->price,0,',','.')); ?></h5>
-                                </div>
+                    <div class="row">
+                        <div class="col-6 rounded me-4" style="width: 100px; height: 100px;">
+                            <img src="<?php echo e($related->image_url); ?>" class="img-fluid rounded" alt="<?php echo e($related->name); ?>">
+                        </div>
+                        <div class="col-6">
+                            <h6 class="mb-2"><a href="#"><?php echo e($related->name); ?></a></h6>
+                            <?php echo $__env->make('clients.components.includes.rating', ['product' => $related], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+                            <div class="mb-1">
+                                <h5 class="text-danger text-decoration-line-through"><?php echo e(number_format($related->price +
+                                    200,0,',','.')); ?></h5>
+                                <h5 class="fw-bold me-2"><?php echo e(number_format($related->price,0,',','.')); ?></h5>
                             </div>
                         </div>
+                    </div>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
                 <div class="d-flex justify-content-center my-4">
@@ -64,12 +59,17 @@
                         <p class="mb-3"><?php echo e($product->manufacturer->name); ?> - <?php echo e($product->category->name); ?></p>
                         <h5 class="fw-bold mb-3"><?php echo e(number_format($product->price,0,',','.')); ?></h5>
                         
-                        <div class="d-flex mb-4">
-                            <i class="fa fa-star text-secondary"></i>
-                            <i class="fa fa-star text-secondary"></i>
-                            <i class="fa fa-star text-secondary"></i>
-                            <i class="fa fa-star text-secondary"></i>
-                            <i class="fa fa-star"></i>
+                        <div class="d-flex mb-2 align-content-center">
+                            <?php for($i = 1;$i <= 5; $i++): ?>
+                                <?php if($i <= floor($averageRating)): ?>
+                                    <i class="fas fa-star"></i>
+                                <?php elseif($i == ceil($averageRating) && $averageRating - floor($averageRating) >= 0.5): ?>
+                                    <i class="fas fa-star-half-alt"></i>
+                                <?php else: ?>
+                                    <i class="far fa-star"></i>
+                                <?php endif; ?>
+                            <?php endfor; ?>
+                            <span><?php echo e($product->reviews->count()); ?> đánh giá</span>
                         </div>
                         
                         <div class="d-flex flex-column mb-3">
@@ -84,18 +84,17 @@
                                     <i class="fa fa-minus"></i>
                                 </button>
                             </div>
-                            <input type="text" readonly data-max="<?php echo e($product->stock); ?>" class="form-control plus-minus-box form-control-sm text-center border-0" value="1">
+                            <input type="text" readonly data-max="<?php echo e($product->stock); ?>"
+                                class="form-control plus-minus-box form-control-sm text-center border-0" value="1">
                             <div class="input-group-btn">
                                 <button class="btn btn-sm inc btn-plus rounded-circle bg-light border">
                                     <i class="fa fa-plus"></i>
                                 </button>
                             </div>
                         </div>
-                        <a href="<?php echo e(route('cart.add')); ?>" 
-                        data-id="<?php echo e($product->id); ?>" 
-                        data-bs-toggle="modal"
-                        data-bs-target="#add_to_cart_modal-<?php echo e($product->id); ?>"
-                        class="add-to-cart-btn btn btn-primary border border-secondary rounded-pill px-4 py-2 mb-4 text-primary">
+                        <a href="<?php echo e(route('cart.add')); ?>" data-id="<?php echo e($product->id); ?>" data-bs-toggle="modal"
+                            data-bs-target="#add_to_cart_modal-<?php echo e($product->id); ?>"
+                            class="add-to-cart-btn btn btn-primary border border-secondary rounded-pill px-4 py-2 mb-4 text-primary">
                             <i class="fa fa-shopping-bag me-2 text-white"></i> Thêm vào giỏ hàng
                         </a>
                     </div>
@@ -115,7 +114,7 @@
                             
                             <div class="tab-pane active" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
                                 <p>
-                                    Mô tả sản phẩm: 
+                                    Mô tả sản phẩm:
                                     <?php echo e($product->description); ?>
 
                                 </p>
@@ -164,23 +163,27 @@
                         </div>
                     </div>
                     
-                    <form id="review-form" data-product-id = "<?php echo e($product->id); ?>">
+                    
+                    <?php if(Auth::check() && $hasPurchased && !$hasReviewed): ?>
+                    <form id="review-form" data-product-id="<?php echo e($product->id); ?>">
                         <h4 class="mb-5 fw-bold">Bình luận</h4>
                         <div class="row g-4">
                             <div class="col-lg-6">
                                 <div class="border-bottom rounded">
-                                    <input type="text" class="form-control border-0 me-4" value="<?php echo e($user->name); ?>" placeholder="Tên của bạn">
+                                    <input type="text" class="form-control border-0 me-4" value="<?php echo e($user->name); ?>"
+                                        placeholder="Tên của bạn">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="border-bottom rounded">
-                                    <input type="email" class="form-control border-0" value="<?php echo e($user->email); ?>" placeholder="Email của bạn">
+                                    <input type="email" class="form-control border-0" value="<?php echo e($user->email); ?>"
+                                        placeholder="Email của bạn">
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="border-bottom rounded my-4">
-                                <textarea name="comment" id="review-content" class="form-control border-0"
-                                        cols="30" rows="8" placeholder="Nhập đánh giá của bạn" spellcheck="false"></textarea>
+                                    <textarea name="comment" id="review-content" class="form-control border-0" cols="30"
+                                        rows="8" placeholder="Nhập đánh giá của bạn" spellcheck="false"></textarea>
                                 </div>
                                 <div id="review-error"></div> <!-- chỗ hiển thị lỗi -->
                             </div>
@@ -190,19 +193,18 @@
                                         <p class="mb-0 me-3">Please rate:</p>
                                         <div class="d-flex align-items-center" style="font-size: 12px;">
                                             <ul class="d-flex list-unstyled mb-0">
-                                                <?php for($i = 1; $i <= 5; $i++): ?>
-                                                    <li>
-                                                        <a href="javascript:void(0)" style="display: inline"
+                                                <?php for($i = 1; $i <= 5; $i++): ?> <li>
+                                                    <a href="javascript:void(0)" style="display: inline"
                                                         class="rating-star" data-value="<?php echo e($i); ?>">
-                                                            <i class="far fa-star"></i>
-                                                        </a>
+                                                        <i class="far fa-star"></i>
+                                                    </a>
                                                     </li>
-                                                <?php endfor; ?>
+                                                    <?php endfor; ?>
                                             </ul>
                                         </div>
                                     </div>
                                     <input type="hidden" name="rating" id="rating-value" value="0">
-                                    <button type="submit" 
+                                    <button type="submit"
                                         class="btn btn-primary border border-secondary text-primary rounded-pill px-4 py-3">
                                         Gửi
                                     </button>
@@ -210,16 +212,14 @@
                             </div>
                         </div>
                     </form>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 </div>
 <!-- Single Products End -->
 <?php echo $__env->make('clients.components.includes.include-modals', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 <?php $__env->stopSection(); ?>
-
-
 <?php echo $__env->make('layouts.client_home', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH E:\laragon\www\QuanLyShop\resources\views/clients/pages/product-detail.blade.php ENDPATH**/ ?>

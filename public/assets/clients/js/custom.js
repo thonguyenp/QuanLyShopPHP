@@ -599,94 +599,94 @@ $(document).ready(function () {
     //**************
     // Rating Product
     //**************
-    let selectRating = 0;
-    // Xử lí khi rê chuột vào ngôi sao
-    $('.rating-star').hover(function (e) {
-        let value = $(this).data('value');
-        highlightStar(value);
-    }, function () {
-        highlightStar(selectRating);
-    });
-
-    // Xử lí khi rê chuột vào ngôi sao
-    $('.rating-star').click(function (e) {
-        e.preventDefault();
-        selectRating = $(this).data('value');
-        $('#rating-value').val(selectRating); // cập nhật input ẩn
-        highlightStar(selectRating);
-    });
-
-    function highlightStar(value) {
-        $('.rating-star').each(function () {
-            let starValue = $(this).data('value');
-            if (starValue <= value) {
-                $(this).find('i').removeClass('far').addClass('fas'); // full star
-            } else {
-                $(this).find('i').removeClass('fas').addClass('far'); // empty star
-            }
+    if (window.location.pathname.startsWith('/product')) {
+        let selectRating = 0;
+        // Xử lí khi rê chuột vào ngôi sao
+        $('.rating-star').hover(function (e) {
+            let value = $(this).data('value');
+            highlightStar(value);
+        }, function () {
+            highlightStar(selectRating);
         });
-    }
-    // Xử lý submit comment
-    $('#review-form').submit(function (e) {
-        e.preventDefault();
 
-        let productId = $(this).data('product-id');
-        let rating = $('#rating-value').val();
-        let content = $('#review-content').val();
+        // Xử lí khi rê chuột vào ngôi sao
+        $('.rating-star').click(function (e) {
+            e.preventDefault();
+            selectRating = $(this).data('value');
+            $('#rating-value').val(selectRating); // cập nhật input ẩn
+            highlightStar(selectRating);
+        });
 
-        // Kiểm tra rating
-        if (rating == 0) {
-            $('#review-error').html('<div class="alert alert-danger">Vui lòng chọn số sao</div>');
-            return;
+        function highlightStar(value) {
+            $('.rating-star').each(function () {
+                let starValue = $(this).data('value');
+                if (starValue <= value) {
+                    $(this).find('i').removeClass('far').addClass('fas'); // full star
+                } else {
+                    $(this).find('i').removeClass('fas').addClass('far'); // empty star
+                }
+            });
         }
+        // Xử lý submit comment
+        $('#review-form').submit(function (e) {
+            e.preventDefault();
 
-        // Kiểm tra nội dung
-        if (content.trim() === '') {
-            $('#review-error').html('<div class="alert alert-danger">Vui lòng nhập nội dung đánh giá</div>');
-            return;
-        }
+            let productId = $(this).data('product-id');
+            let rating = $('#rating-value').val();
+            let content = $('#review-content').val();
 
-        $('#review-error').empty(); // xóa lỗi cũ
-
-        $.ajaxSetup({
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+            // Kiểm tra rating
+            if (rating == 0) {
+                $('#review-error').html('<div class="alert alert-danger">Vui lòng chọn số sao</div>');
+                return;
             }
-        });
 
-        $.ajax({
-            url: "/review",
-            type: 'POST',
-            data: {
-                product_id: productId,
-                rating: rating,
-                comment: content
-            },
-            success: function (response) {
-                $('#review-content').val('');
-                highlightStar(0);
-                selectRating = 0;
-                toastr.success(response.message);
+            // Kiểm tra nội dung
+            if (content.trim() === '') {
+                $('#review-error').html('<div class="alert alert-danger">Vui lòng nhập nội dung đánh giá</div>');
+                return;
+            }
 
-                loadReview(productId);
-            },
-            error: function (xhr) {
-                alert(xhr.responseJSON.error || 'Có lỗi xảy ra');
-            },
-        });
-    });
-    function loadReview (productId)
-    {
-        $.ajax({
-            url: "/review/" + productId,
-            type: 'GET',
-            success: function (response) {
-                $('.ltn_comment-inner').html(response);
-            },
-            error: function (xhr) {
-                alert(xhr.responseJSON.error || 'Có lỗi xảy ra');
-            },
-        });
+            $('#review-error').empty(); // xóa lỗi cũ
 
+            $.ajaxSetup({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                url: "/review",
+                type: 'POST',
+                data: {
+                    product_id: productId,
+                    rating: rating,
+                    comment: content
+                },
+                success: function (response) {
+                    $('#review-content').val('');
+                    highlightStar(0);
+                    selectRating = 0;
+                    toastr.success(response.message);
+
+                    loadReview(productId);
+                },
+                error: function (xhr) {
+                    alert(xhr.responseJSON.error || 'Có lỗi xảy ra');
+                },
+            });
+        });
+        function loadReview(productId) {
+            $.ajax({
+                url: "/review/" + productId,
+                type: 'GET',
+                success: function (response) {
+                    $('.ltn_comment-inner').html(response);
+                },
+                error: function (xhr) {
+                    alert(xhr.responseJSON.error || 'Có lỗi xảy ra');
+                },
+            });
+        }
     }
 });

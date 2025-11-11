@@ -16,7 +16,9 @@
             <a href="<?php echo e(route('cart.index')); ?>">
               <button class="btn btn-primary btn-sm fw-semibold px-3">Xem giỏ hàng</button>
             </a>
-            <button class="btn btn-dark btn-sm fw-semibold px-3">Checkout</button>
+            <a href="<?php echo e(route('checkout')); ?>">
+              <button class="btn btn-dark btn-sm fw-semibold px-3">Checkout</button>
+            </a>
           </div>
         </div>
 

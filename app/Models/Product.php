@@ -20,6 +20,8 @@ class Product extends Model
         'status'
     ];
 
+    protected $appends = ['image_url','average_rating'];
+
     public function category ()
     {
         return $this->belongsTo(Category::class);
@@ -49,5 +51,15 @@ class Product extends Model
     public function reviews()
     {
         return $this->hasMany(Review::class);
+    }
+
+    public function getAverageRatingAttribute()
+    {
+        return $this->reviews->avg('rating') ?? 0;
+    }
+
+    public function getImageUrlAttribute()
+    {
+        return $this->firstImage?->image ? asset('storage/' . $this->firstImage->image) : asset('storage/upload/products/default-product.png');
     }
 }

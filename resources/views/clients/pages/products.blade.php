@@ -70,30 +70,23 @@
                             </div>
                         </div>
                     </div>
-                    <div class="featured-product mb-4">
+                    <div class="new-arrival-home mb-4">
                         <h4 class="mb-3">Sản phẩm mới</h4>
-                        <div class="featured-product-item">
+                        @foreach($latestProducts as $product)
+                        <div class="new-arrival-item">
                             <div class="rounded me-4" style="width: 100px; height: 100px;">
-                                <img src="img/product-5.png" class="img-fluid rounded" alt="Image">
+                                <img src="{{ $product->image_url }}" class="img-fluid rounded" alt="{{ $product->name }}">
                             </div>
                             <div>
-                                <h6 class="mb-2">Camera Leance</h6>
+                                <h6 class="mb-2">{{ $product->name }}</h6>
+                                @include('clients.components.includes.rating')
                                 <div class="d-flex mb-2">
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                                <div class="d-flex mb-2">
-                                    <h5 class="fw-bold me-2">2.99 $</h5>
-                                    <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
+                                    <h5 class="fw-bold me-2">{{number_format($product->price,0,',','.')}} VNĐ</h5>
+                                    <h5 class="text-danger text-decoration-line-through">{{number_format($product->price + 20000,0,',','.')}}</h5>
                                 </div>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-center my-4">
-                            <a href="#" class="btn btn-primary px-4 py-3 rounded-pill w-100">Vew More</a>
-                        </div>
+                        @endforeach
                     </div>
             </div>
             <div class="col-lg-9 wow fadeInUp" data-wow-delay="0.1s">
