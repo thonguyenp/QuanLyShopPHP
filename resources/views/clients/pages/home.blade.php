@@ -474,9 +474,9 @@
                 consectetur?</p>
         </div>
         <div class="row g-4">
+            @foreach ($bestSellingProducts as $product)
             <div class="col-md-6 col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.1s">
                 {{-- Chưa làm phần hóa đơn nên chưa có --}}
-                @foreach ($bestSellingProducts as $product)
                 <div class="products-mini-item border">
                     <div class="row g-0">
                         {{-- img --}}
@@ -516,9 +516,8 @@
                         </a>
                     </div>
                 </div>
-
-                @endforeach
             </div>
+            @endforeach
         </div>
     </div>
 </div>
