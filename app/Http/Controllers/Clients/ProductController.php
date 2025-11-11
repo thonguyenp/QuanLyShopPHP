@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Manufacturer;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -94,7 +95,8 @@ class ProductController extends Controller
             ? asset('storage/upload/products/'.$related->firstImage->image)
             : asset('storage/upload/products/default-product.png');
         }
+        $user = Auth::user();
 
-        return view('clients.pages.product-detail', compact('product', 'relatedProducts'));
+        return view('clients.pages.product-detail', compact('product', 'relatedProducts', 'user'));
     }
 }
