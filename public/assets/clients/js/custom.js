@@ -616,7 +616,7 @@ $(document).ready(function () {
             $('#rating-value').val(selectRating); // cập nhật input ẩn
             highlightStar(selectRating);
         });
-
+        // Làm sáng ngôi sao 
         function highlightStar(value) {
             $('.rating-star').each(function () {
                 let starValue = $(this).data('value');
@@ -676,6 +676,7 @@ $(document).ready(function () {
                 },
             });
         });
+        // Load lại review bằng Ajax
         function loadReview(productId) {
             $.ajax({
                 url: "/review/" + productId,
@@ -689,4 +690,34 @@ $(document).ready(function () {
             });
         }
     }
+
+    //**************
+    // Contact Page
+    //**************
+    $('#contact-form').on('submit', function(e) {
+        let name = $('input[name="name"]').val();
+        let phone = $('input[name="phone"]').val();
+        let email = $('input[name="email"]').val();
+        let message = $('textarea[name="message"]').val();
+        let errorMessage = "";
+
+        if (name.length < 3) {
+            errorMessage += "Họ và tên phải có ít nhất 3 ký tự.<br>";
+        }
+
+        if (phone.length < 10 || phone.length > 11) {
+            errorMessage += "Số điện thoại phải từ 10-11 số.<br>";
+        }
+
+        let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            errorMessage += "Email không hợp lệ.<br>";
+        }
+
+        if(errorMessage !== "") {
+            toastr.error(errorMessage, "Lỗi");
+            e.preventDefault();
+        }
+
+    });
 });

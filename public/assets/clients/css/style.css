@@ -120,6 +120,20 @@
 
 
 /*** Navbar ***/
+.nav-bar {
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    z-index: 1030; /* bootstrap modal < 1050, offcanvas = 1045 */
+}
+.dropdown-menu {
+    z-index: 1040;
+}
+
+.navbar {
+    max-width: 100%;
+}
+
 .nav-bar .categories-bars .categories-bars-item {
     padding: 5px 15px;
     border-bottom: 1px solid rgba(256, 256, 256, 0.1);
