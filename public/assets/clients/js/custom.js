@@ -694,7 +694,7 @@ $(document).ready(function () {
     //**************
     // Contact Page
     //**************
-    $('#contact-form').on('submit', function(e) {
+    $('#contact-form').on('submit', function (e) {
         let name = $('input[name="name"]').val();
         let phone = $('input[name="phone"]').val();
         let email = $('input[name="email"]').val();
@@ -714,10 +714,44 @@ $(document).ready(function () {
             errorMessage += "Email không hợp lệ.<br>";
         }
 
-        if(errorMessage !== "") {
+        if (errorMessage !== "") {
             toastr.error(errorMessage, "Lỗi");
             e.preventDefault();
         }
 
+    });
+    //**************
+    // Wishlist Page
+    //**************
+    // Xử lý thêm vào wishlist
+    $(document).on('click', '.add-to-wishlist', function (e) {
+        e.preventDefault(); // chặn load trang nếu href="#"
+
+        let button = $(this);                      // nút vừa click
+        let productId = button.data('id');         // lấy id sản phẩm
+        // Nếu lấy ở trong product detail thì lấy theo quantity, còn ở những nơi khác thì quantity luôn là 1
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            url: "/wishlist/add",
+            type: 'POST',
+            data: {
+                product_id: productId,
+            },
+            success: function (response) {
+                if (response.status)
+                {
+                    $('#liton_wishlist_modal-' + productId).modal('show');
+                    toastr.success('Đã thêm vào danh sách yêu thích');
+                }
+            },
+            error: function (xhr) {
+                alert('có lỗi xảy ra với Ajax của add to wishlist');
+            },
+        });
     });
 });

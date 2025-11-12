@@ -11,6 +11,7 @@ use App\Http\Controllers\Clients\OrderController;
 use App\Http\Controllers\Clients\ProductController;
 use App\Http\Controllers\Clients\ResetPasswordController;
 use App\Http\Controllers\Clients\ReviewController;
+use App\Http\Controllers\Clients\WishlistController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])
@@ -62,6 +63,8 @@ Route::middleware(['auth.custom'])->group(function(){
     Route::post('/review', [ReviewController::class, 'createReview'])->name('review.createReview');
     Route::get('/review/{product}',[ReviewController::class, 'index'])->name('review.index');
 
+    Route::get('/wishlist',[WishlistController::class, 'index'])->name('wishlist.index');
+    Route::post('/wishlist/add',[WishlistController::class, 'addToWishlist']);
 });
 
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');

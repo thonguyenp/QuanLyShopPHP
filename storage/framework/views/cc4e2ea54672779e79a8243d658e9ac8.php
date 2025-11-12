@@ -6,7 +6,7 @@
         <div class="flex-grow-1">
           <h6 class="mb-1 fw-semibold"><?php echo e($product->name); ?></h6>
           <p class="mb-2 text-success"><i class="bi bi-check-circle-fill"></i> Successfully added to your Wishlist</p>
-          <button class="btn btn-primary btn-sm fw-semibold px-3">View Wishlist</button>
+          <a href="<?php echo e(route('wishlist.index')); ?>" class="btn btn-primary rounded-pill fw-semibold">Xem Wishlist</a>
         </div>
         <button type="button" class="btn-close ms-2" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>

@@ -36,9 +36,8 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <?php echo $__env->make('clients.components.includes.rating', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
                             <a href="#" 
-                                class="text-primary d-flex align-items-center justify-content-center me-0"
-                                data-bs-toggle="modal"
-                                data-bs-target="#liton_wishlist_modal-<?php echo e($product->id); ?>">
+                                class="add-to-wishlist text-primary d-flex align-items-center justify-content-center me-0"
+                                data-id="<?php echo e($product->id); ?>" >
                                 <span class="rounded-circle btn-sm-square border">
                                     <i class="fas fa-heart"></i>
                                 </span>

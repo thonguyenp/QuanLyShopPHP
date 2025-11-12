@@ -200,12 +200,14 @@
                             </a>
                         </li>
                         <li class="nav-item mb-4">
-                            <a class="d-flex py-2 mx-2 bg-light rounded-pill" data-bs-toggle="pill" href="#NewArrivalSection">
+                            <a class="d-flex py-2 mx-2 bg-light rounded-pill" data-bs-toggle="pill"
+                                href="#NewArrivalSection">
                                 <span class="text-dark" style="width: 130px;">New Arrivals</span>
                             </a>
                         </li>
                         <li class="nav-item mb-4">
-                            <a class="d-flex mx-2 py-2 bg-light rounded-pill" data-bs-toggle="pill" href="#TopSellingSection">
+                            <a class="d-flex mx-2 py-2 bg-light rounded-pill" data-bs-toggle="pill"
+                                href="#TopSellingSection">
                                 <span class="text-dark" style="width: 130px;">Top Selling</span>
                             </a>
                         </li>
@@ -225,13 +227,15 @@
                                             alt="{{ $product->name }}">
                                         <div class="product-new">New</div>
                                         <div class="product-details">
-                                            <a href="{{ route('products.detail', $product->slug) }}"><i class="fa fa-eye fa-1x"></i></a>
+                                            <a href="{{ route('products.detail', $product->slug) }}"><i
+                                                    class="fa fa-eye fa-1x"></i></a>
                                         </div>
                                     </div>
                                     {{-- content --}}
                                     <div class="text-center rounded-bottom p-4">
                                         <a href="#" class="d-block mb-2">{{ $product->category->name }} </a>
-                                        <a href="{{ route('products.detail', $product->slug) }}" class="d-block h4">{{$product->name}}</a>
+                                        <a href="{{ route('products.detail', $product->slug) }}"
+                                            class="d-block h4">{{$product->name}}</a>
                                         <del class="me-2 fs-5">{{number_format($product->price + 200, 0,',','.')}}</del>
                                         <span class="text-primary fs-5">{{number_format($product->price,
                                             0,',','.')}}</span>
@@ -239,17 +243,15 @@
                                 </div>
                                 {{-- button --}}
                                 <div class="product-item-add border border-top-0 rounded-bottom text-center p-4 pt-0">
-                                    <a href="{{ route('cart.add') }}" 
-                                        data-id="{{ $product->id }}" 
+                                    <a href="{{ route('cart.add') }}" data-id="{{ $product->id }}"
                                         class="add-to-cart-btn btn btn-primary border border-secondary rounded-pill px-4 py-2 mb-4 text-primary">
-                                            <i class="fa fa-shopping-bag me-2 text-white"></i> Thêm vào giỏ hàng
+                                        <i class="fa fa-shopping-bag me-2 text-white"></i> Thêm vào giỏ hàng
                                     </a>
                                     <div class="d-flex justify-content-between align-items-center">
                                         @include('clients.components.includes.rating')
                                         <a href="#"
-                                            class="text-primary d-flex align-items-center justify-content-center me-0"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#liton_wishlist_modal-{{ $product->id }}">
+                                            class="add-to-wishlist text-primary d-flex align-items-center justify-content-center me-0"
+                                            data-id="{{ $product->id }}">
                                             <span class="rounded-circle btn-sm-square border">
                                                 <i class="fas fa-heart"></i>
                                             </span>
@@ -269,16 +271,19 @@
                                 <div class="product-item-inner border rounded">
                                     {{-- Img --}}
                                     <div class="product-item-inner-item">
-                                        <img src="{{ $product->image_url }}" class="img-fluid rounded-top" alt="{{ $product->name }}">
+                                        <img src="{{ $product->image_url }}" class="img-fluid rounded-top"
+                                            alt="{{ $product->name }}">
                                         <div class="product-new">New</div>
                                         <div class="product-details">
-                                            <a href="{{ route('products.detail', $product->slug) }}"><i class="fa fa-eye fa-1x"></i></a>
+                                            <a href="{{ route('products.detail', $product->slug) }}"><i
+                                                    class="fa fa-eye fa-1x"></i></a>
                                         </div>
                                     </div>
                                     {{-- Content --}}
                                     <div class="text-center rounded-bottom p-4">
                                         <a href="#" class="d-block mb-2">{{ $product->category->name }} </a>
-                                        <a href="{{ route('products.detail', $product->slug) }}" class="d-block h4">{{$product->name}}</a>
+                                        <a href="{{ route('products.detail', $product->slug) }}"
+                                            class="d-block h4">{{$product->name}}</a>
                                         <del class="me-2 fs-5">{{number_format($product->price + 200, 0,',','.')}}</del>
                                         <span class="text-primary fs-5">{{number_format($product->price,
                                             0,',','.')}}</span>
@@ -286,22 +291,20 @@
                                 </div>
                                 {{-- Button --}}
                                 <div class="product-item-add border border-top-0 rounded-bottom  text-center p-4 pt-0">
-                                    <a href="{{ route('cart.add') }}" 
-                                        data-id="{{ $product->id }}" 
+                                    <a href="{{ route('cart.add') }}" data-id="{{ $product->id }}"
                                         class="add-to-cart-btn btn btn-primary border border-secondary rounded-pill px-4 py-2 mb-4 text-primary">
-                                            <i class="fa fa-shopping-bag me-2 text-white"></i> Thêm vào giỏ hàng
+                                        <i class="fa fa-shopping-bag me-2 text-white"></i> Thêm vào giỏ hàng
                                     </a>
                                     <div class="d-flex justify-content-between align-items-center">
                                         @include('clients.components.includes.rating')
                                         <div class="d-flex">
-                                        <a href="#"
-                                            class="text-primary d-flex align-items-center justify-content-center me-0"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#liton_wishlist_modal-{{ $product->id }}">
-                                            <span class="rounded-circle btn-sm-square border">
-                                                <i class="fas fa-heart"></i>
-                                            </span>
-                                        </a>
+                                            <a href="#"
+                                                class="add-to-wishlist text-primary d-flex align-items-center justify-content-center me-0"
+                                                data-id="{{ $product->id }}">
+                                                <span class="rounded-circle btn-sm-square border">
+                                                    <i class="fas fa-heart"></i>
+                                                </span>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -318,16 +321,19 @@
                                 <div class="product-item-inner border rounded">
                                     {{-- Img --}}
                                     <div class="product-item-inner-item">
-                                        <img src="{{ $product->image_url }}" class="img-fluid rounded-top" alt="{{ $product->name }}">
+                                        <img src="{{ $product->image_url }}" class="img-fluid rounded-top"
+                                            alt="{{ $product->name }}">
                                         <div class="product-new">New</div>
                                         <div class="product-details">
-                                            <a href="{{ route('products.detail', $product->slug) }}"><i class="fa fa-eye fa-1x"></i></a>
+                                            <a href="{{ route('products.detail', $product->slug) }}"><i
+                                                    class="fa fa-eye fa-1x"></i></a>
                                         </div>
                                     </div>
                                     {{-- Content --}}
                                     <div class="text-center rounded-bottom p-4">
                                         <a href="#" class="d-block mb-2">{{ $product->category->name }} </a>
-                                        <a href="{{ route('products.detail', $product->slug) }}" class="d-block h4">{{$product->name}}</a>
+                                        <a href="{{ route('products.detail', $product->slug) }}"
+                                            class="d-block h4">{{$product->name}}</a>
                                         <del class="me-2 fs-5">{{number_format($product->price + 200, 0,',','.')}}</del>
                                         <span class="text-primary fs-5">{{number_format($product->price,
                                             0,',','.')}}</span>
@@ -335,22 +341,20 @@
                                 </div>
                                 {{-- Button --}}
                                 <div class="product-item-add border border-top-0 rounded-bottom  text-center p-4 pt-0">
-                                    <a href="{{ route('cart.add') }}" 
-                                        data-id="{{ $product->id }}" 
+                                    <a href="{{ route('cart.add') }}" data-id="{{ $product->id }}"
                                         class="add-to-cart-btn btn btn-primary border border-secondary rounded-pill px-4 py-2 mb-4 text-primary">
-                                            <i class="fa fa-shopping-bag me-2 text-white"></i> Thêm vào giỏ hàng
+                                        <i class="fa fa-shopping-bag me-2 text-white"></i> Thêm vào giỏ hàng
                                     </a>
                                     <div class="d-flex justify-content-between align-items-center">
                                         @include('clients.components.includes.rating')
                                         <div class="d-flex">
-                                        <a href="#"
-                                            class="text-primary d-flex align-items-center justify-content-center me-0"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#liton_wishlist_modal-{{ $product->id }}">
-                                            <span class="rounded-circle btn-sm-square border">
-                                                <i class="fas fa-heart"></i>
-                                            </span>
-                                        </a>
+                                            <a href="#"
+                                                class="add-to-wishlist text-primary d-flex align-items-center justify-content-center me-0"
+                                                data-id="{{ $product->id }}">
+                                                <span class="rounded-circle btn-sm-square border">
+                                                    <i class="fas fa-heart"></i>
+                                                </span>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -423,7 +427,8 @@
                                 <img src="{{ $product->image_url }}" class="img-fluid w-100 h-100"
                                     alt="{{ $product->name }}">
                                 <div class="products-mini-icon rounded-circle bg-primary">
-                                    <a href="{{ route('products.detail', $product->slug) }}"><i class="fa fa-eye fa-1x text-white"></i></a>
+                                    <a href="{{ route('products.detail', $product->slug) }}"><i
+                                            class="fa fa-eye fa-1x text-white"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -431,7 +436,8 @@
                         <div class="col-7">
                             <div class="products-mini-content p-3">
                                 <a href="#" class="d-block mb-2">{{$category->name}}</a>
-                                <a href="{{ route('products.detail', $product->slug) }}" class="d-block h4">{{$product->name}}</a>
+                                <a href="{{ route('products.detail', $product->slug) }}"
+                                    class="d-block h4">{{$product->name}}</a>
                                 <del class="me-2 fs-5">{{number_format($product->price + 200, 2) }}</del>
                                 <span class="text-primary fs-5">{{number_format($product->price, 2)}}</span>
                             </div>
@@ -439,15 +445,14 @@
                     </div>
                     {{-- button --}}
                     <div class="products-mini-add border p-3">
-                        <a href="{{ route('cart.add') }}" 
-                            data-id="{{ $product->id }}" 
-                            data-bs-toggle="modal"
+                        <a href="{{ route('cart.add') }}" data-id="{{ $product->id }}" data-bs-toggle="modal"
                             data-bs-target="#add_to_cart_modal-{{ $product->id }}"
                             class="add-to-cart-btn btn btn-primary border border-secondary rounded-pill px-4 py-2 mb-4 text-primary">
-                                <i class="fa fa-shopping-bag me-2 text-white"></i> Thêm vào giỏ hàng
+                            <i class="fa fa-shopping-bag me-2 text-white"></i> Thêm vào giỏ hàng
                         </a>
-                        <a href="#" class="text-primary d-flex align-items-center justify-content-center me-0"
-                            data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal-{{ $product->id }}">
+                        <a href="#"
+                            class="add-to-wishlist text-primary d-flex align-items-center justify-content-center me-0"
+                            data-id="{{ $product->id }}">
                             <span class="rounded-circle btn-sm-square border">
                                 <i class="fas fa-heart"></i>
                             </span>
@@ -484,7 +489,8 @@
                                 <img src="{{ $product->image_url }}" class="img-fluid w-100 h-100"
                                     alt="{{ $product->name }}">
                                 <div class="products-mini-icon rounded-circle bg-primary">
-                                    <a href="{{ route('products.detail', $product->slug) }}"><i class="fa fa-eye fa-1x text-white"></i></a>
+                                    <a href="{{ route('products.detail', $product->slug) }}"><i
+                                            class="fa fa-eye fa-1x text-white"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -492,7 +498,8 @@
                         <div class="col-7">
                             <div class="products-mini-content p-3">
                                 <a href="#" class="d-block mb-2">{{$category->name}}</a>
-                                <a href="{{ route('products.detail', $product->slug) }}" class="d-block h4">{{$product->name}}</a>
+                                <a href="{{ route('products.detail', $product->slug) }}"
+                                    class="d-block h4">{{$product->name}}</a>
                                 <del class="me-2 fs-5">{{number_format($product->price + 200, 2) }}</del>
                                 <span class="text-primary fs-5">{{number_format($product->price, 2)}}</span>
                             </div>
@@ -500,15 +507,14 @@
                     </div>
                     {{-- button --}}
                     <div class="products-mini-add border p-3">
-                        <a href="{{ route('cart.add') }}" 
-                        data-id="{{ $product->id }}" 
-                        data-bs-toggle="modal"
-                        data-bs-target="#add_to_cart_modal-{{ $product->id }}"
-                        class="add-to-cart-btn btn btn-primary border border-secondary rounded-pill px-4 py-2 mb-4 text-primary">
+                        <a href="{{ route('cart.add') }}" data-id="{{ $product->id }}" data-bs-toggle="modal"
+                            data-bs-target="#add_to_cart_modal-{{ $product->id }}"
+                            class="add-to-cart-btn btn btn-primary border border-secondary rounded-pill px-4 py-2 mb-4 text-primary">
                             <i class="fa fa-shopping-bag me-2 text-white"></i> Thêm vào giỏ hàng
-                        </a>                        
-                        <a href="#" class="text-primary d-flex align-items-center justify-content-center me-0"
-                            data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal-{{ $product->id }}">
+                        </a>
+                        <a href="#"
+                            class="add-to-wishlist text-primary d-flex align-items-center justify-content-center me-0"
+                            data-id="{{ $product->id }}">
                             <span class="rounded-circle btn-sm-square border">
                                 <i class="fas fa-heart"></i>
                             </span>
@@ -523,11 +529,11 @@
 <!-- Bestseller Products End -->
 
 @foreach ($allProductSection as $product)
-    @include('clients.components.includes.include-modals')
+@include('clients.components.includes.include-modals')
 @endforeach
 
 @foreach ($category->products as $product)
-    @include('clients.components.includes.include-modals')
+@include('clients.components.includes.include-modals')
 @endforeach
 
 

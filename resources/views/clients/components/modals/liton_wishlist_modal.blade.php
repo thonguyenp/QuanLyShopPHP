@@ -5,8 +5,8 @@
         <img src="{{ $product->image_url }}" alt="product" width="70" height="70" class="rounded me-3">
         <div class="flex-grow-1">
           <h6 class="mb-1 fw-semibold">{{$product->name}}</h6>
-          <p class="mb-2 text-success"><i class="bi bi-check-circle-fill"></i> Successfully added to your Wishlist</p>
-          <button class="btn btn-primary btn-sm fw-semibold px-3">View Wishlist</button>
+          <p class="mb-2 text-success"><i class="bi bi-check-circle-fill"></i> Đã thêm vào wishlist thành công</p>
+          <a href="{{ route('wishlist.index') }}" class="btn btn-primary rounded-pill fw-semibold">Xem Wishlist</a>
         </div>
         <button type="button" class="btn-close ms-2" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
