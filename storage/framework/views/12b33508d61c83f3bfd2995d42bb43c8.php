@@ -150,15 +150,26 @@
 <div class="container-fluid bg-light py-5">
     <div class="container">
         <div class="row g-4">
-            <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.2s">
+            <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.1s">
                 <a href="#" class="d-flex align-items-center justify-content-between border bg-white rounded p-4">
                     <div>
-                        <p class="text-muted mb-3">Find The Best Camera for You!</p>
-                        <h3 class="text-primary">Smart Camera</h3>
+                        <p class="text-muted mb-3">Find The Best Deal for You!</p>
+                        <h3 class="text-primary">Black Friday</h3>
                         <h1 class="display-3 text-secondary mb-0">40% <span class="text-primary fw-normal">Off</span>
                         </h1>
                     </div>
-                    <img src="img/product-1.png" class="img-fluid" alt="">
+                    <img src="<?php echo e(asset('assets/clients/'.'img/offer-1.png')); ?>" class="img-fluid" alt="">
+                </a>
+            </div>
+            <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.1s">
+                <a href="#" class="d-flex align-items-center justify-content-between border bg-white rounded p-4">
+                    <div>
+                        <p class="text-muted mb-3">Find The Best Deal for You!</p>
+                        <h3 class="text-primary">Big Sale For Accessories</h3>
+                        <h1 class="display-3 text-secondary mb-0">30% <span class="text-primary fw-normal">Off</span>
+                        </h1>
+                    </div>
+                    <img src="<?php echo e(asset('assets/clients/'.'img/offer-2.png')); ?>" class="img-fluid" alt="">
                 </a>
             </div>
         </div>
@@ -376,11 +387,11 @@
             <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.1s">
                 <a href="#">
                     <div class="bg-primary rounded position-relative">
-                        <img src="img/product-banner.jpg" class="img-fluid w-100 rounded" alt="">
+                        <img src="<?php echo e(asset('assets/clients/' . 'img/banner-1.jpg')); ?>" class="img-fluid w-100 rounded" alt="">
                         <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center rounded p-4"
                             style="background: rgba(255, 255, 255, 0.5);">
-                            <h3 class="display-5 text-primary">EOS Rebel <br> <span>T7i Kit</span></h3>
-                            <p class="fs-4 text-muted">$899.99</p>
+                            <h3 class="display-5 text-primary"><span>Ipad Gen 8</span></h3>
+                            <p class="fs-4 text-muted">$329.99</p>
                             <a href="#" class="btn btn-primary rounded-pill align-self-start py-2 px-4">Shop Now</a>
                         </div>
                     </div>
@@ -389,7 +400,7 @@
             <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.2s">
                 <a href="#">
                     <div class="text-center bg-primary rounded position-relative">
-                        <img src="img/product-banner-2.jpg" class="img-fluid w-100" alt="">
+                        <img src="<?php echo e(asset('assets/clients/' . 'img/banner-2.png')); ?>" class="img-fluid w-100" alt="">
                         <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center rounded p-4"
                             style="background: rgba(242, 139, 0, 0.5);">
                             <h2 class="display-2 text-secondary">SALE</h2>
