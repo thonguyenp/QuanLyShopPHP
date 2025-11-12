@@ -12,9 +12,9 @@ class WishlistController extends Controller
     //
     public function index()
     {
-        $wishlists = Wishlist::with('product')->where('user_id', Auth::id())->get();
-
-        return view('clients.pages.wishlist', compact('wishlists'));
+        $wishlist = Wishlist::with('product')->where('user_id', Auth::id())->get();
+        // dd($wishlist);
+        return view('clients.pages.wishlist', compact('wishlist'));
     }
 
     public function addToWishlist(Request $request)
@@ -29,6 +29,14 @@ class WishlistController extends Controller
 
         return response()->json([
             'status' => true 
+        ]);
+    }
+
+    public function removeWishlistItem (Request $request)
+    {
+        Wishlist::where('user_id', Auth::id())->where('product_id', $request->product_id)->delete();
+        return response()->json([
+            'status' => true
         ]);
     }
 }

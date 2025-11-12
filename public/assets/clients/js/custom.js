@@ -754,4 +754,37 @@ $(document).ready(function () {
             },
         });
     });
+
+    $(document).on('click', '.wishlist-product-remove', function (e) {
+        e.preventDefault(); // chặn load trang nếu href="#"
+
+        let button = $(this);                      // nút vừa click
+        let productId = button.data('id');         // lấy id sản phẩm
+        let row = button.closest('tr');
+
+        // Nếu lấy ở trong product detail thì lấy theo quantity, còn ở những nơi khác thì quantity luôn là 1
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            url: "/wishlist/remove",
+            type: 'POST',
+            data: {
+                product_id: productId,
+            },
+            success: function (response) {
+                if (response.status)
+                {
+                    row.remove();
+                    toastr.success('Đã xóa sản phẩm vào danh sách yêu thích');
+                }
+            },
+            error: function (xhr) {
+                alert('có lỗi xảy ra với Ajax của remove from wishlist');
+            },
+        });
+    });
 });

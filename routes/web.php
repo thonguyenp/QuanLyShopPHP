@@ -65,6 +65,7 @@ Route::middleware(['auth.custom'])->group(function(){
 
     Route::get('/wishlist',[WishlistController::class, 'index'])->name('wishlist.index');
     Route::post('/wishlist/add',[WishlistController::class, 'addToWishlist']);
+    Route::post('/wishlist/remove',[WishlistController::class, 'removeWishlistItem']);
 });
 
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
