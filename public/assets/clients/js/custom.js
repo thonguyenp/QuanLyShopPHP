@@ -311,7 +311,7 @@ $(document).ready(function () {
             },
         });
     }
-    // Xử lý phân trang
+    // Xử lý phân trang chỉ trong product page
     if (window.location.pathname === '/products/filter') {
         $(document).on('click', '.pagination-link', function (e) {
             e.preventDefault();
@@ -790,4 +790,62 @@ $(document).ready(function () {
             },
         });
     });
+
+    //**************
+    // Handle search speech recognition
+    //**************
+    // Check browser support?
+    if('SpeechRecognition' in window || 'webkitSpeechRecognition' in window)
+    {
+        var recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        recognition.lang = 'vi-VN';
+        recognition.continuous = true;
+        recognition.interimResults = true;
+
+        // 
+        var isRecognizing = false;
+        
+        $("#voice-search").on('click', function (){
+            if(isRecognizing){
+                recognition.stop();
+                $("#voice-search").removeClass("fa-microphone-slash").addClass("fa-microphone");
+
+            }
+            else{
+                recognition.start();
+                $("#voice-search").removeClass("fa-microphone").addClass("fa-microphone-slash");
+            }
+        });
+        recognition.onstart = function(){
+            console.log('Speech recognition started');
+            isRecognizing = true;
+            $("#voice-search").removeClass('fa-microphone').addClass('fa-microphone-slash');
+        }
+
+        recognition.onresult = function(event){
+            var transcript = event.results[0][0].transcript; // Get result recognition
+            transcript = transcript.replace(/[.,!?]$/g, '');
+            if(event.results[0].isFinal)
+            {
+                // console.log(transcript);
+                $('input[name="keyword"]').val(transcript);
+            }
+            else
+                $('input[name="keyword"]').val(transcript);
+        }
+        recognition.onerror = function(event){
+            console.log('Speech recognition error', event.error);
+            toastr.error('Có lỗi xảy ra khi nhận diện giọng nói:', + event.error);
+        }
+        recognition.onend = function(event){
+            console.log('Speech recognition end');
+            $("#voice-search").removeClass("fa-microphone-slash").addClass("fa-microphone");
+            isRecognizing = false
+        }
+    }
+    else 
+    {
+        console.log('This browser does not support Speech recognition');
+        toastr.error('Trình duyệt của bạn không hỗ trợ tính năng hỗ trợ giọng nói:');
+    }
 });

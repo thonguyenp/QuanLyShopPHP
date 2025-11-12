@@ -45,23 +45,29 @@
                     </a>
                 </div>
             </div>
-            <div class="col-md-4 col-lg-6 text-center">
-                <form action="{{ route('search.index') }}" method="get">
-                    <div class="position-relative ps-4">
-                        <div class="position-relative d-flex border rounded-pill">
-                            {{-- Thanh search --}}
-                            <input class="form-control border-0 rounded-pill w-100 py-3 pe-5" type="text"
-                                placeholder="Tìm kiếm" name="keyword">
+        <div class="col-md-4 col-lg-6 text-center">
+            <form action="{{ route('search.index') }}" method="get">
+                <div class="position-relative ps-4">
+                    <div class="position-relative d-flex border rounded-pill">
+                        {{-- Thanh search --}}
+                        <input class="form-control border-0 rounded-pill w-100 py-3 pe-5 ps-5" 
+                            type="text" placeholder="Tìm kiếm" name="keyword">
 
-                            <button type="submit"
-                                class="btn btn-primary rounded-pill position-absolute top-50 end-0 translate-middle-y me-2"
-                                style="border:0; z-index:2; padding:0.5rem 1.5rem;">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </div>
+                        <!-- Icon micro -->
+                        <i class="fa fa-microphone position-absolute top-50 translate-middle-y text-muted" 
+                        id="voice-search" 
+                        style="cursor: pointer; z-index: 2; right:90px; font-size:24px;"></i>
+
+                        <!-- Nút search -->
+                        <button type="submit"
+                            class="btn btn-primary rounded-pill position-absolute top-50 end-0 translate-middle-y me-2"
+                            style="border:0; z-index:3; padding:0.5rem 1.5rem;">
+                            <i class="fas fa-search"></i>
+                        </button>
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
+        </div>
 
         </div>
     </div>
