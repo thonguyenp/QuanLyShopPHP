@@ -26,9 +26,8 @@
             <div class="card mb-4">
                 <div class="card-header">Bảng điều khiển</div>
                 <div class="card-body">
-                    Hello <strong>{{ $user->email }}</strong> (not <strong>{{ $user->email }}</strong>)
-                    <small><a href="{{route('logout')}}">Đăng xuất</a></small>
-
+                    Hello <strong>{{ $user->email }}</strong>
+                    <br>
                     Từ bảng điều khiển tài khoản của bạn, bạn có thể xem <span>đơn hàng gần đây</span>, quản lý
                     <span>địa chỉ giao hàng và thanh toán của bạn</span>, và <span>chỉnh sửa mật khẩu và thông tin chi
                         tiết về tài khoản của bạn</span>.

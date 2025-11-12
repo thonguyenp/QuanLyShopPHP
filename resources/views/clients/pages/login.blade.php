@@ -8,15 +8,7 @@
     <!-- Register Area Start -->
 <div class="ltn__login-area pb-110">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title-area text-center">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br> Sit aliquid, non distinctio vel iste.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
+        <div class="row mt-4">
             <div class="col-lg-6 offset-lg-3">
                 <div class="account-login-inner">
                     <form action="{{route('post-login')}}" method="POST" id="login-form" class="ltn__form-box contact-form-box">

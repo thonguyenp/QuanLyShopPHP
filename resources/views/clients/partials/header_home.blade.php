@@ -51,7 +51,7 @@
                     <div class="position-relative d-flex border rounded-pill">
                         {{-- Thanh search --}}
                         <input class="form-control border-0 rounded-pill w-100 py-3 pe-5 ps-5" 
-                            type="text" placeholder="Tìm kiếm" name="keyword">
+                            type="text" placeholder="Tìm kiếm" name="keyword" value="{{ request('keyword') }}">
 
                         <!-- Icon micro -->
                         <i class="fa fa-microphone position-absolute top-50 translate-middle-y text-muted" 
