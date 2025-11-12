@@ -1,8 +1,16 @@
+
+
+<?php $__env->startSection('title', 'Search Product'); ?>
+
+<?php $__env->startSection('breadcrumb', 'Tìm kiếm'); ?>
+
+<?php $__env->startSection('content'); ?>
+<?php echo $__env->make('clients.partials.breadcrumb', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 <div class="tab-content">
     <div id="tab-5" class="tab-pane fade show p-0 active">
-        <div class="row g-4 product">
+        <div class="m-2 row g-4 product">
             <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <div class="col-lg-4">
+                <div class="col-6 col-md-4 col-lg-3">
                     <div class="product-item rounded wow fadeInUp" data-wow-delay="0.1s">
                         <div class="product-item-inner border rounded">
                             
@@ -48,7 +56,7 @@
                 </div>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             <div class="col-12 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="pagination-wrapper d-flex justify-content-center mt-5">
+                <div class="pagination-wrapper d-flex justify-content-center mt-5 mb-3">
                     <?php echo $products->links('clients.components.pagination.pagination_custom'); ?>
 
                 </div>
@@ -60,4 +68,5 @@
 <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <?php echo $__env->make('clients.components.includes.include-modals', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-<?php /**PATH E:\laragon\www\QuanLyShop\resources\views/clients/components/products_grid.blade.php ENDPATH**/ ?>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.client_home', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH E:\laragon\www\QuanLyShop\resources\views/clients/pages/products-search.blade.php ENDPATH**/ ?>

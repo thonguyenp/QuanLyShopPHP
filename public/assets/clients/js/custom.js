@@ -312,13 +312,16 @@ $(document).ready(function () {
         });
     }
     // Xử lý phân trang
-    $(document).on('click', '.pagination-link', function (e) {
-        e.preventDefault();
-        let pageUrl = $(this).attr('href');
-        let page = pageUrl.split('page=')[1];
-        currentPage = page;
-        fetchProducts();
-    });
+    if (window.location.pathname === '/products/filter') {
+        $(document).on('click', '.pagination-link', function (e) {
+            e.preventDefault();
+            let pageUrl = $(this).attr('href');
+            let page = pageUrl.split('page=')[1];
+            currentPage = page;
+            fetchProducts();
+        });
+    }
+    
 
     $('.category-filter').on('click', function (e) {
         // e.preventDefault();

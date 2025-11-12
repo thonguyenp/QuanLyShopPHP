@@ -1,6 +1,5 @@
-<div class="sticky-top">
     <!-- Topbar Start -->
-    <div class="container-fluid px-5 d-none border-bottom d-lg-block bg-light">
+    <div class="container-fluid px-5 border-bottom bg-light">
         <div class="row gx-0 align-items-center">
             <div class="col-lg-6 text-center text-lg-start mb-lg-0">
                 <div class="d-inline-flex align-items-center" style="height: 45px;">
@@ -35,7 +34,7 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid px-5 py-4 d-none d-lg-block bg-light">
+    <div class="container-fluid px-5 py-4 bg-light">
         <div class="row gx-0 align-items-center text-center">
             <div class="col-md-4 col-lg-3 text-center text-lg-start">
                 <div class="d-inline-flex align-items-center">
@@ -46,15 +45,21 @@
                 </div>
             </div>
             <div class="col-md-4 col-lg-6 text-center">
-                <div class="position-relative ps-4">
-                    <div class="d-flex border rounded-pill">
-                        
-                        <input class="form-control border-0 rounded-pill w-100 py-3" type="text"
-                            placeholder="Search Looking For?">
-                        <button type="button" class="btn btn-primary rounded-pill py-3 px-5" style="border: 0;"><i
-                                class="fas fa-search"></i></button>
+                <form action="<?php echo e(route('search.index')); ?>" method="get">
+                    <div class="position-relative ps-4">
+                        <div class="position-relative d-flex border rounded-pill">
+                            
+                            <input class="form-control border-0 rounded-pill w-100 py-3 pe-5" type="text"
+                                placeholder="Tìm kiếm" name="keyword">
+
+                            <button type="submit"
+                                class="btn btn-primary rounded-pill position-absolute top-50 end-0 translate-middle-y me-2"
+                                style="border:0; z-index:2; padding:0.5rem 1.5rem;">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
 
         </div>
@@ -114,4 +119,4 @@
         </nav>
     </div>
     <!-- Navbar End -->
-</div><?php /**PATH E:\laragon\www\QuanLyShop\resources\views/clients/partials/header_home.blade.php ENDPATH**/ ?>
+<?php /**PATH E:\laragon\www\QuanLyShop\resources\views/clients/partials/header_home.blade.php ENDPATH**/ ?>
