@@ -82,7 +82,7 @@ class ProductController extends Controller
             ->get();
         // calculate average rating , ensure no null  
         $averageRating = round($product->reviews()->avg('rating') ?? 0, 1);
-        $hasPurchasd = false;
+        $hasPurchased = false;
         $hasReviewed = false;
         if(Auth::check())
         {
