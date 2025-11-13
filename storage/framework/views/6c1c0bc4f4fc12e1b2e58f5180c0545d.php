@@ -29,7 +29,7 @@
         <div class="login_wrapper">
             <div class="animate form login_form">
                 <section class="login_content">
-                    <form action="" method="post">
+                    <form action="<?php echo e(route('admin.login.post')); ?>" method="post">
                         <?php echo csrf_field(); ?>
                         <h1>Đăng nhập</h1>
                         <div>
