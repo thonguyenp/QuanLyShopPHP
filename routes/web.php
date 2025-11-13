@@ -90,3 +90,5 @@ Route::post('/contact', [ContactController::class, 'sendContact'])->name('contac
 
 // Search
 Route::get('/search', [SearchController::class, 'index'])->name('search.index');
+
+require __DIR__.'/admin.php';
