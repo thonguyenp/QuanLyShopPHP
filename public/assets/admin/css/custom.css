@@ -26,3 +26,11 @@
     padding: 5px;
     border-radius: 10px;
 }
+
+.btn-update-category {
+color: purple !important;
+}
+
+.btn-delete-category {
+    color: red !important;
+}

@@ -59,12 +59,42 @@
                                                 <td><?php echo e($category->slug); ?></td>
                                                 <td><?php echo e($category->description); ?></td>
                                                 <td>
-                                                    <i class="fa fa-edit"></i>
+                                                    <a class="btn btn-app btn-update-category" href=""
+                                                        data-toggle="modal"
+                                                        data-target="#modalUpdate-<?php echo e($category->id); ?>">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
                                                 </td>
                                                 <td>
-                                                    <i class="fa fa-close"></i>
+                                                    <a class="btn btn-app btn-delete-category" href="">
+                                                        <i class="fa fa-close"></i>
+                                                    </a>
                                                 </td>
                                             </tr>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="modalUpdate-<?php echo e($category->id); ?>" tabindex="-1"
+                                                aria-labelledby="categoryModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="categoryModalLabel">Modal title
+                                                            </h5>
+                                                            <button type="button" class="btn-close ms-2" data-dismiss="modal" aria-label="Close">
+                                                                <span>	&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            ...
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">Close</button>
+                                                            <button type="button" class="btn btn-primary">Save
+                                                                changes</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </tbody>
                                     </table>
