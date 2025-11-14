@@ -41,14 +41,8 @@
                                     <?php if($user->role->name == 'customer'): ?>
                                     <button type="button" class="btn btn-primary btn-sm upgradeStaff"
                                         data-userid="<?php echo e($user->id); ?>">
-                                        <i class="fa fa-user"> </i> Khách hàng
-                                    </button>
-                                    <?php elseif($user->role->name == 'staff'): ?>
-                                    <button type="button" class="btn btn-primary btn-sm upgradeStaff"
-                                        data-userid="<?php echo e($user->id); ?>">
                                         <i class="fa fa-user"> </i> Nhân viên
                                     </button>
-
                                     <?php endif; ?>
                                     <?php if($user->status == 'banned'): ?>
                                     <button type="button" class="btn btn-success btn-sm changeStatus"

@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" href="images/favicon.ico" type="image/ico" />
+    <meta name="csrf-token" content="{{csrf_token()}}">
 
     <title>Gentelella Alela!</title>
 
@@ -28,6 +29,8 @@
 
     <!-- Custom Theme Style -->
     <link href="{{asset('assets/admin/build/css/custom.min.css')}}" rel="stylesheet">
+    {{-- css toastr --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
   </head>
 
   <body class="nav-md">
@@ -47,6 +50,8 @@
     <script src="{{ asset('assets/admin/vendors/jquery/dist/jquery.min.js')}}"></script>
     <!-- Bootstrap -->
     <script src="{{ asset('assets/admin/vendors/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
+    {{-- Toast --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <!-- FastClick -->
     <script src="{{ asset('assets/admin/vendors/fastclick/lib/fastclick.js')}}"></script>
     <!-- NProgress -->
@@ -83,6 +88,6 @@
 
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('assets/admin/build/js/custom.min.js')}}"></script>
-	
+    <script src="{{ asset('assets/admin/js/custom.js')}}"></script>
   </body>
 </html>
