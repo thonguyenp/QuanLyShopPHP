@@ -18,11 +18,20 @@ class CheckPermission
     {
         $user = Auth::guard('admin')->user();
 
-        // Kiểm tra quyền của người dùng
-        if (!$user || !$user->role->$permissions->contain('name', $permissions))
-        {
+        // Không đăng nhập
+        if (!$user) {
             abort(403, 'Bạn không có quyền truy cập');
         }
+
+        // Người dùng không có role, hoặc role không có quyền đó
+        if (
+            !$user->role ||
+            !$user->role->permissions->contains('name', $permissions)
+        ) {
+            abort(403, 'Bạn không có quyền truy cập');
+        }
+
         return $next($request);
     }
+
 }
