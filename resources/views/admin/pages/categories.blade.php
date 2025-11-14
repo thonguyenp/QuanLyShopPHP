@@ -1,8 +1,8 @@
+@extends('layouts.admin')
 
+@section('title', 'Danh sách danh mục sản phẩm')
 
-<?php $__env->startSection('title', 'Danh sách danh mục sản phẩm'); ?>
-
-<?php $__env->startSection('content'); ?>
+@section('content')
 <!-- page content -->
 <div class="right_col" role="main">
     <div class="">
@@ -48,16 +48,16 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            @foreach ($categories as $category)
                                             <tr role="row" class="even">
                                                 <td>
                                                     <img class="image-category" style="width:100px; height: 100px;"
-                                                        src="<?php echo e(asset('storage/' . $category->image)); ?>"
-                                                        alt="<?php echo e($category->name); ?>">
+                                                        src="{{ asset('storage/' . $category->image) }}"
+                                                        alt="{{ $category->name }}">
                                                 </td>
-                                                <td><?php echo e($category->name); ?></td>
-                                                <td><?php echo e($category->slug); ?></td>
-                                                <td><?php echo e($category->description); ?></td>
+                                                <td>{{$category->name}}</td>
+                                                <td>{{$category->slug}}</td>
+                                                <td>{{$category->description}}</td>
                                                 <td>
                                                     <i class="fa fa-edit"></i>
                                                 </td>
@@ -65,7 +65,7 @@
                                                     <i class="fa fa-close"></i>
                                                 </td>
                                             </tr>
-                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -86,5 +86,4 @@
 </div>
 <!-- /page content -->
 
-<?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.admin', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH E:\laragon\www\QuanLyShop\resources\views/admin/pages/categories.blade.php ENDPATH**/ ?>
+@endsection

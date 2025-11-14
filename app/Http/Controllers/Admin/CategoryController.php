@@ -10,6 +10,12 @@ use Str;
 class CategoryController extends Controller
 {
     //
+    public function index()
+    {
+        $categories = Category::all();
+        return view('admin.pages.categories',compact('categories'));
+    }
+
     public function showFormAddCategories()
     {
         return view('admin.pages.categories-add');
