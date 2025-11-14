@@ -31,6 +31,8 @@
     <link href="{{asset('assets/admin/build/css/custom.min.css')}}" rel="stylesheet">
     {{-- css toastr --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    {{-- custom css --}}
+    <link rel="stylesheet" href="{{ asset('assets/admin/css/custom.css') }}">
   </head>
 
   <body class="nav-md">

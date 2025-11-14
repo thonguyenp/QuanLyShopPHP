@@ -31,6 +31,8 @@
     <link href="<?php echo e(asset('assets/admin/build/css/custom.min.css')); ?>" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    
+    <link rel="stylesheet" href="<?php echo e(asset('assets/admin/css/custom.css')); ?>">
   </head>
 
   <body class="nav-md">
