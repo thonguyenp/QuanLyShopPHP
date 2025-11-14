@@ -67,6 +67,7 @@ $(document).ready(function () {
     //*****************
     // Category Management
     //*****************
+    // Upload hình trong chức năng thêm category
     $("#category-image").change(function () {
         let file = this.files[0];
         if (file) {
@@ -79,7 +80,7 @@ $(document).ready(function () {
             $("#category-image-preview").attr("src", "");
         }
     });
-
+    // Btn reset trong chức năng thêm category
     $('.btn_reset').on('click', function () {
         let form = $(this).closest('form');
         form.trigger('reset');
@@ -88,5 +89,25 @@ $(document).ready(function () {
         form.find('#image-preview').attr('src', '');
     });
 
+    $('.category-image').change(function () {
+        let file = this.files[0];
+        let categoryId = $(this).data('id');
+        if (file) {
+            let reader = new FileReader();
+            reader.onload = function (e) {
+                $('.image-preview').each(function () {
+                    if (
+                        $(this).closest(".modal").attr("id") ===
+                        "modalUpdate-" + categoryId
+                    ) {
+                        $(this).attr("src", e.target.result);
+                    }
+                });
+            };
+            reader.readAsDataURL(file);
+        } else {
+            $("#image-preview").attr("src", "");
+        }
+    });
 
 });

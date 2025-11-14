@@ -122,7 +122,7 @@
                                                                         ảnh</label>
                                                                     <div class="col-md-6 col-sm-6 ">
                                                                         <img src="{{asset('storage/' .$category->image)}}" alt="{{ $category->image }}"
-                                                                            id="image-preview"
+                                                                            id="image-preview" class="image-preview"
                                                                             class="img-thumbnail mt-2">
                                                                         <label class="custom-file-upload"
                                                                             for="category-image-{{ $category->id }}"> Chọn ảnh </label>
