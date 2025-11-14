@@ -17,6 +17,12 @@ Route::prefix('admin')->group(function () {
     });
 
     Route::get('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+
+    Route::middleware(['permission:manage_users'])->group(function() {
+        Route::get('/users', function() {
+            return view('admin.pages.users.index');
+        })->name('admin.users.index');
+    });
 });
 
 ?>
