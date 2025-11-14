@@ -109,5 +109,44 @@ $(document).ready(function () {
             $("#image-preview").attr("src", "");
         }
     });
+    // update category
+        $(document).on('click', '.btn-update-submit-category', function (e) {
+        e.preventDefault();
+        let button = $(this);
+        let categoryId = button.data("id");
+        let form = button.closest(".modal").find("form");
+        let formData = new FormData(form[0]);
+
+        formData.append("category_id", categoryId);
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            url: "/admin/categories/update",
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            beforeSend: function () {
+                button.prop("disabled", true);
+                button.text("Đang cập nhật...");
+            },
+            success: function (response) {
+                if (response.status) {
+                    toastr.success(response.message);
+                    $("#modalUpdate-" + categoryId).modal("hide");
+                    location.reload();
+                } else {
+                    toastr.error(response.message);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("An error occurred: " + error);
+            }
+        });
+    });
 
 });

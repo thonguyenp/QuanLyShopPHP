@@ -131,14 +131,15 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="ln_solid"></div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-dismiss="modal">Đóng</button>
+                                                                    <button type="submit" 
+                                                                    data-id="{{ $category->id }}"
+                                                                    class="btn btn-primary btn-update-submit-category">Chỉnh sửa</button>
+                                                                </div>
 
                                                             </form>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                data-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-primary">Save
-                                                                changes</button>
                                                         </div>
                                                     </div>
                                                 </div>
