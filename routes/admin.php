@@ -30,6 +30,7 @@ Route::prefix('admin')->group(function () {
         Route::post('/categories/add', [CategoryController::class, 'addCategory'])->name('admin.category.add');
         Route::get('/categories', [CategoryController::class, 'index'])->name('admin.categories.index');
         Route::post('/categories/update', [CategoryController::class, 'updateCategory']);
+        Route::post('categories/delete', [CategoryController::class, 'deleteCategory'])->name('admin.category.delete');
     });
 
 });

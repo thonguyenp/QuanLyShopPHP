@@ -66,7 +66,7 @@
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <a class="btn btn-app btn-delete-category" href="">
+                                                    <a class="btn btn-app btn-delete-category" data-id="<?php echo e($category->id); ?>" href="">
                                                         <i class="fa fa-close"></i>
                                                     </a>
                                                 </td>

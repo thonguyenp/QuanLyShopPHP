@@ -7,6 +7,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Str;
+use Throwable;
 
 class CategoryController extends Controller
 {
@@ -70,7 +71,7 @@ class CategoryController extends Controller
                 }
 
                 $image = $request->file('image');
-                $fileName = time() . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
+                $fileName = time().'-'.uniqid().'.'.$image->getClientOriginalExtension();
 
                 // Lưu vào storage/public/upload/categories
                 $path = $image->storeAs('upload/categories', $fileName, 'public');
@@ -81,13 +82,46 @@ class CategoryController extends Controller
 
             return response()->json([
                 'status' => true,
-                'message' => 'Cập nhật danh mục thành công!'
+                'message' => 'Cập nhật danh mục thành công!',
             ]);
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => false,
-                'message' => 'Đã có lỗi, vui lòng thử lại sau!'
+                'message' => 'Đã có lỗi, vui lòng thử lại sau!',
             ]);
+        }
+    }
+
+    public function deleteCategory(Request $request)
+    {
+        try {
+            $category = Category::findOrFail($request->category_id);
+            if (! $category) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Danh mục không tồn tại',
+                ], 404);
+            }
+
+            // Nếu có hình
+            if ($category->image) {
+                Storage::disk('public')->delete($category->image);
+            }
+
+            $category->delete();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Xóa danh mục thành công',
+            ]);
+        }
+        catch (Throwable $th)
+        {
+            return response()->json([
+                'status' => false,
+                'message' => 'Đã có lỗi xảy ra, vui lòng thử lại sau',
+            ], 500);
+
         }
     }
 }
