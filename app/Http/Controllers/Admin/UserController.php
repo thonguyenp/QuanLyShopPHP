@@ -39,5 +39,28 @@ class UserController extends Controller
 
     }
 
+    public function updateStatus(Request $request)
+    {
+        $userId = $request->user_id;
+        $status = $request->status;
+        
+        $user = User::find($userId);
+
+        if (! $user) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Không tìm thấy người dùng',
+            ]);
+        }
+        $user->role_id = 2;
+        $user->save();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Đã update thành nhân viên',
+        ]);
+
+    }
+
     
 }

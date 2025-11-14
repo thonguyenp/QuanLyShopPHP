@@ -22,7 +22,9 @@ Route::prefix('admin')->group(function () {
     Route::middleware(['permission:manage_users'])->group(function() {
         Route::get('/users', [UserController::class, 'index'])->name('admin.users.index');
         Route::post('/user/upgrade', [UserController::class, 'upgrade']);
+        Route::post('/user/updateStatus', [UserController::class, 'updateStatus']);
     });
+    
 });
 
 ?>
