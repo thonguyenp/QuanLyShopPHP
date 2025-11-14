@@ -45,7 +45,7 @@ class CategoryController extends Controller
             'image' => $imagePath,
         ]);
 
-        return redirect()->route('admin.category.add')->with('success', 'Danh mục đã được thêm thành công!');
+        return redirect()->route('admin.category.addForm')->with('success', 'Danh mục đã được thêm thành công!');
     }
 
     public function updateCategory(Request $request)

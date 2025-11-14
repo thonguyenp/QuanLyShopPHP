@@ -36,7 +36,7 @@
                     @if ($adminUser->role->permissions->contains('name', 'manage_categories'))
                         <li><a><i class="fa fa-desktop"></i> Quản lý danh mục <span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
-                                <li><a href="tables.html">Thêm danh mục</a></li>
+                                <li><a href="{{ route('admin.category.add') }}">Thêm danh mục</a></li>
                                 <li><a href="tables_dynamic.html">Danh sách danh mục</a></li>
                             </ul>
                         </li>

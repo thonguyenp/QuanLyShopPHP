@@ -88,7 +88,7 @@ $(document).ready(function () {
         form.find('#image-preview').html('');
         form.find('#image-preview').attr('src', '');
     });
-
+    // preview img phần update category
     $('.category-image').change(function () {
         let file = this.files[0];
         let categoryId = $(this).data('id');
