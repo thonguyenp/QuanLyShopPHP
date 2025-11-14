@@ -62,17 +62,20 @@ class CategoryController extends Controller
             $category->name = $request->name;
             $category->description = $request->description;
 
-            if ($request->hasFile(key: 'image')) {
+            if ($request->hasFile('image')) {
+
+                // Xóa ảnh cũ nếu có
                 if ($category->image) {
-                    // Delete old image
-                    Storage::disk(name: 'public')->delete(paths: $category->image);
+                    Storage::disk('public')->delete($category->image);
                 }
 
-                $imagePath = $request->file(key: 'image');
-                $fileName = now()->timestamp.'-'.uniqid().'-'.$imagePath->getClientOriginalExtension();
-                $imagePath = $imagePath->storeAs('upload/categories' . $fileName, 'public');
-                
-                $category->image = $imagePath;
+                $image = $request->file('image');
+                $fileName = time() . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
+
+                // Lưu vào storage/public/upload/categories
+                $path = $image->storeAs('upload/categories', $fileName, 'public');
+
+                $category->image = $path;
             }
             $category->save();
 
