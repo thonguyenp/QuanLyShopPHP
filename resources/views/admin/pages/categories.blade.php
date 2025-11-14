@@ -65,6 +65,30 @@
                                                     <i class="fa fa-close"></i>
                                                 </td>
                                             </tr>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="modalUpdate-{{ $category->id }}" tabindex="-1"
+                                                aria-labelledby="categoryModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="categoryModalLabel">Modal title
+                                                            </h5>
+                                                            <button type="button" class="btn-close ms-2" data-dismiss="modal" aria-label="Close">
+                                                                <span>	&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            ...
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">Close</button>
+                                                            <button type="button" class="btn btn-primary">Save
+                                                                changes</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             @endforeach
                                         </tbody>
                                     </table>
