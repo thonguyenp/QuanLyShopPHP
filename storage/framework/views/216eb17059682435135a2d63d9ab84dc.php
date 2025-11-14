@@ -79,12 +79,60 @@
                                                         <div class="modal-header">
                                                             <h5 class="modal-title" id="categoryModalLabel">Modal title
                                                             </h5>
-                                                            <button type="button" class="btn-close ms-2" data-dismiss="modal" aria-label="Close">
-                                                                <span>	&times;</span>
+                                                            <button type="button" class="btn-close ms-2"
+                                                                data-dismiss="modal" aria-label="Close">
+                                                                <span> &times;</span>
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            ...
+                                                            <form 
+                                                                id="udate-category" method="POST"
+                                                                enctype="multipart/form-data"
+                                                                class="form-horizontal form-label-left">
+                                                                <?php echo csrf_field(); ?>
+                                                                <div class="item form-group">
+                                                                    <label
+                                                                        class="col-form-label col-md-3 col-sm-3 label-align"
+                                                                        for="category-name">Tên danh
+                                                                        mục
+                                                                        <span class="required">*</span>
+                                                                    </label>
+                                                                    <div class="col-md-6 col-sm-6 ">
+                                                                        <input type="text" id="category-name"
+                                                                            name="name" required="required"
+                                                                            class="form-control" value="<?php echo e($category->name); ?>">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="item form-group">
+                                                                    <label
+                                                                        class="col-form-label col-md-3 col-sm-3 label-align"
+                                                                        for="category-description">Mô tả
+                                                                        <span class="required">*</span>
+                                                                    </label>
+                                                                    <div class="col-md-6 col-sm-6 ">
+                                                                        <input type="text" id="category-description"
+                                                                            name="description" required="required"
+                                                                            class="form-control" value="<?php echo e($category->description); ?>">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="item form-group">
+                                                                    <label
+                                                                        class="col-form-label col-md-3 col-sm-3 label-align"
+                                                                        for="category-image">Hình
+                                                                        ảnh</label>
+                                                                    <div class="col-md-6 col-sm-6 ">
+                                                                        <img src="<?php echo e(asset('storage/' .$category->image)); ?>" alt="<?php echo e($category->image); ?>"
+                                                                            id="image-preview"
+                                                                            class="img-thumbnail mt-2">
+                                                                        <label class="custom-file-upload"
+                                                                            for="category-image-<?php echo e($category->id); ?>"> Chọn ảnh </label>
+                                                                        <input type="file" name="image" class="category-image"
+                                                                            id="category-image-<?php echo e($category->id); ?>" data-id="<?php echo e($category->id); ?>" accept="image/*">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="ln_solid"></div>
+
+                                                            </form>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary"

@@ -34,3 +34,7 @@ color: purple !important;
 .btn-delete-category {
     color: red !important;
 }
+
+.category-image {
+    display: none;
+}
