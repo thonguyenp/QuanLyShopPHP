@@ -40,6 +40,7 @@ Route::prefix('admin')->group(function () {
         Route::post('/manufacturer/add', [ManufacturerController::class, 'addManufacturers'])->name('admin.manufacturer.add');
         Route::get('/manufacturers', [ManufacturerController::class, 'index'])->name('admin.manufacturers.index');
         Route::post('/manufacturers/update', [ManufacturerController::class, 'updateManufacturer']);
+        Route::post('/manufacturers/delete', [ManufacturerController::class, 'deleteManufacturer'])->name('admin.manufacturers.delete');
 
     });
 

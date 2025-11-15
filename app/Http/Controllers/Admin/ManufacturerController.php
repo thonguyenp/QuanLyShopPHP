@@ -7,6 +7,7 @@ use App\Models\Manufacturer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Str;
+use Throwable;
 
 class ManufacturerController extends Controller
 {
@@ -91,6 +92,40 @@ class ManufacturerController extends Controller
                 'status' => false,
                 'message' => 'Đã có lỗi, vui lòng thử lại sau!',
             ]);
+        }
+
+    }
+
+    public function deleteManufacturer(Request $request)
+    {
+        try {
+            $manufacturer = Manufacturer::findOrFail($request->manufacturer_id);
+            if (! $manufacturer) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Danh mục không tồn tại',
+                ], 404);
+            }
+
+            // Nếu có hình
+            if ($manufacturer->image) {
+                Storage::disk('public')->delete($manufacturer->image);
+            }
+
+            $manufacturer->delete();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Xóa danh mục thành công',
+            ]);
+        }
+        catch (Throwable $th)
+        {
+            return response()->json([
+                'status' => false,
+                'message' => 'Đã có lỗi xảy ra, vui lòng thử lại sau',
+            ], 500);
+
         }
 
     }
