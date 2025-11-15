@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Quản lý người dùng')
+@section('title', 'Quản lý danh mục')
 
 @section('content')
 <!-- page content -->

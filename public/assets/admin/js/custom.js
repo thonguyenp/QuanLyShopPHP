@@ -149,7 +149,7 @@ $(document).ready(function () {
         });
     });
 
-    // 
+    // nút xóa danh mục
     $(document).on('click', '.btn-delete-category', function (e) {
         e.preventDefault();
         let button = $(this);
@@ -186,4 +186,33 @@ $(document).ready(function () {
 
         }
     });
+    //************
+    // Product Management
+    //************
+    // Xử lý thêm nhiều hình
+    $("#product-images").change(function (e) {
+        let files = e.target.files;
+        console.log(files);
+        let previewContainer = $("#image-preview-container");
+        previewContainer.empty();
+
+        if (files.length > 0) {
+            for (let i = 0; i < files.length; i++) {
+                let file = files[i];
+                if (file) {
+                    let reader = new FileReader();
+                    reader.onload = function (e) {
+                        let img = $("<img>")
+                            .attr("src", e.target.result)
+                            .addClass("image-preview");
+                        previewContainer.append(img);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+        } else {
+            previewContainer.html("");
+        }
+    });
+
 });
