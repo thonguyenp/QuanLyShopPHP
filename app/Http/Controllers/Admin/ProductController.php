@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Str;
+use Throwable;
 
 class ProductController extends Controller
 {
@@ -44,13 +45,13 @@ class ProductController extends Controller
             'images' => 'required|array',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-    
+
         $slug = Str::slug($request->name).'_'.time();
-        if ($request->isArrival)
-        {
+        if ($request->isArrival) {
             $request->isArrival = 1;
-        } 
-        else $request->isArrival = 0;
+        } else {
+            $request->isArrival = 0;
+        }
         // Create product
         $product = Product::create([
             'name' => $request->name,
@@ -77,8 +78,8 @@ class ProductController extends Controller
         // Handle images upload
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-                $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
-                $path = "upload/products/" . $imageName;
+                $imageName = time().'_'.uniqid().'.'.$image->getClientOriginalExtension();
+                $path = 'upload/products/'.$imageName;
 
                 $resizedImage = Image::make($image)
                     ->resize(600, 600)
@@ -93,7 +94,6 @@ class ProductController extends Controller
             }
         }
 
-
         return redirect()->route('admin.product.add')->with('success', 'Thêm sản phẩm thành công');
     }
 
@@ -102,6 +102,7 @@ class ProductController extends Controller
         $categories = Category::all();
         $manufacturers = Manufacturer::all();
         $products = Product::with('category', 'images')->get();
+
         // dd($products);
         return view('admin.pages.products', compact('products', 'categories', 'manufacturers'));
     }
@@ -128,7 +129,7 @@ class ProductController extends Controller
             'images' => 'nullable|array',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-        $product= Product::findOrFail($request->product_id);
+        $product = Product::findOrFail($request->product_id);
         $slug = Str::slug($request->name).'_'.time();
         $product->update([
             'name' => $request->name,
@@ -153,17 +154,16 @@ class ProductController extends Controller
         // Handle images upload
         if ($request->hasFile('images')) {
             $oldImage = ProductImage::where('product_id', $product->id)->get();
-            foreach($oldImage as $image)
-            {
-                Storage::disk('public')->delete('storage/'. $image->image);
+            foreach ($oldImage as $image) {
+                Storage::disk('public')->delete('storage/'.$image->image);
                 $image->delete();
             }
             // Xóa các bảng ghi ảnh trong db
             ProductImage::where('product_id', $product->id)->delete();
 
             foreach ($request->file('images') as $image) {
-                $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
-                $path = "upload/products/" . $imageName;
+                $imageName = time().'_'.uniqid().'.'.$image->getClientOriginalExtension();
+                $path = 'upload/products/'.$imageName;
 
                 $resizedImage = Image::make($image)
                     ->resize(600, 600)
@@ -177,9 +177,45 @@ class ProductController extends Controller
                 ]);
             }
         }
+
         return response()->json([
             'status' => true,
-            'message' => 'Sửa sản phẩm thành công'
-        ]);    
+            'message' => 'Sửa sản phẩm thành công',
+        ]);
+    }
+
+    public function deleteProduct(Request $request)
+    {
+        try {
+            $product = Product::findOrFail($request->product_id);
+            if (!$product) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Sản phẩm không tồn tại',
+                ], 404);
+            }
+
+            // Nếu có hình
+            if ($product->images) {
+                foreach($product->images as $image)
+                {
+                    Storage::disk('public')->delete($image->image);
+                }
+            }
+
+            $product->delete();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Xóa danh mục thành công',
+            ]);
+        } catch (Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Đã có lỗi xảy ra, vui lòng thử lại sau',
+            ], 500);
+
+        }
+
     }
 }
