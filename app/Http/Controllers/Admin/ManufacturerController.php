@@ -41,4 +41,12 @@ class ManufacturerController extends Controller
         return redirect()->route('admin.manufacturer.addForm')->with('success', 'Nhãn hàng đã được thêm thành công!');
 
     }
+
+    public function index()
+    {
+        $manufacturers = Manufacturer::all();
+
+        return view('admin.pages.manufacturers', compact('manufacturers'));
+
+    }
 }

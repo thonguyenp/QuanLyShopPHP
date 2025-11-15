@@ -27,15 +27,15 @@
     border-radius: 10px;
 }
 
-.btn-update-category, .btn-update-product {
+.btn-update-category, .btn-update-product, .btn-update-manufacturer {
 color: purple !important;
 }
 
-.btn-delete-category, .btn-delete-product {
+.btn-delete-category, .btn-delete-product, .btn-delete-manufacturer {
     color: red !important;
 }
 
-.category-image {
+.category-image, .manufacturer-image {
     display: none;
 }
 

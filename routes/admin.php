@@ -38,6 +38,7 @@ Route::prefix('admin')->group(function () {
     Route::middleware(['permission:manage_manufacturers'])->group(function() {
         Route::get('/manufacturers/add', [ManufacturerController::class, 'showFormAddManufacturers'])->name('admin.manufacturer.addForm');
         Route::post('/manufacturers/add', [ManufacturerController::class, 'addManufacturers'])->name('admin.manufacturer.add');
+        Route::get('/manufacturers', [ManufacturerController::class, 'index'])->name('admin.manufacturers.index');
     });
 
 
