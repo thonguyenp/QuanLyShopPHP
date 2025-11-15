@@ -55,6 +55,20 @@
                                 </div>
                             </div>
                             <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="product-name"> Hãng sản xuất
+                                    <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <select id="product-manufacturer" name="manufacturer_id" required="required"
+                                        class="form-control">
+                                        <option value="">Chọn hãng sản xuất</option>
+                                        <?php $__currentLoopData = $manufacturers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $manufacturer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($manufacturer->id); ?>"><?php echo e($manufacturer->name); ?></option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="product-description">Mô tả
                                     <span class="">*</span>
                                 </label>

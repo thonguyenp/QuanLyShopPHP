@@ -87,6 +87,7 @@ $(document).ready(function () {
         form.find('input[type="file"]').val('');
         form.find('#image-preview').html('');
         form.find('#image-preview').attr('src', '');
+        form.find('#image-preview-container').html('');
     });
     // preview img phần update category
     $('.category-image').change(function () {
@@ -166,16 +167,14 @@ $(document).ready(function () {
                 url: "/admin/categories/delete",
                 type: "POST",
                 data: {
-                    category_id: categoryId 
+                    category_id: categoryId
                 },
-                success: function(response) {
-                    if(response.status)
-                    {
+                success: function (response) {
+                    if (response.status) {
                         row.remove();
                         toastr.success(response.message);
                     }
-                    else 
-                    {
+                    else {
                         toastr.error(response.message);
                     }
                 },
@@ -214,5 +213,72 @@ $(document).ready(function () {
             previewContainer.html("");
         }
     });
+    // Xử lý chỉnh sửa nhiều ảnh
+    $(".product-images").change(function (e) {
+        let files = e.target.files;
+        let productId = $(this).data("id");
+        let previewContainer = $("#image-preview-container-" + productId);
+        previewContainer.empty();
 
-});
+        if (files.length > 0) {
+            for (let i = 0; i < files.length; i++) {
+                let file = files[i];
+                if (file) {
+                    let reader = new FileReader();
+                    reader.onload = function (e) {
+                        let img = $("<img>")
+                            .attr("src", e.target.result)
+                            .addClass("image-preview");
+                        img.css({
+                            "max-width": "150px",
+                            "max-height": "150px",
+                            "margin": "5px",
+                            "border-radius": "5px",
+                        });
+                        previewContainer.append(img);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+        }
+    });
+    //UPDATE sản phẩm
+    $(document).on("click", ".btn-update-submit-product", function (e) {
+        e.preventDefault();
+        let button = $(this);
+        let productId = button.data("id");
+        let form = button.closest(".modal").find("form");
+        let formData = new FormData(form[0]);
+
+        formData.append("product_id", productId);
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+            }
+        }),
+        $.ajax({
+            url: "/admin/products/update",
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            beforeSend: function () {
+                button.prop("disabled", true);
+                button.text("Đang cập nhật...");
+            },
+            success: function (response) {
+                if (response.status) {
+                    toastr.success(response.message);
+                    $("#modalUpdate-" + productId).modal("hide");
+                    location.reload();
+                } else {
+                    toastr.error(response.message);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("An error occurred: " + error);
+            }
+        });
+    });
+
+    });

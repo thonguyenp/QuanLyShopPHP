@@ -46,7 +46,7 @@
                             <div class="single-item"
                                 data-dot="<img class='img-fluid' src='<?php echo e(asset('storage/' . $image->image)); ?>' alt='<?php echo e($product->name); ?>'>">
                                 <div class="single-inner bg-light rounded">
-                                    <img src="<?php echo e(asset('storage/') . $image->image); ?>" class="img-fluid rounded"
+                                    <img src="<?php echo e(asset('storage/' . $image->image)); ?>" class="img-fluid rounded"
                                         alt="<?php echo e($product->name); ?>">
                                 </div>
                             </div>

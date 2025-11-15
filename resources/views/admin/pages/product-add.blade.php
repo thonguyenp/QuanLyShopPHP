@@ -55,6 +55,20 @@
                                 </div>
                             </div>
                             <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="product-name"> Hãng sản xuất
+                                    <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <select id="product-manufacturer" name="manufacturer_id" required="required"
+                                        class="form-control">
+                                        <option value="">Chọn hãng sản xuất</option>
+                                        @foreach ($manufacturers as $manufacturer)
+                                        <option value="{{ $manufacturer->id }}">{{ $manufacturer->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="product-description">Mô tả
                                     <span class="">*</span>
                                 </label>

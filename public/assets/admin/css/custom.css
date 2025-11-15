@@ -14,7 +14,7 @@
     background-color: #f2b500;
 }
 
-#category-image, #product-images{
+#category-image, #product-images, .product-images{
     display: none;
 }
 
@@ -27,11 +27,11 @@
     border-radius: 10px;
 }
 
-.btn-update-category {
+.btn-update-category, .btn-update-product {
 color: purple !important;
 }
 
-.btn-delete-category {
+.btn-delete-category, .btn-delete-product {
     color: red !important;
 }
 
@@ -46,3 +46,4 @@ color: purple !important;
     margin-right: 5px;
     border: 2px solid #f28b00;
 }
+

@@ -46,7 +46,7 @@
                             <div class="single-item"
                                 data-dot="<img class='img-fluid' src='{{ asset('storage/' . $image->image) }}' alt='{{ $product->name }}'>">
                                 <div class="single-inner bg-light rounded">
-                                    <img src="{{ asset('storage/') . $image->image }}" class="img-fluid rounded"
+                                    <img src="{{ asset('storage/' . $image->image) }}" class="img-fluid rounded"
                                         alt="{{ $product->name }}">
                                 </div>
                             </div>
