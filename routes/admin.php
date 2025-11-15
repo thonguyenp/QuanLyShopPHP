@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ManufacturerController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Models\Manufacturer;
@@ -43,9 +44,6 @@ Route::prefix('admin')->group(function () {
         Route::post('/manufacturers/delete', [ManufacturerController::class, 'deleteManufacturer'])->name('admin.manufacturers.delete');
 
     });
-
-
-
     Route::middleware(['permission:manage_products'])->group(function() {
         Route::get('/product/add', [ProductController::class, 'showFormAddProducts'])->name('admin.product.addForm');
         Route::post('/product/add', [ProductController::class, 'addProduct'])->name('admin.product.add');
@@ -53,6 +51,10 @@ Route::prefix('admin')->group(function () {
         Route::post('/products/update', [ProductController::class, 'updateProduct']);
         Route::post('/products/delete', [ProductController::class, 'deleteProduct'])->name('admin.products.delete');
     });
+    Route::middleware(['permission:manage_orders'])->group(function() {
+        Route::get('/orders', [OrderController::class, 'index'])->name('admin.orders.index');
+    });
+
 });
 
 ?>
