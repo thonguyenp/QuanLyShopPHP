@@ -5,12 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Manufacturer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Str;
 
 class ManufacturerController extends Controller
 {
     //
-    public function showFormAddManufacturers ()
+    public function showFormAddManufacturers()
     {
         return view('admin.pages.manufacturers-add');
 
@@ -18,7 +19,7 @@ class ManufacturerController extends Controller
 
     public function addManufacturers(Request $request)
     {
-                // Validate the request data
+        // Validate the request data
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
@@ -47,6 +48,50 @@ class ManufacturerController extends Controller
         $manufacturers = Manufacturer::all();
 
         return view('admin.pages.manufacturers', compact('manufacturers'));
+
+    }
+
+    public function updateManufacturer(Request $request)
+    {
+        try {
+            $manufacturer = Manufacturer::findOrFail(id: $request->manufacturer_id);
+            if (! $manufacturer) {
+                return response()->json(data: [
+                    'status' => false,
+                    'message' => 'Danh mục không tồn tại!',
+                ], status: 404);
+            }
+
+            $manufacturer->name = $request->name;
+            $manufacturer->description = $request->description;
+
+            if ($request->hasFile('image')) {
+
+                // Xóa ảnh cũ nếu có
+                if ($manufacturer->image) {
+                    Storage::disk('public')->delete($manufacturer->image);
+                }
+
+                $image = $request->file('image');
+                $fileName = time().'-'.uniqid().'.'.$image->getClientOriginalExtension();
+
+                // Lưu vào storage/public/upload/manufacturers
+                $path = $image->storeAs('upload/manufacturers', $fileName, 'public');
+
+                $manufacturer->image = $path;
+            }
+            $manufacturer->save();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Cập nhật danh mục thành công!',
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Đã có lỗi, vui lòng thử lại sau!',
+            ]);
+        }
 
     }
 }

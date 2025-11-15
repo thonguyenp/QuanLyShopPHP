@@ -319,7 +319,7 @@ $(document).ready(function () {
     //*****************
     // Manufacturer Management
     //*****************
-    // Upload hình trong chức năng thêm category
+    // Upload hình trong chức năng thêm manufacturer
     $("#manufacturer-image").change(function () {
         let file = this.files[0];
         if (file) {
@@ -333,4 +333,65 @@ $(document).ready(function () {
         }
     });
 
+    // preview img phần update manufacture
+    $('.manufacturer-image').change(function () {
+        let file = this.files[0];
+        let manufactureId = $(this).data('id');
+        if (file) {
+            let reader = new FileReader();
+            reader.onload = function (e) {
+                $('.image-preview').each(function () {
+                    if (
+                        $(this).closest(".modal").attr("id") ===
+                        "modalUpdate-" + manufactureId
+                    ) {
+                        $(this).attr("src", e.target.result);
+                    }
+                });
+            };
+            reader.readAsDataURL(file);
+        } else {
+            $("#image-preview").attr("src", "");
+        }
+    });
+
+    //btn update nhãn hàng
+    $(document).on('click', '.btn-update-submit-manufacturer', function (e) {
+        e.preventDefault();
+        let button = $(this);
+        let manufacturerId = button.data("id");
+        let form = button.closest(".modal").find("form");
+        let formData = new FormData(form[0]);
+
+        formData.append("manufacturer_id", manufacturerId);
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            url: "/admin/manufacturers/update",
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            beforeSend: function () {
+                button.prop("disabled", true);
+                button.text("Đang cập nhật...");
+            },
+            success: function (response) {
+                if (response.status) {
+                    toastr.success(response.message);
+                    $("#modalUpdate-" + manufacturerId).modal("hide");
+                    location.reload();
+                } else {
+                    toastr.error(response.message);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("An error occurred: " + error);
+            }
+        });
+    });
 });

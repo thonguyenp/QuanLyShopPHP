@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
   <?php
-  $dataTableRoutes = ['admin.categories.index', 'admin.products.index', 'admin.orders.index'];
+  $dataTableRoutes = ['admin.categories.index', 'admin.products.index', 'admin.orders.index', 'admin.manufacturers.index'];
   ?>
   <?php if(in_array(Route::currentRouteName(), $dataTableRoutes)): ?>
   <!-- Datatables -->

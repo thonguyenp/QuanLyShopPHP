@@ -1,6 +1,6 @@
 
 
-<?php $__env->startSection('title', 'Quản lý người dùng'); ?>
+<?php $__env->startSection('title', 'Quản lý danh mục'); ?>
 
 <?php $__env->startSection('content'); ?>
 <!-- page content -->
