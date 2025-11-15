@@ -36,11 +36,20 @@
                     <?php if($adminUser->role->permissions->contains('name', 'manage_categories')): ?>
                         <li><a><i class="fa fa-desktop"></i> Quản lý danh mục <span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
-                                <li><a href="<?php echo e(route('admin.category.add')); ?>">Thêm danh mục</a></li>
+                                <li><a href="<?php echo e(route('admin.category.addForm')); ?>">Thêm danh mục</a></li>
                                 <li><a href="tables_dynamic.html">Danh sách danh mục</a></li>
                             </ul>
                         </li>
                     <?php endif; ?>
+                    <?php if($adminUser->role->permissions->contains('name', 'manage_manufacturers')): ?>
+                        <li><a><i class="fa fa-desktop"></i> Quản lý nhãn hàng <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li><a href="<?php echo e(route('admin.manufacturer.addForm')); ?>">Thêm nhãn hàng</a></li>
+                                <li><a href="tables_dynamic.html">Danh sách nhãn hàng</a></li>
+                            </ul>
+                        </li>
+                    <?php endif; ?>
+
                     <?php if($adminUser->role->permissions->contains('name', 'manage_products')): ?>
                         <li><a><i class="fa fa-desktop"></i> Quản lý sản phẩm <span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">

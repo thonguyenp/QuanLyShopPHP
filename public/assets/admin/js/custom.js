@@ -280,6 +280,7 @@ $(document).ready(function () {
             }
         });
     });
+    // Xóa sản phẩm
     $(document).on('click', '.btn-delete-product', function(e) {
         e.preventDefault();
         let button = $(this);
@@ -314,4 +315,22 @@ $(document).ready(function () {
 
         }
     })
+
+    //*****************
+    // Manufacturer Management
+    //*****************
+    // Upload hình trong chức năng thêm category
+    $("#manufacturer-image").change(function () {
+        let file = this.files[0];
+        if (file) {
+            let reader = new FileReader();
+            reader.onload = function (e) {
+                $("#image-preview").attr("src", e.target.result);
+            }
+            reader.readAsDataURL(file);
+        } else {
+            $("#manufacturer-image-preview").attr("src", "");
+        }
+    });
+
 });

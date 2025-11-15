@@ -16,7 +16,7 @@ class Manufacturer extends Model
         'name',
         'slug',
         'description',
-        'images',
+        'image',
     ];
 
     // Tự động tạo slug khi lưu

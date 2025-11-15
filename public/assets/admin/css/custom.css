@@ -14,7 +14,7 @@
     background-color: #f2b500;
 }
 
-#category-image, #product-images, .product-images{
+#category-image, #product-images, .product-images, #manufacturer-image{
     display: none;
 }
 
