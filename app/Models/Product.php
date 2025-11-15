@@ -17,7 +17,17 @@ class Product extends Model
         'description',
         'price',
         'stock',
-        'status'
+        'status',
+        'gpu',
+        'cpu',
+        'ram',
+        'rom',
+        'connection_port',
+        'camera',
+        'battery',
+        'monitor_size',
+        'monitor_resolution',
+        'isArrival'
     ];
 
     protected $appends = ['image_url','average_rating'];

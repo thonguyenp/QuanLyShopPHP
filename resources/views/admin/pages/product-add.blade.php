@@ -55,6 +55,16 @@
                                 </div>
                             </div>
                             <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="product-description">Mô tả
+                                    <span class="">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="text" id="product-description" name="description"
+                                        class="form-control ">
+                                </div>
+                            </div>
+
+                            <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="product-gpu">Tên GPU
                                     <span class="">*</span>
                                 </label>
@@ -68,7 +78,7 @@
                                     <span class="">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="text" id="product-cpu" name="CPU"
+                                    <input type="text" id="product-cpu" name="cpu"
                                         class="form-control">
                                 </div>
                             </div>
@@ -95,7 +105,7 @@
                                     <span class="">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="text" id="product-connection-port" name="connection-port"
+                                    <input type="text" id="product-connection-port" name="connection_port"
                                         class="form-control">
                                 </div>
                             </div>
@@ -122,7 +132,7 @@
                                     <span class="">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="text" id="product-monitor-size" name="monitor-size"
+                                    <input type="text" id="product-monitor-size" name="monitor_size"
                                         class="form-control">
                                 </div>
                             </div>
@@ -131,7 +141,7 @@
                                     <span class="">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="text" id="product-monitor-resolution" name="monitor-resolution"
+                                    <input type="text" id="product-monitor-resolution" name="monitor_resolution"
                                         class="form-control">
                                 </div>
                             </div>
@@ -170,9 +180,7 @@
                                 <div class="col-md-6 col-sm-6 ">
                                     <label class="custom-file-upload" for="product-images"> Chọn ảnh </label>
                                     <input type="file" name="images[]" id="product-images" accept="image/*" required multiple>
-                                    <div id="image-preview-container">
-                                        
-                                    </div>
+                                    <div id="image-preview-container"></div>
                                 </div>
                             </div>
                             <div class="ln_solid"></div>

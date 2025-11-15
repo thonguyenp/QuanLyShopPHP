@@ -10,7 +10,7 @@
   <link rel="icon" href="images/favicon.ico" type="image/ico" />
   <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
-  <title>Gentelella Alela!</title>
+  <title><?php echo $__env->yieldContent('title'); ?></title>
 
   <!-- Bootstrap -->
   <link href="<?php echo e(asset('assets/admin/vendors/bootstrap/dist/css/bootstrap.min.css')); ?>" rel="stylesheet">

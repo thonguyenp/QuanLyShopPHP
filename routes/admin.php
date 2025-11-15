@@ -35,7 +35,7 @@ Route::prefix('admin')->group(function () {
     });
     Route::middleware(['permission:manage_products'])->group(function() {
         Route::get('/product/add', [ProductController::class, 'showFormAddProducts'])->name('admin.product.addForm');
-        Route::post('/product/add', [ProductController::class, 'addCategory'])->name('admin.product.add');
+        Route::post('/product/add', [ProductController::class, 'addProduct'])->name('admin.product.add');
         Route::get('/products', [ProductController::class, 'index'])->name('admin.products.index');
         Route::post('/products/update', [ProductController::class, 'updateCategory']);
         Route::post('products/delete', [ProductController::class, 'deleteCategory'])->name('admin.products.delete');
