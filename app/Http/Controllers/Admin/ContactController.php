@@ -5,14 +5,42 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
     //
     public function index()
     {
-        $contacts = Contact::orderByDesc('created_at')->get();
-        return view ('admin.pages.contact', compact('contacts'));
+        $contacts = Contact::orderBy('is_replied')
+        ->orderByDesc('created_at')->get();
+
+        return view('admin.pages.contact', compact('contacts'));
+    }
+
+    public function replyContact(Request $request)
+    {
+        $id = $request->contact_id;
+        $content = $request->message;
+        $email = $request->email;
+
+        try {
+            Mail::send('admin.emails.reply-contact', ['content' => $content], function ($mail) use ($email) {
+                $mail->to($email)
+                    ->subject('Phản hồi liên hệ của khách hàng');
+            });
+
+            Contact::where('id', $id)->update(['is_replied' => 1]);
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Phản hồi qua email thành công!',
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Không thể gửi email. Vui lòng thử lại sau. '.$th->getMessage(),
+            ]);
+        }
     }
 }
- 

@@ -30,15 +30,16 @@
                     </div>
                     <div class="x_content">
                         <div class="row">
-                            <div class="col-sm-3 mail_list_column">
-                                <label for="" class="badge bg-orange"
+                            <div class="col-sm-3 mail_list_column" style="overflow-y: scroll; max-height:500px; ">
+                                <label class="badge bg-orange"
                                     style="width:100%; line-height:2; font-size:10px; ">Liên hệ khách hàng</label>
                                 @foreach ($contacts as $contact)
                                 <a href="javascript:void(0)" class="contact-item"
                                 data-name="{{ $contact->fullname }}" 
                                 data-email="{{ $contact->email }}" 
                                 data-message="{{ $contact->message }}" 
-                                data-id="{{ $contact->id }}">
+                                data-id="{{ $contact->id }}"
+                                data-is_replied="{{ $contact->is_replied }}">
                                     <div class="mail_list">
                                         <div class="left">
                                             <i class="fa fa-circle-o" style="color: {{ $contact->is_replied ? 'green' : 'red' }}"></i>

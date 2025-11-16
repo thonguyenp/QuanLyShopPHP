@@ -60,7 +60,7 @@ Route::prefix('admin')->group(function () {
     });
     Route::middleware(['permission:manage_contacts'])->group(function() {
         Route::get('/contact', [ContactController::class, 'index'])->name('admin.contact.index');
-        Route::post('/orders/confirm', [ContactController::class, 'confirmOrder'])->name('admin.orders.confirm');
+        Route::post('/contact/reply', [ContactController::class, 'replyContact'])->name('admin.contact.reply');
     });
 
 });

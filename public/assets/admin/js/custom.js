@@ -543,16 +543,66 @@ $(document).ready(function () {
         let contactEmail = $(this).data("email");
         let contactMessage = $(this).data("message");
         let contactId = $(this).data("id");
+        let is_replied = $(this).data("is_replied");
 
         $(".mail_view .inbox-body .sender-info strong").text(contactName);
         $(".mail_view .inbox-body .sender-info span").text('(' + contactEmail + ')');
         $(".mail_view .view-mail p").text(contactMessage);
 
         $(".mail_view").show();
-
-        // Add attribute data-email to button reply
-        $(".send-reply-contact").attr("data-email", contactEmail);
-        $(".send-reply-contact").attr("data-id", contactId);
-
+        console.log(is_replied);
+        if (is_replied != 0)
+        {
+            $("#compose").hide();
+        }
+        else 
+        {
+            // Add attribute data-email to button reply
+            $(".send-reply-contact").attr("data-email", contactEmail);
+            $(".send-reply-contact").attr("data-id", contactId);
+            $("#compose").show();
+        }
     });
+
+    $(document).on("click", ".send-reply-contact", function (e) {
+        e.preventDefault();
+        let button = $(this);
+        let email = button.data("email");
+        let contactId = button.data("id");
+        let message = CKEDITOR.instances["editor-contact"].getData();
+
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "/admin/contact/reply",
+            data: {
+                email: email,
+                message: message,
+                contact_id: contactId,
+            },
+            success: function (response) {
+                if (response.status) {
+                    toastr.success(response.message);
+                    $(".mail_view").hide();
+                    $("#compose").hide();
+                    CKEDITOR.instances["editor-contact"].setData("");
+                    $('#editor-contact').empty();
+                    location.reload();
+                }
+                else 
+                {
+                    toastr.error(response.message);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("An error occurred: " + error);
+            }
+        });
+    });
+
 });
