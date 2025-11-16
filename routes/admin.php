@@ -55,6 +55,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/orders', [OrderController::class, 'index'])->name('admin.orders.index');
         Route::post('/orders/confirm', [OrderController::class, 'confirmOrder'])->name('admin.orders.confirm');
         Route::get('/order-detail/{id}', [OrderController::class, 'showOrderDetail'])->name('admin.order-detail');
+        Route::post('/order-detail/send-invoice', [OrderController::class, 'sendMailInvoice']);
     });
 
 });

@@ -169,7 +169,7 @@
                                         <button class="btn btn-default" onclick="window.print();">
                                             <i class="fa fa-print"></i> In hóa đơn
                                         </button>
-                                        <button class="btn btn-success pull-right">
+                                        <button class="btn btn-success pull-right send-invoice-mail" data-id="<?php echo e($order->id); ?>">
                                             <i class="fa fa-credit-card"></i> Gửi hóa đơn
                                         </button>
 
