@@ -128,10 +128,10 @@
     <script src="<?php echo e(asset('assets/admin/vendors/pdfmake/build/vfs_fonts.js')); ?>"></script>
     
   <?php endif; ?>
-
   <!-- Custom Theme Scripts -->
   <script src="<?php echo e(asset('assets/admin/build/js/custom.min.js')); ?>"></script>
   <script src="<?php echo e(asset('assets/admin/js/custom.js')); ?>"></script>
+  <script src="<?php echo e(asset('assets/admin/js/ckeditor/ckeditor.js')); ?>"></script>
 </body>
 
 </html><?php /**PATH E:\laragon\www\QuanLyShop\resources\views/layouts/admin.blade.php ENDPATH**/ ?>

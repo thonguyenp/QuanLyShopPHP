@@ -34,13 +34,17 @@
                                 <label for="" class="badge bg-orange"
                                     style="width:100%; line-height:2; font-size:10px; ">Liên hệ khách hàng</label>
                                 @foreach ($contacts as $contact)
-                                <a href="#">
+                                <a href="javascript:void(0)" class="contact-item"
+                                data-name="{{ $contact->fullname }}" 
+                                data-email="{{ $contact->email }}" 
+                                data-message="{{ $contact->message }}" 
+                                data-id="{{ $contact->id }}">
                                     <div class="mail_list">
                                         <div class="left">
                                             <i class="fa fa-circle-o" style="color: {{ $contact->is_replied ? 'green' : 'red' }}"></i>
                                         </div>
                                         <div class="right">
-                                            <h3>{{ $contact->fullname }} <small>{{$contact->created_at->format('h:i A')}}</small></h3>
+                                            <h3>{{ $contact->fullname }} <small>{{$contact->created_at->format('h:i A d/m/Y')}}</small></h3>
                                             <p>{{Str::limit($contact->message, 50)}}</p>
                                         </div>
                                     </div>
@@ -52,14 +56,14 @@
                             <!-- /MAIL LIST -->
 
                             <!-- CONTENT MAIL -->
-                            <div class="col-sm-9 mail_view">
+                            <div class="col-sm-9 mail_view" style="display:none;">
                                 <div class="inbox-body">
-                                    <div class="sender-info">
+                                    <div class="sender-info" style="1px solid">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <strong>Jon Doe</strong>
                                                 <span>(jon.doe@gmail.com)</span> to
-                                                <strong>me</strong>
+                                                <b>me</b>
                                                 <a class="sender-dropdown"><i class="fa fa-chevron-down"></i></a>
                                             </div>
                                         </div>
@@ -97,14 +101,11 @@
 
     <div class="compose-body">
         <div id="editor-contact" class="editor-wrapper">
-
         </div>
-
-        <div id="editor" class="editor-wrapper" style="min-height: 150px"></div>
     </div>
 
     <div class="compose-footer">
-        <button class="send-contact btn btn-sm btn-success" type="button">Send</button>
+        <button class="send-reply-contact btn btn-sm btn-success" type="button">Send</button>
     </div>
 </div>
 <!-- /compose -->

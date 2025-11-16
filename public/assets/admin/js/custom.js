@@ -528,5 +528,31 @@ $(document).ready(function () {
         });
     });
 
+    //*****************
+    // Contact Management
+    //*****************
+    // Nhúng ckeditor 4 vào editor
+    if ($('#editor-contact').length) {
+        CKEDITOR.replace('editor-contact');
+    }
 
+    $(document).on("click", ".contact-item", function (e) {
+        $('.mail_view').show();
+        // Get contact data from clicked item
+        let contactName = $(this).data("name");
+        let contactEmail = $(this).data("email");
+        let contactMessage = $(this).data("message");
+        let contactId = $(this).data("id");
+
+        $(".mail_view .inbox-body .sender-info strong").text(contactName);
+        $(".mail_view .inbox-body .sender-info span").text('(' + contactEmail + ')');
+        $(".mail_view .view-mail p").text(contactMessage);
+
+        $(".mail_view").show();
+
+        // Add attribute data-email to button reply
+        $(".send-reply-contact").attr("data-email", contactEmail);
+        $(".send-reply-contact").attr("data-id", contactId);
+
+    });
 });

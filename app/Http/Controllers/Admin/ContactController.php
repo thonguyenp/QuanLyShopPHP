@@ -11,7 +11,7 @@ class ContactController extends Controller
     //
     public function index()
     {
-        $contacts = Contact::where('is_replied', 0)->get();
+        $contacts = Contact::orderByDesc('created_at')->get();
         return view ('admin.pages.contact', compact('contacts'));
     }
 }

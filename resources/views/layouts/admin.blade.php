@@ -128,10 +128,10 @@
     <script src="{{ asset('assets/admin/vendors/pdfmake/build/vfs_fonts.js')}}"></script>
     
   @endif
-
   <!-- Custom Theme Scripts -->
   <script src="{{ asset('assets/admin/build/js/custom.min.js')}}"></script>
   <script src="{{ asset('assets/admin/js/custom.js')}}"></script>
+  <script src="{{ asset('assets/admin/js/ckeditor/ckeditor.js') }}"></script>
 </body>
 
 </html>
