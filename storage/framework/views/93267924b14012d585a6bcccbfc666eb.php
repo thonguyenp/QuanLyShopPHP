@@ -59,10 +59,10 @@
                         </li>
                     <?php endif; ?>
                     <?php if($adminUser->role->permissions->contains('name', 'manage_orders')): ?>
-                        <li><a><i class="fa fa-edit"></i> Quản lý đơn hàng</a></li>
+                        <li><a href="<?php echo e(route('admin.orders.index')); ?>"><i class="fa fa-edit"></i> Quản lý đơn hàng</a></li>
                     <?php endif; ?>
                     <?php if($adminUser->role->permissions->contains('name', 'manage_contacts')): ?>
-                        <li><a><i class="fa fa-edit"></i> Liên hệ</a></li>
+                        <li><a href="<?php echo e(route('admin.contact.index')); ?>"><i class="fa fa-edit"></i> Liên hệ</a></li>
                     <?php endif; ?>
 
                 </ul>

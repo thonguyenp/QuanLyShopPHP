@@ -2,11 +2,11 @@
 
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\ManufacturerController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ProductController;
-use App\Models\Manufacturer;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->group(function () {
@@ -57,6 +57,10 @@ Route::prefix('admin')->group(function () {
         Route::get('/order-detail/{id}', [OrderController::class, 'showOrderDetail'])->name('admin.order-detail');
         Route::post('/order-detail/send-invoice', [OrderController::class, 'sendMailInvoice']);
         Route::post('/order-detail/cancel-order', [OrderController::class, 'cancelOrder']);
+    });
+    Route::middleware(['permission:manage_contacts'])->group(function() {
+        Route::get('/contact', [ContactController::class, 'index'])->name('admin.contact.index');
+        Route::post('/orders/confirm', [ContactController::class, 'confirmOrder'])->name('admin.orders.confirm');
     });
 
 });
