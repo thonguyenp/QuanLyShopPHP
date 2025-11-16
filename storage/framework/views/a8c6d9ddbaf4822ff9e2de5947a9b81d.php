@@ -54,41 +54,126 @@
                                             <tr role="row" class="even">
                                                 <td><?php echo e($order->id); ?></td>
                                                 <td><?php echo e($order->user->name); ?></td>
-                                                <td><?php echo e($order->shippingAddress->address); ?></td>
+                                                <td>
+                                                    <a href="javascript:void(0)" data-toggle="modal" data-target="#addressShippingModal-<?php echo e($order->id); ?>">
+                                                        <?php echo e($order->shippingAddress->address); ?>
+
+                                                        </a>
+                                                </td>
                                                 <td><?php echo e(number_format($order->total_price, 0, ',', '.')); ?></td>
                                                 <td>
                                                     <?php if($order->status == 'pending'): ?>
-                                                        <span class="badge badge-warning">Đợi xác nhận</span>
+                                                    <span class="badge badge-warning">Đợi xác nhận</span>
                                                     <?php elseif($order->status == 'processing'): ?>
-                                                        <span class="badge badge-info">Đang giao hàng</span>
+                                                    <span class="badge badge-info">Đang giao hàng</span>
                                                     <?php elseif($order->status == 'completed'): ?>
-                                                        <span class="badge badge-success">Đã hoàn thành</span>
+                                                    <span class="badge badge-success">Đã hoàn thành</span>
                                                     <?php elseif($order->status == 'canceled'): ?>
-                                                        <span class="badge badge-danger">Đã hủy</span>
+                                                    <span class="badge badge-danger">Đã hủy</span>
                                                     <?php endif; ?>
                                                 </td>
                                                 <td>
                                                     <?php if($order->payment->status == 'pending'): ?>
-                                                        <span class="badge badge-warning">Đợi xác nhận</span>
+                                                    <span class="badge badge-warning">Đợi xác nhận</span>
                                                     <?php elseif($order->payment->status == 'completed'): ?>
-                                                        <span class="badge badge-info">Đã thanh toán</span>
+                                                    <span class="badge badge-info">Đã thanh toán</span>
                                                     <?php elseif($order->payment->status == 'failed'): ?>
-                                                        <span class="badge badge-success">Thanh toán bị lỗi</span>
+                                                    <span class="badge badge-success">Thanh toán bị lỗi</span>
                                                     <?php endif; ?>
                                                 </td>
 
                                                 <td>
-                                                    <button class="btn btn-info">Xem</button>
+                                                    <button class="btn btn-info" data-toggle="modal" data-target="#orderItemlModal-<?php echo e($order->id); ?>">Xem</button>
                                                 </td>
                                                 <td>
-                                                    xcvxc
+                                                    <div class="btn-group">
+                                                        <button type="button"
+                                                            class="btn btn-danger dropdown-toggle dropdown-toggle-split"
+                                                            data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                        </button>
+                                                        <div class="dropdown-menu">
+                                                            <?php if($order->status == 'pending'): ?>
+                                                            <a class="dropdown-item confirm-order" href="#"
+                                                                data-id="<?php echo e($order->id); ?>">Xác nhận</a>
+                                                            <?php endif; ?>
+                                                            <a class="dropdown-item" href="#">Xem chi tiết</a>
+                                                        </div>
+                                                    </div>
                                                 </td>
                                             </tr>
-                                            <!-- Modal -->
-                                            
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </tbody>
                                     </table>
+                                    <?php $__currentLoopData = $orders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    
+                                    
+                                    <div class="modal fade" id="addressShippingModal-<?php echo e($order->id); ?>" tabindex="-1"
+                                        aria-labelledby="addressShippingModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="addressShippingModalLabel">Thông tin giao hàng
+                                                    </h5>
+                                                    <button type="button" class="btn-close ms-2" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span> &times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Người nhận: <?php echo e($order->shippingAddress->full_name); ?></p>
+                                                    <p>Địa chỉ: <?php echo e($order->shippingAddress->address); ?></p>
+                                                    <p>Thành phố: <?php echo e($order->shippingAddress->city); ?></p>
+                                                    <p>Số điện thoại: <?php echo e($order->shippingAddress->phone); ?></p>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="modal fade" id="orderItemlModal-<?php echo e($order->id); ?>" tabindex="-1"
+                                        aria-labelledby="orderItemlModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="orderItemlModalLabel">Chi tiết hóa đơn
+                                                    </h5>
+                                                    <button type="button" class="btn-close ms-2" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span> &times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Tên sản phẩm</th>
+                                                                <th>Số lượng</th>
+                                                                <th>Đơn giá</th>
+                                                                <th>Thành tiền</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php
+                                                                $index = 1;
+                                                            ?>
+                                                            <?php $__currentLoopData = $order->orderItems; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                                <tr>
+                                                                    <td><?php echo e($index++); ?></td>
+                                                                    <td><?php echo e($item->product->name); ?></td>
+                                                                    <td><?php echo e($item->quantity); ?></td>
+                                                                    <td><?php echo e(number_format($item->price, 0, ',', '.')); ?> VND</td>
+                                                                    <td><?php echo e(number_format($item->price * $item->quantity, 0, ',', '.')); ?> VND</td>
+                                                                </tr>
+                                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </div>
                             </div>
                         </div>
