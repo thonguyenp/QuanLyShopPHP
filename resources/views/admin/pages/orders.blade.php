@@ -96,7 +96,7 @@
                                                             <a class="dropdown-item confirm-order" href="#"
                                                                 data-id="{{ $order->id }}">Xác nhận</a>
                                                             @endif
-                                                            <a class="dropdown-item" href="#">Xem chi tiết</a>
+                                                            <a class="dropdown-item" href="{{ route('admin.order-detail', ['id' => $order->id]) }}">Xem chi tiết</a>
                                                         </div>
                                                     </div>
                                                 </td>

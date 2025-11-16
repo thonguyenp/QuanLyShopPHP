@@ -97,7 +97,7 @@
                                                             <a class="dropdown-item confirm-order" href="#"
                                                                 data-id="<?php echo e($order->id); ?>">Xác nhận</a>
                                                             <?php endif; ?>
-                                                            <a class="dropdown-item" href="#">Xem chi tiết</a>
+                                                            <a class="dropdown-item" href="<?php echo e(route('admin.order-detail', ['id' => $order->id])); ?>">Xem chi tiết</a>
                                                         </div>
                                                     </div>
                                                 </td>
