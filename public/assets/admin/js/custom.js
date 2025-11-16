@@ -604,5 +604,23 @@ $(document).ready(function () {
             }
         });
     });
+    
+    $('.update-avatar').on('click', function (e) {
+        e.preventDefault();
+        $('#avatar').trigger('click');
+    });
+
+    $('#avatar').on('change', function (e) {
+        let file = e.target.files[0];
+        if (file) {
+            let reader = new FileReader();
+            reader.onload = function (e) {
+                $('#avatar-preview').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(file);
+        } else {
+            $('#avatar-preview').attr('src', '');
+        }
+    });
 
 });
