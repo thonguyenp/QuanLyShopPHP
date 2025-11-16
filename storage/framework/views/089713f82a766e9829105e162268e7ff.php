@@ -123,11 +123,14 @@
                             <div class="row">
                                 <!-- accepted payments column -->
                                 <div class="col-md-6">
-                                    <p class="lead">Payment Methods:</p>
-                                    <img src="images/visa.png" alt="Visa">
-                                    <img src="images/mastercard.png" alt="Mastercard">
-                                    <img src="images/american-express.png" alt="American Express">
-                                    <img src="images/paypal.png" alt="Paypal">
+                                    <p class="lead">Phương thức thanh toán:</p>
+
+                                    <?php if($order->payment->payment_method == 'cash'): ?>
+                                        <img style="width:50px; height:50px" src="<?php echo e(asset('assets/admin/images/cash-on-delivery.png')); ?>" alt="COD">
+                                    <?php elseif($order->payment->payment_method == 'atm'): ?>
+                                        <img style="width:50px; height:50px" src="<?php echo e(asset('assets/admin/images/vnpay.png')); ?>" alt="VNPAY">
+                                    <?php endif; ?>
+
                                     <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
                                         Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning
                                         heekya handango imeem plugg dopplr jibjab, movity jajah plickers sifteo edmodo
@@ -136,25 +139,20 @@
                                 </div>
                                 <!-- /.col -->
                                 <div class="col-md-6">
-                                    <p class="lead">Amount Due 2/22/2014</p>
                                     <div class="table-responsive">
                                         <table class="table">
                                             <tbody>
                                                 <tr>
-                                                    <th style="width:50%">Subtotal:</th>
-                                                    <td>$250.30</td>
+                                                    <th style="width:50%">Tiền hàng:</th>
+                                                    <td><?php echo e(number_format(num: $order->total_price - 25000, decimals: 0, decimal_separator: ',', thousands_separator: '.')); ?> VND</td>
                                                 </tr>
                                                 <tr>
-                                                    <th>Tax (9.3%)</th>
-                                                    <td>$10.34</td>
+                                                    <th>Shipping</th>
+                                                    <td><?php echo e(number_format(num: 25000, decimals: 0, decimal_separator: ',', thousands_separator: '.')); ?> VND</td>
                                                 </tr>
                                                 <tr>
-                                                    <th>Shipping:</th>
-                                                    <td>$5.80</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Total:</th>
-                                                    <td>$265.24</td>
+                                                    <th>Tổng tiền:</th>
+                                                    <td><?php echo e(number_format(num: $order->total_price, decimals: 0, decimal_separator: ',', thousands_separator: '.')); ?> VND</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -166,13 +164,25 @@
 
                             <!-- this row will not appear when printing -->
                             <div class="row no-print">
-                                <div class=" ">
-                                    <button class="btn btn-default" onclick="window.print();"><i
-                                            class="fa fa-print"></i> Print</button>
-                                    <button class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit
-                                        Payment</button>
-                                    <button class="btn btn-primary pull-right" style="margin-right: 5px;"><i
-                                            class="fa fa-download"></i> Generate PDF</button>
+                                <div>
+                                    <?php if($order->status != 'canceled'): ?>
+                                        <button class="btn btn-default" onclick="window.print();">
+                                            <i class="fa fa-print"></i> In hóa đơn
+                                        </button>
+                                        <button class="btn btn-success pull-right">
+                                            <i class="fa fa-credit-card"></i> Gửi hóa đơn
+                                        </button>
+
+                                        <?php if($order->status == 'pending'): ?>
+                                            <button class="btn btn-danger pull-right" style="margin-right: 5px;" data-id="<?php echo e($order->id); ?>">
+                                                <i class="fa fa-remove"></i> Hủy đơn hàng
+                                            </button>
+                                        <?php endif; ?>
+                                    <?php else: ?>
+                                        <button class="btn btn-danger" style="cursor: not-allowed">
+                                            <i class="fa fa-info"></i> Đơn hàng đã hủy
+                                        </button>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </section>

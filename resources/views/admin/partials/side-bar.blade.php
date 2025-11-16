@@ -31,13 +31,13 @@
                 <ul class="nav side-menu">
                     <li><a href="{{ route('admin.dashboard') }}"><i class="fa fa-home"></i> Dashboard</a></li>
                     @if ($adminUser->role->permissions->contains('name', 'manage_users'))
-                            <li><a><i class="fa fa-edit"></i> Quản lý người dùng</a></li>
+                            <li><a href="{{ route('admin.users.index') }}"><i class="fa fa-edit"></i> Quản lý người dùng</a></li>
                     @endif
                     @if ($adminUser->role->permissions->contains('name', 'manage_categories'))
                         <li><a><i class="fa fa-desktop"></i> Quản lý danh mục <span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
                                 <li><a href="{{ route('admin.category.addForm') }}">Thêm danh mục</a></li>
-                                <li><a href="tables_dynamic.html">Danh sách danh mục</a></li>
+                                <li><a href="{{ route('admin.categories.index') }}">Danh sách danh mục</a></li>
                             </ul>
                         </li>
                     @endif
@@ -45,7 +45,7 @@
                         <li><a><i class="fa fa-desktop"></i> Quản lý nhãn hàng <span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
                                 <li><a href="{{ route('admin.manufacturer.addForm') }}">Thêm nhãn hàng</a></li>
-                                <li><a href="tables_dynamic.html">Danh sách nhãn hàng</a></li>
+                                <li><a href="{{ route('admin.manufacturers.index') }}">Danh sách nhãn hàng</a></li>
                             </ul>
                         </li>
                     @endif
@@ -53,8 +53,8 @@
                     @if ($adminUser->role->permissions->contains('name', 'manage_products'))
                         <li><a><i class="fa fa-desktop"></i> Quản lý sản phẩm <span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
-                                <li><a href="tables.html">Thêm sản phẩm</a></li>
-                                <li><a href="tables_dynamic.html">Danh sách sản phẩm</a></li>
+                                <li><a href="{{ route('admin.product.addForm') }}">Thêm sản phẩm</a></li>
+                                <li><a href="{{ route('admin.products.index') }}">Danh sách sản phẩm</a></li>
                             </ul>
                         </li>
                     @endif

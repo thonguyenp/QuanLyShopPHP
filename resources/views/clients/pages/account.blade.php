@@ -40,7 +40,7 @@
             <div class="card mb-4">
                 <div class="card-header">Đơn hàng của bạn</div>
                 <div class="card-body">
-                    <div class="table-responsive">
+                    <div class="table-responsive" style="overflow-y: auto; overflow-x: auto; max-height: 500px;">
                         <table class="table table-bordered table-hover">
                             <thead>
                                 <tr>
