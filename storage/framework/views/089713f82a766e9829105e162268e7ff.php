@@ -174,7 +174,7 @@
                                         </button>
 
                                         <?php if($order->status == 'pending'): ?>
-                                            <button class="btn btn-danger pull-right" style="margin-right: 5px;" data-id="<?php echo e($order->id); ?>">
+                                            <button class="btn btn-danger pull-right cancel-order" style="margin-right: 5px;" data-id="<?php echo e($order->id); ?>">
                                                 <i class="fa fa-remove"></i> Hủy đơn hàng
                                             </button>
                                         <?php endif; ?>

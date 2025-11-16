@@ -65,4 +65,29 @@ class OrderController extends Controller
             ]);
         }
     }
+
+    public function cancelOrder(Request $request)
+    {
+        $order = Order::find($request->order_id);
+        if ($order) {
+            foreach($order->orderItems as $item)
+            {   
+                //tăng stock product lên lại
+                $item->product->increment('stock', $item->quantity);
+            }
+            $order->status = 'canceled';
+            $order->save();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Hủy đơn hàng thành công',
+            ]);
+        }
+
+        return response()->json([
+            'status' => false,
+            'message' => 'Đơn hàng không tồn tại',
+        ]);
+
+    }
 }

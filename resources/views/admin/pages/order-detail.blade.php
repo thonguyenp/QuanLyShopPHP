@@ -170,7 +170,7 @@
                                         </button>
 
                                         @if ($order->status == 'pending')
-                                            <button class="btn btn-danger pull-right" style="margin-right: 5px;" data-id="{{ $order->id }}">
+                                            <button class="btn btn-danger pull-right cancel-order" style="margin-right: 5px;" data-id="{{ $order->id }}">
                                                 <i class="fa fa-remove"></i> Hủy đơn hàng
                                             </button>
                                         @endif
