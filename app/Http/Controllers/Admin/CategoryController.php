@@ -34,10 +34,24 @@ class CategoryController extends Controller
 
         $imagePath = null;
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image');
-            $fileName = now()->timestamp.'_'.uniqid().'.'.$imagePath->getClientOriginalExtension();
-            $imagePath = $imagePath->storeAs('upload/categories', $fileName, 'public');
+            $image    = $request->file('image');
+            $fileName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+
+            // Đường dẫn tuyệt đối để lưu file
+            $destinationPath = 'D:\laragon\www\QuanLyShopPHP\public\storage\upload\categories';
+
+            // Tạo thư mục nếu chưa có
+            if (!file_exists($destinationPath)) {
+                mkdir($destinationPath, 0777, true);
+            }
+
+            // Lưu file vào đúng thư mục
+            $image->move($destinationPath, $fileName);
+
+            // Đường dẫn để lưu trong DB (hiển thị được qua asset())
+            $imagePath = 'upload/categories/' . $fileName;
         }
+
 
         Category::create(attributes: [
             'name' => $request->input('name'),
@@ -71,7 +85,7 @@ class CategoryController extends Controller
                 }
 
                 $image = $request->file('image');
-                $fileName = time().'-'.uniqid().'.'.$image->getClientOriginalExtension();
+                $fileName = time() . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
 
                 // Lưu vào storage/public/upload/categories
                 $path = $image->storeAs('upload/categories', $fileName, 'public');
@@ -114,14 +128,11 @@ class CategoryController extends Controller
                 'status' => true,
                 'message' => 'Xóa danh mục thành công',
             ]);
-        }
-        catch (Throwable $th)
-        {
+        } catch (Throwable $th) {
             return response()->json([
                 'status' => false,
                 'message' => 'Đã có lỗi xảy ra, vui lòng thử lại sau',
             ], 500);
-
         }
     }
 }
