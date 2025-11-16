@@ -60,13 +60,13 @@
                                                         </a>
                                                 </td>
                                                 <td>{{number_format($order->total_price, 0, ',', '.')}}</td>
-                                                <td>
+                                                <td class="order-status">
                                                     @if ($order->status == 'pending')
                                                     <span class="badge badge-warning">Đợi xác nhận</span>
                                                     @elseif ($order->status == 'processing')
                                                     <span class="badge badge-info">Đang giao hàng</span>
                                                     @elseif ($order->status == 'completed')
-                                                    <span class="badge badge-success">Đã hoàn thành</span>
+                                                    <span class="badge badge-success">Đã giao hàng</span>
                                                     @elseif ($order->status == 'canceled')
                                                     <span class="badge badge-danger">Đã hủy</span>
                                                     @endif

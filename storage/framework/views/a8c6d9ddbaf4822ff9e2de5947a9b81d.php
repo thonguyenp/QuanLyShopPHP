@@ -61,13 +61,13 @@
                                                         </a>
                                                 </td>
                                                 <td><?php echo e(number_format($order->total_price, 0, ',', '.')); ?></td>
-                                                <td>
+                                                <td class="order-status">
                                                     <?php if($order->status == 'pending'): ?>
                                                     <span class="badge badge-warning">Đợi xác nhận</span>
                                                     <?php elseif($order->status == 'processing'): ?>
                                                     <span class="badge badge-info">Đang giao hàng</span>
                                                     <?php elseif($order->status == 'completed'): ?>
-                                                    <span class="badge badge-success">Đã hoàn thành</span>
+                                                    <span class="badge badge-success">Đã giao hàng</span>
                                                     <?php elseif($order->status == 'canceled'): ?>
                                                     <span class="badge badge-danger">Đã hủy</span>
                                                     <?php endif; ?>

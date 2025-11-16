@@ -430,4 +430,44 @@ $(document).ready(function () {
 
         }
     });
+
+    //*****************
+    // Order Management
+    //*****************
+    $(document).on("click", ".confirm-order", function (e) {
+    e.preventDefault();
+    let button = $(this);
+    let orderId = button.data("id");
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr("content")
+        }
+    });
+    $.ajax({
+        type: "POST",
+        url: "/admin/orders/confirm",
+        data: {
+            order_id: orderId,
+        },
+        success: function (response) {
+            if (response.status) {
+                toastr.success(response.message);
+                button
+                    .closest("tr")
+                    .find(".order-status")
+                    .html(
+                        '<span class="badge badge-info">Đang giao hàng</span>'
+                    );
+                button.hide();
+            } else {
+                toastr.error(response.message);
+            }
+        },
+        error: function (xhr, status, error) {
+            alert("An error occurred: " + error);
+        }
+    });
+});
+
+
 });
