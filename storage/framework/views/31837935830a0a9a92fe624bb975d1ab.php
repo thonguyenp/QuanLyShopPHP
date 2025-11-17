@@ -36,7 +36,7 @@
                                     </a>
                                 </form>
                             </div>
-                            <h3><?php echo e($user->name); ?></h3>
+                            <h3 id="user-name"><?php echo e($user->name); ?></h3>
 
                             <ul class="list-unstyled user_data">
                                 <li><i class="fa fa-map-marker user-profile-icon"></i> <span id="user-address"><?php echo e($user->address); ?></span>
@@ -76,7 +76,7 @@
                                                 for="email">Email <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 ">
-                                                <input type="text" id="email" name="email" required
+                                                <input type="text" id="email" readonly name="email" required
                                                     value="<?php echo e($user->email); ?>" class="form-control">
                                             </div>
                                         </div>
@@ -118,7 +118,7 @@
                                                 for="current_password">Mật khẩu hiện tại <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 ">
-                                                <input type="text" id="current_password" required class="form-control ">
+                                                <input type="password" id="current_password" required class="form-control ">
                                             </div>
                                         </div>
                                         <div class="item form-group">
@@ -126,7 +126,7 @@
                                                 for="new_password">Mật khẩu mới <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 ">
-                                                <input type="text" id="new_password" name="new_password" required
+                                                <input type="password" id="new_password" name="new_password" required
                                                     class="form-control">
                                             </div>
                                         </div>
@@ -136,7 +136,7 @@
                                                     class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 ">
-                                                <input type="text" id="confirm_password" name="confirm_password"
+                                                <input type="password" id="confirm_password" name="confirm_password"
                                                     required class="form-control">
                                             </div>
                                         </div>

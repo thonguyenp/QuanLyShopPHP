@@ -25,7 +25,8 @@ Route::prefix('admin')->group(function () {
         Route::get('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
         
         Route::get('/profile', [AccountController::class, 'index'])->name('admin.profile.index');
-        
+        Route::post('/profile/update', [AccountController::class, 'updateProfile'])->name('admin.profile.update');
+
         Route::middleware(['permission:manage_users'])->group(function() {
             Route::get('/users', [UserController::class, 'index'])->name('admin.users.index');
             Route::post('/user/upgrade', [UserController::class, 'upgrade']);

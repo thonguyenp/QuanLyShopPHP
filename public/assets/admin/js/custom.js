@@ -535,7 +535,7 @@ $(document).ready(function () {
     if ($('#editor-contact').length) {
         CKEDITOR.replace('editor-contact');
     }
-
+    //replied rồi thì ko hiện nút trả lời nữa
     $(document).on("click", ".contact-item", function (e) {
         $('.mail_view').show();
         // Get contact data from clicked item
@@ -551,19 +551,17 @@ $(document).ready(function () {
 
         $(".mail_view").show();
         console.log(is_replied);
-        if (is_replied != 0)
-        {
+        if (is_replied != 0) {
             $("#compose").hide();
         }
-        else 
-        {
+        else {
             // Add attribute data-email to button reply
             $(".send-reply-contact").attr("data-email", contactEmail);
             $(".send-reply-contact").attr("data-id", contactId);
             $("#compose").show();
         }
     });
-
+    //reply mail lại cho khách hàng
     $(document).on("click", ".send-reply-contact", function (e) {
         e.preventDefault();
         let button = $(this);
@@ -594,8 +592,7 @@ $(document).ready(function () {
                     $('#editor-contact').empty();
                     location.reload();
                 }
-                else 
-                {
+                else {
                     toastr.error(response.message);
                 }
             },
@@ -604,12 +601,12 @@ $(document).ready(function () {
             }
         });
     });
-    
+    //bấm vào label thì trigger cái input click
     $('.update-avatar').on('click', function (e) {
         e.preventDefault();
         $('#avatar').trigger('click');
     });
-
+    // hiện ảnh preview cho phần avatar
     $('#avatar').on('change', function (e) {
         let file = e.target.files[0];
         if (file) {
@@ -618,9 +615,130 @@ $(document).ready(function () {
                 $('#avatar-preview').attr('src', e.target.result);
             };
             reader.readAsDataURL(file);
+            // Tạo form data để gửi ảnh
+            let formData = new FormData();
+            formData.append('type', 'avatar');
+            formData.append('avatar', file);
+
+            updateProfile(formData);
         } else {
             $('#avatar-preview').attr('src', '');
         }
     });
+    // validate form update profile
+    $('#update-profile').submit(function (e) {
+        let valid = true;
+        let name = $('#name').val();
+        let phone = $('#phone_number').val();
+        let address = $('#address').val();
+        let email = $('#email').val();
 
+        e.preventDefault();
+
+        if (name.length < 3) {
+            toastr.error("Họ và tên phải có ít nhất 3 ký tự");
+            valid = false;
+        }
+        let phoneRegex = /^0\d{9}$/;
+        if (!phoneRegex.test(phone)) {
+            toastr.error(
+                "Số điện thoại không hợp lệ. Phải có 10 số và bắt đầu bằng 0."
+            );
+            valid = false;
+        }
+
+        if (address === "") {
+            toastr.error("Địa chỉ không được để trống.");
+            valid = false;
+        }
+
+        if (valid) {
+            let formData = new FormData();
+            formData.append('type', 'profile');
+            formData.append('name', name);
+            formData.append('phone', phone);
+            formData.append('address', address);
+            formData.append('email', email);
+
+            updateProfile(formData);
+        }
+    });
+    // validate form change password
+    $('#change-password').submit(function (e) {
+        let valid = true;
+        let current_password = $('#current_password').val();
+        let new_password = $('#new_password').val();
+        let confirm_password = $('#confirm_password').val();
+        e.preventDefault();
+
+        if (current_password === "") {
+            toastr.error("Bạn cần nhập mật khẩu hiện tại.");
+            valid = false;
+        }
+
+        if (new_password.length < 6) {
+            toastr.error("Mật khẩu mới phải có ít nhất 6 ký tự.");
+            valid = false;
+        }
+
+        if (new_password !== confirm_password) {
+            toastr.error("Mật khẩu xác nhận không khớp.");
+            valid = false;
+        }
+
+        if (valid) {
+            let formData = new FormData();
+            formData.append("type", "password");
+            formData.append("current_password", current_password);
+            formData.append("new_password", new_password);
+            formData.append("confirm_password", confirm_password);
+
+            updateProfile(formData);
+        }
+    });
+    // Cập nhật lại profile
+    function updateProfile(formData) {
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "/admin/profile/update",
+            data: formData,
+            contentType:false,
+            processData: false,
+            dataType: 'json',
+            success: function (response) {
+                if (response.status) {
+                    toastr.success(response.message);
+                    if (formData.get('type') == 'profile')
+                    {
+                        $("#user-name").text(formData.get('name'));
+                        $("#user-address").text(formData.get('address'));
+                        $("#user-email").text(formData.get('email'));
+                        $("#user-phone").text(formData.get('phone'));
+                    }
+                    if (formData.get('type') == 'password')
+                    {
+                        $('#change-password')[0].reset();
+                    }
+                    if (formData.get('type') == 'avatar')
+                    {
+                        $('#avatar-preview').attr("src", response.avatar_url);
+                    }
+                }
+                else {
+                    toastr.error(response.message);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("An error occurred: " + error);
+            }
+        });
+
+
+    }
 });
