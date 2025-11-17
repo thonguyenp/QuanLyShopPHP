@@ -47,3 +47,12 @@ color: purple !important;
     border: 2px solid #f28b00;
 }
 
+.custom-message-top {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  white-space: unset !important;
+}

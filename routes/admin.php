@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ManufacturerController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Middleware\DefaultAdminData;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->group(function () {
@@ -17,7 +18,7 @@ Route::prefix('admin')->group(function () {
         Route::post('/login', [AdminAuthController::class, 'login'])->name('admin.login.post');
     });
 
-    Route::middleware(['auth.custom'])->group(function() {
+    Route::middleware(['auth.custom', DefaultAdminData::class])->group(function() {
         Route::get('/dashboard', function() {
             return view('admin.pages.dashboard');
         })->name('admin.dashboard');
