@@ -57,17 +57,34 @@
                     <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown"
                         aria-expanded="false">
                         <i class="fa fa-bell-o"></i>
-                        <span class="badge bg-green">12</span>
+                        <span class="badge bg-green"><?php echo e($notifications->count()); ?></span>
                     </a>
-                    <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
-                        <li class="nav-item">
-                            <div class="text-center">
-                                <a class="dropdown-item" href="<?php echo e(route('admin.contact.index')); ?>">
-                                    <strong>Xem tất cả thông báo</strong>
-                                    <i class="fa fa-angle-right"></i>
+                    <ul class="dropdown-menu list-unstyled msg_list" role="menu">
+                        <?php for($i = 0; $i < min (3, $notifications->count()); $i++): ?>
+                            <li class="nav-item">
+                                <a class="dropdown-item">
+                                    <span>
+                                        <i class="fa fa-bell" style="font-size: 20px"></i>
+                                        <a href="<?php echo e(route('admin.notifications.index')); ?>"><?php echo e($notifications[$i]->title); ?></span></a>
+                                        <span class="time"><?php echo e($notifications[$i]->created_at->diffForHumans()); ?></span>
+                                    </span>
+                                    <span class="message custom-message-top">
+                                        <?php echo e($notifications[$i]->message); ?>
+
+                                    </span>
                                 </a>
-                            </div>
-                        </li>
+                            </li>
+
+                            <?php endfor; ?>
+
+                            <li class="nav-item">
+                                <div class="text-center">
+                                    <a class="dropdown-item" href="<?php echo e(route('admin.notifications.index')); ?>">
+                                        <strong>Xem tất cả thông báo</strong>
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+                                </div>
+                            </li>
                     </ul>
                 </li>
 

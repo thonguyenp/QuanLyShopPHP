@@ -1,0 +1,28 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Models\Notification;
+
+class NotificationController extends Controller
+{
+    //
+    public function index()
+    {
+        $notifications = Notification::where('is_read', 0)->latest('created_at')->get();
+        foreach ($notifications as $noti) {
+            if ($noti->type === 'order') {
+                $noti->title = 'Có đơn hàng mới';
+            } elseif ($noti->type === 'contact') {
+                $noti->title = 'Có liên hệ mới';
+            } elseif ($noti->wishlist === 'wishlist') {
+                $noti->title = 'Sản phẩm yêu thích';
+            }
+        }
+
+        // dd($notifications);
+
+        return view('admin.pages.notifications', compact('notifications'));
+    }
+}

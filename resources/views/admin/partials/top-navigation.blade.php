@@ -55,17 +55,32 @@
                     <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown"
                         aria-expanded="false">
                         <i class="fa fa-bell-o"></i>
-                        <span class="badge bg-green">12</span>
+                        <span class="badge bg-green">{{$notifications->count()}}</span>
                     </a>
-                    <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
-                        <li class="nav-item">
-                            <div class="text-center">
-                                <a class="dropdown-item" href="{{ route('admin.contact.index')}}">
-                                    <strong>Xem tất cả thông báo</strong>
-                                    <i class="fa fa-angle-right"></i>
+                    <ul class="dropdown-menu list-unstyled msg_list" role="menu">
+                        @for ($i = 0; $i < min (3, $notifications->count()); $i++)
+                            <li class="nav-item">
+                                <a class="dropdown-item">
+                                    <span>
+                                        <i class="fa fa-bell" style="font-size: 20px"></i>
+                                        <a href="{{ route('admin.notifications.index') }}">{{$notifications[$i]->title}}</a>
+                                        <span class="time">{{$notifications[$i]->created_at->diffForHumans()}}</span>
+                                    </span>
+                                    <span class="message custom-message-top">
+                                        {{ $notifications[$i]->message }}
+                                    </span>
                                 </a>
-                            </div>
-                        </li>
+                            </li>
+                        @endfor
+
+                            <li class="nav-item">
+                                <div class="text-center">
+                                    <a class="dropdown-item" href="{{ route('admin.notifications.index')}}">
+                                        <strong>Xem tất cả thông báo</strong>
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+                                </div>
+                            </li>
                     </ul>
                 </li>
 
