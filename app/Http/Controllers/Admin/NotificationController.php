@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Notification;
+use Illuminate\Http\Request;
 
 class NotificationController extends Controller
 {
@@ -24,5 +25,13 @@ class NotificationController extends Controller
         // dd($notifications);
 
         return view('admin.pages.notifications', compact('notifications'));
+    }
+
+    public function update(Request $request)
+    {
+        Notification::where('id', $request->id)
+            ->update(['is_read' => 1]);
+
+        return response()->json(['status' => true]);
     }
 }

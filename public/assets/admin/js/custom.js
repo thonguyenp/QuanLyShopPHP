@@ -741,4 +741,33 @@ $(document).ready(function () {
 
 
     }
+    //*****************
+    // Notification Management
+    //*****************
+    $(document).on('click', '.notification-item',function(e){
+        e.preventDefault();
+        let noti_id = $(this).data('id');
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "/admin/notification/update",
+            dataType: 'json',
+            data: {id: noti_id},
+            success: function (response) {
+
+            },
+            error: function (xhr, status, error) {
+                alert("Đã có lỗi xảy ra, vui lòng thử lại!");
+            }
+        });
+
+
+    });
+
+
 });

@@ -65,7 +65,7 @@
                                 <a class="dropdown-item">
                                     <span>
                                         <i class="fa fa-bell" style="font-size: 20px"></i>
-                                        <a href="<?php echo e(route('admin.notifications.index')); ?>"><?php echo e($notifications[$i]->title); ?></span></a>
+                                        <a href="<?php echo e(route('admin.notifications.index')); ?>"><?php echo e($notifications[$i]->title); ?></a>
                                         <span class="time"><?php echo e($notifications[$i]->created_at->diffForHumans()); ?></span>
                                     </span>
                                     <span class="message custom-message-top">
@@ -74,8 +74,7 @@
                                     </span>
                                 </a>
                             </li>
-
-                            <?php endfor; ?>
+                        <?php endfor; ?>
 
                             <li class="nav-item">
                                 <div class="text-center">

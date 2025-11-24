@@ -45,7 +45,9 @@
                                                     </div>
                                                     <div class="message_wrapper">
                                                         <span><i class="fa fa-bell" style="font-size: 20px"></i></span>
-                                                        <a href=<?php echo e(url('admin'.$notification->link)); ?>><?php echo e($notification->title); ?></h4></a>
+                                                        <a href=<?php echo e(url('admin'.$notification->link)); ?> data-id="<?php echo e($notification->id); ?>" class="notification-item">
+                                                            <h4><?php echo e($notification->title); ?></h4>
+                                                        </a>
                                                         <blockquote class="message"><?php echo e($notification->message); ?>
 
                                                         </blockquote>
