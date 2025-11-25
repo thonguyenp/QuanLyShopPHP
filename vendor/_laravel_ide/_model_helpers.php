@@ -3226,6 +3226,8 @@ namespace App\Models {
      * @property-read \App\Models\ProductImage $firstImage
      * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Review> $reviews
      * @property-read int|null $reviews_count
+     * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\OrderItem> $orderItems
+     * @property-read int|null $orderItems_count
      * @method static \Illuminate\Database\Eloquent\Builder<Product>|Product whereId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Product>|Product whereName($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Product>|Product whereSlug($value)

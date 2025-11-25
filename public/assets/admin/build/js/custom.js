@@ -2163,21 +2163,19 @@ function init_charts() {
 
     // Bar chart
 
-    if ($('#mybarChart').length) {
+    if ($('#revenueBarChart').length) {
 
-        var ctx = document.getElementById("mybarChart");
-        var mybarChart = new Chart(ctx, {
+        var ctx = document.getElementById("revenueBarChart");
+        var values = JSON.parse(ctx.getAttribute('data-values'));
+        var labels = JSON.parse(ctx.getAttribute('data-labels'));
+        var revenueBarChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ["January", "February", "March", "April", "May", "June", "July"],
+                labels: labels,
                 datasets: [{
-                    label: '# of Votes',
+                    label: 'Doanh số',
                     backgroundColor: "#26B99A",
-                    data: [51, 30, 40, 28, 92, 50, 45]
-                }, {
-                    label: '# of Votes',
-                    backgroundColor: "#03586A",
-                    data: [41, 56, 25, 48, 72, 34, 12]
+                    data: values
                 }]
             },
 

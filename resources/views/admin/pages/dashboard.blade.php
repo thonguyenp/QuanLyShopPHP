@@ -29,6 +29,27 @@
     <!-- /top tiles -->
 
     <div class="row">
+              <div class="col-md-4 col-sm-4  ">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Doanh thu</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <canvas id="revenueBarChart"
+                    data-labels='@json($monthlyRevenue->pluck('month')->toArray())'
+                    data-values='@json($monthlyRevenue->pluck('revenue')->toArray())'
+                    ></canvas>
+                  </div>
+                </div>
+              </div>
+
         <div class="col-md-4 col-sm-4 ">
             <div class="x_panel tile fixed_height_320 overflow_hidden">
                 <div class="x_title">
@@ -86,20 +107,8 @@
         <div class="col-md-4 col-sm-4  ">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Bordered table <small>Bordered table subtitle</small></h2>
+                    <h2>Sản phẩm bán chạy nhất <small>Danh sách</small></h2>
                     <ul class="nav navbar-right panel_toolbox">
-                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Settings 1</a>
-                                <a class="dropdown-item" href="#">Settings 2</a>
-                            </div>
-                        </li>
-                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                        </li>
                     </ul>
                     <div class="clearfix"></div>
                 </div>
@@ -109,30 +118,121 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Username</th>
+                                <th>Ảnh</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Đơn giá</th>
+                                <th>Số lượng đã bán</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($topSellingProducts as $item)
                             <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
+                                <th scope="row">{{ $item->id }}</th>
+                                <td>
+                                    <img src="{{ asset('storage/' . $item->image_url) }}" alt="">
+                                </td>
+                                <td>{{ $item->name }}</td>
+                                <td>{{ number_format($item->price, 0, ',', '.') }} vnd</td>
+                                <td>{{ $item->total_sold }}</td>
                             </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6  ">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Người dùng mới <small>Danh sách</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                    <table class="table table-bordered">
+                        <thead>
                             <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
+                                <th>#</th>
+                                <th>Khách hàng</th>
+                                <th>Số điện thoại</th>
+                                <th>Trạng thái</th>
                             </tr>
+                        </thead>
+                        <tbody>
+                            @for ($i = 0; $i < min(3, $users->count()); $i++)
                             <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
+                                <td scope="row">{{ $users[$i]->id }}</td>
+                                <td>{{ $users[$i]->name }}</td>
+                                <td>{{ $users[$i]->phone_number }}</td>
+                                <td>
+                                    @if ($users[$i]->status == 'banned')
+                                        <span class="custom-badge badge badge-warning">Bị chặn</span>
+                                    @elseif ($users[$i]->status == 'deleted')
+                                        <span class="custom-badge badge badge-danger">Đã xóa</span>
+                                    @elseif ($users[$i]->status == 'pending')
+                                        <span class="custom-badge badge badge-primary">Đợi kích hoạt</span>
+                                    @else
+                                        <span class="custom-badge badge badge-success">Đã kích hoạt</span>
+                                    @endif
+                                </td>
                             </tr>
+                            @endfor
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6  ">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Đơn hàng mới <small>Danh sách</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Khách hàng</th>
+                                <th>Tổng tiền</th>
+                                <th>Trạng thái</th>
+                                <th>Ngày đặt hàng</th>
+                                <th>Xem chi tiết</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for ($i = 0; $i < min(3, $orders->count()); $i++)
+                            <tr>
+                                <td scope="row">{{ $orders[$i]->id }}</td>
+                                <td>{{ $orders[$i]->shippingAddress->full_name }}</td>
+                                <td>{{ number_format($orders[$i]->total_price, 0,0) }}</td>
+                                <td>
+                                    @if ($orders[$i]->status == 'pending')
+                                        <span class="custom-badge badge badge-warning">Đợi xác nhận</span>
+                                    @elseif ($orders[$i]->status == 'canceled')
+                                        <span class="custom-badge badge badge-danger">Đã hủy</span>
+                                    @elseif ($orders[$i]->status == 'processing')
+                                        <span class="custom-badge badge badge-primary">Đang giao</span>
+                                    @else
+                                        <span class="custom-badge badge badge-success">Hoàn thành</span>
+                                    @endif
+                                </td>
+                                <td>{{ $orders[$i]->created_at->format('d-m-Y H:i:s') }}</td>
+                                <td>
+                                <a href="{{ route('admin.order-detail', ['id' => $orders[$i]->id]) }}" class="btn btn-primary" target="_blank">
+                                    Xem chi tiết
+                                </a>
+                                </td>
+                            </tr>
+                            @endfor
                         </tbody>
                     </table>
 
