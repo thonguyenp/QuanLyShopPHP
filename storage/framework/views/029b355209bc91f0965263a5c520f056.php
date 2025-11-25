@@ -10,19 +10,19 @@
         <div class="tile_count">
             <div class="col-md-2 col-sm-4  tile_stats_count">
                 <span class="count_top"><i class="fa fa-user"></i> Tổng số người dùng</span>
-                <div class="count">2500</div>
+                <div class="count"><?php echo e($users->count()); ?></div>
             </div>
             <div class="col-md-2 col-sm-4  tile_stats_count">
                 <span class="count_top"><i class="fa fa-bar-chart"></i> Tổng số lượng sản phẩm</span>
-                <div class="count">123.50</div>
+                <div class="count"><?php echo e($products->count()); ?></div>
             </div>
             <div class="col-md-2 col-sm-4  tile_stats_count">
                 <span class="count_top"><i class="fa fa-shopping-cart"></i> Tổng số lượng đơn hàng</span>
-                <div class="count green">2,500</div>
+                <div class="count green"><?php echo e($orders->count()); ?></div>
             </div>
-            <div class="col-md-2 col-sm-4  tile_stats_count">
+            <div class="col-md-6 col-sm-4  tile_stats_count">
                 <span class="count_top"><i class="fa fa-money"></i> Tổng số lượng doanh thu</span>
-                <div class="count">4,567</div>
+                <div class="count"><?php echo e(number_format($orders->sum('total_price'), 0,0)); ?> VND</div>
             </div>
         </div>
     </div>
@@ -58,41 +58,22 @@
                         </tr>
                         <tr>
                             <td>
-                                <canvas class="canvasDoughnut" height="140" width="140"
-                                    style="margin: 15px 10px 10px 0"></canvas>
+                                <canvas class="canvasDoughnutCategory" height="140" width="140"
+                                    data-labels='<?php echo json_encode($categories->pluck('name'), 15, 512) ?>'
+                                    data-counts='<?php echo json_encode($categories->map(fn($category) => $category->products->count()), 15, 512) ?>'
+                                style="margin: 15px 10px 10px 0"></canvas>
                             </td>
                             <td>
                                 <table class="tile_info">
+                                    <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index=>$category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
                                         <td>
-                                            <p><i class="fa fa-square blue"></i>IOS </p>
+                                            <p><i class="fa fa-square" style="color: <?php echo e(['#BDC3C7', '#9B59B6', '#E74C3C', '#26B99A', '#3498DB'][$index % 5]); ?>"></i><?php echo e($category->name); ?> </p>
                                         </td>
-                                        <td>30%</td>
+                                        <td><?php echo e($category->products->count()); ?></td>
                                     </tr>
-                                    <tr>
-                                        <td>
-                                            <p><i class="fa fa-square green"></i>Android </p>
-                                        </td>
-                                        <td>10%</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <p><i class="fa fa-square purple"></i>Blackberry </p>
-                                        </td>
-                                        <td>20%</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <p><i class="fa fa-square aero"></i>Symbian </p>
-                                        </td>
-                                        <td>15%</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <p><i class="fa fa-square red"></i>Others </p>
-                                        </td>
-                                        <td>30%</td>
-                                    </tr>
+
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </table>
                             </td>
                         </tr>

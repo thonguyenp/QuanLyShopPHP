@@ -108,6 +108,8 @@
   <!-- bootstrap-daterangepicker -->
   <script src="<?php echo e(asset('assets/admin/vendors/moment/min/moment.min.js')); ?>"></script>
   <script src="<?php echo e(asset('assets/admin/vendors/bootstrap-daterangepicker/daterangepicker.js')); ?>"></script>
+  <!-- Custom Theme Scripts -->
+  <script src="<?php echo e(asset('assets/admin/build/js/custom.js')); ?>"></script>
 
   <?php if(in_array(Route::currentRouteName(), $dataTableRoutes)): ?>
     <!-- Datatables -->
@@ -128,10 +130,9 @@
     <script src="<?php echo e(asset('assets/admin/vendors/pdfmake/build/vfs_fonts.js')); ?>"></script>
     
   <?php endif; ?>
-  <!-- Custom Theme Scripts -->
-  <script src="<?php echo e(asset('assets/admin/build/js/custom.min.js')); ?>"></script>
   <script src="<?php echo e(asset('assets/admin/js/custom.js')); ?>"></script>
   <script src="<?php echo e(asset('assets/admin/js/ckeditor/ckeditor.js')); ?>"></script>
+
 </body>
 
 </html><?php /**PATH E:\laragon\www\QuanLyShop\resources\views/layouts/admin.blade.php ENDPATH**/ ?>

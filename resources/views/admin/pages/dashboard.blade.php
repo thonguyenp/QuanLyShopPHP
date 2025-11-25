@@ -10,19 +10,19 @@
         <div class="tile_count">
             <div class="col-md-2 col-sm-4  tile_stats_count">
                 <span class="count_top"><i class="fa fa-user"></i> Tổng số người dùng</span>
-                <div class="count">2500</div>
+                <div class="count">{{ $users->count() }}</div>
             </div>
             <div class="col-md-2 col-sm-4  tile_stats_count">
                 <span class="count_top"><i class="fa fa-bar-chart"></i> Tổng số lượng sản phẩm</span>
-                <div class="count">123.50</div>
+                <div class="count">{{ $products->count() }}</div>
             </div>
             <div class="col-md-2 col-sm-4  tile_stats_count">
                 <span class="count_top"><i class="fa fa-shopping-cart"></i> Tổng số lượng đơn hàng</span>
-                <div class="count green">2,500</div>
+                <div class="count green">{{ $orders->count() }}</div>
             </div>
-            <div class="col-md-2 col-sm-4  tile_stats_count">
+            <div class="col-md-6 col-sm-4  tile_stats_count">
                 <span class="count_top"><i class="fa fa-money"></i> Tổng số lượng doanh thu</span>
-                <div class="count">4,567</div>
+                <div class="count">{{number_format($orders->sum('total_price'), 0,0)}} VND</div>
             </div>
         </div>
     </div>
@@ -58,45 +58,84 @@
                         </tr>
                         <tr>
                             <td>
-                                <canvas class="canvasDoughnut" height="140" width="140"
+                                <canvas class="canvasDoughnutCategory" height="140" width="140"
+                                    data-labels='@json($categories->pluck(' name'))'
+                                    data-counts='@json($categories->map(fn($category) => $category->products->count()))'
                                     style="margin: 15px 10px 10px 0"></canvas>
                             </td>
                             <td>
                                 <table class="tile_info">
+                                    @foreach ($categories as $index=>$category)
                                     <tr>
                                         <td>
-                                            <p><i class="fa fa-square blue"></i>IOS </p>
+                                            <p><i class="fa fa-square"
+                                                    style="color: {{ ['#BDC3C7', '#9B59B6', '#E74C3C', '#26B99A', '#3498DB'][$index % 5] }}"></i>{{
+                                                $category->name }} </p>
                                         </td>
-                                        <td>30%</td>
+                                        <td>{{$category->products->count()}}</td>
                                     </tr>
-                                    <tr>
-                                        <td>
-                                            <p><i class="fa fa-square green"></i>Android </p>
-                                        </td>
-                                        <td>10%</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <p><i class="fa fa-square purple"></i>Blackberry </p>
-                                        </td>
-                                        <td>20%</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <p><i class="fa fa-square aero"></i>Symbian </p>
-                                        </td>
-                                        <td>15%</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <p><i class="fa fa-square red"></i>Others </p>
-                                        </td>
-                                        <td>30%</td>
-                                    </tr>
+
+                                    @endforeach
                                 </table>
                             </td>
                         </tr>
                     </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-4  ">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Bordered table <small>Bordered table subtitle</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Settings 1</a>
+                                <a class="dropdown-item" href="#">Settings 2</a>
+                            </div>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Username</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>@fat</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>Larry</td>
+                                <td>the Bird</td>
+                                <td>@twitter</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
                 </div>
             </div>
         </div>
