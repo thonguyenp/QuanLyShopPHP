@@ -270,6 +270,7 @@ $(document).ready(function () {
 
     function fetchProducts() {
         let category_id = $('.category-filter.active').data('id') || '';
+        let manufacturer_id = $('.manufacturer-filter.active').data('id') || '';
         let minPrice = parseInt($('#minValue').text().replace(/\./g, '')) || 0;
         let maxPrice = parseInt($('#maxValue').text().replace(/\./g, '')) || 0;
         let sort_by = $('#sort-by').val();
@@ -290,6 +291,7 @@ $(document).ready(function () {
             type: 'GET',
             data: {
                 category_id: category_id,
+                manufacturer_id: manufacturer_id,
                 min_price: minPrice,
                 max_price: maxPrice,
                 sort_by: sort_by,
@@ -328,6 +330,14 @@ $(document).ready(function () {
         $('.category-filter').removeClass('active');
         $(this).addClass('active');
         currentPage = 1;
+        fetchProducts();
+    });
+
+    // Active manufacturer
+    $(document).on("click", ".manufacturer-filter", function (e) {
+        e.preventDefault();
+        $(".manufacturer-filter").removeClass("active");
+        $(this).addClass("active");
         fetchProducts();
     });
 

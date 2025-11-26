@@ -60,7 +60,7 @@
                             <div class="row">
                                 <?php $__currentLoopData = $manufacturers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $manufacturer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <div class="col-lg-6">
-                                    <a href="">
+                                    <a href="" class="manufacturer-filter text-dark" data-id="<?php echo e($manufacturer->id); ?>">
                                         <img src="<?php echo e(asset('storage/'. $manufacturer->image)); ?>" class="img-fluid"
                                             alt="<?php echo e($manufacturer->name); ?>"
                                             style="width: 250px; height: 100px">
@@ -78,7 +78,7 @@
                                 <img src="<?php echo e($product->image_url); ?>" class="img-fluid rounded" alt="<?php echo e($product->name); ?>">
                             </div>
                             <div>
-                                <h6 class="mb-2"><?php echo e($product->name); ?></h6>
+                                <h6 class="mb-2"><a href="<?php echo e(route('products.detail', $product->slug)); ?>"><?php echo e($product->name); ?></a></h6>
                                 <?php echo $__env->make('clients.components.includes.rating', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
                                 <div class="d-flex mb-2">
                                     <h5 class="fw-bold me-2"><?php echo e(number_format($product->price,0,',','.')); ?> VNĐ</h5>

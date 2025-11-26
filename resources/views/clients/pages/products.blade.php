@@ -60,7 +60,7 @@
                             <div class="row">
                                 @foreach ($manufacturers as $manufacturer)
                                 <div class="col-lg-6">
-                                    <a href="">
+                                    <a href="" class="manufacturer-filter text-dark" data-id="{{ $manufacturer->id }}">
                                         <img src="{{ asset('storage/'. $manufacturer->image) }}" class="img-fluid"
                                             alt="{{ $manufacturer->name }}"
                                             style="width: 250px; height: 100px">
@@ -78,7 +78,7 @@
                                 <img src="{{ $product->image_url }}" class="img-fluid rounded" alt="{{ $product->name }}">
                             </div>
                             <div>
-                                <h6 class="mb-2">{{ $product->name }}</h6>
+                                <h6 class="mb-2"><a href="{{ route('products.detail', $product->slug) }}">{{ $product->name }}</a></h6>
                                 @include('clients.components.includes.rating')
                                 <div class="d-flex mb-2">
                                     <h5 class="fw-bold me-2">{{number_format($product->price,0,',','.')}} VNĐ</h5>

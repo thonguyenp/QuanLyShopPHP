@@ -38,6 +38,11 @@ class ProductController extends Controller
         {
             $query->where('category_id', $request->category_id);
         }
+        // Filter manufacturers
+        if ($request->has('manufacturer_id') &&  $request->manufacturer_id != '')
+        {
+            $query->where('manufacturer_id', $request->manufacturer_id);
+        }
 
         // Filter price
         if ($request->has('min_price') &&  $request->has('max_price'))
