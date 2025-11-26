@@ -20,30 +20,26 @@
             <div class="header-carousel owl-carousel bg-light py-5">
                 <div class="row g-0 header-carousel-item align-items-center">
                     <div class="col-xl-6 carousel-img wow fadeInLeft" data-wow-delay="0.1s">
-                        <img src="<?php echo e(asset('assets/clients/img/carousel-1.png')); ?>" class="img-fluid w-100" alt="Image">
+                        <img src="<?php echo e(asset('assets/clients/img/ip17.jpg')); ?>" class="img-fluid w-100" alt="Image">
                     </div>
                     <div class="col-xl-6 carousel-content p-4">
                         <h4 class="text-uppercase fw-bold mb-4 wow fadeInRight" data-wow-delay="0.1s"
-                            style="letter-spacing: 3px;">Save Up To A $400</h4>
-                        <h1 class="display-3 text-capitalize mb-4 wow fadeInRight" data-wow-delay="0.3s">On Selected
-                            Laptops & Desktop Or Smartphone carousel 1</h1>
-                        <p class="text-dark wow fadeInRight" data-wow-delay="0.5s">Terms and Condition Apply</p>
+                            style="letter-spacing: 3px;">Giảm giá cuối năm</h4>
+                        <h1 class="display-3 text-capitalize mb-4 wow fadeInRight" data-wow-delay="0.3s">Iphone 17</h1>
                         <a class="btn btn-primary rounded-pill py-3 px-5 wow fadeInRight" data-wow-delay="0.7s"
-                            href="#">Shop Now</a>
+                            href="#">Mua ngay</a>
                     </div>
                 </div>
                 <div class="row g-0 header-carousel-item align-items-center">
                     <div class="col-xl-6 carousel-img wow fadeInLeft" data-wow-delay="0.1s">
-                        <img src="<?php echo e(asset('assets/clients/img/carousel-2.png')); ?>" class="img-fluid w-100" alt="Image">
+                        <img src="<?php echo e(asset('assets/clients/img/zepg16.jpg')); ?>" class="img-fluid w-100" alt="Image">
                     </div>
                     <div class="col-xl-6 carousel-content p-4">
                         <h4 class="text-uppercase fw-bold mb-4 wow fadeInRight" data-wow-delay="0.1s"
-                            style="letter-spacing: 3px;">Save Up To A $200</h4>
-                        <h1 class="display-3 text-capitalize mb-4 wow fadeInRight" data-wow-delay="0.3s">On Selected
-                            Laptops & Desktop Or Smartphone carousel 2</h1>
-                        <p class="text-dark wow fadeInRight" data-wow-delay="0.5s">Terms and Condition Apply</p>
+                            style="letter-spacing: 3px;">Ưu đãi đến 50%</h4>
+                        <h1 class="display-3 text-capitalize mb-4 wow fadeInRight" data-wow-delay="0.3s">Asus Zephyrus G16</h1>
                         <a class="btn btn-primary rounded-pill py-3 px-5 wow fadeInRight" data-wow-delay="0.7s"
-                            href="#">Shop Now</a>
+                            href="#">Mua ngay</a>
                     </div>
                 </div>
             </div>
@@ -55,7 +51,7 @@
                 <img src="<?php echo e(asset('assets/clients/img/header-img2.jpg')); ?>" class="img-fluid w-100 h-100"
                     style="object-fit: cover;" alt="Image">
                 <div class="carousel-banner-offer">
-                    <p class="bg-primary text-white rounded fs-5 py-2 px-4 mb-0 me-3">Special Offer</p>
+                    <p class="bg-primary text-white rounded fs-5 py-2 px-4 mb-0 me-3">Giảm giá đặc biệt</p>
                 </div>
                 <div class="carousel-banner">
                     <div class="carousel-banner-content text-center p-4">
@@ -403,10 +399,9 @@
                         <img src="<?php echo e(asset('assets/clients/' . 'img/banner-2.png')); ?>" class="img-fluid w-100" alt="">
                         <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center rounded p-4"
                             style="background: rgba(242, 139, 0, 0.5);">
-                            <h2 class="display-2 text-secondary">SALE</h2>
-                            <h4 class="display-5 text-white mb-4">Get UP To 50% Off</h4>
-                            <a href="#" class="btn btn-secondary rounded-pill align-self-center py-2 px-4">Shop
-                                Now</a>
+                            <h2 class="display-2 text-secondary">GIẢM GIÁ</h2>
+                            <h4 class="display-5 text-white mb-4">Lên đến 50%</h4>
+                            <a href="<?php echo e(route('products.index')); ?>" class="btn btn-secondary rounded-pill align-self-center py-2 px-4">Mua ngay</a>
                         </div>
                     </div>
                 </a>
@@ -423,7 +418,7 @@
         <div class="mx-auto text-center mb-5" style="max-width: 900px;">
             <h4 class="text-primary border-bottom border-primary border-2 d-inline-block p-2 title-border-radius wow fadeInUp"
                 data-wow-delay="0.1s">Products</h4>
-            <h1 class="mb-0 display-3 wow fadeInUp" data-wow-delay="0.3s">All Product Items</h1>
+            <h1 class="mb-0 display-3 wow fadeInUp" data-wow-delay="0.3s">Tất cả sản phẩm</h1>
         </div>
         
         <div class="productList-carousel owl-carousel pt-4 wow fadeInUp" data-wow-delay="0.3s">
@@ -483,10 +478,9 @@
     <div class="container products-mini py-5">
         <div class="mx-auto text-center mb-5" style="max-width: 700px;">
             <h4 class="text-primary mb-4 border-bottom border-primary border-2 d-inline-block p-2 title-border-radius wow fadeInUp"
-                data-wow-delay="0.1s">Bestseller Products</h4>
-            <p class="mb-0 wow fadeInUp" data-wow-delay="0.2s">Lorem ipsum dolor sit amet consectetur adipisicing
-                elit. Modi, asperiores ducimus sint quos tempore officia similique quia? Libero, pariatur
-                consectetur?</p>
+                data-wow-delay="0.1s">Sản phẩm bán chạy nhất</h4>
+            <p class="mb-0 wow fadeInUp" data-wow-delay="0.2s">Sản phẩm bán chạy nhất tính theo số lượng bán được
+            </p>
         </div>
         <div class="row g-4">
             <?php $__currentLoopData = $bestSellingProducts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>

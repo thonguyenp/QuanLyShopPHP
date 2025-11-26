@@ -22,7 +22,7 @@
                 
                 <div class="mini-cart-img position-relative" style="width:80px; height:80px; flex-shrink:0;">
                     <a href="javascript:void(0)">
-                        <img src="<?php echo e(asset($product->images->first()->image_path ?? 'storage/upload/products/default-product.png')); ?>"
+                        <img src="<?php echo e(asset($product->image_url ?? 'storage/upload/products/default-product.png')); ?>"
                             alt="<?php echo e($product->name); ?>" class="img-thumbnail" style="width:100%; height:100%; object-fit:cover;">
                     </a>
                     <button data-id="<?php echo e($product->id); ?>" class="mini-cart-item-delete btn btn-sm btn-danger" title="Xóa sản phẩm"
@@ -31,8 +31,8 @@
                     </button>
                 </div>
                 
-                <div class="mini-cart-info ml-3 flex-grow-1">
-                    <h6 class="mb-1"><a href="product-details.html" class="text-decoration-none"><?php echo e($product->name); ?></a></h6>
+                <div class="mini-cart-info ps-2 flex-grow-1">
+                    <h6 class="mb-1"><a href="<?php echo e(route('products.detail', $product->slug)); ?>" class="text-decoration-none"><?php echo e($product->name); ?></a></h6>
                     <span class="text-muted"><?php echo e($quantity); ?> x <?php echo e(number_format($product->price,0,',','.')); ?></span>
                 </div>
             </div>

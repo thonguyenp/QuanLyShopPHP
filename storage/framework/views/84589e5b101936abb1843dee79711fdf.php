@@ -33,6 +33,9 @@
     <link href="<?php echo e(asset('assets/clients/css/style.css')); ?>" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    
+        <link href="<?php echo e(asset('assets/clients/css/chat.css')); ?>" rel="stylesheet">
+
 </head>
 
 <body>
@@ -42,6 +45,7 @@
     <!-- Header Start -->
     <main>
         <?php echo $__env->yieldContent('content'); ?>
+        <?php echo $__env->make('clients.partials.chat_ai', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
     </main>
     <!-- Footer Start -->
     <?php echo $__env->make('clients.partials.footer_home', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
@@ -63,6 +67,7 @@
     <script src="<?php echo e(asset('assets/clients/js/custom.js')); ?>"></script>
     <!-- Template Javascript -->
     <script src="<?php echo e(asset('assets/clients/js/main.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/clients/js/chat.js')); ?>"></script>
 </body>
 <script>
         document.addEventListener("DOMContentLoaded", function() {

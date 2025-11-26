@@ -33,6 +33,9 @@
     <link href="{{asset('assets/clients/css/style.css')}}" rel="stylesheet">
     {{-- css toastr --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    {{-- Chat bot --}}
+        <link href="{{asset('assets/clients/css/chat.css')}}" rel="stylesheet">
+
 </head>
 
 <body>
@@ -42,6 +45,7 @@
     <!-- Header Start -->
     <main>
         @yield('content')
+        @include('clients.partials.chat_ai')
     </main>
     <!-- Footer Start -->
     @include('clients.partials.footer_home')
@@ -63,6 +67,7 @@
     <script src="{{asset('assets/clients/js/custom.js')}}"></script>
     <!-- Template Javascript -->
     <script src="{{asset('assets/clients/js/main.js')}}"></script>
+    <script src="{{asset('assets/clients/js/chat.js')}}"></script>
 </body>
 <script>
         document.addEventListener("DOMContentLoaded", function() {

@@ -4,6 +4,7 @@ use App\Http\Controllers\Clients\CartController;
 use App\Http\Controllers\Clients\CheckoutController;
 use App\Http\Controllers\Clients\AccountController;
 use App\Http\Controllers\Clients\AuthController;
+use App\Http\Controllers\Clients\ChatbotController;
 use App\Http\Controllers\Clients\ContactController;
 use App\Http\Controllers\Clients\ForgotPasswordController;
 use App\Http\Controllers\Clients\HomeController;
@@ -90,5 +91,9 @@ Route::post('/contact', [ContactController::class, 'sendContact'])->name('contac
 
 // Search
 Route::get('/search', [SearchController::class, 'index'])->name('search.index');
+
+//chat bot
+Route::post('/chatbot/send', [ChatbotController::class, 'sendMessage']);
+
 
 require __DIR__.'/admin.php';
