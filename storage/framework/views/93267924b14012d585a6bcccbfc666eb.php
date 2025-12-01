@@ -62,7 +62,6 @@
                     <?php endif; ?>
                     <?php if($adminUser->role->permissions->contains('name', 'manage_kpi')): ?>
                     <li><a href="<?php echo e(route('kpi.index')); ?>"><i class="fa fa-edit"></i> Quản lý KPI nhân viên</a></li>
-
                     <?php endif; ?>
 
                     <?php if($adminUser->role->permissions->contains('name', 'manage_orders')): ?>

@@ -62,7 +62,6 @@
                     @endif
                     @if ($adminUser->role->permissions->contains('name', 'manage_kpi'))
                     <li><a href="{{ route('kpi.index') }}"><i class="fa fa-edit"></i> Quản lý KPI nhân viên</a></li>
-
                     @endif
 
                     @if ($adminUser->role->permissions->contains('name', 'manage_orders'))

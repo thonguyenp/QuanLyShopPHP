@@ -960,7 +960,21 @@ namespace App\Models {
     /**
      * App\Models\KpiBonus
      *
+     * @property \Illuminate\Support\Carbon|null $updated_at
+     * @property \Illuminate\Support\Carbon|null $created_at
+     * @property float $bonus_amount
+     * @property int $total_score
+     * @property string $year
+     * @property int $user_id
+     * @property int $id
      * @property-read \App\Models\User $user
+     * @method static \Illuminate\Database\Eloquent\Builder<KpiBonus>|KpiBonus whereId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<KpiBonus>|KpiBonus whereUserId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<KpiBonus>|KpiBonus whereYear($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<KpiBonus>|KpiBonus whereTotalScore($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<KpiBonus>|KpiBonus whereBonusAmount($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<KpiBonus>|KpiBonus whereCreatedAt($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<KpiBonus>|KpiBonus whereUpdatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<KpiBonus>|KpiBonus newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<KpiBonus>|KpiBonus newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<KpiBonus>|KpiBonus query()
