@@ -1,0 +1,544 @@
+<?php $__env->startSection('title', 'Trang chủ'); ?>
+
+<?php $__env->startSection('content'); ?>
+<!-- Spinner Start -->
+<div id="spinner"
+    class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<!-- Spinner End -->
+
+<!-- Carousel Start -->
+<div class="container-fluid carousel bg-light px-0">
+    <div class="row g-0 justify-content-end">
+        
+        <div class="col-12 col-lg-7 col-xl-9">
+            <div class="header-carousel owl-carousel bg-light py-5">
+                <div class="row g-0 header-carousel-item align-items-center">
+                    <div class="col-xl-6 carousel-img wow fadeInLeft" data-wow-delay="0.1s">
+                        <img src="<?php echo e(asset('assets/clients/img/ip17.jpg')); ?>" class="img-fluid w-100" alt="Image">
+                    </div>
+                    <div class="col-xl-6 carousel-content p-4">
+                        <h4 class="text-uppercase fw-bold mb-4 wow fadeInRight" data-wow-delay="0.1s"
+                            style="letter-spacing: 3px;">Giảm giá cuối năm</h4>
+                        <h1 class="display-3 text-capitalize mb-4 wow fadeInRight" data-wow-delay="0.3s">Iphone 17</h1>
+                        <a class="btn btn-primary rounded-pill py-3 px-5 wow fadeInRight" data-wow-delay="0.7s"
+                            href="#">Mua ngay</a>
+                    </div>
+                </div>
+                <div class="row g-0 header-carousel-item align-items-center">
+                    <div class="col-xl-6 carousel-img wow fadeInLeft" data-wow-delay="0.1s">
+                        <img src="<?php echo e(asset('assets/clients/img/zepg16.jpg')); ?>" class="img-fluid w-100" alt="Image">
+                    </div>
+                    <div class="col-xl-6 carousel-content p-4">
+                        <h4 class="text-uppercase fw-bold mb-4 wow fadeInRight" data-wow-delay="0.1s"
+                            style="letter-spacing: 3px;">Ưu đãi đến 50%</h4>
+                        <h1 class="display-3 text-capitalize mb-4 wow fadeInRight" data-wow-delay="0.3s">Asus Zephyrus G16</h1>
+                        <a class="btn btn-primary rounded-pill py-3 px-5 wow fadeInRight" data-wow-delay="0.7s"
+                            href="#">Mua ngay</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-12 col-lg-5 col-xl-3 wow fadeInRight" data-wow-delay="0.1s">
+            <div class="carousel-header-banner h-100">
+                
+                <img src="<?php echo e(asset('assets/clients/img/header-img2.jpg')); ?>" class="img-fluid w-100 h-100"
+                    style="object-fit: cover;" alt="Image">
+                <div class="carousel-banner-offer">
+                    <p class="bg-primary text-white rounded fs-5 py-2 px-4 mb-0 me-3">Giảm giá đặc biệt</p>
+                </div>
+                <div class="carousel-banner">
+                    <div class="carousel-banner-content text-center p-4">
+                        <a href="#" class="d-block mb-2"><?php echo e($productRightBanner->category->name); ?></a>
+                        <a href="#" class="d-block text-white fs-3"><?php echo e($productRightBanner->name); ?></a>
+                        <del class="me-2 text-white fs-5"><?php echo e(number_format($productRightBanner->price + 200, 2)); ?></del>
+                        <span class="text-primary fs-5"><?php echo e(number_format($productRightBanner->price, 2)); ?></span>
+                    </div>
+                    <a href="#" class="btn btn-primary rounded-pill py-2 px-4"><i class="fas fa-shopping-cart me-2"></i>
+                        Add To Cart</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Carousel End -->
+
+<!-- Searvices Start -->
+<div class="container-fluid px-0">
+    <div class="row g-0">
+        <div class="col-6 col-md-4 col-lg-2 border-start border-end wow fadeInUp" data-wow-delay="0.1s">
+            <div class="p-4">
+                <div class="d-inline-flex align-items-center">
+                    <i class="fa fa-sync-alt fa-2x text-primary"></i>
+                    <div class="ms-4">
+                        <h6 class="text-uppercase mb-2">Free Return</h6>
+                        <p class="mb-0">30 days money back guarantee!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2 border-end wow fadeInUp" data-wow-delay="0.2s">
+            <div class="p-4">
+                <div class="d-flex align-items-center">
+                    <i class="fab fa-telegram-plane fa-2x text-primary"></i>
+                    <div class="ms-4">
+                        <h6 class="text-uppercase mb-2">Free Shipping</h6>
+                        <p class="mb-0">Free shipping on all order</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2 border-end wow fadeInUp" data-wow-delay="0.3s">
+            <div class="p-4">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-life-ring fa-2x text-primary"></i>
+                    <div class="ms-4">
+                        <h6 class="text-uppercase mb-2">Support 24/7</h6>
+                        <p class="mb-0">We support online 24 hrs a day</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2 border-end wow fadeInUp" data-wow-delay="0.4s">
+            <div class="p-4">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-credit-card fa-2x text-primary"></i>
+                    <div class="ms-4">
+                        <h6 class="text-uppercase mb-2">Receive Gift Card</h6>
+                        <p class="mb-0">Recieve gift all over oder $50</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2 border-end wow fadeInUp" data-wow-delay="0.5s">
+            <div class="p-4">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-lock fa-2x text-primary"></i>
+                    <div class="ms-4">
+                        <h6 class="text-uppercase mb-2">Secure Payment</h6>
+                        <p class="mb-0">We Value Your Security</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2 border-end wow fadeInUp" data-wow-delay="0.6s">
+            <div class="p-4">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-blog fa-2x text-primary"></i>
+                    <div class="ms-4">
+                        <h6 class="text-uppercase mb-2">Online Service</h6>
+                        <p class="mb-0">Free return products in 30 days</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Searvices End -->
+
+<!-- Products Offer Start -->
+<div class="container-fluid bg-light py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.1s">
+                <a href="#" class="d-flex align-items-center justify-content-between border bg-white rounded p-4">
+                    <div>
+                        <p class="text-muted mb-3">Find The Best Deal for You!</p>
+                        <h3 class="text-primary">Black Friday</h3>
+                        <h1 class="display-3 text-secondary mb-0">40% <span class="text-primary fw-normal">Off</span>
+                        </h1>
+                    </div>
+                    <img src="<?php echo e(asset('assets/clients/'.'img/offer-1.png')); ?>" class="img-fluid" alt="">
+                </a>
+            </div>
+            <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.1s">
+                <a href="#" class="d-flex align-items-center justify-content-between border bg-white rounded p-4">
+                    <div>
+                        <p class="text-muted mb-3">Find The Best Deal for You!</p>
+                        <h3 class="text-primary">Big Sale For Accessories</h3>
+                        <h1 class="display-3 text-secondary mb-0">30% <span class="text-primary fw-normal">Off</span>
+                        </h1>
+                    </div>
+                    <img src="<?php echo e(asset('assets/clients/'.'img/offer-2.png')); ?>" class="img-fluid" alt="">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Products Offer End -->
+
+
+<div class="category-section">
+    <h4 class="fw-bold mb-2">Danh mục nổi bật</h4>
+    <div class="row row-cols-2 row-cols-md-4 g-3">
+        <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <div class="col">
+            <div class="category-card">
+                <img src="<?php echo e(asset('storage/'. $category->image)); ?>" alt=<?php echo e($category->name); ?>>
+                <p><?php echo e($category->name); ?></p>
+                <p><?php echo e($category->products->count()); ?> sản phẩm</p>
+            </div>
+        </div>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+    </div>
+</div>
+
+
+<!-- Our Products Start -->
+<div class="container-fluid product py-5">
+    <div class="container py-5">
+        <div class="tab-class">
+            <div class="row g-4">
+                <div class="col-lg-4 text-start wow fadeInLeft" data-wow-delay="0.1s">
+                    <h1>Our Products</h1>
+                </div>
+                <div class="col-lg-8 text-end wow fadeInRight" data-wow-delay="0.1s">
+                    <ul class="nav nav-pills d-inline-flex text-center mb-5">
+                        <li class="nav-item mb-4">
+                            <a class="d-flex mx-2 py-2 bg-light rounded-pill active" data-bs-toggle="pill"
+                                href="#AllProductSection">
+                                <span class="text-dark" style="width: 130px;">All Products</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mb-4">
+                            <a class="d-flex py-2 mx-2 bg-light rounded-pill" data-bs-toggle="pill"
+                                href="#NewArrivalSection">
+                                <span class="text-dark" style="width: 130px;">New Arrivals</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mb-4">
+                            <a class="d-flex mx-2 py-2 bg-light rounded-pill" data-bs-toggle="pill"
+                                href="#TopSellingSection">
+                                <span class="text-dark" style="width: 130px;">Top Selling</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="tab-content">
+                <div id="AllProductSection" class="tab-pane fade show p-0 active">
+                    <div class="row g-4">
+                        <?php $__currentLoopData = $allProductSection; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <div class="col-md-6 col-lg-4 col-xl-3">
+                            <div class="product-item rounded wow fadeInUp" data-wow-delay="0.1s">
+                                <div class="product-item-inner border rounded">
+                                    
+                                    <div class="product-item-inner-item">
+                                        <img src="<?php echo e($product->image_url); ?>" class="img-fluid w-100 rounded-top"
+                                            alt="<?php echo e($product->name); ?>">
+                                        <div class="product-new">New</div>
+                                        <div class="product-details">
+                                            <a href="<?php echo e(route('products.detail', $product->slug)); ?>"><i
+                                                    class="fa fa-eye fa-1x"></i></a>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="text-center rounded-bottom p-4">
+                                        <a href="#" class="d-block mb-2"><?php echo e($product->category->name); ?> </a>
+                                        <a href="<?php echo e(route('products.detail', $product->slug)); ?>"
+                                            class="d-block h4"><?php echo e($product->name); ?></a>
+                                        <del class="me-2 fs-5"><?php echo e(number_format($product->price + 200, 0,',','.')); ?></del>
+                                        <span class="text-primary fs-5"><?php echo e(number_format($product->price,
+                                            0,',','.')); ?></span>
+                                    </div>
+                                </div>
+                                
+                                <div class="product-item-add border border-top-0 rounded-bottom text-center p-4 pt-0">
+                                    <a href="<?php echo e(route('cart.add')); ?>" data-id="<?php echo e($product->id); ?>"
+                                        class="add-to-cart-btn btn btn-primary border border-secondary rounded-pill px-4 py-2 mb-4 text-primary">
+                                        <i class="fa fa-shopping-bag me-2 text-white"></i> Thêm vào giỏ hàng
+                                    </a>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <?php echo $__env->make('clients.components.includes.rating', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+                                        <a href="#"
+                                            class="add-to-wishlist text-primary d-flex align-items-center justify-content-center me-0"
+                                            data-id="<?php echo e($product->id); ?>">
+                                            <span class="rounded-circle btn-sm-square border">
+                                                <i class="fas fa-heart"></i>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </div>
+                </div>
+                <div id="NewArrivalSection" class="tab-pane fade show p-0">
+                    <div class="row g-4">
+                        <?php $__currentLoopData = $latestProducts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <div class="col-md-6 col-lg-4 col-xl-3">
+                            <div class="product-item rounded wow fadeInUp" data-wow-delay="0.1s">
+                                <div class="product-item-inner border rounded">
+                                    
+                                    <div class="product-item-inner-item">
+                                        <img src="<?php echo e($product->image_url); ?>" class="img-fluid rounded-top"
+                                            alt="<?php echo e($product->name); ?>">
+                                        <div class="product-new">New</div>
+                                        <div class="product-details">
+                                            <a href="<?php echo e(route('products.detail', $product->slug)); ?>"><i
+                                                    class="fa fa-eye fa-1x"></i></a>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="text-center rounded-bottom p-4">
+                                        <a href="#" class="d-block mb-2"><?php echo e($product->category->name); ?> </a>
+                                        <a href="<?php echo e(route('products.detail', $product->slug)); ?>"
+                                            class="d-block h4"><?php echo e($product->name); ?></a>
+                                        <del class="me-2 fs-5"><?php echo e(number_format($product->price + 200, 0,',','.')); ?></del>
+                                        <span class="text-primary fs-5"><?php echo e(number_format($product->price,
+                                            0,',','.')); ?></span>
+                                    </div>
+                                </div>
+                                
+                                <div class="product-item-add border border-top-0 rounded-bottom  text-center p-4 pt-0">
+                                    <a href="<?php echo e(route('cart.add')); ?>" data-id="<?php echo e($product->id); ?>"
+                                        class="add-to-cart-btn btn btn-primary border border-secondary rounded-pill px-4 py-2 mb-4 text-primary">
+                                        <i class="fa fa-shopping-bag me-2 text-white"></i> Thêm vào giỏ hàng
+                                    </a>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <?php echo $__env->make('clients.components.includes.rating', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+                                        <div class="d-flex">
+                                            <a href="#"
+                                                class="add-to-wishlist text-primary d-flex align-items-center justify-content-center me-0"
+                                                data-id="<?php echo e($product->id); ?>">
+                                                <span class="rounded-circle btn-sm-square border">
+                                                    <i class="fas fa-heart"></i>
+                                                </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </div>
+                </div>
+                <div id="TopSellingSection" class="tab-pane fade show p-0">
+                    <div class="row g-4">
+                        <?php $__currentLoopData = $bestSellingProducts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <div class="col-md-6 col-lg-4 col-xl-3">
+                            <div class="product-item rounded wow fadeInUp" data-wow-delay="0.1s">
+                                <div class="product-item-inner border rounded">
+                                    
+                                    <div class="product-item-inner-item">
+                                        <img src="<?php echo e($product->image_url); ?>" class="img-fluid rounded-top"
+                                            alt="<?php echo e($product->name); ?>">
+                                        <div class="product-new">New</div>
+                                        <div class="product-details">
+                                            <a href="<?php echo e(route('products.detail', $product->slug)); ?>"><i
+                                                    class="fa fa-eye fa-1x"></i></a>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="text-center rounded-bottom p-4">
+                                        <a href="#" class="d-block mb-2"><?php echo e($product->category->name); ?> </a>
+                                        <a href="<?php echo e(route('products.detail', $product->slug)); ?>"
+                                            class="d-block h4"><?php echo e($product->name); ?></a>
+                                        <del class="me-2 fs-5"><?php echo e(number_format($product->price + 200, 0,',','.')); ?></del>
+                                        <span class="text-primary fs-5"><?php echo e(number_format($product->price,
+                                            0,',','.')); ?></span>
+                                    </div>
+                                </div>
+                                
+                                <div class="product-item-add border border-top-0 rounded-bottom  text-center p-4 pt-0">
+                                    <a href="<?php echo e(route('cart.add')); ?>" data-id="<?php echo e($product->id); ?>"
+                                        class="add-to-cart-btn btn btn-primary border border-secondary rounded-pill px-4 py-2 mb-4 text-primary">
+                                        <i class="fa fa-shopping-bag me-2 text-white"></i> Thêm vào giỏ hàng
+                                    </a>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <?php echo $__env->make('clients.components.includes.rating', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+                                        <div class="d-flex">
+                                            <a href="#"
+                                                class="add-to-wishlist text-primary d-flex align-items-center justify-content-center me-0"
+                                                data-id="<?php echo e($product->id); ?>">
+                                                <span class="rounded-circle btn-sm-square border">
+                                                    <i class="fas fa-heart"></i>
+                                                </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Our Products End -->
+
+<!-- Product Banner Start -->
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.1s">
+                <a href="#">
+                    <div class="bg-primary rounded position-relative">
+                        <img src="<?php echo e(asset('assets/clients/' . 'img/banner-1.jpg')); ?>" class="img-fluid w-100 rounded" alt="">
+                        <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center rounded p-4"
+                            style="background: rgba(255, 255, 255, 0.5);">
+                            <h3 class="display-5 text-primary"><span>Ipad Gen 8</span></h3>
+                            <p class="fs-4 text-muted">$329.99</p>
+                            <a href="#" class="btn btn-primary rounded-pill align-self-start py-2 px-4">Shop Now</a>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.2s">
+                <a href="#">
+                    <div class="text-center bg-primary rounded position-relative">
+                        <img src="<?php echo e(asset('assets/clients/' . 'img/banner-2.png')); ?>" class="img-fluid w-100" alt="">
+                        <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center rounded p-4"
+                            style="background: rgba(242, 139, 0, 0.5);">
+                            <h2 class="display-2 text-secondary">GIẢM GIÁ</h2>
+                            <h4 class="display-5 text-white mb-4">Lên đến 50%</h4>
+                            <a href="<?php echo e(route('products.index')); ?>" class="btn btn-secondary rounded-pill align-self-center py-2 px-4">Mua ngay</a>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Product Banner End -->
+
+<!-- Product List start -->
+<div class="container-fluid products productList overflow-hidden">
+    <div class="container products-mini py-5">
+        
+        <div class="mx-auto text-center mb-5" style="max-width: 900px;">
+            <h4 class="text-primary border-bottom border-primary border-2 d-inline-block p-2 title-border-radius wow fadeInUp"
+                data-wow-delay="0.1s">Products</h4>
+            <h1 class="mb-0 display-3 wow fadeInUp" data-wow-delay="0.3s">Tất cả sản phẩm</h1>
+        </div>
+        
+        <div class="productList-carousel owl-carousel pt-4 wow fadeInUp" data-wow-delay="0.3s">
+            <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <div class="productImg-carousel owl-carousel productList-item">
+                <?php $__currentLoopData = $category->products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <div class="productImg-item products-mini-item border">
+                    <div class="row g-0">
+                        
+                        <div class="col-5">
+                            <div class="products-mini-img border-end h-100">
+                                <img src="<?php echo e($product->image_url); ?>" class="img-fluid w-100 h-100"
+                                    alt="<?php echo e($product->name); ?>">
+                                <div class="products-mini-icon rounded-circle bg-primary">
+                                    <a href="<?php echo e(route('products.detail', $product->slug)); ?>"><i
+                                            class="fa fa-eye fa-1x text-white"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-7">
+                            <div class="products-mini-content p-3">
+                                <a href="#" class="d-block mb-2"><?php echo e($category->name); ?></a>
+                                <a href="<?php echo e(route('products.detail', $product->slug)); ?>"
+                                    class="d-block h4"><?php echo e($product->name); ?></a>
+                                <del class="me-2 fs-5"><?php echo e(number_format($product->price + 200, 2)); ?></del>
+                                <span class="text-primary fs-5"><?php echo e(number_format($product->price, 2)); ?></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="products-mini-add border p-3">
+                        <a href="<?php echo e(route('cart.add')); ?>" data-id="<?php echo e($product->id); ?>" data-bs-toggle="modal"
+                            data-bs-target="#add_to_cart_modal-<?php echo e($product->id); ?>"
+                            class="add-to-cart-btn btn btn-primary border border-secondary rounded-pill px-4 py-2 mb-4 text-primary">
+                            <i class="fa fa-shopping-bag me-2 text-white"></i> Thêm vào giỏ hàng
+                        </a>
+                        <a href="#"
+                            class="add-to-wishlist text-primary d-flex align-items-center justify-content-center me-0"
+                            data-id="<?php echo e($product->id); ?>">
+                            <span class="rounded-circle btn-sm-square border">
+                                <i class="fas fa-heart"></i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            </div>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        </div>
+    </div>
+</div>
+<!-- Product List End -->
+
+<!-- Bestseller Products Start -->
+<div class="container-fluid products pb-5">
+    <div class="container products-mini py-5">
+        <div class="mx-auto text-center mb-5" style="max-width: 700px;">
+            <h4 class="text-primary mb-4 border-bottom border-primary border-2 d-inline-block p-2 title-border-radius wow fadeInUp"
+                data-wow-delay="0.1s">Sản phẩm bán chạy nhất</h4>
+            <p class="mb-0 wow fadeInUp" data-wow-delay="0.2s">Sản phẩm bán chạy nhất tính theo số lượng bán được
+            </p>
+        </div>
+        <div class="row g-4">
+            <?php $__currentLoopData = $bestSellingProducts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <div class="col-md-6 col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.1s">
+                
+                <div class="products-mini-item border">
+                    <div class="row g-0">
+                        
+                        <div class="col-5">
+                            <div class="products-mini-img border-end h-100">
+                                <img src="<?php echo e($product->image_url); ?>" class="img-fluid w-100 h-100"
+                                    alt="<?php echo e($product->name); ?>">
+                                <div class="products-mini-icon rounded-circle bg-primary">
+                                    <a href="<?php echo e(route('products.detail', $product->slug)); ?>"><i
+                                            class="fa fa-eye fa-1x text-white"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-7">
+                            <div class="products-mini-content p-3">
+                                <a href="#" class="d-block mb-2"><?php echo e($category->name); ?></a>
+                                <a href="<?php echo e(route('products.detail', $product->slug)); ?>"
+                                    class="d-block h4"><?php echo e($product->name); ?></a>
+                                <del class="me-2 fs-5"><?php echo e(number_format($product->price + 200, 2)); ?></del>
+                                <span class="text-primary fs-5"><?php echo e(number_format($product->price, 2)); ?></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="products-mini-add border p-3">
+                        <a href="<?php echo e(route('cart.add')); ?>" data-id="<?php echo e($product->id); ?>" data-bs-toggle="modal"
+                            data-bs-target="#add_to_cart_modal-<?php echo e($product->id); ?>"
+                            class="add-to-cart-btn btn btn-primary border border-secondary rounded-pill px-4 py-2 mb-4 text-primary">
+                            <i class="fa fa-shopping-bag me-2 text-white"></i> Thêm vào giỏ hàng
+                        </a>
+                        <a href="#"
+                            class="add-to-wishlist text-primary d-flex align-items-center justify-content-center me-0"
+                            data-id="<?php echo e($product->id); ?>">
+                            <span class="rounded-circle btn-sm-square border">
+                                <i class="fas fa-heart"></i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        </div>
+    </div>
+</div>
+<!-- Bestseller Products End -->
+
+<?php $__currentLoopData = $allProductSection; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+<?php echo $__env->make('clients.components.includes.include-modals', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+<?php $__currentLoopData = $category->products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+<?php echo $__env->make('clients.components.includes.include-modals', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.client_home', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\laragon\www\QuanlyShopphp\resources\views/clients/pages/home.blade.php ENDPATH**/ ?>
