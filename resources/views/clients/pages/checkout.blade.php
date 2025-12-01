@@ -135,7 +135,7 @@
                         </tbody>
                     </table>
                 </div>
-                <form action="{{ route('checkout.placeOrder') }}" method="post">
+                <form action="{{ route('checkout.placeOrder') }}" method="post" id="checkoutForm">
                     @csrf
                     <input type="hidden" name="address_id" value="{{ $defaultAddress->id }}">
                     <div id="checkout_payment">
@@ -143,11 +143,11 @@
                             <div class="col-12">
                                 <div class="form-check text-start my-2">
                                     <input type="radio" class="form-check-input bg-primary border-0" 
-                                        id="payment_paypal"
+                                        id="payment_vnpay"
                                         name="payment_method" value="atm">
-                                    <label class="form-check-label" for="Transfer-paypal">Paypal</label>
+                                    <label class="form-check-label" for="Transfer-paypal">VnPay</label>
                                 </div>
-                                <p class="text-start text-dark">Thanh toán qua Paypal</p>
+                                <p class="text-start text-dark">Thanh toán qua VnPay</p>
                             </div>
                         </div>
 

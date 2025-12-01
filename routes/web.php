@@ -58,6 +58,7 @@ Route::middleware(['auth.custom'])->group(function(){
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
     Route::get('/checkout/get-address', [CheckoutController::class, 'getAddress'])->name('checkout.get-addres');
     Route::post('/checkout', [CheckoutController::class, 'placeOrder'])->name('checkout.placeOrder');
+    Route::post('/redirectToVnpay', [CheckoutController::class,'redirectToVnpay']);
 
     Route::get('/order/{id}', [OrderController::class, 'showOrder'])->name('order.showOrder');
     Route::post('/order/{id}/cancel', [OrderController::class, 'cancel'])->name('order.cancel');

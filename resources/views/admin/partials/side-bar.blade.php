@@ -2,7 +2,8 @@
 <div class="col-md-3 left_col">
     <div class="left_col scroll-view">
         <div class="navbar nav_title" style="border: 0;">
-            <a href="{{ route('admin.dashboard')}}" class="site_title"><i class="fa fa-shopping-bag"></i> <span>Electro</span></a>
+            <a href="{{ route('admin.dashboard')}}" class="site_title"><i class="fa fa-shopping-bag"></i>
+                <span>Electro</span></a>
         </div>
 
         <div class="clearfix"></div>
@@ -26,43 +27,49 @@
             <div class="menu_section">
                 <h3>Tổng quan</h3>
                 @php
-                    $adminUser = Auth::guard('admin')->user();
+                $adminUser = Auth::guard('admin')->user();
                 @endphp
                 <ul class="nav side-menu">
                     <li><a href="{{ route('admin.dashboard') }}"><i class="fa fa-home"></i> Dashboard</a></li>
                     @if ($adminUser->role->permissions->contains('name', 'manage_users'))
-                            <li><a href="{{ route('admin.users.index') }}"><i class="fa fa-edit"></i> Quản lý người dùng</a></li>
+                    <li><a href="{{ route('admin.users.index') }}"><i class="fa fa-edit"></i> Quản lý người dùng</a>
+                    </li>
                     @endif
                     @if ($adminUser->role->permissions->contains('name', 'manage_categories'))
-                        <li><a><i class="fa fa-desktop"></i> Quản lý danh mục <span class="fa fa-chevron-down"></span></a>
-                            <ul class="nav child_menu">
-                                <li><a href="{{ route('admin.category.addForm') }}">Thêm danh mục</a></li>
-                                <li><a href="{{ route('admin.categories.index') }}">Danh sách danh mục</a></li>
-                            </ul>
-                        </li>
+                    <li><a><i class="fa fa-desktop"></i> Quản lý danh mục <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="{{ route('admin.category.addForm') }}">Thêm danh mục</a></li>
+                            <li><a href="{{ route('admin.categories.index') }}">Danh sách danh mục</a></li>
+                        </ul>
+                    </li>
                     @endif
                     @if ($adminUser->role->permissions->contains('name', 'manage_manufacturers'))
-                        <li><a><i class="fa fa-desktop"></i> Quản lý nhãn hàng <span class="fa fa-chevron-down"></span></a>
-                            <ul class="nav child_menu">
-                                <li><a href="{{ route('admin.manufacturer.addForm') }}">Thêm nhãn hàng</a></li>
-                                <li><a href="{{ route('admin.manufacturers.index') }}">Danh sách nhãn hàng</a></li>
-                            </ul>
-                        </li>
+                    <li><a><i class="fa fa-desktop"></i> Quản lý nhãn hàng <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="{{ route('admin.manufacturer.addForm') }}">Thêm nhãn hàng</a></li>
+                            <li><a href="{{ route('admin.manufacturers.index') }}">Danh sách nhãn hàng</a></li>
+                        </ul>
+                    </li>
                     @endif
 
                     @if ($adminUser->role->permissions->contains('name', 'manage_products'))
-                        <li><a><i class="fa fa-desktop"></i> Quản lý sản phẩm <span class="fa fa-chevron-down"></span></a>
-                            <ul class="nav child_menu">
-                                <li><a href="{{ route('admin.product.addForm') }}">Thêm sản phẩm</a></li>
-                                <li><a href="{{ route('admin.products.index') }}">Danh sách sản phẩm</a></li>
-                            </ul>
-                        </li>
+                    <li><a><i class="fa fa-desktop"></i> Quản lý sản phẩm <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="{{ route('admin.product.addForm') }}">Thêm sản phẩm</a></li>
+                            <li><a href="{{ route('admin.products.index') }}">Danh sách sản phẩm</a></li>
+                        </ul>
+                    </li>
                     @endif
+                    @if ($adminUser->role->permissions->contains('name', 'manage_kpi'))
+                    <li><a href="{{ route('kpi.index') }}"><i class="fa fa-edit"></i> Quản lý KPI nhân viên</a></li>
+
+                    @endif
+
                     @if ($adminUser->role->permissions->contains('name', 'manage_orders'))
-                        <li><a href="{{ route('admin.orders.index') }}"><i class="fa fa-edit"></i> Quản lý đơn hàng</a></li>
+                    <li><a href="{{ route('admin.orders.index') }}"><i class="fa fa-edit"></i> Quản lý đơn hàng</a></li>
                     @endif
                     @if ($adminUser->role->permissions->contains('name', 'manage_contacts'))
-                        <li><a href="{{ route('admin.contact.index') }}"><i class="fa fa-edit"></i> Liên hệ</a></li>
+                    <li><a href="{{ route('admin.contact.index') }}"><i class="fa fa-edit"></i> Liên hệ</a></li>
                     @endif
 
                 </ul>

@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\KpiController;
 use App\Http\Controllers\Admin\ManufacturerController;
 use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\OrderController;
@@ -67,6 +68,13 @@ Route::prefix('admin')->group(function () {
         Route::middleware(['permission:manage_contacts'])->group(function() {
             Route::get('/contact', [ContactController::class, 'index'])->name('admin.contact.index');
             Route::post('/contact/reply', [ContactController::class, 'replyContact'])->name('admin.contact.reply');
+        });
+        Route::middleware(['permission:manage_kpi'])->group(function () {
+            Route::get('/kpi', [KpiController::class, 'index'])->name('kpi.index');
+            Route::get('/kpi/create/{user}', [KpiController::class, 'create'])->name('kpi.create');
+            Route::get('/kpi/view/{user}', [KpiController::class, 'view'])->name('kpi.view');
+            Route::post('/kpi/store', [KpiController::class, 'store'])->name('kpi.store');
+            Route::get('/kpi/annual/{user}', [KpiController::class,'annualBonus'])->name('kpi.annual');
         });
     });
 

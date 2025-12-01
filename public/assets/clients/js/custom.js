@@ -323,7 +323,7 @@ $(document).ready(function () {
             fetchProducts();
         });
     }
-    
+
 
     $('.category-filter').on('click', function (e) {
         // e.preventDefault();
@@ -608,6 +608,48 @@ $(document).ready(function () {
         });
 
     });
+    // Thanh toán bằng vnpay
+    document.addEventListener('DOMContentLoaded', function() {
+        const orderButton = document.getElementById('order_button_cash');
+        if (!orderButton) return;
+
+        orderButton.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            const form = document.getElementById('checkoutForm');
+            const paymentMethod = form.querySelector('input[name="payment_method"]:checked').value;
+
+            if(paymentMethod === 'atm') { // VNPAY
+                const formData = new FormData(form);
+
+                fetch(form.action, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: formData
+                })
+                .then(res => res.json())   // controller trả JSON khi chọn atm
+                .then(data => {
+                    if(data.redirect_url) {
+                        window.location.href = data.redirect_url;  // redirect sang VNPAY
+                    } else {
+                        alert('Có lỗi xảy ra, vui lòng thử lại');
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    alert('Có lỗi xảy ra, vui lòng thử lại');
+                });
+            } else { 
+                // COD
+                form.submit();
+            }
+        });
+    });
+
+
+
 
     //**************
     // Rating Product
@@ -756,8 +798,7 @@ $(document).ready(function () {
                 product_id: productId,
             },
             success: function (response) {
-                if (response.status)
-                {
+                if (response.status) {
                     $('#liton_wishlist_modal-' + productId).modal('show');
                     toastr.success('Đã thêm vào danh sách yêu thích');
                 }
@@ -789,8 +830,7 @@ $(document).ready(function () {
                 product_id: productId,
             },
             success: function (response) {
-                if (response.status)
-                {
+                if (response.status) {
                     row.remove();
                     toastr.success('Đã xóa sản phẩm vào danh sách yêu thích');
                 }
@@ -805,8 +845,7 @@ $(document).ready(function () {
     // Handle search speech recognition
     //**************
     // Check browser support?
-    if('SpeechRecognition' in window || 'webkitSpeechRecognition' in window)
-    {
+    if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
         var recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
         recognition.lang = 'vi-VN';
         recognition.continuous = true;
@@ -814,47 +853,45 @@ $(document).ready(function () {
 
         // 
         var isRecognizing = false;
-        
-        $("#voice-search").on('click', function (){
-            if(isRecognizing){
+
+        $("#voice-search").on('click', function () {
+            if (isRecognizing) {
                 recognition.stop();
                 $("#voice-search").removeClass("fa-microphone-slash").addClass("fa-microphone");
 
             }
-            else{
+            else {
                 recognition.start();
                 $("#voice-search").removeClass("fa-microphone").addClass("fa-microphone-slash");
             }
         });
-        recognition.onstart = function(){
+        recognition.onstart = function () {
             console.log('Speech recognition started');
             isRecognizing = true;
             $("#voice-search").removeClass('fa-microphone').addClass('fa-microphone-slash');
         }
 
-        recognition.onresult = function(event){
+        recognition.onresult = function (event) {
             var transcript = event.results[0][0].transcript; // Get result recognition
             transcript = transcript.replace(/[.,!?]$/g, '');
-            if(event.results[0].isFinal)
-            {
+            if (event.results[0].isFinal) {
                 // console.log(transcript);
                 $('input[name="keyword"]').val(transcript);
             }
             else
                 $('input[name="keyword"]').val(transcript);
         }
-        recognition.onerror = function(event){
+        recognition.onerror = function (event) {
             console.log('Speech recognition error', event.error);
             toastr.error('Có lỗi xảy ra khi nhận diện giọng nói:', + event.error);
         }
-        recognition.onend = function(event){
+        recognition.onend = function (event) {
             console.log('Speech recognition end');
             $("#voice-search").removeClass("fa-microphone-slash").addClass("fa-microphone");
             isRecognizing = false
         }
     }
-    else 
-    {
+    else {
         console.log('This browser does not support Speech recognition');
         toastr.error('Trình duyệt của bạn không hỗ trợ tính năng hỗ trợ giọng nói:');
     }
