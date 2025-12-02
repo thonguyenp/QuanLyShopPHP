@@ -1,8 +1,6 @@
-@extends('layouts.admin')
+<?php $__env->startSection('title', 'Trang chấm kpi'); ?>
 
-@section('title', 'Trang chấm kpi')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <!-- page content -->
 <div class="right_col" role="main">
     <div class="">
@@ -38,24 +36,24 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($employees as $employee)
+                                            <?php $__currentLoopData = $employees; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $employee): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <tr role="row" class="even">
-                                                <td>{{$employee->id}}</td>
-                                                <td>{{$employee->name}}</td>
-                                                <td>{{$employee->email}}</td>
-                                                <td>{{$employee->phone_number}}</td>
+                                                <td><?php echo e($employee->id); ?></td>
+                                                <td><?php echo e($employee->name); ?></td>
+                                                <td><?php echo e($employee->email); ?></td>
+                                                <td><?php echo e($employee->phone_number); ?></td>
                                                 <td>
-                                                    <a href="{{ route('kpi.create', $employee->id) }}" class="btn btn-primary">
+                                                    <a href="<?php echo e(route('kpi.create', $employee->id)); ?>" class="btn btn-primary">
                                                         Chấm KPI
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <a href="{{ route('kpi.view', $employee->id) }}" class="btn btn-primary">
+                                                    <a href="<?php echo e(route('kpi.view', $employee->id)); ?>" class="btn btn-primary">
                                                         Lịch sử KPI
                                                     </a>
                                                 </td>
                                             </tr>
-                                            @endforeach
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -74,4 +72,6 @@
 </div>
 
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.admin', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\laragon\www\QuanLyShopPHP\resources\views/admin/pages/kpi.blade.php ENDPATH**/ ?>

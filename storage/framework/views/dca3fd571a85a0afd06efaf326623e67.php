@@ -1,8 +1,6 @@
-@extends('layouts.admin')
+<?php $__env->startSection('title', 'Danh sách danh mục sản phẩm'); ?>
 
-@section('title', 'Danh sách danh mục sản phẩm')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <!-- page content -->
 <div class="right_col" role="main">
     <div class="">
@@ -23,6 +21,12 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
+                                    <p class="text-muted font-13 m-b-30">
+                                        The Buttons extension for DataTables provides a common set of options, API
+                                        methods and styling to display buttons on a page that will interact with a
+                                        DataTable. The core library provides the based framework upon which plug-ins can
+                                        built.
+                                    </p>
                                     <table id="datatable-buttons" class="table table-striped table-bordered"
                                         style="width:100%">
                                         <thead>
@@ -36,31 +40,31 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($manufacturers as $manufacturer)
+                                            <?php $__currentLoopData = $manufacturers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $manufacturer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <tr role="row" class="even">
                                                 <td>
                                                     <img class="image-manufacturer" style="width:100px; height: 100px;"
-                                                        src="{{ asset('storage/' . $manufacturer->image) }}"
-                                                        alt="{{ $manufacturer->name }}">
+                                                        src="<?php echo e(asset('storage/' . $manufacturer->image)); ?>"
+                                                        alt="<?php echo e($manufacturer->name); ?>">
                                                 </td>
-                                                <td>{{$manufacturer->name}}</td>
-                                                <td>{{$manufacturer->slug}}</td>
-                                                <td>{{$manufacturer->description}}</td>
+                                                <td><?php echo e($manufacturer->name); ?></td>
+                                                <td><?php echo e($manufacturer->slug); ?></td>
+                                                <td><?php echo e($manufacturer->description); ?></td>
                                                 <td>
                                                     <a class="btn btn-app btn-update-manufacturer" href=""
                                                         data-toggle="modal"
-                                                        data-target="#modalUpdate-{{ $manufacturer->id }}">
+                                                        data-target="#modalUpdate-<?php echo e($manufacturer->id); ?>">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <a class="btn btn-app btn-delete-manufacturer" data-id="{{ $manufacturer->id }}" href="">
+                                                    <a class="btn btn-app btn-delete-manufacturer" data-id="<?php echo e($manufacturer->id); ?>" href="">
                                                         <i class="fa fa-close"></i>
                                                     </a>
                                                 </td>
                                             </tr>
                                             <!-- Modal -->
-                                            <div class="modal fade" id="modalUpdate-{{ $manufacturer->id }}" tabindex="-1"
+                                            <div class="modal fade" id="modalUpdate-<?php echo e($manufacturer->id); ?>" tabindex="-1"
                                                 aria-labelledby="manufacturerModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
@@ -77,7 +81,7 @@
                                                                 id="update-manufacturer" method="POST"
                                                                 enctype="multipart/form-data"
                                                                 class="form-horizontal form-label-left">
-                                                                @csrf
+                                                                <?php echo csrf_field(); ?>
                                                                 <div class="item form-group">
                                                                     <label
                                                                         class="col-form-label col-md-3 col-sm-3 label-align"
@@ -88,7 +92,7 @@
                                                                     <div class="col-md-6 col-sm-6 ">
                                                                         <input type="text" id="manufacturer-name"
                                                                             name="name" required="required"
-                                                                            class="form-control" value="{{ $manufacturer->name }}">
+                                                                            class="form-control" value="<?php echo e($manufacturer->name); ?>">
                                                                     </div>
                                                                 </div>
                                                                 <div class="item form-group">
@@ -100,7 +104,7 @@
                                                                     <div class="col-md-6 col-sm-6 ">
                                                                         <input type="text" id="manufacturer-description"
                                                                             name="description" required="required"
-                                                                            class="form-control" value="{{ $manufacturer->description }}">
+                                                                            class="form-control" value="<?php echo e($manufacturer->description); ?>">
                                                                     </div>
                                                                 </div>
                                                                 <div class="item form-group">
@@ -109,13 +113,13 @@
                                                                         for="manufacturer-image">Hình
                                                                         ảnh</label>
                                                                     <div class="col-md-6 col-sm-6 ">
-                                                                        <img src="{{asset('storage/' .$manufacturer->image)}}" alt="{{ $manufacturer->image }}"
+                                                                        <img src="<?php echo e(asset('storage/' .$manufacturer->image)); ?>" alt="<?php echo e($manufacturer->image); ?>"
                                                                             id="image-preview" class="image-preview"
                                                                             class="img-thumbnail mt-2">
                                                                         <label class="custom-file-upload"
-                                                                            for="manufacturer-image-{{ $manufacturer->id }}"> Chọn ảnh </label>
+                                                                            for="manufacturer-image-<?php echo e($manufacturer->id); ?>"> Chọn ảnh </label>
                                                                         <input type="file" name="image" class="manufacturer-image"
-                                                                            id="manufacturer-image-{{ $manufacturer->id }}" data-id="{{ $manufacturer->id }}" accept="image/*">
+                                                                            id="manufacturer-image-<?php echo e($manufacturer->id); ?>" data-id="<?php echo e($manufacturer->id); ?>" accept="image/*">
                                                                     </div>
                                                                 </div>
                                                                 <div class="ln_solid"></div>
@@ -123,7 +127,7 @@
                                                                     <button type="button" class="btn btn-secondary"
                                                                         data-dismiss="modal">Đóng</button>
                                                                     <button type="submit" 
-                                                                    data-id="{{ $manufacturer->id }}"
+                                                                    data-id="<?php echo e($manufacturer->id); ?>"
                                                                     class="btn btn-primary btn-update-submit-manufacturer">Chỉnh sửa</button>
                                                                 </div>
 
@@ -132,7 +136,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            @endforeach
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -153,4 +157,5 @@
 </div>
 <!-- /page content -->
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.admin', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\laragon\www\QuanLyShopPHP\resources\views/admin/pages/manufacturers.blade.php ENDPATH**/ ?>

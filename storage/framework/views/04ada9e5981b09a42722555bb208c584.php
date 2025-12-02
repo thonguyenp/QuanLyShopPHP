@@ -1,8 +1,6 @@
-@extends('layouts.admin')
+<?php $__env->startSection('title', 'Quản lý thông tin admin'); ?>
 
-@section('title', 'Quản lý thông tin admin')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <!-- page content -->
 <div class="right_col" role="main">
     <div class="">
@@ -11,6 +9,12 @@
                 <div class="x_panel">
                     <div class="x_title">
                         <h2>Tài khoản</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -19,7 +23,7 @@
                                 <div id="crop-avatar">
                                     <!-- Current avatar -->
                                     <img class="img-responsive avatar-view img-account" id="avatar-preview"
-                                        style="width:100px; height:100px;" src="{{ asset('storage/' . $user->avatar) }}"
+                                        style="width:100px; height:100px;" src="<?php echo e(asset('storage/' . $user->avatar)); ?>"
                                         alt="Avatar" title="Avatar">
                                 </div>
                                 <form action="" enctype="multipart/form-data">
@@ -30,21 +34,19 @@
                                     </a>
                                 </form>
                             </div>
-                            <h3 id="user-name">{{$user->name}}</h3>
+                            <h3 id="user-name"><?php echo e($user->name); ?></h3>
 
                             <ul class="list-unstyled user_data">
-                                <li><i class="fa fa-map-marker user-profile-icon"></i> <span id="user-address">{{
-                                        $user->address }}</span>
+                                <li><i class="fa fa-map-marker user-profile-icon"></i> <span id="user-address"><?php echo e($user->address); ?></span>
                                 </li>
 
                                 <li>
-                                    <i class="fa fa-briefcase user-profile-icon"></i> <span id="user-email">{{
-                                        $user->email }}</span>
+                                    <i class="fa fa-briefcase user-profile-icon"></i> <span id="user-email"><?php echo e($user->email); ?></span>
                                 </li>
 
                                 <li class="m-top-xs">
                                     <i class="fa fa-phone user-profile-icon"></i>
-                                    <span id="user-phone">{{$user->phone_number}}</span>
+                                    <span id="user-phone"><?php echo e($user->phone_number); ?></span>
                                 </li>
                             </ul>
                         </div>
@@ -63,7 +65,7 @@
                                                 tên <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 ">
-                                                <input type="text" id="name" required value="{{ $user->name }}"
+                                                <input type="text" id="name" required value="<?php echo e($user->name); ?>"
                                                     class="form-control ">
                                             </div>
                                         </div>
@@ -73,7 +75,7 @@
                                             </label>
                                             <div class="col-md-6 col-sm-6 ">
                                                 <input type="text" id="email" readonly name="email" required
-                                                    value="{{ $user->email }}" class="form-control">
+                                                    value="<?php echo e($user->email); ?>" class="form-control">
                                             </div>
                                         </div>
                                         <div class="item form-group">
@@ -82,7 +84,7 @@
                                             </label>
                                             <div class="col-md-6 col-sm-6 ">
                                                 <input type="text" id="phone_number" name="phone_number" required
-                                                    value="{{ $user->phone_number }}" class="form-control">
+                                                    value="<?php echo e($user->phone_number); ?>" class="form-control">
                                             </div>
                                         </div>
                                         <div class="item form-group">
@@ -91,7 +93,7 @@
                                             </label>
                                             <div class="col-md-6 col-sm-6 ">
                                                 <input type="text" id="address" name="address" required
-                                                    value="{{ $user->address }}" class="form-control">
+                                                    value="<?php echo e($user->address); ?>" class="form-control">
                                             </div>
                                         </div>
 
@@ -158,4 +160,5 @@
 </div>
 <!-- /page content -->
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.admin', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\laragon\www\QuanLyShopPHP\resources\views/admin/pages/profile.blade.php ENDPATH**/ ?>

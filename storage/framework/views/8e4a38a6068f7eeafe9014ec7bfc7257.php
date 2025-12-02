@@ -1,8 +1,6 @@
-@extends('layouts.admin')
+<?php $__env->startSection('title', 'Quản lý liên hệ'); ?>
 
-@section('title', 'Quản lý liên hệ')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <!-- page content -->
 <div class="right_col" role="main">
     <div class="">
@@ -27,26 +25,26 @@
                             <div class="col-sm-3 mail_list_column" style="overflow-y: scroll; max-height:500px; ">
                                 <label class="badge bg-orange"
                                     style="width:100%; line-height:2; font-size:10px; ">Liên hệ khách hàng</label>
-                                @foreach ($contacts as $contact)
+                                <?php $__currentLoopData = $contacts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $contact): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <a href="javascript:void(0)" class="contact-item"
-                                data-name="{{ $contact->fullname }}" 
-                                data-email="{{ $contact->email }}" 
-                                data-message="{{ $contact->message }}" 
-                                data-id="{{ $contact->id }}"
-                                data-is_replied="{{ $contact->is_replied }}">
+                                data-name="<?php echo e($contact->fullname); ?>" 
+                                data-email="<?php echo e($contact->email); ?>" 
+                                data-message="<?php echo e($contact->message); ?>" 
+                                data-id="<?php echo e($contact->id); ?>"
+                                data-is_replied="<?php echo e($contact->is_replied); ?>">
                                     <div class="mail_list">
                                         <div class="left">
-                                            <i class="fa fa-circle-o" style="color: {{ $contact->is_replied ? 'green' : 'red' }}"></i>
+                                            <i class="fa fa-circle-o" style="color: <?php echo e($contact->is_replied ? 'green' : 'red'); ?>"></i>
                                         </div>
                                         <div class="right">
-                                            <h3>{{ $contact->fullname }} <small>{{$contact->created_at->format('h:i A d/m/Y')}}</small></h3>
-                                            <p>{{Str::limit($contact->message, 50)}}</p>
+                                            <h3><?php echo e($contact->fullname); ?> <small><?php echo e($contact->created_at->format('h:i A d/m/Y')); ?></small></h3>
+                                            <p><?php echo e(Str::limit($contact->message, 50)); ?></p>
                                         </div>
                                     </div>
                                 </a>
 
 
-                                @endforeach
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </div>
                             <!-- /MAIL LIST -->
                         </div>
@@ -77,4 +75,5 @@
 <!-- /compose -->
 <!-- /page content -->
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.admin', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\laragon\www\QuanLyShopPHP\resources\views/admin/pages/contact.blade.php ENDPATH**/ ?>

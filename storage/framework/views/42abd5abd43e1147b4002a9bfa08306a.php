@@ -1,14 +1,12 @@
-@extends('layouts.admin')
+<?php $__env->startSection('title', 'Danh sách danh mục sản phẩm'); ?>
 
-@section('title', 'Danh sách danh mục sản phẩm')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <!-- page content -->
 <div class="right_col" role="main">
     <div class="">
         <div class="page-title">
             <div class="title_left">
-                <h3>Quản lý nhãn hàng</h3>
+                <h3>Quản lý danh mục</h3>
             </div>
         </div>
         <div class="clearfix"></div>
@@ -16,7 +14,7 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Danh sách nhãn hàng</h2>
+                        <h2>Danh sách danh mục</h2>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -36,36 +34,36 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($manufacturers as $manufacturer)
+                                            <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <tr role="row" class="even">
                                                 <td>
-                                                    <img class="image-manufacturer" style="width:100px; height: 100px;"
-                                                        src="{{ asset('storage/' . $manufacturer->image) }}"
-                                                        alt="{{ $manufacturer->name }}">
+                                                    <img class="image-category" style="width:100px; height: 100px;"
+                                                        src="<?php echo e(asset('storage/' . $category->image)); ?>"
+                                                        alt="<?php echo e($category->name); ?>">
                                                 </td>
-                                                <td>{{$manufacturer->name}}</td>
-                                                <td>{{$manufacturer->slug}}</td>
-                                                <td>{{$manufacturer->description}}</td>
+                                                <td><?php echo e($category->name); ?></td>
+                                                <td><?php echo e($category->slug); ?></td>
+                                                <td><?php echo e($category->description); ?></td>
                                                 <td>
-                                                    <a class="btn btn-app btn-update-manufacturer" href=""
+                                                    <a class="btn btn-app btn-update-category" href=""
                                                         data-toggle="modal"
-                                                        data-target="#modalUpdate-{{ $manufacturer->id }}">
+                                                        data-target="#modalUpdate-<?php echo e($category->id); ?>">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <a class="btn btn-app btn-delete-manufacturer" data-id="{{ $manufacturer->id }}" href="">
+                                                    <a class="btn btn-app btn-delete-category" data-id="<?php echo e($category->id); ?>" href="">
                                                         <i class="fa fa-close"></i>
                                                     </a>
                                                 </td>
                                             </tr>
                                             <!-- Modal -->
-                                            <div class="modal fade" id="modalUpdate-{{ $manufacturer->id }}" tabindex="-1"
-                                                aria-labelledby="manufacturerModalLabel" aria-hidden="true">
+                                            <div class="modal fade" id="modalUpdate-<?php echo e($category->id); ?>" tabindex="-1"
+                                                aria-labelledby="categoryModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="manufacturerModalLabel">Modal title
+                                                            <h5 class="modal-title" id="categoryModalLabel">Modal title
                                                             </h5>
                                                             <button type="button" class="btn-close ms-2"
                                                                 data-dismiss="modal" aria-label="Close">
@@ -74,48 +72,48 @@
                                                         </div>
                                                         <div class="modal-body">
                                                             <form 
-                                                                id="update-manufacturer" method="POST"
+                                                                id="udate-category" method="POST"
                                                                 enctype="multipart/form-data"
                                                                 class="form-horizontal form-label-left">
-                                                                @csrf
+                                                                <?php echo csrf_field(); ?>
                                                                 <div class="item form-group">
                                                                     <label
                                                                         class="col-form-label col-md-3 col-sm-3 label-align"
-                                                                        for="manufacturer-name">Tên danh
+                                                                        for="category-name">Tên danh
                                                                         mục
                                                                         <span class="required">*</span>
                                                                     </label>
                                                                     <div class="col-md-6 col-sm-6 ">
-                                                                        <input type="text" id="manufacturer-name"
+                                                                        <input type="text" id="category-name"
                                                                             name="name" required="required"
-                                                                            class="form-control" value="{{ $manufacturer->name }}">
+                                                                            class="form-control" value="<?php echo e($category->name); ?>">
                                                                     </div>
                                                                 </div>
                                                                 <div class="item form-group">
                                                                     <label
                                                                         class="col-form-label col-md-3 col-sm-3 label-align"
-                                                                        for="manufacturer-description">Mô tả
+                                                                        for="category-description">Mô tả
                                                                         <span class="required">*</span>
                                                                     </label>
                                                                     <div class="col-md-6 col-sm-6 ">
-                                                                        <input type="text" id="manufacturer-description"
+                                                                        <input type="text" id="category-description"
                                                                             name="description" required="required"
-                                                                            class="form-control" value="{{ $manufacturer->description }}">
+                                                                            class="form-control" value="<?php echo e($category->description); ?>">
                                                                     </div>
                                                                 </div>
                                                                 <div class="item form-group">
                                                                     <label
                                                                         class="col-form-label col-md-3 col-sm-3 label-align"
-                                                                        for="manufacturer-image">Hình
+                                                                        for="category-image">Hình
                                                                         ảnh</label>
                                                                     <div class="col-md-6 col-sm-6 ">
-                                                                        <img src="{{asset('storage/' .$manufacturer->image)}}" alt="{{ $manufacturer->image }}"
+                                                                        <img src="<?php echo e(asset('storage/' .$category->image)); ?>" alt="<?php echo e($category->image); ?>"
                                                                             id="image-preview" class="image-preview"
                                                                             class="img-thumbnail mt-2">
                                                                         <label class="custom-file-upload"
-                                                                            for="manufacturer-image-{{ $manufacturer->id }}"> Chọn ảnh </label>
-                                                                        <input type="file" name="image" class="manufacturer-image"
-                                                                            id="manufacturer-image-{{ $manufacturer->id }}" data-id="{{ $manufacturer->id }}" accept="image/*">
+                                                                            for="category-image-<?php echo e($category->id); ?>"> Chọn ảnh </label>
+                                                                        <input type="file" name="image" class="category-image"
+                                                                            id="category-image-<?php echo e($category->id); ?>" data-id="<?php echo e($category->id); ?>" accept="image/*">
                                                                     </div>
                                                                 </div>
                                                                 <div class="ln_solid"></div>
@@ -123,8 +121,8 @@
                                                                     <button type="button" class="btn btn-secondary"
                                                                         data-dismiss="modal">Đóng</button>
                                                                     <button type="submit" 
-                                                                    data-id="{{ $manufacturer->id }}"
-                                                                    class="btn btn-primary btn-update-submit-manufacturer">Chỉnh sửa</button>
+                                                                    data-id="<?php echo e($category->id); ?>"
+                                                                    class="btn btn-primary btn-update-submit-category">Chỉnh sửa</button>
                                                                 </div>
 
                                                             </form>
@@ -132,7 +130,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            @endforeach
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -153,4 +151,5 @@
 </div>
 <!-- /page content -->
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.admin', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\laragon\www\QuanLyShopPHP\resources\views/admin/pages/categories.blade.php ENDPATH**/ ?>
