@@ -1,8 +1,6 @@
-@extends('layouts.admin')
+<?php $__env->startSection('title', 'Dashboard'); ?>
 
-@section('title', 'Dashboard')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <!-- page content -->
 <div class="right_col" role="main">
     <!-- top tiles -->
@@ -10,19 +8,19 @@
         <div class="tile_count">
             <div class="col-md-2 col-sm-4  tile_stats_count">
                 <span class="count_top"><i class="fa fa-user"></i> Tổng số người dùng</span>
-                <div class="count">{{ $users->count() }}</div>
+                <div class="count"><?php echo e($users->count()); ?></div>
             </div>
             <div class="col-md-2 col-sm-4  tile_stats_count">
                 <span class="count_top"><i class="fa fa-bar-chart"></i> Tổng số lượng sản phẩm</span>
-                <div class="count">{{ $products->count() }}</div>
+                <div class="count"><?php echo e($products->count()); ?></div>
             </div>
             <div class="col-md-2 col-sm-4  tile_stats_count">
                 <span class="count_top"><i class="fa fa-shopping-cart"></i> Tổng số lượng đơn hàng</span>
-                <div class="count green">{{ $orders->count() }}</div>
+                <div class="count green"><?php echo e($orders->count()); ?></div>
             </div>
             <div class="col-md-6 col-sm-4  tile_stats_count">
                 <span class="count_top"><i class="fa fa-money"></i> Tổng số lượng doanh thu</span>
-                <div class="count">{{number_format($orders->sum('total_price'), 0,0)}} VND</div>
+                <div class="count"><?php echo e(number_format($orders->sum('total_price'), 0,0)); ?> VND</div>
             </div>
         </div>
     </div>
@@ -37,8 +35,8 @@
                   </div>
                   <div class="x_content">
                     <canvas id="revenueBarChart"
-                    data-labels='@json($monthlyRevenue->pluck('month')->toArray())'
-                    data-values='@json($monthlyRevenue->pluck('revenue')->toArray())'
+                    data-labels='<?php echo json_encode($monthlyRevenue->pluck('month')->toArray(), 15, 512) ?>'
+                    data-values='<?php echo json_encode($monthlyRevenue->pluck('revenue')->toArray(), 15, 512) ?>'
                     ></canvas>
                   </div>
                 </div>
@@ -68,23 +66,22 @@
                         <tr>
                             <td>
                                 <canvas class="canvasDoughnutCategory" height="140" width="140"
-                                    data-labels='@json($categories->pluck(' name'))'
-                                    data-counts='@json($categories->map(fn($category) => $category->products->count()))'
+                                    data-labels='<?php echo json_encode($categories->pluck(' name'), 15, 512) ?>'
+                                    data-counts='<?php echo json_encode($categories->map(fn($category) => $category->products->count()), 15, 512) ?>'
                                     style="margin: 15px 10px 10px 0"></canvas>
                             </td>
                             <td>
                                 <table class="tile_info">
-                                    @foreach ($categories as $index=>$category)
+                                    <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index=>$category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
                                         <td>
                                             <p><i class="fa fa-square"
-                                                    style="color: {{ ['#BDC3C7', '#9B59B6', '#E74C3C', '#26B99A', '#3498DB'][$index % 5] }}"></i>{{
-                                                $category->name }} </p>
+                                                    style="color: <?php echo e(['#BDC3C7', '#9B59B6', '#E74C3C', '#26B99A', '#3498DB'][$index % 5]); ?>"></i><?php echo e($category->name); ?> </p>
                                         </td>
-                                        <td>{{$category->products->count()}}</td>
+                                        <td><?php echo e($category->products->count()); ?></td>
                                     </tr>
 
-                                    @endforeach
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </table>
                             </td>
                         </tr>
@@ -113,17 +110,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($topSellingProducts as $item)
+                            <?php $__currentLoopData = $topSellingProducts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr>
-                                <th scope="row">{{ $item->id }}</th>
+                                <th scope="row"><?php echo e($item->id); ?></th>
                                 <td>
-                                    <img src="{{ asset('storage/' . $item->image_url) }}" alt="">
+                                    <img src="<?php echo e(asset('storage/' . $item->image_url)); ?>" alt="">
                                 </td>
-                                <td>{{ $item->name }}</td>
-                                <td>{{ number_format($item->price, 0, ',', '.') }} vnd</td>
-                                <td>{{ $item->total_sold }}</td>
+                                <td><?php echo e($item->name); ?></td>
+                                <td><?php echo e(number_format($item->price, 0, ',', '.')); ?> vnd</td>
+                                <td><?php echo e($item->total_sold); ?></td>
                             </tr>
-                            @endforeach
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </tbody>
                     </table>
 
@@ -150,24 +147,24 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @for ($i = 0; $i < min(3, $users->count()); $i++)
+                            <?php for($i = 0; $i < min(3, $users->count()); $i++): ?>
                             <tr>
-                                <td scope="row">{{ $users[$i]->id }}</td>
-                                <td>{{ $users[$i]->name }}</td>
-                                <td>{{ $users[$i]->phone_number }}</td>
+                                <td scope="row"><?php echo e($users[$i]->id); ?></td>
+                                <td><?php echo e($users[$i]->name); ?></td>
+                                <td><?php echo e($users[$i]->phone_number); ?></td>
                                 <td>
-                                    @if ($users[$i]->status == 'banned')
+                                    <?php if($users[$i]->status == 'banned'): ?>
                                         <span class="custom-badge badge badge-warning">Bị chặn</span>
-                                    @elseif ($users[$i]->status == 'deleted')
+                                    <?php elseif($users[$i]->status == 'deleted'): ?>
                                         <span class="custom-badge badge badge-danger">Đã xóa</span>
-                                    @elseif ($users[$i]->status == 'pending')
+                                    <?php elseif($users[$i]->status == 'pending'): ?>
                                         <span class="custom-badge badge badge-primary">Đợi kích hoạt</span>
-                                    @else
+                                    <?php else: ?>
                                         <span class="custom-badge badge badge-success">Đã kích hoạt</span>
-                                    @endif
+                                    <?php endif; ?>
                                 </td>
                             </tr>
-                            @endfor
+                            <?php endfor; ?>
                         </tbody>
                     </table>
 
@@ -197,30 +194,30 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @for ($i = 0; $i < min(3, $orders->count()); $i++)
+                            <?php for($i = 0; $i < min(3, $orders->count()); $i++): ?>
                             <tr>
-                                <td scope="row">{{ $orders[$i]->id }}</td>
-                                <td>{{ $orders[$i]->shippingAddress->full_name }}</td>
-                                <td>{{ number_format($orders[$i]->total_price, 0,0) }}</td>
+                                <td scope="row"><?php echo e($orders[$i]->id); ?></td>
+                                <td><?php echo e($orders[$i]->shippingAddress->full_name); ?></td>
+                                <td><?php echo e(number_format($orders[$i]->total_price, 0,0)); ?></td>
                                 <td>
-                                    @if ($orders[$i]->status == 'pending')
+                                    <?php if($orders[$i]->status == 'pending'): ?>
                                         <span class="custom-badge badge badge-warning">Đợi xác nhận</span>
-                                    @elseif ($orders[$i]->status == 'canceled')
+                                    <?php elseif($orders[$i]->status == 'canceled'): ?>
                                         <span class="custom-badge badge badge-danger">Đã hủy</span>
-                                    @elseif ($orders[$i]->status == 'processing')
+                                    <?php elseif($orders[$i]->status == 'processing'): ?>
                                         <span class="custom-badge badge badge-primary">Đang giao</span>
-                                    @else
+                                    <?php else: ?>
                                         <span class="custom-badge badge badge-success">Hoàn thành</span>
-                                    @endif
+                                    <?php endif; ?>
                                 </td>
-                                <td>{{ $orders[$i]->created_at->format('d-m-Y H:i:s') }}</td>
+                                <td><?php echo e($orders[$i]->created_at->format('d-m-Y H:i:s')); ?></td>
                                 <td>
-                                <a href="{{ route('admin.order-detail', ['id' => $orders[$i]->id]) }}" class="btn btn-primary" target="_blank">
+                                <a href="<?php echo e(route('admin.order-detail', ['id' => $orders[$i]->id])); ?>" class="btn btn-primary" target="_blank">
                                     Xem chi tiết
                                 </a>
                                 </td>
                             </tr>
-                            @endfor
+                            <?php endfor; ?>
                         </tbody>
                     </table>
 
@@ -232,4 +229,5 @@
     </div>
 </div>
 <!-- /page content -->
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.admin', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\laragon\www\QuanLyShopPHP\resources\views/admin/pages/dashboard.blade.php ENDPATH**/ ?>

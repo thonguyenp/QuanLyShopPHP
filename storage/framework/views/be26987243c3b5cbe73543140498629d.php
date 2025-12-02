@@ -1,8 +1,6 @@
-@extends('layouts.admin')
+<?php $__env->startSection('title', 'Quản lý danh mục'); ?>
 
-@section('title', 'Quản lý danh mục')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <!-- page content -->
 <div class="right_col" role="main">
 	<div class="">
@@ -16,14 +14,20 @@
 			<div class="col-md-12 col-sm-12 ">
 				<div class="x_panel">
 					<div class="x_title">
-						<h2>Thêm danh mục mới:</h2>
+						<h2>Thêm danh mục mới: <small>different form elements</small></h2>
+						<ul class="nav navbar-right panel_toolbox">
+							<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+							</li>
+							<li><a class="close-link"><i class="fa fa-close"></i></a>
+							</li>
+						</ul>
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
 						<br />
-						<form action="{{ route('admin.category.add') }}" id="add-category" method="POST" enctype="multipart/form-data"
+						<form action="<?php echo e(route('admin.category.add')); ?>" id="add-category" method="POST" enctype="multipart/form-data"
 							class="form-horizontal form-label-left">
-							@csrf
+							<?php echo csrf_field(); ?>
 							<div class="item form-group">
 								<label class="col-form-label col-md-3 col-sm-3 label-align" for="category-name">Tên danh
 									mục
@@ -75,4 +79,5 @@
 </div>
 <!-- /page content -->
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.admin', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\laragon\www\QuanLyShopPHP\resources\views/admin/pages/categories-add.blade.php ENDPATH**/ ?>
