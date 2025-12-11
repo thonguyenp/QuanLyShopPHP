@@ -17,14 +17,9 @@ Hệ thống quản lý cửa hàng trực tuyến được xây dựng bằng L
 - [Công nghệ sử dụng](#-công-nghệ-sử-dụng)
 - [Yêu cầu hệ thống](#-yêu-cầu-hệ-thống)
 - [Cài đặt](#-cài-đặt)
-- [Cấu hình](#-cấu-hình)
 - [Sử dụng](#-sử-dụng)
-- [Cấu trúc thư mục](#-cấu-trúc-thư-mục)
-- [API Documentation](#-api-documentation)
-- [Testing](#-testing)
 - [Deployment](#-deployment)
 - [Đóng góp](#-đóng-góp)
-- [License](#-license)
 
 ## ✨ Tính năng
 
