@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('title', 'Dashboard'); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -33,12 +31,6 @@
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Doanh thu</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
@@ -54,12 +46,6 @@
             <div class="x_panel tile fixed_height_320 overflow_hidden">
                 <div class="x_title">
                     <h2>Danh mục</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                        </li>
-                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                        </li>
-                    </ul>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
@@ -106,7 +92,7 @@
         <div class="col-md-4 col-sm-4  ">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Sản phẩm bán chạy nhất <small>Danh sách</small></h2>
+                    <h2>Sản phẩm bán chạy nhất</h2>
                     <ul class="nav navbar-right panel_toolbox">
                     </ul>
                     <div class="clearfix"></div>
@@ -144,7 +130,7 @@
         <div class="col-md-6 col-sm-6  ">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Người dùng mới <small>Danh sách</small></h2>
+                    <h2>Người dùng mới</h2>
                     <ul class="nav navbar-right panel_toolbox">
                     </ul>
                     <div class="clearfix"></div>
@@ -188,7 +174,7 @@
         <div class="col-md-6 col-sm-6  ">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Đơn hàng mới <small>Danh sách</small></h2>
+                    <h2>Đơn hàng mới</h2>
                     <ul class="nav navbar-right panel_toolbox">
                     </ul>
                     <div class="clearfix"></div>

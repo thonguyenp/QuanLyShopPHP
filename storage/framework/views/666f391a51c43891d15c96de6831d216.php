@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('title', 'Quản lý sản phẩm'); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -17,12 +15,6 @@
                 <div class="x_panel">
                     <div class="x_title">
                         <h2>Thêm sản phẩm mới: </h2>
-                        <ul class="nav navbar-right panel_toolbox">
-                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                            </li>
-                            <li><a class="close-link"><i class="fa fa-close"></i></a>
-                            </li>
-                        </ul>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -151,7 +143,7 @@
                                 </div>
                             </div>
                             <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="product-monitor-resolution">Kích thước màn hình
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="product-monitor-resolution">Độ phân giải màn hình
                                     <span class="">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">

@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('title', 'Quản lý liên hệ'); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -20,12 +18,6 @@
                 <div class="x_panel">
                     <div class="x_title">
                         <h2>Xử lý tin nhắn của khách hàng gửi tới</small></h2>
-                        <ul class="nav navbar-right panel_toolbox">
-                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                            </li>
-                            <li><a class="close-link"><i class="fa fa-close"></i></a>
-                            </li>
-                        </ul>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -55,35 +47,6 @@
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </div>
                             <!-- /MAIL LIST -->
-
-                            <!-- CONTENT MAIL -->
-                            <div class="col-sm-9 mail_view" style="display:none;">
-                                <div class="inbox-body">
-                                    <div class="sender-info" style="1px solid">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <strong>Jon Doe</strong>
-                                                <span>(jon.doe@gmail.com)</span> to
-                                                <b>me</b>
-                                                <a class="sender-dropdown"><i class="fa fa-chevron-down"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="view-mail">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                            consequat.</p>
-                                    </div>
-                                    <div class="btn-group">
-                                        <button id="compose" class="btn btn-sm btn-primary" type="button"><i
-                                                class="fa fa-reply"></i>
-                                            Trả lời</button>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <!-- /CONTENT MAIL -->
                         </div>
                     </div>
                 </div>
